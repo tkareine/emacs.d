@@ -32,6 +32,7 @@
 
 (add-dotfile-path "lib")
 
+(load-dotfile-etc "backups.el")
 (load-dotfile-etc "keys.el")
 (load-dotfile-etc "looks.el")
 (load-dotfile-etc "programming.el")
