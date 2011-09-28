@@ -3,37 +3,37 @@
 
 ;; Create a variable to store the path to this dotfile directory
 ;; (usually ~/.emacs.d).
-(setq dotfiles-dir (file-name-directory
-                    (or (buffer-file-name) load-file-name)))
+(setq my-dotfiles-dir (file-name-directory
+                       (or (buffer-file-name) load-file-name)))
 
-(setq dotfiles-lib-dir (concat dotfiles-dir "lib/"))
-(setq dotfiles-etc-dir (concat dotfiles-dir "etc/"))
+(setq my-dotfiles-lib-dir (concat my-dotfiles-dir "lib/"))
+(setq my-dotfiles-etc-dir (concat my-dotfiles-dir "etc/"))
 
-(defun add-dotfile-path (p)
-  (add-to-list 'load-path (concat dotfiles-dir p)))
+(defun my-add-dotfile-path (p)
+  (add-to-list 'load-path (concat my-dotfiles-dir p)))
 
-(defun add-dotfile-lib-path (p)
-  (add-to-list 'load-path (concat dotfiles-lib-dir p)))
+(defun my-add-dotfile-lib-path (p)
+  (add-to-list 'load-path (concat my-dotfiles-lib-dir p)))
 
-(defun load-dotfile (f)
-  (load-file (concat dotfiles-dir f)))
+(defun my-load-dotfile (f)
+  (load-file (concat my-dotfiles-dir f)))
 
-(defun load-dotfile-etc (f)
-  (load-file (concat dotfiles-etc-dir f)))
+(defun my-load-dotfile-etc (f)
+  (load-file (concat my-dotfiles-etc-dir f)))
 
-(defun load-dotfile-lib (f)
-  (load-file (concat dotfiles-lib-dir f)))
+(defun my-load-dotfile-lib (f)
+  (load-file (concat my-dotfiles-lib-dir f)))
 
 ;; Start ELPA
-(when (load (concat dotfiles-dir "elpa/package.el"))
+(when (load (concat my-dotfiles-dir "elpa/package.el"))
   (package-initialize))
 
 (add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/"))
 
-(add-dotfile-path "lib")
+(my-add-dotfile-path "lib")
 
-(load-dotfile-etc "backups.el")
-(load-dotfile-etc "keys.el")
-(load-dotfile-etc "looks.el")
-(load-dotfile-etc "programming.el")
-(load-dotfile-etc "misc.el")
+(my-load-dotfile-etc "backups.el")
+(my-load-dotfile-etc "keys.el")
+(my-load-dotfile-etc "looks.el")
+(my-load-dotfile-etc "programming.el")
+(my-load-dotfile-etc "misc.el")
