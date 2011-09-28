@@ -1,4 +1,4 @@
-;; This file is based upon @overtone's live-coding-emacs
+;; This file is based on @overtone's live-coding-emacs
 ;; <https://github.com/overtone/live-coding-emacs>. Thanks!
 
 ;; Create a variable to store the path to this dotfile directory
