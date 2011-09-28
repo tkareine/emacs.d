@@ -1,0 +1,3 @@
+[submodule "lib/color-theme-twilight"]
+	path = lib/color-theme-twilight
+	url = git://github.com/crafterm/twilight-emacs.git
