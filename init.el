@@ -24,11 +24,23 @@
 (defun my-load-dotfile-lib (f)
   (load-file (concat my-dotfiles-lib-dir f)))
 
+(defun my-filter (condp lst)
+  (delq nil
+        (mapcar (lambda (x) (and (funcall condp x) x)) lst)))
+
+(defun my-require-packages-installed (lst)
+  (let* ((missing-packages (my-filter '(lambda (x) (not (package-installed-p x))) lst)))
+    (when missing-packages
+      (error "Required packages are not installed: %s" missing-packages))))
+
 ;; Start ELPA
 (when (load (concat my-dotfiles-dir "elpa/package.el"))
   (package-initialize))
 
 (add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/"))
+
+(my-load-dotfile "dependencies.el")
+(my-require-packages-installed my-package-dependencies)
 
 (my-add-dotfile-path "lib")
 
