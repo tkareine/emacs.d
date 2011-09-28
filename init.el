@@ -32,7 +32,7 @@
 
 (add-dotfile-path "lib")
 
-(load-dotfile-etc "bindings.el")
+(load-dotfile-etc "keys.el")
 (load-dotfile-etc "looks.el")
-(load-dotfile-etc "misc.el")
 (load-dotfile-etc "programming.el")
+(load-dotfile-etc "misc.el")
