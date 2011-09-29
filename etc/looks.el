@@ -29,5 +29,6 @@
 ;; Frame width and height
 (if (and (boundp 'window-system) window-system) (set-frame-size (selected-frame) 140 60))
 
-(my-load-dotfile-lib "color-theme-twilight/color-theme-twilight.el")
-(color-theme-twilight)
+;; Color theme
+(require 'color-theme-my-twilight)
+(color-theme-my-twilight)
