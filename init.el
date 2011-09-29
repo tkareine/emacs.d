@@ -3,11 +3,11 @@
 
 ;; Create a variable to store the path to this dotfile directory
 ;; (usually ~/.emacs.d).
-(setq my-dotfiles-dir (file-name-directory
-                       (or (buffer-file-name) load-file-name)))
+(defvar my-dotfiles-dir (file-name-directory
+                         (or (buffer-file-name) load-file-name)))
 
-(setq my-dotfiles-lib-dir (concat my-dotfiles-dir "lib/"))
-(setq my-dotfiles-etc-dir (concat my-dotfiles-dir "etc/"))
+(defvar my-dotfiles-lib-dir (concat my-dotfiles-dir "lib/"))
+(defvar my-dotfiles-etc-dir (concat my-dotfiles-dir "etc/"))
 
 (defun my-add-dotfile-path (p)
   (add-to-list 'load-path (concat my-dotfiles-dir p)))
