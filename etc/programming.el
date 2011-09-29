@@ -1,3 +1,6 @@
+;; JavaScript language customizations
+(setq js-indent-level 2)
+
 ;; Erlang language support
 (let* ((root-dir  (concat my-dotfiles-lib-dir "erlang-mode"))
        (bin-dir   (concat root-dir "bin"))
