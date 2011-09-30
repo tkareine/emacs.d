@@ -7,6 +7,7 @@
 ;; Custom key bindings
 (global-set-key [kp-delete]    'delete-char)
 (global-set-key [M-kp-delete]  'kill-word)
+(global-set-key (kbd "C-c c")  'comment-or-uncomment-region)
 (global-set-key (kbd "C-c w")  'whitespace-mode)
 (global-set-key (kbd "M-+")    'dabbrev-expand)
 (global-set-key (kbd "M-ö")    'fixup-whitespace)
