@@ -44,7 +44,7 @@
 
 (my-add-dotfile-path "lib")
 
-(my-load-dotfile-etc "backups.el")
+(my-load-dotfile-etc "saves.el")
 (my-load-dotfile-etc "keys.el")
 (my-load-dotfile-etc "looks.el")
 (my-load-dotfile-etc "programming.el")
