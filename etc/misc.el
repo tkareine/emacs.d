@@ -22,5 +22,13 @@
 (add-to-list 'auto-mode-alist '("\\.markdown$" . markdown-mode))
 (add-to-list 'auto-mode-alist '("\\.md$" . markdown-mode))
 
+(defun my-file-path-to-clipboard ()
+  "Copy the current file name to the clipboard"
+  (interactive)
+  (let ((path (expand-file-name (or (buffer-file-name) default-directory))))
+    (when path
+      (let ((x-select-enable-clipboard t)) (x-select-text path))
+      (message path))))
+
 ;; Server mode
 (server-start)
