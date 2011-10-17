@@ -5,6 +5,9 @@
 (set-selection-coding-system 'utf-8)
 (prefer-coding-system 'utf-8)
 
+;; Dired: allow opening file, replacing current buffer
+(put 'dired-find-alternate-file 'disabled nil)
+
 ;; IDO: Flexible matching (try exact match first, then fuzzy)
 (setq ido-enable-flex-matching t)
 
