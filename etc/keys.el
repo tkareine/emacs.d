@@ -10,7 +10,7 @@
 (global-set-key (kbd "C-c c")  'comment-or-uncomment-region)
 (global-set-key (kbd "C-c p")  'my-file-path-to-clipboard)
 (global-set-key (kbd "C-c w")  'whitespace-mode)
-(global-set-key (kbd "M-+")    'dabbrev-expand)
+(global-set-key (kbd "M-+")    'hippie-expand)
 (global-set-key (kbd "M-ö")    'fixup-whitespace)
 
 ;; Prevent extraneous tabs
