@@ -1,3 +1,6 @@
+;; CSS language customizations
+(setq css-indent-offset 2)
+
 ;; JavaScript language customizations
 (setq js-indent-level 2)
 
