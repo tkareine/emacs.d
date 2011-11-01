@@ -3,6 +3,17 @@
 
 ;; JavaScript language customizations
 (setq js-indent-level 2)
+(setq js2-basic-offset 2)
+(setq js2-missing-semi-one-line-override t)
+
+(defun my-toggle-js2-strict-missing-semi-warning ()
+  (interactive)
+  (setq js2-strict-missing-semi-warning (eq js2-strict-missing-semi-warning nil))
+  (js2-mode))
+
+(add-hook 'js2-mode-hook
+ (lambda ()
+   (local-set-key (kbd "C-c s") 'my-toggle-js2-strict-missing-semi-warning)))
 
 ;; Erlang language support
 (let* ((root-dir  (concat my-dotfiles-lib-dir "erlang-mode"))
