@@ -1,7 +1,11 @@
 ;; CSS language customizations
 (setq css-indent-offset 2)
 
-;; JavaScript language customizations
+;; JavaScript language support
+(my-add-dotfile-lib-path "js2-mode")
+(autoload 'js2-mode "js2-mode" nil t)
+(add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
+
 (setq js-indent-level 2)
 (setq js2-basic-offset 2)
 (setq js2-missing-semi-one-line-override t)
