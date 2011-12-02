@@ -29,6 +29,10 @@
 (add-to-list 'auto-mode-alist '("\\.markdown$" . markdown-mode))
 (add-to-list 'auto-mode-alist '("\\.md$" . markdown-mode))
 
+(add-to-list 'safe-local-variable-values '(encoding . utf-8))
+(add-to-list 'safe-local-variable-values '(lexical-binding . t))
+(add-to-list 'safe-local-variable-values '(whitespace-line-column . 80))
+
 (defun my-file-path-to-clipboard ()
   "Copy the current file name to the clipboard"
   (interactive)
