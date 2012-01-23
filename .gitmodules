@@ -1,3 +1,6 @@
 [submodule "lib/js2-mode"]
 	path = lib/js2-mode
 	url = git://github.com/mooz/js2-mode.git
+[submodule "lib/scss-mode"]
+	path = lib/scss-mode
+	url = git://github.com/antonj/scss-mode.git
