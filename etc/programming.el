@@ -40,5 +40,7 @@
 (setq scss-compile-at-save nil)
 
 ;; Scala language support
-(my-add-dotfile-lib-to-load-path "scala-mode")
-(require 'scala-mode-auto)
+(let* ((scala-dir (my-dotfile-lib-path "scala-mode")))
+  (when (file-exists-p scala-dir)
+    (add-to-list 'load-path scala-dir)
+    (require 'scala-mode-auto)))
