@@ -1,6 +1,16 @@
 ;; CSS language customizations
 (setq css-indent-offset 2)
 
+;; Erlang language support
+(let* ((root-dir  (concat my-dotfiles-lib-dir "erlang-mode"))
+       (bin-dir   (concat root-dir "/bin"))
+       (elisp-dir (car (file-expand-wildcards (concat root-dir
+                                                      "/lib/tools-2.6.*/emacs") t))))
+  (setq erlang-root-dir root-dir)
+  (add-to-list 'load-path elisp-dir)
+  (add-to-list 'exec-path bin-dir))
+(require 'erlang-start)
+
 ;; JavaScript language support
 (my-add-dotfile-lib-path "js2-mode")
 (autoload 'js2-mode "js2-mode" nil t)
@@ -18,16 +28,6 @@
 (add-hook 'js2-mode-hook
  (lambda ()
    (local-set-key (kbd "C-c s") 'my-toggle-js2-strict-missing-semi-warning)))
-
-;; Erlang language support
-(let* ((root-dir  (concat my-dotfiles-lib-dir "erlang-mode"))
-       (bin-dir   (concat root-dir "/bin"))
-       (elisp-dir (car (file-expand-wildcards (concat root-dir
-                                                      "/lib/tools-2.6.*/emacs") t))))
-  (setq erlang-root-dir root-dir)
-  (add-to-list 'load-path elisp-dir)
-  (add-to-list 'exec-path bin-dir))
-(require 'erlang-start)
 
 ;; Sass language support
 (my-add-dotfile-lib-path "scss-mode")
