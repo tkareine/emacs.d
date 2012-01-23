@@ -8,7 +8,6 @@
                                                       "/lib/tools-2.6.*/emacs") t))))
   (when (and (file-exists-p bin-dir)
              (file-exists-p elisp-dir))
-    (message "erlang start")
     (setq erlang-root-dir root-dir)
     (add-to-list 'load-path elisp-dir)
     (add-to-list 'exec-path bin-dir)
