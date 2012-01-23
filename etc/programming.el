@@ -29,6 +29,11 @@
   (add-to-list 'exec-path bin-dir))
 (require 'erlang-start)
 
+;; Sass language support
+(my-add-dotfile-lib-path "scss-mode")
+(autoload 'scss-mode "scss-mode")
+(add-to-list 'auto-mode-alist '("\\.scss\\'" . scss-mode))
+
 ;; Scala language support
 (my-add-dotfile-lib-path "scala-mode")
 (require 'scala-mode-auto)
