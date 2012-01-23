@@ -21,7 +21,7 @@
 
 ;; Erlang language support
 (let* ((root-dir  (concat my-dotfiles-lib-dir "erlang-mode"))
-       (bin-dir   (concat root-dir "bin"))
+       (bin-dir   (concat root-dir "/bin"))
        (elisp-dir (car (file-expand-wildcards (concat root-dir
                                                       "/lib/tools-2.6.*/emacs") t))))
   (setq erlang-root-dir root-dir)
