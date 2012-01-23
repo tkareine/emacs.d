@@ -3,26 +3,32 @@
 
 ;; Create a variable to store the path to this dotfile directory
 ;; (usually ~/.emacs.d).
-(defvar my-dotfiles-dir (file-name-directory
-                         (or (buffer-file-name) load-file-name)))
+(defvar my-dotfile-dir (file-name-directory
+                        (or (buffer-file-name) load-file-name)))
 
-(defvar my-dotfiles-lib-dir (concat my-dotfiles-dir "lib/"))
-(defvar my-dotfiles-etc-dir (concat my-dotfiles-dir "etc/"))
+(defun my-dotfile-path (p)
+  (concat my-dotfile-dir p))
 
-(defun my-add-dotfile-path (p)
-  (add-to-list 'load-path (concat my-dotfiles-dir p)))
+(defun my-dotfile-etc-path (p)
+  (concat (my-dotfile-path "etc/") p))
 
-(defun my-add-dotfile-lib-path (p)
-  (add-to-list 'load-path (concat my-dotfiles-lib-dir p)))
+(defun my-dotfile-lib-path (p)
+  (concat (my-dotfile-path "lib/") p))
+
+(defun my-add-dotfile-to-load-path (p)
+  (add-to-list 'load-path (my-dotfile-path p)))
+
+(defun my-add-dotfile-lib-to-load-path (p)
+  (add-to-list 'load-path (my-dotfile-lib-path p)))
 
 (defun my-load-dotfile (f)
-  (load-file (concat my-dotfiles-dir f)))
+  (load-file (my-dotfile-path f)))
 
 (defun my-load-dotfile-etc (f)
-  (load-file (concat my-dotfiles-etc-dir f)))
+  (load-file (my-dotfile-etc-path f)))
 
 (defun my-load-dotfile-lib (f)
-  (load-file (concat my-dotfiles-lib-dir f)))
+  (load-file (my-dotfile-lib-path f)))
 
 (defun my-filter (condp lst)
   (delq nil
@@ -34,7 +40,7 @@
       (error "Required packages are not installed: %s" missing-packages))))
 
 ;; Start ELPA
-(when (load (concat my-dotfiles-dir "elpa/package.el"))
+(when (load (my-dotfile-path "elpa/package.el"))
   (package-initialize))
 
 (add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/"))
@@ -42,7 +48,7 @@
 (my-load-dotfile "dependencies.el")
 (my-require-packages-installed my-package-dependencies)
 
-(my-add-dotfile-path "lib")
+(my-add-dotfile-to-load-path "lib")
 
 (my-load-dotfile-etc "saves.el")
 (my-load-dotfile-etc "keys.el")
