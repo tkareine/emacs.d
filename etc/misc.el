@@ -39,6 +39,7 @@
   (let ((path (expand-file-name (or (buffer-file-name) default-directory))))
     (when path
       (let ((x-select-enable-clipboard t)) (x-select-text path))
+      (kill-new path)
       (message path))))
 
 ;; Server mode
