@@ -43,3 +43,5 @@
   (when (file-exists-p scala-dir)
     (add-to-list 'load-path scala-dir)
     (require 'scala-mode-auto)))
+
+(require 'textile-mode)
