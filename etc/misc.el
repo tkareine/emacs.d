@@ -16,7 +16,7 @@
 (setq ido-ubiquitous-enabled nil)
 
 ;; Hard wrapping at column number
-(set-fill-column 72)
+(set-fill-column 78)
 
 ;; Default indentation
 (setq standard-indent 2)
