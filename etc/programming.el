@@ -31,6 +31,11 @@
  (lambda ()
    (local-set-key (kbd "C-c s") 'my-toggle-js2-strict-missing-semi-warning)))
 
+(add-hook 'js2-mode-hook
+ (lambda ()
+   (require 'js2-highlight-vars)
+   (js2-highlight-vars-mode)))
+
 ;; Sass language support
 (my-add-dotfile-lib-to-load-path "scss-mode")
 (autoload 'scss-mode "scss-mode")
