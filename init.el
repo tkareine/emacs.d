@@ -39,11 +39,9 @@
     (when missing-packages
       (error "Required packages are not installed: %s" missing-packages))))
 
-;; Start ELPA
-(when (load (my-dotfile-path "elpa/package.el"))
-  (package-initialize))
-
+(require 'package)
 (add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/"))
+(package-initialize)
 
 (my-load-dotfile "dependencies.el")
 (my-require-packages-installed my-package-dependencies)
