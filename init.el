@@ -39,15 +39,19 @@
     (when missing-packages
       (error "Required packages are not installed: %s" missing-packages))))
 
+;; Start package system, make installed packages available
 (require 'package)
 (add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/"))
 (package-initialize)
 
+;; Check that minimum set of packages is installed
 (my-load-dotfile "dependencies.el")
 (my-require-packages-installed my-package-dependencies)
 
+;; Provide other libraries than packages
 (my-add-dotfile-to-load-path "lib")
 
+;; Load configuration
 (my-load-dotfile-etc "saves.el")
 (my-load-dotfile-etc "keys.el")
 (my-load-dotfile-etc "looks.el")
