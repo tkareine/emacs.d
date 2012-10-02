@@ -24,9 +24,7 @@
 (setq js2-concat-multiline-strings nil)
 (setq js2-highlight-level 3)
 (setq js2-missing-semi-one-line-override t)
-(custom-set-faces
-  '(js2-private-member ((t (:foreground "coral1"))))
-  '(js2-warning ((t (:underline "DeepPink1")))))
+(custom-set-faces '(js2-private-member ((t (:foreground "coral1")))))
 
 (defun my-toggle-js2-strict-missing-semi-warning ()
   (interactive)
