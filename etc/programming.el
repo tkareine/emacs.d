@@ -33,7 +33,8 @@
 
 (add-hook 'js2-mode-hook
  (lambda ()
-   (local-set-key (kbd "C-c s") 'my-toggle-js2-strict-missing-semi-warning)))
+   (local-set-key (kbd "C-c s") 'my-toggle-js2-strict-missing-semi-warning)
+   (set-fill-column 120)))
 
 ;; Sass language support
 (my-add-dotfile-lib-to-load-path "scss-mode")
