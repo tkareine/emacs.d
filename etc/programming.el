@@ -1,3 +1,6 @@
+;; Do not prettify lambda word with λ character
+(remove-hook 'prog-mode-hook 'esk-pretty-lambdas)
+
 ;; CSS language customizations
 (setq css-indent-offset 2)
 
