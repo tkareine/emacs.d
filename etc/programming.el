@@ -1,4 +1,4 @@
-;; Do not prettify lambda word with λ character
+;; Do not prettify lambda word with λ character (Emacs Starter Kit)
 (remove-hook 'prog-mode-hook 'esk-pretty-lambdas)
 
 ;; CSS language customizations
