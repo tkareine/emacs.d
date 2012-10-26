@@ -34,10 +34,17 @@
   (delq nil
         (mapcar (lambda (x) (and (funcall condp x) x)) lst)))
 
-(defun my-require-packages-installed (lst)
-  (let* ((missing-packages (my-filter '(lambda (x) (not (package-installed-p x))) lst)))
+(defun my-install-packages (packages)
+  (message "Refreshing packages from repositories...")
+  (package-refresh-contents)
+  (message "Done refreshing packages from repositories.")
+  (dolist (p packages) (package-install p)))
+
+(defun my-require-packages-installed (packages)
+  (let* ((missing-packages (my-filter '(lambda (x) (not (package-installed-p x))) packages)))
     (when missing-packages
-      (error "Required packages are not installed: %s" missing-packages))))
+      (message "Missing required packages, attempting to install them: %s" missing-packages)
+      (my-install-packages missing-packages))))
 
 ;; Start package system, make installed packages available
 (require 'package)
