@@ -21,9 +21,8 @@
 ;; Default indentation
 (setq standard-indent 2)
 
-;; Disable automatic auto-fill-mode in text-mode (enabled by Emacs
-;; Starter Kit)
-(add-hook 'text-mode-hook 'turn-off-auto-fill t)
+;; Disable automatic auto-fill-mode in text-mode (Emacs Starter Kit)
+(remove-hook 'text-mode-hook 'turn-on-auto-fill)
 
 ;; Markdown file types
 (add-to-list 'auto-mode-alist '("\\.markdown$" . markdown-mode))
