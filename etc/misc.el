@@ -21,6 +21,9 @@
 ;; Default indentation
 (setq standard-indent 2)
 
+;; Typing text replaces active selection
+(delete-selection-mode t)
+
 ;; Disable automatic auto-fill-mode in text-mode (Emacs Starter Kit)
 (remove-hook 'text-mode-hook 'turn-on-auto-fill)
 
