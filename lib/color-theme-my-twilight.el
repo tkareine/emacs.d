@@ -111,7 +111,7 @@
 	  (font-lock-variable-name-face ((t (:foreground "#7587A6"))))
 	  (font-lock-warning-face ((t (:background "#EE799F" :foreground "red"))))
 	  (gui-element ((t (:background "#D4D0C8" :foreground "black"))))
-	  (region ((t (:background "#27292A"))))
+	  (region ((t (:background "#424242"))))
 	  (mode-line ((t (:background "grey75" :foreground "black"))))
 	  (highlight ((t (:background "#111111"))))
 	  (highline-face ((t (:background "SeaGreen"))))
