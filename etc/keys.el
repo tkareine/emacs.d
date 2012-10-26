@@ -12,6 +12,7 @@
 (global-set-key (kbd "C-c t")  'delete-trailing-whitespace)
 (global-set-key (kbd "C-c w")  'whitespace-mode)
 (global-set-key (kbd "M-+")    'hippie-expand)
+(global-set-key (kbd "M-å")    'er/expand-region)
 (global-set-key (kbd "M-ö")    'fixup-whitespace)
 
 ;; Prevent extraneous tabs
