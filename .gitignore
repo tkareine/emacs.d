@@ -1,6 +1,7 @@
 *.elc
 .*
 /auto-save-list/
+/backups/
 /elpa/*/
 /swank/
 /url/

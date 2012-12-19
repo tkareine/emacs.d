@@ -1,6 +1,9 @@
 ;; Enable backup files
 (setq make-backup-files t)
 
+;; Make backups of files, even when they're in version control
+(setq vc-make-backup-files t)
+
 ;; Safer backup for symlinks
 (setq backup-by-copying t)
 
@@ -17,7 +20,7 @@
 (setq delete-old-versions t)
 
 ;; Save all backup files to this directory
-(setq backup-directory-alist `(("." . ,temporary-file-directory)))
+(setq backup-directory-alist `(("." . ,(expand-file-name (my-dotfile-path "backups")))))
 
 ;; Save all autosaves to this directory
 (setq auto-save-file-name-transforms `((".*" ,temporary-file-directory t)))
