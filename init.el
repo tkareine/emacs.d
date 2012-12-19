@@ -1,8 +1,18 @@
 ;; This file is based on @overtone's live-coding-emacs
 ;; <https://github.com/overtone/live-coding-emacs>. Thanks!
 
+;; Configuration that must be done early
+
+;; Disable mouse interface
+(if (fboundp 'menu-bar-mode) (menu-bar-mode -1))
+(if (fboundp 'tool-bar-mode) (tool-bar-mode -1))
+(if (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
+
+;; Do not show splash screen
+(setq inhibit-startup-message t)
+
 ;; Create a variable to store the path to this dotfile directory
-;; (usually ~/.emacs.d).
+;; (usually ~/.emacs.d)
 (defvar my-dotfile-dir (file-name-directory
                         (or (buffer-file-name) load-file-name)))
 
