@@ -15,6 +15,11 @@
 ;; certain prompts, such as when locating TAGS file)
 (setq ido-ubiquitous-enabled nil)
 
+;; Auto complete
+(require 'auto-complete-config)
+(add-to-list 'ac-dictionary-directories (my-dotfile-path "ac-dictionary"))
+(ac-config-default)
+
 ;; Hard wrapping at column number
 (set-fill-column 78)
 

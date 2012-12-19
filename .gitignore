@@ -1,5 +1,7 @@
 *.elc
 .*
+ac-comphist.dat
+/ac-dictionary/
 /auto-save-list/
 /backups/
 /elpa/*/

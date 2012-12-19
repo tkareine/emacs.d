@@ -15,5 +15,9 @@
 (global-set-key (kbd "M-å")    'er/expand-region)
 (global-set-key (kbd "M-ö")    'fixup-whitespace)
 
+;; Auto complete: advanced completion
+;; <http://cx4a.org/software/auto-complete/manual.html#auto-complete_command>
+(define-key ac-mode-map (kbd "C-u TAB") 'auto-complete)
+
 ;; Prevent extraneous tabs
 (setq-default indent-tabs-mode nil)
