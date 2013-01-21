@@ -3,8 +3,7 @@
 
 ;; OS X: modifier keys
 (setq mac-command-modifier 'meta)
-(setq mac-option-modifier 'super)
-(setq ns-function-modifier 'hyper)
+(setq ns-function-modifier 'super)
 
 ;; Custom key bindings
 (global-set-key [kp-delete]    'delete-char)
