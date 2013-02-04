@@ -16,6 +16,10 @@
 (global-set-key (kbd "M-j")    'my-join-line)
 (global-set-key (kbd "M-å")    'er/expand-region)
 (global-set-key (kbd "M-ö")    'fixup-whitespace)
+(global-set-key (kbd "C-M-n")  'my-next-line-5)
+(global-set-key (kbd "C-M-p")  'my-previous-line-5)
+(global-set-key (kbd "C-M-f")  'my-forward-char-5)
+(global-set-key (kbd "C-M-b")  'my-backward-char-5)
 
 ;; Auto complete: advanced completion
 ;; <http://cx4a.org/software/auto-complete/manual.html#auto-complete_command>

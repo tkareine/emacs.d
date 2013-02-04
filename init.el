@@ -44,6 +44,22 @@
   (interactive)
   (join-line -1))
 
+(defun my-next-line-5 ()
+  (interactive)
+  (ignore-errors (next-line 5)))
+
+(defun my-previous-line-5 ()
+  (interactive)
+  (ignore-errors (previous-line 5)))
+
+(defun my-forward-char-5 ()
+  (interactive)
+  (ignore-errors (forward-char 5)))
+
+(defun my-backward-char-5 ()
+  (interactive)
+  (ignore-errors (backward-char 5)))
+
 (defun my-filter (condp lst)
   (delq nil
         (mapcar (lambda (x) (and (funcall condp x) x)) lst)))
