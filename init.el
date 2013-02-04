@@ -40,6 +40,10 @@
 (defun my-load-dotfile-lib (f)
   (load-file (my-dotfile-lib-path f)))
 
+(defun my-join-line ()
+  (interactive)
+  (join-line -1))
+
 (defun my-filter (condp lst)
   (delq nil
         (mapcar (lambda (x) (and (funcall condp x) x)) lst)))
