@@ -6,10 +6,10 @@
 (setq ns-function-modifier 'super)
 
 ;; Custom key bindings
-(global-set-key (kbd "C-M-b")  'my-backward-char-5)
-(global-set-key (kbd "C-M-f")  'my-forward-char-5)
-(global-set-key (kbd "C-M-n")  'my-next-line-5)
-(global-set-key (kbd "C-M-p")  'my-previous-line-5)
+(global-set-key (kbd "C-B")    'my-backward-char-5)
+(global-set-key (kbd "C-F")    'my-forward-char-5)
+(global-set-key (kbd "C-N")    'my-next-line-5)
+(global-set-key (kbd "C-P")    'my-previous-line-5)
 (global-set-key (kbd "C-c c")  'comment-or-uncomment-region)
 (global-set-key (kbd "C-c p")  'my-file-path-to-clipboard)
 (global-set-key (kbd "C-c t")  'delete-trailing-whitespace)
