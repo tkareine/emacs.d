@@ -48,7 +48,7 @@
 (package-initialize)
 
 ;; Check that minimum set of packages is installed
-(my-load-dotfile "dependencies.el")
+(my-load-dotfile-etc "dependencies.el")
 (my-require-packages-installed my-package-dependencies)
 
 ;; Provide other libraries than packages
