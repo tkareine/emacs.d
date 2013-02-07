@@ -29,14 +29,9 @@
 (setq js2-missing-semi-one-line-override t)
 (custom-set-faces '(js2-private-member ((t (:foreground "coral1")))))
 
-(defun my-toggle-js2-strict-missing-semi-warning ()
-  (interactive)
-  (setq js2-strict-missing-semi-warning (eq js2-strict-missing-semi-warning nil))
-  (js2-mode))
-
 (add-hook 'js2-mode-hook
  (lambda ()
-   (local-set-key (kbd "C-c s") 'my-toggle-js2-strict-missing-semi-warning)
+   (local-set-key (kbd "C-c s") 'my-js2-mode-toggle-strict-missing-semi-warning)
    (set-fill-column 120)))
 
 ;; Sass language support

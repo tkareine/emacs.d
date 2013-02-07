@@ -33,3 +33,8 @@
     (when missing-packages
       (message "Missing required packages, attempting to install them: %s" missing-packages)
       (my-install-packages missing-packages))))
+
+(defun my-js2-mode-toggle-strict-missing-semi-warning ()
+  (interactive)
+  (setq js2-strict-missing-semi-warning (eq js2-strict-missing-semi-warning nil))
+  (js2-mode))
