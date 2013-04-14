@@ -7,4 +7,5 @@
   starter-kit
   starter-kit-bindings
   starter-kit-ruby
+  zenburn-theme
 ) "Minimum set of packages required for my configuration")

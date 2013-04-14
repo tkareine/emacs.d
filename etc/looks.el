@@ -31,5 +31,6 @@
 (if (and (boundp 'window-system) window-system) (set-frame-size (selected-frame) 140 60))
 
 ;; Color theme
-(require 'color-theme-my-twilight)
-(color-theme-my-twilight)
+;;(require 'color-theme-my-twilight)
+;;(color-theme-my-twilight)
+(load-theme 'zenburn t)
