@@ -1,6 +1,9 @@
 ;; Do not prettify lambda word with λ character (Emacs Starter Kit)
 (remove-hook 'prog-mode-hook 'esk-pretty-lambdas)
 
+;; When killing, stop at subwords inside a CamelCase word
+(add-hook 'prog-mode-hook 'subword-mode)
+
 ;; CSS language customizations
 (setq css-indent-offset 2)
 
