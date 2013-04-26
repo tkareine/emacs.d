@@ -20,6 +20,9 @@
 (add-to-list 'ac-dictionary-directories (my-dotfile-path "ac-dictionary"))
 (ac-config-default)
 
+;; Enable UndoTree globally
+(global-undo-tree-mode)
+
 ;; Hard wrapping at column number
 (set-fill-column 78)
 
