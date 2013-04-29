@@ -35,7 +35,6 @@
 
 (add-hook 'js2-mode-hook
  (lambda ()
-   (local-set-key (kbd "C-c s") 'my-js2-mode-toggle-strict-missing-semi-warning)
    (set-fill-column 300)))
 
 ;; Sass language support
