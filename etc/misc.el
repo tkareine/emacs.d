@@ -23,6 +23,9 @@
 ;; Enable UndoTree globally
 (global-undo-tree-mode)
 
+;; Enable search highlighting for ag
+(setq ag-highlight-search t)
+
 ;; Hard wrapping at column number
 (set-fill-column 78)
 

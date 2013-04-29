@@ -1,4 +1,5 @@
 (defvar my-package-dependencies '(
+  ag
   auto-complete
   clojure-mode
   color-theme
