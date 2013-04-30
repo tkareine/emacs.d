@@ -46,14 +46,5 @@
 (add-to-list 'safe-local-variable-values '(lexical-binding . t))
 (add-to-list 'safe-local-variable-values '(whitespace-line-column . 80))
 
-(defun my-file-path-to-clipboard ()
-  "Copy the current file name to the clipboard"
-  (interactive)
-  (let ((path (expand-file-name (or (buffer-file-name) default-directory))))
-    (when path
-      (let ((x-select-enable-clipboard t)) (x-select-text path))
-      (kill-new path)
-      (message path))))
-
 ;; Server mode
 (server-start)

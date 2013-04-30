@@ -34,6 +34,15 @@
       (message "Missing required packages, attempting to install them: %s" missing-packages)
       (my-install-packages missing-packages))))
 
+(defun my-file-path-to-clipboard ()
+  "Copy the current file name to the clipboard"
+  (interactive)
+  (let ((path (expand-file-name (or (buffer-file-name) default-directory))))
+    (when path
+      (let ((x-select-enable-clipboard t)) (x-select-text path))
+      (kill-new path)
+      (message path))))
+
 (defun my-js2-mode-toggle-strict-missing-semi-warning ()
   (interactive)
   (setq js2-strict-missing-semi-warning (eq js2-strict-missing-semi-warning nil))
