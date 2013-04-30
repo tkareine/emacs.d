@@ -57,6 +57,6 @@
 ;; Load configuration
 (my-load-dotfile-etc "saves.el")
 (my-load-dotfile-etc "looks.el")
-(my-load-dotfile-etc "programming.el")
+(my-load-dotfile-etc "major-modes.el")
 (my-load-dotfile-etc "misc.el")
-(my-load-dotfile-etc "keys.el")
+(my-load-dotfile-etc "bindings.el")
