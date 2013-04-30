@@ -35,13 +35,6 @@
 ;; Typing text replaces active selection
 (delete-selection-mode t)
 
-;; Disable automatic auto-fill-mode in text-mode (Emacs Starter Kit)
-(remove-hook 'text-mode-hook 'turn-on-auto-fill)
-
-;; Markdown file types
-(add-to-list 'auto-mode-alist '("\\.markdown$" . markdown-mode))
-(add-to-list 'auto-mode-alist '("\\.md$" . markdown-mode))
-
 (add-to-list 'safe-local-variable-values '(encoding . utf-8))
 (add-to-list 'safe-local-variable-values '(lexical-binding . t))
 (add-to-list 'safe-local-variable-values '(whitespace-line-column . 80))
