@@ -10,6 +10,10 @@
 ;; CSS language customizations
 (setq css-indent-offset 2)
 
+;; C language family customizations
+(setq c-basic-offset 4)
+(setq c-default-style "linux")
+
 ;; Erlang language support
 (let* ((root-dir  (my-dotfile-lib-path "erlang-mode"))
        (bin-dir   (concat root-dir "/bin"))
