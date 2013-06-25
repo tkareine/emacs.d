@@ -1,5 +1,5 @@
 [subtree "lib/scss-mode"]
-        url = git://github.com/antonj/scss-mode.git
+	url = git://github.com/antonj/scss-mode.git
 	path = lib/scss-mode
 	branch = master
 
