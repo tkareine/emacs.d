@@ -26,6 +26,9 @@
 ;; Enable search highlighting for ag
 (setq ag-highlight-search t)
 
+;; Enable auto pairing of brackets and quotation marks
+(electric-pair-mode 1)
+
 ;; Hard wrapping at column number
 (set-fill-column 78)
 
