@@ -57,6 +57,9 @@
 ;; Apropos commands perform more extensive searches than default
 (setq apropos-do-all t)
 
+;; Mouse yanking inserts at the point instead of the location of the click
+(setq mouse-yank-at-point t)
+
 (add-to-list 'safe-local-variable-values '(encoding . utf-8))
 (add-to-list 'safe-local-variable-values '(lexical-binding . t))
 (add-to-list 'safe-local-variable-values '(whitespace-line-column . 80))
