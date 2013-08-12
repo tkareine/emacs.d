@@ -54,6 +54,9 @@
       x-select-enable-primary t
       save-interprogram-paste-before-kill t)
 
+;; Apropos commands perform more extensive searches than default
+(setq apropos-do-all t)
+
 (add-to-list 'safe-local-variable-values '(encoding . utf-8))
 (add-to-list 'safe-local-variable-values '(lexical-binding . t))
 (add-to-list 'safe-local-variable-values '(whitespace-line-column . 80))
