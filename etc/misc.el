@@ -18,7 +18,7 @@
 (require 'uniquify)
 (setq uniquify-buffer-name-style 'forward)
 
-;; Save the cursor location in the buffer when revisiting the buffer
+;; Save point location in the buffer when revisiting the buffer
 (require 'saveplace)
 (setq-default save-place t)
 (setq save-place-file (my-dotfile-path "places"))
