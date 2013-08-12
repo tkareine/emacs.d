@@ -15,13 +15,8 @@
 ;; Do not show splash screen
 (setq inhibit-startup-message t)
 
-;; Create a variable to store the path to this dotfile directory
-;; (usually ~/.emacs.d)
-(defvar my-dotfile-dir (file-name-directory
-                        (or (buffer-file-name) load-file-name)))
-
 (defun my-dotfile-path (p)
-  (concat my-dotfile-dir p))
+  (concat user-emacs-directory p))
 
 (defun my-dotfile-etc-path (p)
   (concat (my-dotfile-path "etc/") p))
