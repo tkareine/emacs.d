@@ -4,6 +4,9 @@
 ;; Dired: allow opening file, replacing current buffer
 (put 'dired-find-alternate-file 'disabled nil)
 
+;; IDO: Enable globally
+(ido-mode t)
+
 ;; IDO: Flexible matching (try exact match first, then fuzzy)
 (setq ido-enable-flex-matching t)
 
