@@ -17,6 +17,7 @@
 (global-set-key (kbd "C-c s")   'ag-regexp-project-at-point)
 (global-set-key (kbd "C-c t")   'delete-trailing-whitespace)
 (global-set-key (kbd "C-c w")   'whitespace-mode)
+(global-set-key (kbd "C-x C-b") 'ibuffer)
 (global-set-key (kbd "M-J")     'delete-indentation)
 (global-set-key (kbd "M-j")     'my-join-line)
 (global-set-key (kbd "M-å")     'er/expand-region)
