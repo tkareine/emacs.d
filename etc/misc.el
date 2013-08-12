@@ -31,6 +31,9 @@
 ;; Default indentation
 (setq standard-indent 2)
 
+;; Do not insert tabs in place of multiple spaces when formatting a region
+(setq-default indent-tabs-mode nil)
+
 ;; Typing text replaces active selection
 (delete-selection-mode t)
 
