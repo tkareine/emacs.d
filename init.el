@@ -3,9 +3,13 @@
 
 ;; Configuration that must be done early
 
-;; Disable mouse interface
+;; Hide menu bar
 (if (fboundp 'menu-bar-mode) (menu-bar-mode -1))
+
+;; Hide tool bar
 (if (fboundp 'tool-bar-mode) (tool-bar-mode -1))
+
+;; Hide scroll bar
 (if (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
 
 ;; Do not show splash screen
