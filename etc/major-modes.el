@@ -1,9 +1,3 @@
-;; Do not prettify lambda word with λ character (Emacs Starter Kit)
-(remove-hook 'prog-mode-hook 'esk-pretty-lambdas)
-
-;; Disable automatic auto-fill-mode in text-mode (Emacs Starter Kit)
-(remove-hook 'text-mode-hook 'turn-on-auto-fill)
-
 ;; When killing, stop at subwords inside a CamelCase word
 (add-hook 'prog-mode-hook 'subword-mode)
 
