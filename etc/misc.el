@@ -49,6 +49,11 @@
 ;; Typing text replaces active selection
 (delete-selection-mode t)
 
+;; Killing and yanking uses the X clipboard rather than just the primary selection
+(setq x-select-enable-clipboard t
+      x-select-enable-primary t
+      save-interprogram-paste-before-kill t)
+
 (add-to-list 'safe-local-variable-values '(encoding . utf-8))
 (add-to-list 'safe-local-variable-values '(lexical-binding . t))
 (add-to-list 'safe-local-variable-values '(whitespace-line-column . 80))
