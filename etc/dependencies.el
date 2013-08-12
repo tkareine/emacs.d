@@ -5,9 +5,6 @@
   color-theme
   expand-region
   markdown-mode
-  starter-kit
-  starter-kit-bindings
-  starter-kit-ruby
   undo-tree
   zenburn-theme
 ) "Minimum set of packages required for my configuration")
