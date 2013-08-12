@@ -18,6 +18,11 @@
 (require 'uniquify)
 (setq uniquify-buffer-name-style 'forward)
 
+;; Save the cursor location in the buffer when revisiting the buffer
+(require 'saveplace)
+(setq-default save-place t)
+(setq save-place-file (my-dotfile-path "places"))
+
 ;; Auto complete
 (require 'auto-complete-config)
 (add-to-list 'ac-dictionary-directories (my-dotfile-path "ac-dictionary"))
