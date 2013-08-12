@@ -54,7 +54,7 @@
 (my-add-dotfile-to-load-path "lib")
 
 ;; Load configuration
-(my-load-dotfile-etc "saves.el")
+(my-load-dotfile-etc "backups.el")
 (my-load-dotfile-etc "looks.el")
 (my-load-dotfile-etc "major-modes.el")
 (my-load-dotfile-etc "misc.el")
