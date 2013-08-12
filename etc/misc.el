@@ -14,6 +14,10 @@
 ;; certain prompts, such as when locating TAGS file)
 (setq ido-ubiquitous-enabled nil)
 
+;; Append dir name to buffers with similar filenames
+(require 'uniquify)
+(setq uniquify-buffer-name-style 'forward)
+
 ;; Auto complete
 (require 'auto-complete-config)
 (add-to-list 'ac-dictionary-directories (my-dotfile-path "ac-dictionary"))
