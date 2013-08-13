@@ -49,10 +49,8 @@
 ;; Typing text replaces active selection
 (delete-selection-mode t)
 
-;; Killing and yanking uses the X clipboard rather than just the primary selection
-(setq x-select-enable-clipboard t
-      x-select-enable-primary t
-      save-interprogram-paste-before-kill t)
+;; Save clipboard strings into kill ring before replacing them
+(setq save-interprogram-paste-before-kill t)
 
 ;; Apropos commands perform more extensive searches than default
 (setq apropos-do-all t)
