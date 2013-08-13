@@ -29,6 +29,10 @@
 (global-set-key (kbd "M-ö")     'fixup-whitespace)
 (global-set-key (kbd "s-SPC")   'hippie-expand)
 (global-set-key [M-kp-delete]   'kill-word)
+(global-set-key [S-down]        'windmove-down)
+(global-set-key [S-left]        'windmove-left)
+(global-set-key [S-right]       'windmove-right)
+(global-set-key [S-up]          'windmove-up)
 (global-set-key [kp-delete]     'delete-char)
 
 ;; Auto complete: advanced completion
