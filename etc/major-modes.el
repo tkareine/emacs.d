@@ -38,6 +38,9 @@
  (lambda ()
    (set-fill-column 300)))
 
+;; CoffeeScript support
+(setq coffee-tab-width 2)
+
 ;; Sass language support
 (my-add-dotfile-lib-to-load-path "scss-mode")
 (autoload 'scss-mode "scss-mode")
