@@ -10,10 +10,6 @@
 ;; IDO: Flexible matching (try exact match first, then fuzzy)
 (setq ido-enable-flex-matching t)
 
-;; IDO: disable ido-ubiquitous (would give the default value only for
-;; certain prompts, such as when locating TAGS file)
-(setq ido-ubiquitous-enabled nil)
-
 ;; Append dir name to buffers with similar filenames
 (require 'uniquify)
 (setq uniquify-buffer-name-style 'forward)
