@@ -31,7 +31,10 @@
 ;; Enable UndoTree globally
 (global-undo-tree-mode)
 
-;; Enable search highlighting for ag
+;; TRAMP: Prefer ssh
+(setq tramp-default-method "ssh")
+
+;; Ag: enable search highlighting
 (setq ag-highlight-search t)
 
 ;; Enable auto pairing of brackets and quotation marks
