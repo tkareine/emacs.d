@@ -31,7 +31,7 @@
 ;; Enable UndoTree globally
 (global-undo-tree-mode)
 
-;; TRAMP: Prefer ssh
+;; Tramp: Prefer ssh
 (setq tramp-default-method "ssh")
 
 ;; Ag: enable search highlighting
