@@ -48,6 +48,14 @@
 ;; Typing text replaces active selection
 (delete-selection-mode t)
 
+;; Workaround for bug #12183: 24.1.50; Unrecognized pasteboard formats quit yank in Emacs.app
+;; <http://emacs.1067599.n5.nabble.com/bug-12183-24-1-50-Unrecognized-pasteboard-formats-quit-yank-in-Emacs-app-td261226.html>
+(defun ns-get-pasteboard ()
+  "Returns the value of the pasteboard, or nil for unsupported formats."
+  (condition-case nil
+      (ns-get-selection-internal 'CLIPBOARD)
+    (quit nil)))
+
 ;; Save clipboard strings into kill ring before replacing them
 (setq save-interprogram-paste-before-kill t)
 
