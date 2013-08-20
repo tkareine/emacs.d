@@ -4,6 +4,7 @@
   clojure-mode
   color-theme
   expand-region
+  find-file-in-project
   markdown-mode
   smex
   undo-tree
