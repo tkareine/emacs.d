@@ -34,9 +34,8 @@
 (setq js2-strict-missing-semi-warning nil)
 (custom-set-faces '(js2-private-member ((t (:foreground "coral1")))))
 
-(add-hook 'js2-mode-hook
- (lambda ()
-   (set-fill-column 300)))
+(add-hook 'js2-mode-hook (lambda () (set-fill-column 300)))
+(add-hook 'js2-mode-hook 'flymake-mode)
 
 ;; CoffeeScript support
 (setq coffee-tab-width 2)
