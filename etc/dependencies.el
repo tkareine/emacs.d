@@ -2,7 +2,6 @@
   ag
   auto-complete
   clojure-mode
-  color-theme
   expand-region
   find-file-in-project
   flymake
