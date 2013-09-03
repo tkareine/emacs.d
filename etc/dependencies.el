@@ -6,6 +6,7 @@
   find-file-in-project
   flymake
   flymake-jshint
+  imenu-anywhere
   markdown-mode
   smex
   undo-tree
