@@ -43,7 +43,7 @@
 
 ;; Start package system, make installed packages available
 (require 'package)
-(add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/"))
+(add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/") t)
 (package-initialize)
 
 ;; Check that minimum set of packages is installed
