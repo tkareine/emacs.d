@@ -21,10 +21,6 @@
     (require 'erlang-start)))
 
 ;; JavaScript language support
-(my-add-dotfile-lib-to-load-path "js2-mode")
-(autoload 'js2-mode "js2-mode" nil t)
-(add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
-
 (setq js-indent-level 2)
 (setq js2-basic-offset 2)
 (setq js2-bounce-indent-p t)
@@ -41,10 +37,6 @@
 (setq coffee-tab-width 2)
 
 ;; Sass language support
-(my-add-dotfile-lib-to-load-path "scss-mode")
-(autoload 'scss-mode "scss-mode")
-(add-to-list 'auto-mode-alist '("\\.scss$" . scss-mode))
-
 (setq scss-compile-at-save nil)
 
 ;; Scala language support

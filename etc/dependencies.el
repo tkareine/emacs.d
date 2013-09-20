@@ -7,7 +7,9 @@
   flymake
   flymake-jshint
   imenu-anywhere
+  js2-mode
   markdown-mode
+  scss-mode
   smex
   undo-tree
   zenburn-theme
