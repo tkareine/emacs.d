@@ -1,4 +1,5 @@
 (defvar my-package-dependencies '(
+  ac-js2
   ag
   auto-complete
   clojure-mode
