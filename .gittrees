@@ -1,9 +1,0 @@
-[subtree "lib/scss-mode"]
-	url = git://github.com/antonj/scss-mode.git
-	path = lib/scss-mode
-	branch = master
-
-[subtree "lib/js2-mode"]
-	url = git://github.com/mooz/js2-mode.git
-	path = lib/js2-mode
-	branch = master
