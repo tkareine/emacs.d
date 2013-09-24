@@ -24,6 +24,9 @@
 (add-to-list 'ac-dictionary-directories (my-dotfile-path "ac-dictionary"))
 (ac-config-default)
 
+;; For Dired Jump
+(require 'dired-x)
+
 ;; Enable UndoTree globally
 (global-undo-tree-mode)
 
