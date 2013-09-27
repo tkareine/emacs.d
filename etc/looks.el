@@ -24,7 +24,7 @@
 (size-indication-mode t)
 
 ;; Font
-(set-default-font "Inconsolata-14")
+(set-default-font "Inconsolata-16")
 (setq-default line-spacing 1)
 
 ;; Frame width and height
