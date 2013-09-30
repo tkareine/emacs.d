@@ -24,6 +24,9 @@
 (add-to-list 'ac-dictionary-directories (my-dotfile-path "ac-dictionary"))
 (ac-config-default)
 
+;; Find file in project: add more files to match
+(add-to-list 'ffip-patterns "*.coffee" t)
+
 ;; For Dired Jump
 (require 'dired-x)
 
