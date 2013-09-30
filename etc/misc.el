@@ -25,6 +25,7 @@
 (ac-config-default)
 
 ;; Find file in project: add more files to match
+(require 'find-file-in-project)
 (add-to-list 'ffip-patterns "*.coffee" t)
 
 ;; For Dired Jump
