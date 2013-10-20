@@ -10,6 +10,12 @@
 ;; IDO: Flexible matching (try exact match first, then fuzzy)
 (setq ido-enable-flex-matching t)
 
+;; CUA: Enable globally for enhanced rectangle support
+(cua-mode t)
+
+;; CUA: Disable binding of C-x, C-c, C-v
+(setq cua-enable-cua-keys nil)
+
 ;; Append dir name to buffers with similar filenames
 (require 'uniquify)
 (setq uniquify-buffer-name-style 'forward)
