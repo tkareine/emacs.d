@@ -53,6 +53,7 @@
 (add-to-list 'auto-mode-alist '("/procfile\\'" . ruby-mode))
 (add-to-list 'auto-mode-alist '("/rakefile\\'" . ruby-mode))
 (add-to-list 'auto-mode-alist '("/vagrantfile\\'" . ruby-mode))
+(add-to-list 'auto-mode-alist '("\\.rake\\'" . ruby-mode))
 
 ;; Textile language support
 (require 'textile-mode)
