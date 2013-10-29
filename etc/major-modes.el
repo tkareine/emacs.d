@@ -47,5 +47,12 @@
 (add-to-list 'auto-mode-alist '("\\.markdown\\'" . markdown-mode))
 (add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode))
 
+;; Ruby file types
+(add-to-list 'auto-mode-alist '("/gemfile\\'" . ruby-mode))
+(add-to-list 'auto-mode-alist '("/guardfile\\'" . ruby-mode))
+(add-to-list 'auto-mode-alist '("/procfile\\'" . ruby-mode))
+(add-to-list 'auto-mode-alist '("/rakefile\\'" . ruby-mode))
+(add-to-list 'auto-mode-alist '("/vagrantfile\\'" . ruby-mode))
+
 ;; Textile language support
 (require 'textile-mode)
