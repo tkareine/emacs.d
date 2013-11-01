@@ -15,7 +15,7 @@
 (global-set-key (kbd "C-c C-c M-x") 'execute-extended-command)
 (global-set-key (kbd "C-c SPC")     'imenu-anywhere)
 (global-set-key (kbd "C-c c")       'comment-or-uncomment-region)
-(global-set-key (kbd "C-c f")       'find-file-in-project)
+(global-set-key (kbd "C-c d")       'dash-at-point)
 (global-set-key (kbd "C-c j")       'my-js2-mode-toggle-strict-missing-semi-warning)
 (global-set-key (kbd "C-c p")       'my-file-path-to-clipboard)
 (global-set-key (kbd "C-c s")       'ag-regexp-project-at-point)

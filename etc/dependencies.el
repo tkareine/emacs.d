@@ -3,6 +3,7 @@
   ag
   auto-complete
   clojure-mode
+  dash-at-point
   expand-region
   find-file-in-project
   flymake
