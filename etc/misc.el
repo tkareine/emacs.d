@@ -30,10 +30,6 @@
 (add-to-list 'ac-dictionary-directories (my-dotfile-path "ac-dictionary"))
 (ac-config-default)
 
-;; Find file in project: add more files to match
-(require 'find-file-in-project)
-(add-to-list 'ffip-patterns "*.coffee" t)
-
 ;; For Dired Jump
 (require 'dired-x)
 
@@ -45,6 +41,11 @@
 
 ;; Ag: enable search highlighting
 (setq ag-highlight-search t)
+
+;; Projectile
+(require 'grizzl)
+(projectile-global-mode)
+(setq projectile-completion-system 'grizzl)
 
 ;; Enable auto pairing of brackets and quotation marks
 (electric-pair-mode 1)

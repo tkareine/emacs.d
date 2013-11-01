@@ -5,12 +5,13 @@
   clojure-mode
   dash-at-point
   expand-region
-  find-file-in-project
   flymake
   flymake-jshint
+  grizzl
   imenu-anywhere
   js2-mode
   markdown-mode
+  projectile
   scss-mode
   smex
   undo-tree
