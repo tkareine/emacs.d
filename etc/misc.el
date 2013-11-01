@@ -1,55 +1,6 @@
 ;; Prefer UTF-8 encoding for input and output
 (set-language-environment "UTF-8")
 
-;; Dired: allow opening file, replacing current buffer
-(put 'dired-find-alternate-file 'disabled nil)
-
-;; IDO: Enable globally
-(ido-mode t)
-
-;; IDO: Flexible matching (try exact match first, then fuzzy)
-(setq ido-enable-flex-matching t)
-
-;; CUA: Enable globally for enhanced rectangle support
-(cua-mode t)
-
-;; CUA: Disable binding of C-x, C-c, C-v
-(setq cua-enable-cua-keys nil)
-
-;; Append dir name to buffers with similar filenames
-(require 'uniquify)
-(setq uniquify-buffer-name-style 'forward)
-
-;; Save point location in the buffer when revisiting the buffer
-(require 'saveplace)
-(setq-default save-place t)
-(setq save-place-file (my-dotfile-path "places"))
-
-;; Auto complete
-(require 'auto-complete-config)
-(add-to-list 'ac-dictionary-directories (my-dotfile-path "ac-dictionary"))
-(ac-config-default)
-
-;; For Dired Jump
-(require 'dired-x)
-
-;; Enable UndoTree globally
-(global-undo-tree-mode)
-
-;; Tramp: Prefer ssh
-(setq tramp-default-method "ssh")
-
-;; Ag: enable search highlighting
-(setq ag-highlight-search t)
-
-;; Projectile
-(require 'grizzl)
-(projectile-global-mode)
-(setq projectile-completion-system 'grizzl)
-
-;; Enable auto pairing of brackets and quotation marks
-(electric-pair-mode 1)
-
 ;; Hard wrapping at column number
 (set-fill-column 78)
 
@@ -58,9 +9,6 @@
 
 ;; Do not insert tabs in place of multiple spaces when formatting a region
 (setq-default indent-tabs-mode nil)
-
-;; Typing text replaces active selection
-(delete-selection-mode t)
 
 ;; Save typing chars when answering yes-or-no-p questions
 (defalias 'yes-or-no-p 'y-or-n-p)
