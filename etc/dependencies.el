@@ -16,5 +16,6 @@
   scss-mode
   smex
   undo-tree
+  yaml-mode
   zenburn-theme
 ) "Minimum set of packages required for my configuration")
