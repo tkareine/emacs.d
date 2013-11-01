@@ -4,6 +4,7 @@
   auto-complete
   clojure-mode
   dash-at-point
+  enh-ruby-mode
   expand-region
   flymake
   flymake-jshint
