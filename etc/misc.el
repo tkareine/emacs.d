@@ -61,6 +61,9 @@
 ;; Typing text replaces active selection
 (delete-selection-mode t)
 
+;; Save typing chars when answering yes-or-no-p questions
+(defalias 'yes-or-no-p 'y-or-n-p)
+
 ;; Workaround for bug #12183: 24.1.50; Unrecognized pasteboard formats quit yank in Emacs.app
 ;; <http://emacs.1067599.n5.nabble.com/bug-12183-24-1-50-Unrecognized-pasteboard-formats-quit-yank-in-Emacs-app-td261226.html>
 (defun ns-get-pasteboard ()
