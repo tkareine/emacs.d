@@ -33,6 +33,9 @@
 (add-hook 'js2-mode-hook (lambda () (set-fill-column 300)))
 (add-hook 'js2-mode-hook 'flymake-mode)
 
+(add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
+(add-to-list 'auto-mode-alist '("\\.javascript\\'" . js2-mode))
+
 ;; CoffeeScript support
 (setq coffee-tab-width 2)
 
