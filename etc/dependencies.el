@@ -12,6 +12,7 @@
   imenu-anywhere
   js2-mode
   markdown-mode
+  paredit
   projectile
   scss-mode
   smex
