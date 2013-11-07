@@ -9,7 +9,7 @@
 (setq c-default-style "linux")
 
 ;; Erlang language support
-(let* ((root-dir  (my-dotfile-lib-path "erlang-mode"))
+(let* ((root-dir  (my-dotfile-path "lib/erlang-mode"))
        (bin-dir   (concat root-dir "/bin"))
        (elisp-dir (car (file-expand-wildcards (concat root-dir
                                                       "/lib/tools-2.6.*/emacs") t))))
@@ -43,7 +43,7 @@
 (setq scss-compile-at-save nil)
 
 ;; Scala language support
-(my-add-dotfile-lib-to-load-path "scala-mode")
+(my-add-dotfile-to-load-path "lib/scala-mode")
 (require 'scala-mode-auto)
 
 ;; Markdown file types
