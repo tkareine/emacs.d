@@ -35,7 +35,7 @@
       (my-install-packages missing-packages))))
 
 (defun my-file-path-to-clipboard ()
-  "Copy the current file name to the clipboard"
+  "Copy the current file name to the clipboard."
   (interactive)
   (let ((path (expand-file-name (or (buffer-file-name) default-directory))))
     (when path
