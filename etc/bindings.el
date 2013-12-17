@@ -13,7 +13,7 @@
 (global-set-key (kbd "C--")         'text-scale-decrease)
 (global-set-key (kbd "C-+")         'text-scale-increase)
 (global-set-key (kbd "C-c C-c M-x") 'execute-extended-command)
-(global-set-key (kbd "C-c O")       'my-open-path-at-point)
+(global-set-key (kbd "C-c O")       'my-open-url-at-point)
 (global-set-key (kbd "C-c P")       'my-file-path-to-clipboard)
 (global-set-key (kbd "C-c SPC")     'imenu-anywhere)
 (global-set-key (kbd "C-c a")       'ag-regexp)

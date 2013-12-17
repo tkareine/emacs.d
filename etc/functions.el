@@ -48,24 +48,13 @@
   (setq js2-strict-missing-semi-warning (eq js2-strict-missing-semi-warning nil))
   (js2-mode))
 
-(defun my-open-path-at-point ()
-  "Open the URL or file path at point.
-If region is active, uses its content for path. If the path
-starts with \"http(s)://\" or \"mailto:\", open the URL in
-browser. Input path can be {relative, full path, URL}. This
-command is similar to `find-file-at-point' but without prompting
-for confirmation.
+(defun my-open-url-at-point ()
+  "Open the URL at point in browser.
+If region is active, uses its content for URL, otherwise use the
+URL at point.
 "
   (interactive)
-  (let ((path (if (region-active-p)
+  (let ((url (if (region-active-p)
                   (buffer-substring-no-properties (region-beginning) (region-end))
-                (thing-at-point 'filename))))
-    (if (string-match-p "\\`\\(https?://\\)\\|\\(mailto:\\)" path)
-        (browse-url path)
-      (progn
-        (if (file-exists-p path)
-            (find-file path)
-          (if (file-exists-p (concat path ".el"))
-              (find-file (concat path ".el"))
-            (when (y-or-n-p (format "File doesn't exist: %s. Create?" path) )
-              (find-file path))))))))
+                (thing-at-point 'url))))
+    (browse-url url)))
