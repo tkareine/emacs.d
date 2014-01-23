@@ -15,6 +15,9 @@
 ;; Do not show splash screen
 (setq inhibit-startup-message t)
 
+;; Set no content in *scratch* buffer
+(setq initial-scratch-message "")
+
 ;; Rudimentary helpers for loading the rest of init
 (defun my-dotfile-path (p)
   (concat user-emacs-directory p))
