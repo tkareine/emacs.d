@@ -58,3 +58,11 @@
 (add-hook 'lisp-interaction-mode-hook            'paredit-mode)
 (add-hook 'lisp-mode-hook                        'paredit-mode)
 (add-hook 'scheme-mode-hook                      'paredit-mode)
+
+(defadvice kill-ring-save (before slickcopy activate compile)
+  "When called interactively with no active region, copy a single line instead."
+  (interactive (my-active-region-or-line)))
+
+(defadvice kill-region (before slickcut activate compile)
+  "When called interactively with no active region, kill a single line instead."
+  (interactive (my-active-region-or-line)))

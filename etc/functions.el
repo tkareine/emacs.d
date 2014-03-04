@@ -58,3 +58,8 @@ URL at point.
                   (buffer-substring-no-properties (region-beginning) (region-end))
                 (thing-at-point 'url))))
     (browse-url url)))
+
+(defun my-active-region-or-line ()
+  (if mark-active (list (region-beginning) (region-end))
+    (list (line-beginning-position)
+          (line-beginning-position 2))))
