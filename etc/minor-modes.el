@@ -32,11 +32,11 @@
 ;; Saveplace: save point location in the buffer when revisiting the buffer
 (require 'saveplace)
 (setq-default save-place t)
-(setq save-place-file (my-dotfile-path "places"))
+(setq save-place-file (tkareine/dotfile-path "places"))
 
 ;; Auto complete
 (require 'auto-complete-config)
-(add-to-list 'ac-dictionary-directories (my-dotfile-path "ac-dictionary"))
+(add-to-list 'ac-dictionary-directories (tkareine/dotfile-path "ac-dictionary"))
 (ac-config-default)
 
 ;; Enable UndoTree globally
@@ -61,8 +61,8 @@
 
 (defadvice kill-ring-save (before slickcopy activate compile)
   "When called interactively with no active region, copy a single line instead."
-  (interactive (my-active-region-or-line)))
+  (interactive (tkareine/active-region-or-line)))
 
 (defadvice kill-region (before slickcut activate compile)
   "When called interactively with no active region, kill a single line instead."
-  (interactive (my-active-region-or-line)))
+  (interactive (tkareine/active-region-or-line)))

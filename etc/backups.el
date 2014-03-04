@@ -20,7 +20,7 @@
 (setq delete-old-versions t)
 
 ;; Save all backup files to this directory
-(setq backup-directory-alist `(("." . ,(expand-file-name (my-dotfile-path "backups")))))
+(setq backup-directory-alist `(("." . ,(expand-file-name (tkareine/dotfile-path "backups")))))
 
 ;; Save all autosaves to this directory
 (setq auto-save-file-name-transforms `((".*" ,temporary-file-directory t)))

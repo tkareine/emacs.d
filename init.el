@@ -18,17 +18,15 @@
 ;; Set no content in *scratch* buffer
 (setq initial-scratch-message "")
 
-;; Rudimentary helpers for loading the rest of init
-(defun my-dotfile-path (p)
+;; Define rudimentary functions for loading the rest of init
+(defun tkareine/dotfile-path (p)
   (concat user-emacs-directory p))
 
-(defun my-load-dotfile (f)
-  (load-file (my-dotfile-path f)))
+(defun tkareine/load-dotfile (f)
+  (load-file (tkareine/dotfile-path f)))
 
-(defun my-add-dotfile-to-load-path (p)
-  (add-to-list 'load-path (my-dotfile-path p)))
-
-(my-load-dotfile "etc/functions.el")
+;; Load the rest of my functions
+(tkareine/load-dotfile "etc/functions.el")
 
 ;; Start package system, make installed packages available
 (require 'package)
@@ -36,16 +34,16 @@
 (package-initialize)
 
 ;; Check that minimum set of packages is installed
-(my-load-dotfile "etc/dependencies.el")
-(my-require-packages-installed my-package-dependencies)
+(tkareine/load-dotfile "etc/dependencies.el")
+(tkareine/require-packages-installed tkareine/package-dependencies)
 
 ;; Provide other libraries than packages
-(my-add-dotfile-to-load-path "lib")
+(tkareine/add-dotfile-to-load-path "lib")
 
 ;; Load configuration
-(my-load-dotfile "etc/minor-modes.el")
-(my-load-dotfile "etc/major-modes.el")
-(my-load-dotfile "etc/backups.el")
-(my-load-dotfile "etc/looks.el")
-(my-load-dotfile "etc/bindings.el")
-(my-load-dotfile "etc/misc.el")
+(tkareine/load-dotfile "etc/minor-modes.el")
+(tkareine/load-dotfile "etc/major-modes.el")
+(tkareine/load-dotfile "etc/backups.el")
+(tkareine/load-dotfile "etc/looks.el")
+(tkareine/load-dotfile "etc/bindings.el")
+(tkareine/load-dotfile "etc/misc.el")
