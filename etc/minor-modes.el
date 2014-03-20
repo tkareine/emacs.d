@@ -7,16 +7,16 @@
 ;; Dired: allow opening file, replacing current buffer
 (put 'dired-find-alternate-file 'disabled nil)
 
-;; Tramp: Prefer ssh
+;; Tramp: prefer ssh
 (setq tramp-default-method "ssh")
 
 ;; DiredX: for Dired Jump
 (require 'dired-x)
 
-;; IDO: Enable globally
+;; IDO: enable globally
 (ido-mode t)
 
-;; IDO: Flexible matching (try exact match first, then fuzzy)
+;; IDO: flexible matching (try exact match first, then fuzzy)
 (setq ido-enable-flex-matching t)
 
 ;; IDO vertical mode: Enable globally
@@ -25,10 +25,10 @@
 ;; IDO vertical mode: up/down to navigate, left/right to browser history
 (setq ido-vertical-define-keys 'C-n-C-p-up-down-left-right)
 
-;; CUA: Enable globally for enhanced rectangle support
+;; CUA: enable globally for enhanced rectangle support
 (cua-mode t)
 
-;; CUA: Disable binding of C-x, C-c, C-v
+;; CUA: disable binding of C-x, C-c, C-v
 (setq cua-enable-cua-keys nil)
 
 ;; Uniquify: append dir name to buffers with similar filenames
