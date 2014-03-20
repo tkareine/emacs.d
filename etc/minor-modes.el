@@ -19,6 +19,12 @@
 ;; IDO: Flexible matching (try exact match first, then fuzzy)
 (setq ido-enable-flex-matching t)
 
+;; IDO vertical mode: Enable globally
+(ido-vertical-mode t)
+
+;; IDO vertical mode: up/down to navigate, left/right to browser history
+(setq ido-vertical-define-keys 'C-n-C-p-up-down-left-right)
+
 ;; CUA: Enable globally for enhanced rectangle support
 (cua-mode t)
 

@@ -9,6 +9,7 @@
   flymake
   flymake-jshint
   grizzl
+  ido-vertical-mode
   imenu-anywhere
   js2-mode
   markdown-mode
