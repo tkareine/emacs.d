@@ -42,6 +42,7 @@
 (global-set-key (kbd "s-b")         'projectile-switch-to-buffer)
 (global-set-key (kbd "s-d")         'projectile-find-dir)
 (global-set-key (kbd "s-f")         'projectile-find-file)
+(global-set-key (kbd "s-F")         'find-file-at-point)
 (global-set-key [M-kp-delete]       'kill-word)
 (global-set-key [S-down]            'windmove-down)
 (global-set-key [S-left]            'windmove-left)
