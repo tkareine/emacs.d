@@ -22,7 +22,7 @@
 ;; IDO vertical mode: Enable globally
 (ido-vertical-mode t)
 
-;; IDO vertical mode: up/down to navigate, left/right to browser history
+;; IDO vertical mode: up/down to navigate, left/right to browse history
 (setq ido-vertical-define-keys 'C-n-C-p-up-down-left-right)
 
 ;; CUA: enable globally for enhanced rectangle support
