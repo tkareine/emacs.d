@@ -28,7 +28,7 @@
 
 ;; Font
 (set-default-font "Inconsolata-16")
-(setq-default line-spacing 1)
+(setq-default line-spacing 2)
 
 ;; Frame width and height
 (if (and (boundp 'window-system) window-system) (set-frame-size (selected-frame) 140 60))
