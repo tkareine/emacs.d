@@ -66,3 +66,21 @@ URL at point.
   (if mark-active (list (region-beginning) (region-end))
     (list (line-beginning-position)
           (line-beginning-position 2))))
+
+(defun tkareine/pretty-print-xml-region (begin end)
+  "Pretty format XML markup in region with nxml-mode."
+  (interactive "r")
+  (save-excursion
+    (nxml-mode)
+    (goto-char begin)
+    ;; split <foo><foo> or </foo><foo>, but not <foo></foo>
+    (while (search-forward-regexp ">[ \t]*<[^/]" end t)
+      (backward-char 2)
+      (insert "\n"))
+    ;; split <foo/></foo> and </foo></foo>
+    (goto-char begin)
+    (while (search-forward-regexp "<.*?/.*?>[ \t]*<" end t)
+      (backward-char)
+      (insert "\n"))
+    (indent-region begin end nil)
+    (normal-mode)))
