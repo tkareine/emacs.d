@@ -63,3 +63,10 @@
 
 ;; Textile language support
 (require 'textile-mode)
+
+;; Visual Basic support
+(autoload 'visual-basic-mode "visual-basic-mode" "Visual Basic mode." t)
+(add-to-list 'auto-mode-alist '("\\.aspx\\'" . visual-basic-mode))
+(add-to-list 'auto-mode-alist '("\\.bas\\'" . markdown-mode))
+(add-to-list 'auto-mode-alist '("\\.cls\\'" . markdown-mode))
+(add-to-list 'auto-mode-alist '("\\.frm\\'" . markdown-mode))
