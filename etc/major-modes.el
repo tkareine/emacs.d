@@ -58,7 +58,7 @@
 (add-to-list 'auto-mode-alist '("/vagrantfile\\'" . ruby-mode))
 (add-to-list 'auto-mode-alist '("\\.rake\\'" . ruby-mode))
 
-;; Shell script types
+;; Shell script file types
 (add-to-list 'auto-mode-alist '("\\.bashrc\\." . shell-script-mode))
 
 ;; Textile language support
