@@ -1,6 +1,9 @@
 ;; When killing, stop at subwords inside a CamelCase word
 (add-hook 'prog-mode-hook 'subword-mode)
 
+;; Use text-mode for *scratch* buffer
+(setq initial-major-mode 'text-mode)
+
 ;; CSS language customizations
 (setq css-indent-offset 2)
 
