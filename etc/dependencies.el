@@ -8,6 +8,7 @@
   expand-region
   flymake
   flymake-jshint
+  git-gutter
   grizzl
   ido-vertical-mode
   imenu-anywhere

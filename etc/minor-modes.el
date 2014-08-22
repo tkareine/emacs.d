@@ -56,6 +56,10 @@
 (projectile-global-mode)
 (setq projectile-completion-system 'grizzl)
 
+;; GitGutter
+(global-git-gutter-mode t)
+(setq git-gutter:lighter " GG")
+
 ;; Paredit
 (add-hook 'clojure-mode-hook                     'paredit-mode)
 (add-hook 'emacs-lisp-mode-hook                  'paredit-mode)
