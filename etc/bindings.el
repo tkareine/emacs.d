@@ -34,6 +34,7 @@
 (global-set-key (kbd "C-x C-b")     'ibuffer)
 (global-set-key (kbd "C-M-s")       'isearch-forward)
 (global-set-key (kbd "C-M-r")       'isearch-backward)
+(global-set-key (kbd "M-§")         'other-frame)
 (global-set-key (kbd "M-J")         'delete-indentation)
 (global-set-key (kbd "M-X")         'smex-major-mode-commands)
 (global-set-key (kbd "M-j")         'tkareine/join-line)
