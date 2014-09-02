@@ -9,7 +9,6 @@
   flymake
   flymake-jshint
   git-gutter
-  grizzl
   ido-vertical-mode
   imenu-anywhere
   js2-mode

@@ -52,9 +52,8 @@
 (setq ag-highlight-search t)
 
 ;; Projectile: file finder, with Grizzl completion system
-(require 'grizzl)
 (projectile-global-mode)
-(setq projectile-completion-system 'grizzl)
+(setq projectile-completion-system 'ido)
 
 ;; GitGutter
 (global-git-gutter-mode t)
