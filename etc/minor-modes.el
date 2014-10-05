@@ -28,6 +28,9 @@
 ;; CUA: enable globally for enhanced rectangle support
 (cua-selection-mode t)
 
+;; Switch function: enable globally
+(which-function-mode t)
+
 ;; Uniquify: append dir name to buffers with similar filenames
 (require 'uniquify)
 (setq uniquify-buffer-name-style 'forward)
