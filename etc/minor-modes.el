@@ -26,10 +26,7 @@
 (setq ido-vertical-define-keys 'C-n-C-p-up-down-left-right)
 
 ;; CUA: enable globally for enhanced rectangle support
-(cua-mode t)
-
-;; CUA: disable binding of C-x, C-c, C-v
-(setq cua-enable-cua-keys nil)
+(cua-selection-mode t)
 
 ;; Uniquify: append dir name to buffers with similar filenames
 (require 'uniquify)
