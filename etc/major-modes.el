@@ -42,6 +42,11 @@
 ;; CoffeeScript support
 (setq coffee-tab-width 2)
 
+;; Haskell support
+(add-hook 'haskell-mode-hook 'turn-on-haskell-indentation)
+;;; enable top-level definition move commands
+(add-hook 'haskell-mode-hook 'turn-on-haskell-decl-scan)
+
 ;; Sass language support
 (setq scss-compile-at-save nil)
 
