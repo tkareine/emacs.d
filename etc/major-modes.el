@@ -27,7 +27,7 @@
 ;; JavaScript language support
 (setq js-indent-level 2)
 (setq js2-basic-offset 2)
-(setq js2-bounce-indent-p t)
+(setq js2-bounce-indent-p nil)
 (setq js2-concat-multiline-strings nil)
 (setq js2-highlight-level 3)
 (setq js2-missing-semi-one-line-override t)
