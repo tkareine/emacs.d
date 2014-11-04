@@ -50,6 +50,7 @@
 
 ;; Sass language support
 (setq scss-compile-at-save nil)
+(add-to-list 'auto-mode-alist '("\\.sass\\'" . scss-mode))
 
 ;; Scala language support
 (tkareine/add-dotfile-to-load-path "lib/scala-mode")
