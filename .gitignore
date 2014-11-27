@@ -1,12 +1,12 @@
 *.elc
 .*
-ac-comphist.dat
+/ac-comphist.dat
 /ac-dictionary/
 /auto-save-list/
 /backups/
 /elpa/
+/places
+/projectile-bookmarks.eld
 /swank/
+/tramp
 /url/
-places
-projectile-bookmarks.eld
-tramp
