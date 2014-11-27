@@ -24,6 +24,7 @@
 (global-set-key (kbd "C-c a")       'ag-project-at-point)
 (global-set-key (kbd "C-c c")       'comment-or-uncomment-region)
 (global-set-key (kbd "C-c d")       'ag-project-dired-regexp)
+(global-set-key (kbd "C-c g")       'magit-status)
 (global-set-key (kbd "C-c h")       'dash-at-point)
 (global-set-key (kbd "C-c j")       'tkareine/js2-mode-toggle-strict-missing-semi-warning)
 (global-set-key (kbd "C-c s")       'ag-regexp-project-at-point)
