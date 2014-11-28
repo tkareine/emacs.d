@@ -1,6 +1,5 @@
 (defvar tkareine/package-dependencies '(
   ac-js2
-  ag
   auto-complete
   clojure-mode
   dash-at-point
@@ -10,6 +9,7 @@
   flymake-jshint
   git-gutter
   helm
+  helm-ag
   helm-projectile
   js2-mode
   markdown-mode
