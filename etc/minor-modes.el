@@ -13,18 +13,6 @@
 ;; DiredX: for Dired Jump
 (require 'dired-x)
 
-;; IDO: enable globally
-(ido-mode t)
-
-;; IDO: flexible matching (try exact match first, then fuzzy)
-(setq ido-enable-flex-matching t)
-
-;; IDO vertical mode: Enable globally
-(ido-vertical-mode t)
-
-;; IDO vertical mode: up/down to navigate, left/right to browse history
-(setq ido-vertical-define-keys 'C-n-C-p-up-down-left-right)
-
 ;; CUA: enable globally for enhanced rectangle support
 (cua-selection-mode t)
 
@@ -45,15 +33,19 @@
 (add-to-list 'ac-dictionary-directories (tkareine/dotfile-path "ac-dictionary"))
 (ac-config-default)
 
+;; Helm: enable globally
+(require 'helm-config)
+(helm-mode t)
+
+;; Helm: use it for Projectile file finder
+(require 'helm-projectile)
+(helm-projectile-on)
+
 ;; Enable UndoTree globally
 (global-undo-tree-mode)
 
 ;; Ag: enable search highlighting
 (setq ag-highlight-search t)
-
-;; Projectile: file finder, with Grizzl completion system
-(projectile-global-mode)
-(setq projectile-completion-system 'ido)
 
 ;; GitGutter
 (global-git-gutter-mode t)

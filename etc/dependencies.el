@@ -9,14 +9,13 @@
   flymake
   flymake-jshint
   git-gutter
-  ido-vertical-mode
-  imenu-anywhere
+  helm
+  helm-projectile
   js2-mode
   markdown-mode
   paredit
   projectile
   scss-mode
-  smex
   undo-tree
   yaml-mode
   zenburn-theme
