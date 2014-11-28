@@ -58,3 +58,10 @@
 ;; Auto complete: advanced completion
 ;; <http://cx4a.org/software/auto-complete/manual.html#auto-complete_command>
 (define-key ac-mode-map (kbd "C-u TAB") 'auto-complete)
+
+;; Helm: switch bindings for TAB andn C-z
+(define-key helm-map (kbd "TAB") 'helm-execute-persistent-action)
+(define-key helm-map (kbd "C-z") 'helm-select-action)
+
+;; Helm: make TAB work in terminal
+(define-key helm-map (kbd "C-i") 'helm-execute-persistent-action)
