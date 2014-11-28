@@ -12,6 +12,7 @@
   helm-ag
   helm-projectile
   js2-mode
+  magit
   markdown-mode
   paredit
   projectile
