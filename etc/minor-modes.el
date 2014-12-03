@@ -33,8 +33,12 @@
 (add-to-list 'ac-dictionary-directories (tkareine/dotfile-path "ac-dictionary"))
 (ac-config-default)
 
-;; Helm: enable globally
+;; Helm
 (require 'helm-config)
+;; Helm: always show helm buffers below
+(setq helm-split-window-default-side 'below)
+(setq helm-always-two-windows t)
+;; Helm: enable globally
 (helm-mode t)
 
 ;; Helm: use it for Projectile file finder
