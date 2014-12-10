@@ -21,6 +21,7 @@
 (global-set-key (kbd "C-c P")       'tkareine/file-path-to-clipboard)
 (global-set-key (kbd "C-c SPC")     'helm-semantic-or-imenu)
 (global-set-key (kbd "C-c a")       'helm-do-ag)
+(global-set-key (kbd "C-c b")       'helm-resume)
 (global-set-key (kbd "C-c c")       'comment-or-uncomment-region)
 (global-set-key (kbd "C-c g")       'magit-status)
 (global-set-key (kbd "C-c h")       'helm-command-prefix)
