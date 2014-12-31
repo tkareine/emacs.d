@@ -84,7 +84,3 @@ URL at point.
       (insert "\n"))
     (indent-region begin end nil)
     (normal-mode)))
-
-(defun tkareine/helm-projectile-do-ag ()
-  (interactive)
-  (helm-do-ag (projectile-project-root)))

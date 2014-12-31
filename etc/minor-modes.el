@@ -41,9 +41,14 @@
 ;; Helm: enable globally
 (helm-mode t)
 
-;; Helm: use it for Projectile file finder
-(require 'helm-projectile)
+;; Projectile
+(projectile-global-mode)
+(setq projectile-completion-system 'helm)
 (helm-projectile-on)
+(setq projectile-switch-project-action 'helm-projectile)
+(add-to-list 'projectile-other-file-alist '("html" "js" "css"))
+(add-to-list 'projectile-other-file-alist '("js" "html" "css"))
+(add-to-list 'projectile-other-file-alist '("css" "html" "js"))
 
 ;; Enable UndoTree globally
 (global-undo-tree-mode)
