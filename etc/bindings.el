@@ -18,7 +18,7 @@
 (global-set-key (kbd "C-c A")       'helm-ag-this-file)
 (global-set-key (kbd "C-c C-c M-x") 'execute-extended-command)
 (global-set-key (kbd "C-c C-SPC")   'helm-all-mark-rings)
-(global-set-key (kbd "C-c O")       'tkareine/open-url-at-point)
+(global-set-key (kbd "C-c B")       'browse-url-at-point)
 (global-set-key (kbd "C-c P")       'tkareine/file-path-to-clipboard)
 (global-set-key (kbd "C-c SPC")     'helm-semantic-or-imenu)
 (global-set-key (kbd "C-c a")       'helm-do-ag)

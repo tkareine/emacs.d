@@ -51,17 +51,6 @@
   (setq js2-strict-missing-semi-warning (eq js2-strict-missing-semi-warning nil))
   (js2-mode))
 
-(defun tkareine/open-url-at-point ()
-  "Open the URL at point in browser.
-If region is active, uses its content for URL, otherwise use the
-URL at point.
-"
-  (interactive)
-  (let ((url (if (region-active-p)
-                  (buffer-substring-no-properties (region-beginning) (region-end))
-                (thing-at-point 'url))))
-    (browse-url url)))
-
 (defun tkareine/active-region-or-line ()
   (if mark-active (list (region-beginning) (region-end))
     (list (line-beginning-position)
