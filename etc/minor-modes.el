@@ -40,6 +40,9 @@
 (setq savehist-file (tkareine/dotfile-path "savehist"))
 (savehist-mode 1)
 
+;; Recentf: store save file under emacs conf dir
+(setq recentf-save-file (tkareine/dotfile-path "recentf"))
+
 ;; Auto complete
 (require 'auto-complete-config)
 (add-to-list 'ac-dictionary-directories (tkareine/dotfile-path "ac-dictionary"))
