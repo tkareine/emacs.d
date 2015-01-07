@@ -7,6 +7,15 @@
 ;; Dired: allow opening file, replacing current buffer
 (put 'dired-find-alternate-file 'disabled nil)
 
+;; Revert file buffer if changed externally
+(global-auto-revert-mode t)
+
+;; Default major-mode
+(setq major-mode 'text-mode)
+
+;; Add missing newline to file automatically when saving
+(setq require-final-newline t)
+
 ;; Tramp: prefer ssh
 (setq tramp-default-method "ssh")
 
