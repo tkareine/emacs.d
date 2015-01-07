@@ -1,3 +1,6 @@
+;; Default major-mode
+(setq major-mode 'text-mode)
+
 ;; Prefer UTF-8 encoding for input and output
 (set-language-environment "UTF-8")
 (prefer-coding-system 'utf-8)
@@ -8,11 +11,22 @@
 ;; Default indentation
 (setq standard-indent 2)
 
+;; Add missing newline to file automatically when saving
+(setq require-final-newline t)
+
 ;; Do not insert tabs in place of multiple spaces when formatting a region
 (setq-default indent-tabs-mode nil)
 
 ;; Save typing chars when answering yes-or-no-p questions
 (defalias 'yes-or-no-p 'y-or-n-p)
+
+(defadvice kill-ring-save (before slickcopy activate compile)
+  "When called interactively with no active region, copy a single line instead."
+  (interactive (tkareine/active-region-or-line)))
+
+(defadvice kill-region (before slickcut activate compile)
+  "When called interactively with no active region, kill a single line instead."
+  (interactive (tkareine/active-region-or-line)))
 
 ;; Workaround for bug #12183: 24.1.50; Unrecognized pasteboard formats quit yank in Emacs.app
 ;; <http://emacs.1067599.n5.nabble.com/bug-12183-24-1-50-Unrecognized-pasteboard-formats-quit-yank-in-Emacs-app-td261226.html>
