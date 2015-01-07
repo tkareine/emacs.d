@@ -1,5 +1,6 @@
 ;; Prefer UTF-8 encoding for input and output
 (set-language-environment "UTF-8")
+(prefer-coding-system 'utf-8)
 
 ;; Hard wrapping at column number
 (set-fill-column 78)
