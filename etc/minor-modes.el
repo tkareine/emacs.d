@@ -24,9 +24,12 @@
 (setq uniquify-buffer-name-style 'forward)
 
 ;; Saveplace: save point location in the buffer when revisiting the buffer
-(require 'saveplace)
 (setq-default save-place t)
-(setq save-place-file (tkareine/dotfile-path "places"))
+(require 'saveplace)
+(setq history-delete-duplicates t)
+(setq save-place-file (tkareine/dotfile-path "saveplace"))
+(setq savehist-file (tkareine/dotfile-path "savehist"))
+(savehist-mode 1)
 
 ;; Auto complete
 (require 'auto-complete-config)

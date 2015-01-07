@@ -6,9 +6,10 @@
 /backups/
 /elpa/
 /ido.last
-/places
 /projectile-bookmarks.eld
 /recentf
+/savehist
+/saveplace
 /swank/
 /tramp
 /url/
