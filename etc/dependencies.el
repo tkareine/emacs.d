@@ -1,5 +1,6 @@
 (defvar tkareine/package-dependencies '(
   ac-js2
+  ag
   auto-complete
   clojure-mode
   dash-at-point
