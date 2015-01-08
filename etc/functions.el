@@ -56,6 +56,14 @@
     (list (line-beginning-position)
           (line-beginning-position 2))))
 
+(defun tkareine/comment-or-uncomment-region-or-line ()
+  (interactive)
+  (let ((region (tkareine/active-region-or-line)))
+    (when region
+      (let ((rbegin (car region))
+            (rend (cadr region)))
+        (comment-or-uncomment-region rbegin rend)))))
+
 (defun tkareine/pretty-print-xml-region (begin end)
   "Pretty format XML markup in region with nxml-mode."
   (interactive "r")

@@ -26,7 +26,7 @@
 (global-set-key (kbd "C-c SPC")     'helm-semantic-or-imenu)
 (global-set-key (kbd "C-c a")       'ag-project-regexp)
 (global-set-key (kbd "C-c b")       'helm-resume)
-(global-set-key (kbd "C-c c")       'comment-or-uncomment-region)
+(global-set-key (kbd "C-c c")       'tkareine/comment-or-uncomment-region-or-line)
 (global-set-key (kbd "C-c g")       'magit-status)
 (global-set-key (kbd "C-c h")       'helm-command-prefix)
 (global-set-key (kbd "C-c h o")     'helm-occur)
