@@ -74,3 +74,21 @@
 
 ;; Helm: make TAB work in terminal
 (define-key helm-map (kbd "C-i") 'helm-execute-persistent-action)
+
+;; Just use C-<left|right> to move within subwords
+(global-unset-key (kbd "M-<left>"))
+(global-unset-key (kbd "M-<right>"))
+
+;; In paredit-mode, allow using C-<left|right> to move within subwords
+;; and use M-<left|right> as replacement
+(add-hook 'paredit-mode-hook
+          (lambda ()
+            (let ((oldmap (cdr (assoc 'paredit-mode minor-mode-map-alist)))
+                  (newmap (make-sparse-keymap)))
+              (set-keymap-parent newmap oldmap)
+              (define-key newmap (kbd "C-<left>") nil)
+              (define-key newmap (kbd "C-<right>") nil)
+              (define-key newmap (kbd "M-<left>") 'paredit-forward-barf-sexp)
+              (define-key newmap (kbd "M-<right>") 'paredit-forward-slurp-sexp)
+              (make-local-variable 'minor-mode-overriding-map-alist)
+              (push `(paredit-mode . ,newmap) minor-mode-overriding-map-alist))))
