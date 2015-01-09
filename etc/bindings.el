@@ -56,6 +56,7 @@
 (global-set-key (kbd "s-SPC")       'hippie-expand)
 (global-set-key (kbd "s-d")         'helm-projectile-find-dir)
 (global-set-key (kbd "s-f")         'helm-projectile-find-file)
+(global-set-key (kbd "s-g")         'helm-projectile-find-file-dwim)
 (global-set-key (kbd "s-v")         'helm-projectile-find-other-file)
 (global-set-key [M-kp-delete]       'kill-word)
 (global-set-key [S-down]            'windmove-down)
