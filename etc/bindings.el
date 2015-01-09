@@ -22,6 +22,7 @@
 (global-set-key (kbd "C-c C-SPC")   'helm-all-mark-rings)
 (global-set-key (kbd "C-c A")       'ag)
 (global-set-key (kbd "C-c B")       'browse-url-at-point)
+(global-set-key (kbd "C-c C")       'comment-dwim)
 (global-set-key (kbd "C-c P")       'tkareine/file-path-to-clipboard)
 (global-set-key (kbd "C-c SPC")     'helm-semantic-or-imenu)
 (global-set-key (kbd "C-c a")       'ag-project-regexp)
