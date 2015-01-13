@@ -17,6 +17,10 @@
 ;; Do not insert tabs in place of multiple spaces when formatting a region
 (setq-default indent-tabs-mode nil)
 
+;; Allow downcase-region (C-x C-l), upcase-region (C-x C-u)
+(put 'downcase-region 'disabled nil)
+(put 'upcase-region 'disabled nil)
+
 ;; Save typing chars when answering yes-or-no-p questions
 (defalias 'yes-or-no-p 'y-or-n-p)
 
