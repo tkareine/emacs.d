@@ -23,8 +23,11 @@
 ;; No blinking cursor
 (blink-cursor-mode 0)
 
-;; Whitespace highlighting options
+;; Highlight long lines when whitespace-mode is enabled
 (setq whitespace-line-column 140)
+
+;; Highlight trailing whitespaces in lines
+(setq-default show-trailing-whitespace t)
 
 ;; Show file size
 (size-indication-mode t)
