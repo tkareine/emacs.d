@@ -17,6 +17,9 @@
 (line-number-mode t)
 (column-number-mode t)
 
+;; Show buffer size in the mode line
+(size-indication-mode 1)
+
 ;; No blinking cursor
 (blink-cursor-mode 0)
 
