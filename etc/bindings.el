@@ -1,8 +1,10 @@
 ;; OS X: allow entering special chars via Option key
 (setq mac-option-modifier nil)
 
-;; OS X: modifier keys
+;; OS X: use Cmd as Meta modifier
 (setq mac-command-modifier 'meta)
+
+;; Bind Ns key to Super modifer
 (setq ns-function-modifier 'super)
 
 ;; Custom key bindings
@@ -14,7 +16,6 @@
 (global-set-key (kbd "C-M-s")          'isearch-forward)
 (global-set-key (kbd "C-N")            'tkareine/next-line-5)
 (global-set-key (kbd "C-P")            'tkareine/previous-line-5)
-(global-set-key (kbd "C-c ?")          'dash-at-point)
 (global-set-key (kbd "C-c A")          'ag)
 (global-set-key (kbd "C-c B")          'browse-url-at-point)
 (global-set-key (kbd "C-c C")          'comment-dwim)
@@ -28,7 +29,6 @@
 (global-set-key (kbd "C-c a")          'ag-project-regexp)
 (global-set-key (kbd "C-c b")          'helm-resume)
 (global-set-key (kbd "C-c c")          'tkareine/comment-or-uncomment-region-or-line)
-(global-set-key (kbd "C-c g")          'magit-status)
 (global-set-key (kbd "C-c h o")        'helm-occur)
 (global-set-key (kbd "C-c h x")        'helm-register)
 (global-set-key (kbd "C-c h")          'helm-command-prefix)
@@ -41,6 +41,7 @@
 (global-set-key (kbd "C-x C-b")        'ibuffer)
 (global-set-key (kbd "C-x C-f")        'helm-find-files)
 (global-set-key (kbd "C-x b")          'helm-mini)
+(global-set-key (kbd "C-x g")          'magit-status)
 (global-set-key (kbd "C-ä")            'insert-register)
 (global-set-key (kbd "C-ö")            'copy-to-register)
 (global-set-key (kbd "M-<kp-delete>")  'kill-word)
@@ -63,6 +64,10 @@
 (global-set-key (kbd "s-f")            'helm-projectile-find-file)
 (global-set-key (kbd "s-g")            'helm-projectile-find-file-dwim)
 (global-set-key (kbd "s-v")            'helm-projectile-find-other-file)
+
+;; OS X specific bindings
+(if (eq system-type 'darwin)
+    (global-set-key (kbd "C-c ?")      'dash-at-point))
 
 ;; Auto complete: advanced completion
 ;; <http://cx4a.org/software/auto-complete/manual.html#auto-complete_command>
