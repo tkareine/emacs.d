@@ -6,8 +6,7 @@
   dash-at-point
   enh-ruby-mode
   expand-region
-  flymake
-  flymake-jshint
+  flycheck
   git-gutter
   helm
   helm-ag
