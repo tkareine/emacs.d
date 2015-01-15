@@ -47,6 +47,12 @@
 ;; Helm: always show helm buffers below
 (setq helm-split-window-default-side 'below)
 (setq helm-always-two-windows t)
+(setq helm-locate-command
+      (pcase system-type
+        (`gnu/linux "locate %s -e -A %s")
+        (`darwin "mdfind -name %s %s")
+        (`windows-nt "es %s %s")
+        (_ "locate %s %s")))
 (helm-mode t)
 
 ;; Projectile

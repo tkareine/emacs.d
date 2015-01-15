@@ -21,6 +21,10 @@
 (put 'downcase-region 'disabled nil)
 (put 'upcase-region 'disabled nil)
 
+;; OS X: Use `mdfind` for locate
+(if (eq system-type 'darwin)
+    (setq locate-command "mdfind"))
+
 ;; Save typing chars when answering yes-or-no-p questions
 (defalias 'yes-or-no-p 'y-or-n-p)
 
