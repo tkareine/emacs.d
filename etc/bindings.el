@@ -8,8 +8,8 @@
 (setq ns-function-modifier 'super)
 
 ;; Custom key bindings
-(global-set-key (kbd "C-+")            'text-scale-increase)
 (global-set-key (kbd "C--")            'text-scale-decrease)
+(global-set-key (kbd "C-=")            'text-scale-increase)
 (global-set-key (kbd "C-B")            'tkareine/backward-char-5)
 (global-set-key (kbd "C-F")            'tkareine/forward-char-5)
 (global-set-key (kbd "C-M-r")          'isearch-backward)
@@ -29,7 +29,6 @@
 (global-set-key (kbd "C-c SPC")        'helm-semantic-or-imenu)
 (global-set-key (kbd "C-c a")          'ag-project-regexp)
 (global-set-key (kbd "C-c b")          'helm-resume)
-(global-set-key (kbd "C-c c")          'tkareine/comment-or-uncomment-region-or-line)
 (global-set-key (kbd "C-c d")          'helm-projectile-find-dir)
 (global-set-key (kbd "C-c f")          'helm-projectile-find-file)
 (global-set-key (kbd "C-c g")          'helm-projectile-find-file-dwim)
@@ -49,6 +48,7 @@
 (global-set-key (kbd "C-x w")          'whitespace-mode)
 (global-set-key (kbd "C-ä")            'insert-register)
 (global-set-key (kbd "C-ö")            'copy-to-register)
+(global-set-key (kbd "M-/")            'tkareine/comment-or-uncomment-region-or-line)
 (global-set-key (kbd "M-<kp-delete>")  'kill-word)
 (global-set-key (kbd "M-J")            'delete-indentation)
 (global-set-key (kbd "M-SPC")          'fixup-whitespace)
