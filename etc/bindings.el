@@ -45,6 +45,7 @@
 (global-set-key (kbd "C-x b")          'helm-mini)
 (global-set-key (kbd "C-x g")          'magit-status)
 (global-set-key (kbd "C-x t")          'delete-trailing-whitespace)
+(global-set-key (kbd "C-x y")          'tkareine/toggle-show-trailing-whitespace)
 (global-set-key (kbd "C-x w")          'whitespace-mode)
 (global-set-key (kbd "C-ä")            'insert-register)
 (global-set-key (kbd "C-ö")            'copy-to-register)

@@ -81,3 +81,7 @@
       (insert "\n"))
     (indent-region begin end nil)
     (normal-mode)))
+
+(defun tkareine/toggle-show-trailing-whitespace ()
+  (interactive)
+  (setq show-trailing-whitespace (eq show-trailing-whitespace nil)))
