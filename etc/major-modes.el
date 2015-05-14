@@ -44,9 +44,15 @@
 (setq coffee-tab-width 2)
 
 ;; Haskell support
-(add-hook 'haskell-mode-hook 'turn-on-haskell-indentation)
-;;; enable top-level definition move commands
-(add-hook 'haskell-mode-hook 'turn-on-haskell-decl-scan)
+(setq haskell-process-suggest-remove-import-lines t)
+(setq haskell-process-auto-import-loaded-modules t)
+(setq haskell-process-log t)
+(add-hook 'haskell-mode-hook
+          (lambda ()
+            (turn-on-haskell-indentation)
+            (turn-on-haskell-decl-scan)
+            (interactive-haskell-mode)
+            (define-key haskell-mode-map (kbd "C-c o") 'haskell-hoogle)))
 
 ;; Sass language support
 (setq scss-compile-at-save nil)
