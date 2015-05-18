@@ -74,6 +74,9 @@
 (global-git-gutter-mode t)
 (setq git-gutter:lighter " GG")
 
+;; Magit
+(setq magit-last-seen-setup-instructions "1.4.0")
+
 ;; Paredit
 (add-hook 'clojure-mode-hook                     'paredit-mode)
 (add-hook 'emacs-lisp-mode-hook                  'paredit-mode)
