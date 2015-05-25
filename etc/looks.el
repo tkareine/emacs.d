@@ -33,7 +33,8 @@
 (size-indication-mode t)
 
 ;; Font
-(set-face-font 'default "Inconsolata-16")
+;; (set-face-font 'default "Inconsolata-16")
+(set-face-font 'default "Input-14")
 (setq-default line-spacing 2)
 
 ;; Frame width and height
