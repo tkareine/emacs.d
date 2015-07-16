@@ -62,6 +62,7 @@
 (global-set-key (kbd "S-<left>")       'windmove-left)
 (global-set-key (kbd "S-<right>")      'windmove-right)
 (global-set-key (kbd "S-<up>")         'windmove-up)
+(global-set-key (kbd "S-<return>")     'tkareine/eol-newline-and-indent)
 (global-set-key (kbd "s-SPC")          'hippie-expand)
 
 ;; OS X specific bindings

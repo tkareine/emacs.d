@@ -21,6 +21,11 @@
   (interactive)
   (ignore-errors (backward-char 5)))
 
+(defun tkareine/eol-newline-and-indent ()
+  (interactive)
+  (end-of-line)
+  (newline-and-indent))
+
 (defun tkareine/filter (condp lst)
   (delq nil
         (mapcar (lambda (x) (and (funcall condp x) x)) lst)))
