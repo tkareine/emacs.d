@@ -47,12 +47,17 @@
 (setq haskell-process-suggest-remove-import-lines t)
 (setq haskell-process-auto-import-loaded-modules t)
 (setq haskell-process-log t)
+(setq haskell-process-type 'cabal-repl)
 (add-hook 'haskell-mode-hook
           (lambda ()
             (turn-on-haskell-indentation)
             (turn-on-haskell-decl-scan)
             (interactive-haskell-mode)
-            (define-key haskell-mode-map (kbd "C-c o") 'haskell-hoogle)))
+            (define-key haskell-mode-map [f8] 'haskell-navigate-imports)
+            (define-key haskell-mode-map (kbd "C-`") 'haskell-interactive-bring)
+            (define-key haskell-mode-map (kbd "C-c c") 'haskell-process-cabal)
+            (define-key haskell-mode-map (kbd "C-c o") 'haskell-hoogle)
+            (define-key haskell-mode-map (kbd "SPC") 'haskell-mode-contextual-space)))
 
 ;; Sass language support
 (setq scss-compile-at-save nil)
