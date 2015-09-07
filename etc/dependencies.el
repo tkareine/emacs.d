@@ -2,7 +2,6 @@
   ac-js2
   ag
   auto-complete
-  clojure-mode
   dash-at-point
   enh-ruby-mode
   expand-region
