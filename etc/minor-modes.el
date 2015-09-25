@@ -44,6 +44,9 @@
 
 ;; Helm
 (require 'helm-config)
+;; Helm: enter directory automatically when only one candidate matches
+;; input
+(setq helm-ff-auto-update-initial-value t)
 ;; Helm: always show helm buffers below
 (setq helm-split-window-default-side 'below)
 (setq helm-always-two-windows t)
