@@ -67,9 +67,10 @@
 (tkareine/add-dotfile-to-load-path "lib/scala-mode")
 (require 'scala-mode-auto)
 
-;; Markdown file types
-(add-to-list 'auto-mode-alist '("\\.markdown\\'" . markdown-mode))
-(add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode))
+;; Markdown language support
+(add-hook 'markdown-mode-hook '(lambda() (setq markdown-command "marked --gfm --tables")))
+(add-to-list 'auto-mode-alist '("\\.markdown\\'" . gfm-mode))
+(add-to-list 'auto-mode-alist '("\\.md\\'" . gfm-mode))
 
 ;; Ruby file types
 (add-to-list 'auto-mode-alist '("/gemfile\\'" . ruby-mode))
