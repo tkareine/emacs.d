@@ -69,13 +69,19 @@
             (rend (cadr region)))
         (comment-or-uncomment-region rbegin rend)))))
 
-(defun tkareine/pretty-print-xml-region (begin end)
+(defun tkareine/pretty-print-xml (begin end)
   "Pretty format XML markup in region with nxml-mode."
-  (interactive "*r")
-  (let* ((last-buf (current-buffer))
+  (interactive (progn
+                 (barf-if-buffer-read-only)
+                 (if (use-region-p)
+                     (list (region-beginning) (region-end))
+                   (list nil nil))))
+  (let* ((begin (or begin (point-min)))
+         (end (or end (point-max)))
+         (last-buf (current-buffer))
          (tmp-buf (generate-new-buffer (generate-new-buffer-name "*tkareine-pretty-print-xml-region*"))))
     (unwind-protect
-        (progn
+        (save-excursion
           (with-current-buffer tmp-buf
             (insert-buffer-substring-no-properties last-buf begin end)
             (nxml-mode)
