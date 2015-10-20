@@ -71,22 +71,25 @@
 
 (defun tkareine/pretty-print-xml-region (begin end)
   "Pretty format XML markup in region with nxml-mode."
-  (interactive "r")
-  (save-excursion
-    (let ((last-major-mode major-mode))
-      (nxml-mode)
-      (goto-char begin)
-      ;; split <foo><foo> or </foo><foo>, but not <foo></foo>
-      (while (search-forward-regexp ">[ \t]*<[^/]" end t)
-        (backward-char 2)
-        (insert "\n"))
-      ;; split <foo/></foo> and </foo></foo>
-      (goto-char begin)
-      (while (search-forward-regexp "<.*?/.*?>[ \t]*<" end t)
-        (backward-char)
-        (insert "\n"))
-      (indent-region begin end nil)
-      (funcall last-major-mode))))
+  (interactive "*r")
+  (with-current-buffer (clone-indirect-buffer nil nil)
+    (unwind-protect
+        (progn
+          (nxml-mode)
+          (narrow-to-region begin end)
+          (goto-char (point-min))
+          ;; split <foo><foo> or </foo><foo>, but not <foo></foo>
+          (while (search-forward-regexp ">[ \t]*<[^/]" end t)
+            (backward-char 2)
+            (insert "\n"))
+          ;; split <foo/></foo> and </foo></foo>
+          (goto-char (point-min))
+          (while (search-forward-regexp "<.*?/.*?>[ \t]*<" end t)
+            (backward-char)
+            (insert "\n"))
+          (indent-region (point-min) (point-max) nil)
+          (delete-trailing-whitespace (point-min) (point-max))))
+    (kill-buffer (current-buffer))))
 
 (defun tkareine/toggle-show-trailing-whitespace ()
   (interactive)
