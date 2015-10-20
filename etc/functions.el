@@ -72,24 +72,28 @@
 (defun tkareine/pretty-print-xml-region (begin end)
   "Pretty format XML markup in region with nxml-mode."
   (interactive "*r")
-  (with-current-buffer (clone-indirect-buffer nil nil)
+  (let* ((last-buf (current-buffer))
+         (tmp-buf (generate-new-buffer (generate-new-buffer-name "*tkareine-pretty-print-xml-region*"))))
     (unwind-protect
         (progn
-          (nxml-mode)
-          (narrow-to-region begin end)
-          (goto-char (point-min))
-          ;; split <foo><foo> or </foo><foo>, but not <foo></foo>
-          (while (search-forward-regexp ">[ \t]*<[^/]" end t)
-            (backward-char 2)
-            (insert "\n"))
-          ;; split <foo/></foo> and </foo></foo>
-          (goto-char (point-min))
-          (while (search-forward-regexp "<.*?/.*?>[ \t]*<" end t)
-            (backward-char)
-            (insert "\n"))
-          (indent-region (point-min) (point-max) nil)
-          (delete-trailing-whitespace (point-min) (point-max))))
-    (kill-buffer (current-buffer))))
+          (with-current-buffer tmp-buf
+            (insert-buffer-substring-no-properties last-buf begin end)
+            (nxml-mode)
+            (goto-char (point-min))
+            ;; split <foo><foo> or </foo><foo>, but not <foo></foo>
+            (while (search-forward-regexp ">[ \t]*<[^/]" end t)
+              (backward-char 2)
+              (insert "\n"))
+            ;; split <foo/></foo> and </foo></foo>
+            (goto-char (point-min))
+            (while (search-forward-regexp "<.*?/.*?>[ \t]*<" end t)
+              (backward-char)
+              (insert "\n"))
+            (indent-region (point-min) (point-max) nil)
+            (delete-trailing-whitespace (point-min) (point-max)))
+          (delete-region begin end)
+          (insert-buffer-substring tmp-buf))
+    (kill-buffer tmp-buf))))
 
 (defun tkareine/toggle-show-trailing-whitespace ()
   (interactive)
