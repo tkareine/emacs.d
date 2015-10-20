@@ -73,19 +73,20 @@
   "Pretty format XML markup in region with nxml-mode."
   (interactive "r")
   (save-excursion
-    (nxml-mode)
-    (goto-char begin)
-    ;; split <foo><foo> or </foo><foo>, but not <foo></foo>
-    (while (search-forward-regexp ">[ \t]*<[^/]" end t)
-      (backward-char 2)
-      (insert "\n"))
-    ;; split <foo/></foo> and </foo></foo>
-    (goto-char begin)
-    (while (search-forward-regexp "<.*?/.*?>[ \t]*<" end t)
-      (backward-char)
-      (insert "\n"))
-    (indent-region begin end nil)
-    (normal-mode)))
+    (let ((last-major-mode major-mode))
+      (nxml-mode)
+      (goto-char begin)
+      ;; split <foo><foo> or </foo><foo>, but not <foo></foo>
+      (while (search-forward-regexp ">[ \t]*<[^/]" end t)
+        (backward-char 2)
+        (insert "\n"))
+      ;; split <foo/></foo> and </foo></foo>
+      (goto-char begin)
+      (while (search-forward-regexp "<.*?/.*?>[ \t]*<" end t)
+        (backward-char)
+        (insert "\n"))
+      (indent-region begin end nil)
+      (funcall last-major-mode))))
 
 (defun tkareine/toggle-show-trailing-whitespace ()
   (interactive)
