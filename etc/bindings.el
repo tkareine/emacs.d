@@ -8,9 +8,9 @@
 (setq ns-function-modifier 'super)
 
 ;; Custom key bindings
-(global-set-key (kbd "C--")            'text-scale-decrease)
-(global-set-key (kbd "C-;")            'er/expand-region)
-(global-set-key (kbd "C-=")            'text-scale-increase)
+(global-set-key (kbd "C-'")            'text-scale-increase)
+(global-set-key (kbd "C-;")            'text-scale-decrease)
+(global-set-key (kbd "C-=")            'er/expand-region)
 (global-set-key (kbd "C-B")            'tkareine/backward-char-5)
 (global-set-key (kbd "C-F")            'tkareine/forward-char-5)
 (global-set-key (kbd "C-M-r")          'isearch-backward)
