@@ -88,3 +88,6 @@
 (add-hook 'lisp-interaction-mode-hook            #'paredit-mode)
 (add-hook 'lisp-mode-hook                        #'paredit-mode)
 (add-hook 'scheme-mode-hook                      #'paredit-mode)
+
+;; Flycheck: enable globally
+(add-hook 'after-init-hook #'global-flycheck-mode)
