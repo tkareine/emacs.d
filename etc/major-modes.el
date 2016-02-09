@@ -1,5 +1,5 @@
 ;; When killing, stop at subwords inside a CamelCase word
-(add-hook 'prog-mode-hook 'subword-mode)
+(add-hook 'prog-mode-hook #'subword-mode)
 
 ;; Use text-mode for *scratch* buffer
 (setq initial-major-mode 'text-mode)
@@ -68,7 +68,7 @@
 (require 'scala-mode-auto)
 
 ;; Markdown language support
-(add-hook 'markdown-mode-hook '(lambda() (setq markdown-command "marked --gfm --tables")))
+(add-hook 'markdown-mode-hook (lambda() (setq markdown-command "marked --gfm --tables")))
 (add-to-list 'auto-mode-alist '("\\.markdown\\'" . gfm-mode))
 (add-to-list 'auto-mode-alist '("\\.md\\'" . gfm-mode))
 
