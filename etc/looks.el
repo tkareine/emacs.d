@@ -1,6 +1,3 @@
-;; Visual bell instead of annoying sound
-(setq visible-bell t)
-
 ;; Syntax higlighting where applicable
 (global-font-lock-mode t)
 
