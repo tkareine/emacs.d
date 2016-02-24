@@ -1,3 +1,9 @@
+;; Disable visible bell, is broken on OS X El Capitan
+(setq visible-bell nil)
+
+;; Replace ring-bell with my own function
+(setq ring-bell-function #'tkareine/visible-bell)
+
 ;; Syntax higlighting where applicable
 (global-font-lock-mode t)
 
