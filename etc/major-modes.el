@@ -11,6 +11,12 @@
 (setq c-basic-offset 4)
 (setq c-default-style "linux")
 
+;; Ediff: use current frame for control panel
+(setq ediff-window-setup-function 'ediff-setup-windows-plain)
+;; Ediff: I find it easier to read a diff by having one buffer on the
+;; left and another on the right
+(setq ediff-split-window-function 'split-window-horizontally)
+
 ;; Erlang language support
 (let* ((root-dir  (tkareine/dotfile-path "lib/erlang-mode"))
        (bin-dir   (concat root-dir "/bin"))
