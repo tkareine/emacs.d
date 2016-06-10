@@ -1,5 +1,6 @@
 *.elc
 .*
+/abbrev_defs
 /ac-comphist.dat
 /ac-dictionary/
 /auto-save-list/
