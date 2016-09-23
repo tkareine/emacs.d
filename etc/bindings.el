@@ -1,11 +1,11 @@
 ;; OS X: allow entering special chars via Option key
-(setq mac-option-modifier nil)
+(customize-set-variable 'mac-option-modifier nil)
 
 ;; OS X: use Cmd as Meta modifier
-(setq mac-command-modifier 'meta)
+(customize-set-variable 'mac-command-modifier 'meta)
 
 ;; Bind Ns key to Super modifer
-(setq ns-function-modifier 'super)
+(customize-set-variable 'ns-function-modifier 'super)
 
 ;; Custom key bindings
 (global-set-key (kbd "C-'")            'text-scale-increase)

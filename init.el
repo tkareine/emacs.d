@@ -13,10 +13,10 @@
 (if (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
 
 ;; Do not show splash screen
-(setq inhibit-startup-message t)
+(customize-set-variable 'inhibit-startup-message t)
 
 ;; Set no content in *scratch* buffer
-(setq initial-scratch-message "")
+(customize-set-variable 'initial-scratch-message "")
 
 ;; Define rudimentary functions for loading the rest of init
 (defun tkareine/dotfile-path (p)
@@ -47,3 +47,6 @@
 (tkareine/load-dotfile "etc/looks.el")
 (tkareine/load-dotfile "etc/bindings.el")
 (tkareine/load-dotfile "etc/misc.el")
+
+(setq custom-file (tkareine/dotfile-path ".custom.el"))
+(load custom-file)

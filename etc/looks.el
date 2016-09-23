@@ -1,8 +1,8 @@
 ;; Disable visible bell, is broken on OS X El Capitan
-(setq visible-bell nil)
+(customize-set-variable 'visible-bell nil)
 
 ;; Replace ring-bell with my own function
-(setq ring-bell-function #'tkareine/visible-bell)
+(customize-set-variable 'ring-bell-function #'tkareine/visible-bell)
 
 ;; Syntax higlighting where applicable
 (global-font-lock-mode t)
@@ -30,7 +30,7 @@
 (setq whitespace-line-column 140)
 
 ;; Highlight trailing whitespaces in lines
-(setq-default show-trailing-whitespace t)
+(customize-set-variable 'show-trailing-whitespace t)
 
 ;; Show file size
 (size-indication-mode t)
@@ -38,7 +38,7 @@
 ;; Font
 ;; (set-face-font 'default "Inconsolata-16")
 (set-face-font 'default "Input-14")
-(setq-default line-spacing 2)
+(customize-set-variable 'line-spacing 2)
 
 ;; Frame width and height
 (if (and (boundp 'window-system) window-system) (set-frame-size (selected-frame) 140 60))

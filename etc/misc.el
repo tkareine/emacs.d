@@ -1,5 +1,5 @@
 ;; Default major-mode
-(setq major-mode 'text-mode)
+(customize-set-variable 'major-mode 'text-mode)
 
 ;; Prefer UTF-8 encoding for input and output
 (set-language-environment "UTF-8")
@@ -9,13 +9,13 @@
 (set-fill-column 78)
 
 ;; Default indentation
-(setq standard-indent 2)
+(customize-set-variable 'standard-indent 2)
 
 ;; Add missing newline to file automatically when saving
-(setq require-final-newline t)
+(customize-set-variable 'require-final-newline t)
 
 ;; Do not insert tabs in place of multiple spaces when formatting a region
-(setq-default indent-tabs-mode nil)
+(customize-set-variable 'indent-tabs-mode nil)
 
 ;; Allow downcase-region (C-x C-l), upcase-region (C-x C-u)
 (put 'downcase-region 'disabled nil)
@@ -37,14 +37,15 @@
   (interactive (tkareine/active-region-or-line)))
 
 ;; Save clipboard strings into kill ring before replacing them
-(setq save-interprogram-paste-before-kill t)
+(customize-set-variable 'save-interprogram-paste-before-kill t)
 
 ;; Apropos commands perform more extensive searches than default
 (setq apropos-do-all t)
 
 ;; Mouse yanking inserts at the point instead of the location of the click
-(setq mouse-yank-at-point t)
+(customize-set-variable 'mouse-yank-at-point t)
 
+;; Safe buffer-local variables
 (add-to-list 'safe-local-variable-values '(encoding . utf-8))
 (add-to-list 'safe-local-variable-values '(lexical-binding . t))
 (add-to-list 'safe-local-variable-values '(whitespace-line-column . 80))

@@ -104,7 +104,7 @@
 
 (defun tkareine/toggle-show-trailing-whitespace ()
   (interactive)
-  (setq show-trailing-whitespace (eq show-trailing-whitespace nil)))
+  (customize-set-variable 'show-trailing-whitespace (eq show-trailing-whitespace nil)))
 
 ;; Adapted from <https://www.emacswiki.org/emacs/AlarmBell>
 (defun tkareine/visible-bell ()
