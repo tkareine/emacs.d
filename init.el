@@ -45,7 +45,6 @@
 (tkareine/load-dotfile "etc/major-modes.el")
 (tkareine/load-dotfile "etc/backups.el")
 (tkareine/load-dotfile "etc/looks.el")
-(tkareine/load-dotfile "etc/bindings.el")
 (tkareine/load-dotfile "etc/misc.el")
 
 (setq custom-file (tkareine/dotfile-path ".custom.el"))

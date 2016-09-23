@@ -39,9 +39,8 @@
 (setq js2-missing-semi-one-line-override t)
 (setq js2-strict-missing-semi-warning nil)
 (custom-set-faces '(js2-private-member ((t (:foreground "coral1")))))
-
 (add-hook 'js2-mode-hook (lambda () (set-fill-column 300)))
-
+(global-set-key (kbd "C-c j")          #'tkareine/js2-mode-toggle-strict-missing-semi-warning)
 (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
 (add-to-list 'auto-mode-alist '("\\.javascript\\'" . js2-mode))
 
