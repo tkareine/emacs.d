@@ -45,6 +45,9 @@
 ;; Mouse yanking inserts at the point instead of the location of the click
 (customize-set-variable 'mouse-yank-at-point t)
 
+;; Network security
+(customize-set-variable 'network-security-level 'high)
+
 ;; Safe buffer-local variables
 (add-to-list 'safe-local-variable-values '(encoding . utf-8))
 (add-to-list 'safe-local-variable-values '(lexical-binding . t))
