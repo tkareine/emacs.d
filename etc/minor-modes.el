@@ -46,6 +46,7 @@
 (define-key ac-mode-map (kbd "C-u TAB") #'auto-complete)
 
 ;; Helm
+(require 'helm)
 (require 'helm-config)
 (global-set-key (kbd "C-c C-SPC")      #'helm-all-mark-rings)
 (global-set-key (kbd "C-c C-s")        #'helm-do-ag)
@@ -59,6 +60,11 @@
 (global-set-key (kbd "C-x b")          #'helm-mini)
 (global-set-key (kbd "M-x")            #'helm-M-x)
 (global-set-key (kbd "M-y")            #'helm-show-kill-ring)
+;; Helm: switch bindings for TAB andn C-z
+(define-key helm-map (kbd "TAB") #'helm-execute-persistent-action)
+(define-key helm-map (kbd "C-z") #'helm-select-action)
+;; Helm: make TAB work in terminal
+(define-key helm-map (kbd "C-i") #'helm-execute-persistent-action)
 ;; Helm: enter directory automatically when only one candidate matches
 ;; input
 (customize-set-variable 'helm-ff-auto-update-initial-value t)
@@ -73,25 +79,21 @@
         (_ "locate %s %s")))
 ;; Helm: enable
 (helm-mode t)
-;; Helm: switch bindings for TAB andn C-z
-(define-key helm-map (kbd "TAB") #'helm-execute-persistent-action)
-(define-key helm-map (kbd "C-z") #'helm-select-action)
-;; Helm: make TAB work in terminal
-(define-key helm-map (kbd "C-i") #'helm-execute-persistent-action)
 
 ;; Projectile
+(require 'helm-projectile)
 (global-set-key (kbd "C-c d")          #'helm-projectile-find-dir)
 (global-set-key (kbd "C-c f")          #'helm-projectile-find-file)
 (global-set-key (kbd "C-c g")          #'helm-projectile-find-file-dwim)
 (global-set-key (kbd "C-c s")          #'helm-projectile-ag)
 (global-set-key (kbd "C-c v")          #'helm-projectile-find-other-file)
-(projectile-global-mode)
 (customize-set-variable 'projectile-completion-system 'helm)
-(helm-projectile-on)
 (customize-set-variable 'projectile-switch-project-action 'helm-projectile)
 (add-to-list 'projectile-other-file-alist '("html" "js" "css"))
 (add-to-list 'projectile-other-file-alist '("js" "html" "css"))
 (add-to-list 'projectile-other-file-alist '("css" "html" "js"))
+(projectile-global-mode)
+(helm-projectile-on)
 
 ;; UndoTree
 (global-undo-tree-mode)
