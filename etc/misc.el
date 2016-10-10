@@ -84,6 +84,7 @@
 (global-set-key (kbd "C-x w")          #'whitespace-mode)
 (global-set-key (kbd "M-/")            #'tkareine/comment-or-uncomment-region-or-line)
 (global-set-key (kbd "M-<kp-delete>")  #'kill-word)
+(global-set-key (kbd "M-ESC")          #'other-frame)
 (global-set-key (kbd "M-J")            #'delete-indentation)
 (global-set-key (kbd "M-S-SPC")        #'fixup-whitespace)
 (global-set-key (kbd "M-[")            #'point-to-register)
