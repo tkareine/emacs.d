@@ -7,11 +7,11 @@
 
 (defun tkareine/next-line-5 ()
   (interactive)
-  (ignore-errors (next-line 5)))
+  (ignore-errors (forward-line 5)))
 
 (defun tkareine/previous-line-5 ()
   (interactive)
-  (ignore-errors (previous-line 5)))
+  (ignore-errors (forward-line -5)))
 
 (defun tkareine/forward-char-5 ()
   (interactive)
@@ -47,7 +47,7 @@
   (interactive)
   (let ((path (expand-file-name (or (buffer-file-name) default-directory))))
     (when path
-      (let ((x-select-enable-clipboard t)) (x-select-text path))
+      (let ((select-enable-clipboard t)) (gui-select-text path))
       (kill-new path)
       (message path))))
 
