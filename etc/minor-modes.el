@@ -27,8 +27,8 @@
 (customize-set-variable 'uniquify-buffer-name-style 'forward)
 
 ;; Saveplace: save point location in the buffer when revisiting the buffer
-(customize-set-variable 'save-place t)
 (require 'saveplace)
+(customize-set-variable 'save-place t)
 (customize-set-variable 'history-delete-duplicates t)
 (customize-set-variable 'save-place-file (tkareine/dotfile-path "saveplace"))
 (customize-set-variable 'savehist-file (tkareine/dotfile-path "savehist"))
