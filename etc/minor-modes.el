@@ -95,7 +95,7 @@
 (add-to-list 'projectile-other-file-alist '("html" "js" "css"))
 (add-to-list 'projectile-other-file-alist '("js" "html" "css"))
 (add-to-list 'projectile-other-file-alist '("css" "html" "js"))
-(projectile-global-mode)
+(projectile-mode)
 (helm-projectile-on)
 
 ;; UndoTree
