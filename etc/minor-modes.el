@@ -113,7 +113,6 @@
 
 ;; Magit
 (global-set-key (kbd "C-x g")          #'magit-status)
-(setq magit-last-seen-setup-instructions "1.4.0")
 
 ;; Paredit: just use C-<left|right> to move within subwords
 (global-unset-key (kbd "M-<left>"))
