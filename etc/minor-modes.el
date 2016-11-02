@@ -80,6 +80,9 @@
 ;; Helm: enable
 (helm-mode t)
 
+;; Helm-ag
+(customize-set-variable 'helm-ag-insert-at-point 'symbol)
+
 ;; Projectile
 (require 'helm-projectile)
 (global-set-key (kbd "C-c d")          #'helm-projectile-find-dir)
