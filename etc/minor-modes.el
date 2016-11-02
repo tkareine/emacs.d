@@ -102,7 +102,7 @@
 (global-undo-tree-mode)
 
 ;; Ag: enable search highlighting
-(setq ag-highlight-search t)
+(customize-set-variable 'ag-highlight-search t)
 (global-set-key (kbd "C-c A")          #'ag)
 (global-set-key (kbd "C-c a")          #'ag-project-regexp)
 (global-set-key (kbd "C-c C-a")        #'ag-regexp)

@@ -27,7 +27,7 @@
 (blink-cursor-mode 0)
 
 ;; Highlight long lines when whitespace-mode is enabled
-(setq whitespace-line-column 140)
+(customize-set-variable 'whitespace-line-column 140)
 
 ;; Highlight trailing whitespaces in lines
 (customize-set-variable 'show-trailing-whitespace t)

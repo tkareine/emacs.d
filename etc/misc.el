@@ -23,7 +23,7 @@
 
 ;; OS X: Use `mdfind` for locate
 (if (eq system-type 'darwin)
-    (setq locate-command "mdfind"))
+    (customize-set-variable 'locate-command "mdfind"))
 
 ;; Save typing chars when answering yes-or-no-p questions
 (defalias 'yes-or-no-p 'y-or-n-p)
@@ -40,7 +40,7 @@
 (customize-set-variable 'save-interprogram-paste-before-kill t)
 
 ;; Apropos commands perform more extensive searches than default
-(setq apropos-do-all t)
+(customize-set-variable 'apropos-do-all t)
 
 ;; Mouse yanking inserts at the point instead of the location of the click
 (customize-set-variable 'mouse-yank-at-point t)

@@ -5,17 +5,17 @@
 (customize-set-variable 'initial-major-mode 'text-mode)
 
 ;; CSS language customizations
-(setq css-indent-offset 2)
+(customize-set-variable 'css-indent-offset 2)
 
 ;; C language family customizations
-(setq c-basic-offset 4)
-(setq c-default-style "linux")
+(customize-set-variable 'c-basic-offset 4)
+(customize-set-variable 'c-default-style "linux")
 
 ;; Ediff: use current frame for control panel
-(setq ediff-window-setup-function 'ediff-setup-windows-plain)
+(customize-set-variable 'ediff-window-setup-function 'ediff-setup-windows-plain)
 ;; Ediff: I find it easier to read a diff by having one buffer on the
 ;; left and another on the right
-(setq ediff-split-window-function 'split-window-horizontally)
+(customize-set-variable 'ediff-split-window-function 'split-window-horizontally)
 
 ;; Erlang language support
 (let* ((root-dir  (tkareine/dotfile-path "lib/erlang-mode"))
@@ -31,13 +31,13 @@
     (require 'erlang-start)))
 
 ;; JavaScript language support
-(setq js-indent-level 2)
-(setq js2-basic-offset 2)
-(setq js2-bounce-indent-p t)
-(setq js2-concat-multiline-strings nil)
-(setq js2-highlight-level 3)
-(setq js2-missing-semi-one-line-override t)
-(setq js2-strict-missing-semi-warning nil)
+(customize-set-variable 'js-indent-level 2)
+(customize-set-variable 'js2-basic-offset 2)
+(customize-set-variable 'js2-bounce-indent-p t)
+(customize-set-variable 'js2-concat-multiline-strings nil)
+(customize-set-variable 'js2-highlight-level 3)
+(customize-set-variable 'js2-missing-semi-one-line-override t)
+(customize-set-variable 'js2-strict-missing-semi-warning nil)
 (custom-set-faces '(js2-private-member ((t (:foreground "coral1")))))
 (add-hook 'js2-mode-hook (lambda () (set-fill-column 300)))
 (global-set-key (kbd "C-c j")          #'tkareine/js2-mode-toggle-strict-missing-semi-warning)
@@ -45,13 +45,13 @@
 (add-to-list 'auto-mode-alist '("\\.javascript\\'" . js2-mode))
 
 ;; CoffeeScript support
-(setq coffee-tab-width 2)
+(customize-set-variable 'coffee-tab-width 2)
 
 ;; Haskell support
-(setq haskell-process-suggest-remove-import-lines t)
-(setq haskell-process-auto-import-loaded-modules t)
-(setq haskell-process-log t)
-(setq haskell-process-type 'cabal-repl)
+(customize-set-variable 'haskell-process-suggest-remove-import-lines t)
+(customize-set-variable 'haskell-process-auto-import-loaded-modules t)
+(customize-set-variable 'haskell-process-log t)
+(customize-set-variable 'haskell-process-type 'cabal-repl)
 (add-hook 'haskell-mode-hook
           (lambda ()
             (turn-on-haskell-indentation)
@@ -64,7 +64,7 @@
             (define-key haskell-mode-map (kbd "SPC") 'haskell-mode-contextual-space)))
 
 ;; Sass language support
-(setq scss-compile-at-save nil)
+(customize-set-variable 'scss-compile-at-save nil)
 (add-to-list 'auto-mode-alist '("\\.sass\\'" . scss-mode))
 
 ;; Scala language support
