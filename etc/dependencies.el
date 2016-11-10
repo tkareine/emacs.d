@@ -18,5 +18,6 @@
   scss-mode
   undo-tree
   yaml-mode
+  web-mode
   zenburn-theme
 ) "Minimum set of packages required for my configuration")

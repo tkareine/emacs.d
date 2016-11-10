@@ -96,3 +96,8 @@
 (add-to-list 'auto-mode-alist '("\\.bas\\'" . markdown-mode))
 (add-to-list 'auto-mode-alist '("\\.cls\\'" . markdown-mode))
 (add-to-list 'auto-mode-alist '("\\.frm\\'" . markdown-mode))
+
+;; Web support
+(add-to-list 'auto-mode-alist '("\\.erb\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.ftl\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.jsx\\'" . web-mode))
