@@ -37,13 +37,10 @@
 ;; Recentf: store save file under emacs conf dir
 (customize-set-variable 'recentf-save-file (tkareine/dotfile-path "recentf"))
 
-;; Auto complete
-(require 'auto-complete-config)
-(add-to-list 'ac-dictionary-directories (tkareine/dotfile-path "ac-dictionary"))
-(ac-config-default)
-;; Auto complete: advanced completion
-;; <http://cx4a.org/software/auto-complete/manual.html#auto-complete_command>
-(define-key ac-mode-map (kbd "C-u TAB") #'auto-complete)
+;; Company: auto completion
+(require 'company)
+(global-company-mode)
+(define-key company-mode-map (kbd "C-u TAB") #'company-complete)
 
 ;; Helm
 (require 'helm)

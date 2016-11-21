@@ -1,7 +1,6 @@
 (defvar tkareine/package-dependencies '(
-  ac-js2
   ag
-  auto-complete
+  company
   dash-at-point
   enh-ruby-mode
   expand-region
