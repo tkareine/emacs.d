@@ -15,6 +15,7 @@
   markdown-mode
   paredit
   projectile
+  rjsx-mode
   scss-mode
   undo-tree
   yaml-mode
