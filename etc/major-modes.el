@@ -44,6 +44,11 @@
 (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
 (add-to-list 'auto-mode-alist '("\\.javascript\\'" . js2-mode))
 
+;; Clojure support
+(customize-set-variable 'cider-eval-result-prefix ";; => ")
+(customize-set-variable 'cider-repl-result-prefix ";; => ")
+(custom-set-faces '(cider-result-overlay-face ((t (:background "grey30")))))
+
 ;; CoffeeScript support
 (customize-set-variable 'coffee-tab-width 2)
 
