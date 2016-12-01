@@ -47,6 +47,7 @@
 ;; Clojure support
 (customize-set-variable 'cider-eval-result-prefix ";; => ")
 (customize-set-variable 'cider-repl-result-prefix ";; => ")
+(customize-set-variable 'cider-repl-history-file "~/.cider_history")
 (custom-set-faces '(cider-result-overlay-face ((t (:background "grey30")))))
 
 ;; CoffeeScript support
