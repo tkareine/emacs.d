@@ -40,7 +40,6 @@
 ;; Company: auto completion
 (require 'company)
 (global-company-mode)
-(define-key company-mode-map (kbd "C-u TAB") #'company-complete)
 
 ;; Helm
 (require 'helm)
