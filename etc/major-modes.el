@@ -39,8 +39,10 @@
 (customize-set-variable 'js2-missing-semi-one-line-override t)
 (customize-set-variable 'js2-strict-missing-semi-warning nil)
 (custom-set-faces '(js2-private-member ((t (:foreground "coral1")))))
-(add-hook 'js2-mode-hook (lambda () (set-fill-column 300)))
-(global-set-key (kbd "C-c j")          #'tkareine/js2-mode-toggle-strict-missing-semi-warning)
+(add-hook 'js2-mode-hook
+          (lambda ()
+            (set-fill-column 300)
+            (local-set-key (kbd "C-c j") #'tkareine/js2-mode-toggle-strict-missing-semi-warning)))
 (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
 (add-to-list 'auto-mode-alist '("\\.javascript\\'" . js2-mode))
 
@@ -63,11 +65,10 @@
             (turn-on-haskell-indentation)
             (turn-on-haskell-decl-scan)
             (interactive-haskell-mode)
-            (define-key haskell-mode-map [f8] 'haskell-navigate-imports)
-            (define-key haskell-mode-map (kbd "C-`") 'haskell-interactive-bring)
-            (define-key haskell-mode-map (kbd "C-c c") 'haskell-process-cabal)
-            (define-key haskell-mode-map (kbd "C-c o") 'haskell-hoogle)
-            (define-key haskell-mode-map (kbd "SPC") 'haskell-mode-contextual-space)))
+            (local-set-key (kbd "<f8>")  #'haskell-navigate-imports)
+            (local-set-key (kbd "C-`")   #'haskell-interactive-bring)
+            (local-set-key (kbd "C-c c") #'haskell-process-cabal)
+            (local-set-key (kbd "C-c o") #'haskell-hoogle)))
 
 ;; Sass language support
 (customize-set-variable 'scss-compile-at-save nil)
