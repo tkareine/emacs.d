@@ -40,6 +40,18 @@
 ;; Provide other libraries than packages
 (tkareine/add-dotfile-to-load-path "lib")
 
+;; Shell command to setup external files as required by Emacs
+;; configuration.  Output errors in the shell command to dedicated file.
+(call-process-shell-command (mapconcat
+                             #'identity
+                             `("touch ~/.cider_history"
+                               "chmod 600 ~/.cider_history"
+                               ,(concat "touch " (tkareine/dotfile-path ".custom.el")))
+                             " && ")
+                            nil
+                            `(nil ,(tkareine/dotfile-path ".init_shell_error"))
+                            nil)
+
 ;; Load configuration
 (tkareine/load-dotfile "etc/minor-modes.el")
 (tkareine/load-dotfile "etc/major-modes.el")
