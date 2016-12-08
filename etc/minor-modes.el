@@ -144,3 +144,6 @@
 ;; Flycheck: enable globally
 (add-hook 'after-init-hook #'global-flycheck-mode)
 (customize-set-variable 'flycheck-disabled-checkers '(emacs-lisp-checkdoc))
+
+;; Which-key: enable globally
+(which-key-mode)

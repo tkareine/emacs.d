@@ -19,5 +19,6 @@
   undo-tree
   yaml-mode
   web-mode
+  which-key
   zenburn-theme
 ) "Minimum set of packages required for my configuration")
