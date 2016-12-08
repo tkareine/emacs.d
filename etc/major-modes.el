@@ -51,6 +51,9 @@
 (customize-set-variable 'cider-repl-result-prefix ";; => ")
 (customize-set-variable 'cider-repl-history-file "~/.cider_history")
 (custom-set-faces '(cider-result-overlay-face ((t (:background "grey30")))))
+(add-hook 'cider-mode-hook
+          (lambda ()
+            (local-set-key (kbd "C-c M-R") #'cider-restart)))
 
 ;; CoffeeScript support
 (customize-set-variable 'coffee-tab-width 2)
