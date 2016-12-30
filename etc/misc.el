@@ -6,7 +6,7 @@
 (prefer-coding-system 'utf-8)
 
 ;; Hard wrapping at column number
-(set-fill-column 78)
+(customize-set-variable 'fill-column 72)
 
 ;; Default indentation
 (customize-set-variable 'standard-indent 2)
