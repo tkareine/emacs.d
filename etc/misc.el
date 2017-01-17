@@ -73,6 +73,8 @@
 (global-set-key (kbd "C-c C-c M-x")    #'execute-extended-command)
 (global-set-key (kbd "C-c F")          #'find-file-at-point)
 (global-set-key (kbd "C-c P")          #'tkareine/file-path-to-clipboard)
+(global-set-key (kbd "C-c T")          #'tkareine/make-ctags)
+(global-set-key (kbd "C-c t")          #'visit-tags-table)
 (global-set-key (kbd "C-f")            #'tkareine/forward-char-5)
 (global-set-key (kbd "C-n")            #'tkareine/next-line-5)
 (global-set-key (kbd "C-p")            #'tkareine/previous-line-5)
