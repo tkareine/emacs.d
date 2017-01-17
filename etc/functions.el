@@ -110,3 +110,10 @@
 (defun tkareine/visible-bell ()
   (invert-face 'mode-line)
   (run-with-timer 0.1 nil 'invert-face 'mode-line))
+
+(defun tkareine/make-ctags (dir-name)
+  "Make tags file."
+  (interactive "DDirectory: ")
+  (let ((d-name (directory-file-name dir-name)))
+    (async-shell-command (format "ctags -e -R -f \"%s/TAGS\" \"%s\"" d-name d-name)
+                         "*ctags Command Output*")))
