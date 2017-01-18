@@ -40,6 +40,16 @@
 (set-face-font 'default "Input-14")
 (customize-set-variable 'line-spacing 2)
 
+;; Frame title: show
+;; 1. hostname
+;; 2. buffer file name, dired directory, or buffer name
+;; 3. buffer modification marker
+(customize-set-variable 'frame-title-format
+                        (list (system-name)
+                              ": "
+                              '(buffer-file-name "%f" (dired-directory dired-directory "%b"))
+                              " %*"))
+
 ;; Frame width and height
 (if (and (boundp 'window-system) window-system) (set-frame-size (selected-frame) 140 60))
 
