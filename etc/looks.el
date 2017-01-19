@@ -20,6 +20,9 @@
 (line-number-mode t)
 (column-number-mode t)
 
+;; Don't show line number if buffer is too big; value in bytes
+(customize-set-variable 'line-number-display-limit (* 1024 1024 64))
+
 ;; Show buffer size in the mode line
 (size-indication-mode 1)
 
