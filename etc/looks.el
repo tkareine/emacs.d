@@ -51,7 +51,8 @@
                         (list (system-name)
                               ": "
                               '(buffer-file-name "%f" (dired-directory dired-directory "%b"))
-                              " %*"))
+                              " %*"
+                              '(multiple-frames (:eval (concat " [" (number-to-string (length (frame-list))) "]")))))
 
 ;; Frame width and height
 (if (display-graphic-p) (set-frame-size (selected-frame) 140 60))
