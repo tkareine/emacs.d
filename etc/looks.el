@@ -43,6 +43,98 @@
 (set-face-font 'default "Input-14")
 (customize-set-variable 'line-spacing 2)
 
+;; Shorter position, e.g.: `27%/3.0k`. Adapted from
+;; <http://www.lunaryorn.com/posts/make-your-emacs-mode-line-more-useful.html>.
+(customize-set-variable 'mode-line-position
+                        '((-3 "%p")
+                          (size-indication-mode ("/" (-4 "%I")))
+                          " "
+                          (line-number-mode ("%l" (column-number-mode ":%c")))))
+
+(defvar tkareine/mode-line-projectile-project
+  '(:eval (when (ignore-errors (projectile-project-root))
+            (let ((project-name (projectile-project-name)))
+              (put-text-property 0
+                                 (length project-name)
+                                 'face
+                                 'font-lock-constant-face
+                                 project-name)
+              (concat "  " project-name))))
+  "Mode line construct for project name from Projectile.")
+
+(put 'tkareine/mode-line-projectile-project 'risky-local-variable t)
+
+(defvar tkareine/mode-line-vc
+  '(vc-mode (" "
+             (:propertize vc-mode
+                          face
+                          font-lock-variable-name-face)))
+  "Mode line construct for VC mode.")
+
+(put 'tkareine/mode-line-vc 'risky-local-variable t)
+
+(defvar tkareine/mode-line-flycheck
+  '(flycheck-mode (" "
+                   (11 "" flycheck-mode-line)))
+  "Mode line construct for Flycheck.")
+
+(put 'tkareine/mode-line-flycheck 'risky-local-variable t)
+
+(defvar tkareine/mode-line-modes
+  '(#("%[" 0 2 (face font-lock-warning-face help-echo "Recursive edit, type C-M-c to cancel"))
+    "("
+    mode-name
+    ("" mode-line-process)
+    #("%n" 0 2 (face font-lock-warning-face help-echo "Narrowing, type C-x n w to cancel"))
+    ")"
+    #("%]" 0 2 (face font-lock-warning-face help-echo "Recursive edit, type C-M-c to cancel"))
+    " "
+    (server-buffer-clients " Server")
+    (paredit-mode paredit-lighter)
+    (defining-kbd-macro " Def")
+    (diff-minor-mode " Diff")
+    (global-whitespace-newline-mode " NL")
+    (global-whitespace-mode " WS")
+    (whitespace-newline-mode " nl")
+    (whitespace-mode " ws")
+    (visible-mode " Vis")
+    (visual-line-mode " Wrap")
+    (superword-mode " ²")
+    (edebug-mode " *Debugging*")
+    (compilation-minor-mode " Compilation")
+    (compilation-in-progress " Compiling")
+    (auto-revert-tail-mode auto-revert-tail-mode-text)
+    (auto-revert-mode auto-revert-mode-text)
+    (eldoc-mode eldoc-minor-mode-string)
+    (next-error-follow-minor-mode " Fol")
+    (abbrev-mode " Abbrev")
+    (overwrite-mode overwrite-mode)
+    (auto-fill-function " Fill"))
+  "Mode line construct for major mode (with recursive edit,
+  mode-line-process, and narrowing) and selected minor modes.")
+
+(put 'tkareine/mode-line-modes 'risky-local-variable t)
+
+(customize-set-variable 'mode-line-format
+                        '("%e"
+                          mode-line-front-space
+                          mode-line-mule-info
+                          mode-line-client
+                          mode-line-modified
+                          mode-line-remote
+                          mode-line-frame-identification
+                          mode-line-buffer-identification
+                          "  "
+                          mode-line-position
+                          tkareine/mode-line-projectile-project
+                          tkareine/mode-line-vc
+                          tkareine/mode-line-flycheck
+                          " "
+                          mode-line-misc-info
+                          " "
+                          tkareine/mode-line-modes
+                          mode-line-end-spaces))
+
 ;; Frame title: show
 ;; 1. hostname
 ;; 2. buffer file name, dired directory, or buffer name
