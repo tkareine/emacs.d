@@ -51,7 +51,7 @@
                               " %*"))
 
 ;; Frame width and height
-(if (and (boundp 'window-system) window-system) (set-frame-size (selected-frame) 140 60))
+(if (display-graphic-p) (set-frame-size (selected-frame) 140 60))
 
 ;; Color theme
 ;;(require 'color-theme-my-twilight)
