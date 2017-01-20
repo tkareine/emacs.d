@@ -43,13 +43,14 @@
 (set-face-font 'default "Input-14")
 (customize-set-variable 'line-spacing 2)
 
-;; Shorter position, e.g.: `27%/3.0k`. Adapted from
+;; Adapted from
 ;; <http://www.lunaryorn.com/posts/make-your-emacs-mode-line-more-useful.html>.
-(customize-set-variable 'mode-line-position
-                        '((-3 "%p")
-                          (size-indication-mode ("/" (-4 "%I")))
-                          " "
-                          (line-number-mode ("%l" (column-number-mode ":%c")))))
+(defvar tkareine/mode-line-position
+  '((-3 "%p")
+    (size-indication-mode ("/" (-4 "%I")))
+    " "
+    (line-number-mode ("%l" (column-number-mode ":%c"))))
+  "Mode line construct for point position in the buffer. Example: `27%/3.0k`")
 
 (defvar tkareine/mode-line-projectile-project
   '(:eval (when (ignore-errors (projectile-project-root))
@@ -80,19 +81,10 @@
 
 (put 'tkareine/mode-line-flycheck 'risky-local-variable t)
 
-(defvar tkareine/mode-line-modes
-  '(#("%[" 0 2 (face font-lock-warning-face help-echo "Recursive edit, type C-M-c to cancel"))
-    "("
-    mode-name
-    ("" mode-line-process)
-    #("%n" 0 2 (face font-lock-warning-face help-echo "Narrowing, type C-x n w to cancel"))
-    ")"
-    #("%]" 0 2 (face font-lock-warning-face help-echo "Recursive edit, type C-M-c to cancel"))
-    " "
+(defvar tkareine/minor-mode-alist
+  '((defining-kbd-macro " Def")
     (server-buffer-clients " Server")
-    (paredit-mode paredit-lighter)
-    (defining-kbd-macro " Def")
-    (diff-minor-mode " Diff")
+    (overwrite-mode overwrite-mode)
     (global-whitespace-newline-mode " NL")
     (global-whitespace-mode " WS")
     (whitespace-newline-mode " nl")
@@ -100,16 +92,29 @@
     (visible-mode " Vis")
     (visual-line-mode " Wrap")
     (superword-mode " ²")
+    (auto-revert-tail-mode auto-revert-tail-mode-text)
+    (auto-revert-mode auto-revert-mode-text)
     (edebug-mode " *Debugging*")
     (compilation-minor-mode " Compilation")
     (compilation-in-progress " Compiling")
-    (auto-revert-tail-mode auto-revert-tail-mode-text)
-    (auto-revert-mode auto-revert-mode-text)
+    (diff-minor-mode " Diff")
     (eldoc-mode eldoc-minor-mode-string)
     (next-error-follow-minor-mode " Fol")
     (abbrev-mode " Abbrev")
-    (overwrite-mode overwrite-mode)
-    (auto-fill-function " Fill"))
+    (auto-fill-function " Fill")
+    (paredit-mode paredit-lighter))
+  "Alist of selected minor modes to be shown in the mode line.")
+
+(defvar tkareine/mode-line-modes
+  '(#("%[" 0 2 (face font-lock-warning-face help-echo "Recursive edit, type C-M-c to cancel"))
+    "("
+    mode-name
+    mode-line-process
+    #("%n" 0 2 (face font-lock-warning-face help-echo "Narrowing, type C-x n w to cancel"))
+    ")"
+    #("%]" 0 2 (face font-lock-warning-face help-echo "Recursive edit, type C-M-c to cancel"))
+    " "
+    tkareine/minor-mode-alist)
   "Mode line construct for major mode (with recursive edit,
   mode-line-process, and narrowing) and selected minor modes.")
 
@@ -125,7 +130,7 @@
                           mode-line-frame-identification
                           mode-line-buffer-identification
                           "  "
-                          mode-line-position
+                          tkareine/mode-line-position
                           tkareine/mode-line-projectile-project
                           tkareine/mode-line-vc
                           tkareine/mode-line-flycheck
