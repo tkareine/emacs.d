@@ -52,6 +52,8 @@
     (line-number-mode ("%l" (column-number-mode ":%c"))))
   "Mode line construct for point position in the buffer. Example: `27%/3.0k`")
 
+(put 'tkareine/mode-line-position 'risky-local-variable t)
+
 (defvar tkareine/mode-line-projectile-project
   '(:eval (when (ignore-errors (projectile-project-root))
             (let ((project-name (projectile-project-name)))
