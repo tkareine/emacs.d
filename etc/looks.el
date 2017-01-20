@@ -151,8 +151,9 @@
                           " %*"
                           (multiple-frames (:eval (concat " [" (number-to-string (length (frame-list))) "]")))))
 
-;; Frame width and height
-(if (display-graphic-p) (set-frame-size (selected-frame) 140 60))
+;; Maximize initial frame
+(customize-set-variable 'initial-frame-alist
+                        '((fullscreen . maximized)))
 
 ;; Color theme
 ;;(require 'color-theme-my-twilight)
