@@ -73,6 +73,8 @@
         (`darwin "mdfind -name %s %s")
         (`windows-nt "es %s %s")
         (_ "locate %s %s")))
+;; Helm: always show full buffer name in helm-M-x
+(customize-set-variable 'helm-buffer-max-length nil)
 ;; Helm: enable
 (helm-mode t)
 
