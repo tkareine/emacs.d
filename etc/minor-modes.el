@@ -34,6 +34,9 @@
 (customize-set-variable 'savehist-file (tkareine/dotfile-path "savehist"))
 (savehist-mode 1)
 
+;; Recentf: for showing list of recently opened files
+(require 'recentf)
+(recentf-mode)
 ;; Recentf: store save file under emacs conf dir
 (customize-set-variable 'recentf-save-file (tkareine/dotfile-path "recentf"))
 ;; Recentf: save the list of recent files periodically. Normally,
