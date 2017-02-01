@@ -39,7 +39,9 @@
 ;; Recentf: save the list of recent files periodically. Normally,
 ;; Recentf saves the list when Emacs exits cleanly. If Emacs crashes,
 ;; that save is probably not done.
-(run-at-time (* 5 60) (* 5 60) 'recentf-save-list)
+(run-at-time (* 5 60) (* 5 60) (lambda ()
+                                 (let ((inhibit-message t))
+                                   (recentf-save-list))))
 
 ;; Company: auto completion
 (require 'company)
