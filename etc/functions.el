@@ -37,7 +37,7 @@
   (dolist (p packages) (package-install p)))
 
 (defun tkareine/require-packages-installed (packages)
-  (let* ((missing-packages (tkareine/filter '(lambda (x) (not (package-installed-p x))) packages)))
+  (let* ((missing-packages (tkareine/filter (lambda (x) (not (package-installed-p x))) packages)))
     (when missing-packages
       (message "Missing required packages, attempting to install them: %s" missing-packages)
       (tkareine/install-packages missing-packages))))
