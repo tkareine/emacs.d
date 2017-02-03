@@ -39,7 +39,7 @@
 (size-indication-mode t)
 
 ;; Adapted from
-;; <http://www.lunaryorn.com/posts/make-your-emacs-mode-line-more-useful.html>.
+;; <http://www.lunaryorn.com/posts/make-your-emacs-mode-line-more-useful.html>
 (defvar tkareine/mode-line-position
   '((-3 "%p")
     (size-indication-mode ("/" (-4 "%I")))
