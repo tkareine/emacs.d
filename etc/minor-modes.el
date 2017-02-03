@@ -154,7 +154,6 @@
                                                    "HotPink3"
                                                    "RoyalBlue1"
                                                    "OliveDrab"))
-;; Highlight-symbol: don't change foreground color
 (customize-set-variable 'highlight-symbol-foreground-color "#DCDCCC")
 (global-set-key (kbd "C-<f5>") 'highlight-symbol)
 (global-set-key (kbd "<f5>")   'highlight-symbol-next)
