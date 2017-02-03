@@ -54,8 +54,6 @@
 (require 'helm)
 (require 'helm-config)
 (global-set-key (kbd "C-c C-SPC")      #'helm-all-mark-rings)
-(global-set-key (kbd "C-c C-s")        #'helm-do-ag)
-(global-set-key (kbd "C-c S")          #'helm-ag-this-file)
 (global-set-key (kbd "C-c SPC")        #'helm-semantic-or-imenu)
 (global-set-key (kbd "C-c b")          #'helm-resume)
 (global-set-key (kbd "C-c h o")        #'helm-occur)
@@ -89,6 +87,8 @@
 
 ;; Helm-ag
 (customize-set-variable 'helm-ag-insert-at-point 'symbol)
+(global-set-key (kbd "C-c C-s")        #'helm-do-ag)
+(global-set-key (kbd "C-c S")          #'helm-ag-this-file)
 
 ;; Projectile
 (require 'helm-projectile)
