@@ -38,11 +38,6 @@
 ;; Show file size
 (size-indication-mode t)
 
-;; Font
-;; (set-face-font 'default "Inconsolata-16")
-(set-face-font 'default "Input-14")
-(customize-set-variable 'line-spacing 2)
-
 ;; Adapted from
 ;; <http://www.lunaryorn.com/posts/make-your-emacs-mode-line-more-useful.html>.
 (defvar tkareine/mode-line-position
@@ -161,3 +156,12 @@
 ;;(require 'color-theme-my-twilight)
 ;;(color-theme-my-twilight)
 (load-theme 'zenburn t)
+
+;; Font
+;; (set-face-font 'default "Inconsolata-16")
+(set-face-font 'default "Input-14")
+(customize-set-variable 'line-spacing 2)
+
+;; Highlight color for next-error, used by 'compilation-display-error
+(custom-set-faces '(next-error
+                    ((t (:background "SkyBlue3" :foreground "#DCDCCC")))))
