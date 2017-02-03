@@ -143,3 +143,20 @@
 
 ;; Which-key: enable globally
 (which-key-mode)
+
+;; Highlight-symbol
+(customize-set-variable 'highlight-symbol-colors '("orange3"
+                                                   "DeepPink3"
+                                                   "cyan4"
+                                                   "MediumPurple3"
+                                                   "SpringGreen4"
+                                                   "DarkOrange3"
+                                                   "HotPink3"
+                                                   "RoyalBlue1"
+                                                   "OliveDrab"))
+;; Highlight-symbol: don't change foreground color
+(customize-set-variable 'highlight-symbol-foreground-color nil)
+(global-set-key (kbd "C-<f5>") 'highlight-symbol)
+(global-set-key (kbd "<f5>")   'highlight-symbol-next)
+(global-set-key (kbd "S-<f5>") 'highlight-symbol-prev)
+(global-set-key (kbd "M-<f5>") 'highlight-symbol-query-replace)

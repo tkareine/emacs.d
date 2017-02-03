@@ -9,6 +9,7 @@
     helm
     helm-ag
     helm-projectile
+    highlight-symbol
     js2-mode
     magit
     markdown-mode
