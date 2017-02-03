@@ -155,7 +155,7 @@
                                                    "RoyalBlue1"
                                                    "OliveDrab"))
 (customize-set-variable 'highlight-symbol-foreground-color "#DCDCCC")
-(global-set-key (kbd "C-<f5>") 'highlight-symbol)
-(global-set-key (kbd "<f5>")   'highlight-symbol-next)
-(global-set-key (kbd "S-<f5>") 'highlight-symbol-prev)
-(global-set-key (kbd "M-<f5>") 'highlight-symbol-query-replace)
+(global-set-key (kbd "C-<f5>") #'highlight-symbol)
+(global-set-key (kbd "<f5>")   #'highlight-symbol-next)
+(global-set-key (kbd "S-<f5>") #'highlight-symbol-prev)
+(global-set-key (kbd "M-<f5>") #'highlight-symbol-query-replace)
