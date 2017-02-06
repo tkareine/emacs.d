@@ -35,7 +35,8 @@
 
 ;; Check that minimum set of packages is installed
 (tkareine/load-dotfile "etc/dependencies.el")
-(tkareine/require-packages-installed tkareine/package-dependencies)
+(tkareine/add-selected-packages tkareine/package-dependencies)
+(tkareine/install-missing-packages tkareine/package-dependencies)
 
 ;; Provide other libraries than packages
 (tkareine/add-dotfile-to-load-path "lib")

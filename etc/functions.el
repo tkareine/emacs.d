@@ -30,16 +30,25 @@
   (delq nil
         (mapcar (lambda (x) (and (funcall condp x) x)) lst)))
 
+(defun tkareine/add-selected-packages (packages)
+  (let ((new-packages (sort (delete-dups (append packages
+                                                 package-selected-packages))
+                            #'string>)))
+    (customize-set-variable 'package-selected-packages new-packages)))
+
 (defun tkareine/install-packages (packages)
   (message "Refreshing packages from repositories...")
   (package-refresh-contents)
   (message "Done refreshing packages from repositories.")
-  (dolist (p packages) (package-install p)))
+  (dolist (p packages)
+    (message "Installing package: %s" p)
+    (package-install p)))
 
-(defun tkareine/require-packages-installed (packages)
-  (let* ((missing-packages (tkareine/filter (lambda (x) (not (package-installed-p x))) packages)))
+(defun tkareine/install-missing-packages (packages)
+  (let ((missing-packages (tkareine/filter (lambda (x) (not (package-installed-p x)))
+                                           packages)))
     (when missing-packages
-      (message "Missing required packages, attempting to install them: %s" missing-packages)
+      (message "Installing missing packages: %s" missing-packages)
       (tkareine/install-packages missing-packages))))
 
 (defun tkareine/file-path-to-clipboard ()
