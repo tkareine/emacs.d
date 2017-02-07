@@ -31,9 +31,8 @@
         (mapcar (lambda (x) (and (funcall condp x) x)) lst)))
 
 (defun tkareine/add-selected-packages (packages)
-  (let ((new-packages (sort (delete-dups (append packages
-                                                 package-selected-packages))
-                            #'string>)))
+  (let ((new-packages (delete-dups (append packages
+                                           package-selected-packages))))
     (customize-set-variable 'package-selected-packages new-packages)))
 
 (defun tkareine/install-packages (packages)
