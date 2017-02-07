@@ -30,7 +30,8 @@
 
 ;; Start package system, make installed packages available
 (require 'package)
-(add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/") t)
+(customize-set-variable 'package-archives '(("melpa" . "https://melpa.milkbox.net/packages/")
+                                            ("gnu"   . "https://elpa.gnu.org/packages/")))
 (package-initialize)
 
 ;; Check that minimum set of packages is installed
