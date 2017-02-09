@@ -54,7 +54,6 @@
 (require 'helm)
 (require 'helm-config)
 (global-set-key (kbd "C-c C-SPC")      #'helm-all-mark-rings)
-(global-set-key (kbd "C-c SPC")        #'helm-semantic-or-imenu)
 (global-set-key (kbd "C-c b")          #'helm-resume)
 (global-set-key (kbd "C-c h o")        #'helm-occur)
 (global-set-key (kbd "C-c h x")        #'helm-register)
@@ -63,6 +62,7 @@
 (global-set-key (kbd "C-x b")          #'helm-mini)
 (global-set-key (kbd "M-x")            #'helm-M-x)
 (global-set-key (kbd "M-y")            #'helm-show-kill-ring)
+(global-set-key (kbd "s-.")            #'helm-semantic-or-imenu)
 ;; Helm: switch bindings for TAB andn C-z
 (define-key helm-map (kbd "TAB") #'helm-execute-persistent-action)
 (define-key helm-map (kbd "C-z") #'helm-select-action)
