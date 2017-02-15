@@ -36,7 +36,6 @@
 
 ;; Recentf: for showing list of recently opened files
 (require 'recentf)
-(recentf-mode)
 ;; Recentf: store save file under emacs conf dir
 (customize-set-variable 'recentf-save-file (tkareine/dotfile-path "recentf"))
 ;; Recentf: exclude the recentf save file and Emacs ELPA autoloads
@@ -49,6 +48,8 @@
 (run-at-time (* 5 60) (* 5 60) (lambda ()
                                  (let ((inhibit-message t))
                                    (recentf-save-list))))
+;; Recentf: enable globally
+(recentf-mode)
 
 ;; Company: auto completion
 (require 'company)
