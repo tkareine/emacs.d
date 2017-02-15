@@ -39,6 +39,10 @@
 (recentf-mode)
 ;; Recentf: store save file under emacs conf dir
 (customize-set-variable 'recentf-save-file (tkareine/dotfile-path "recentf"))
+;; Recentf: exclude the recentf save file and Emacs ELPA autoloads
+(customize-set-variable 'recentf-exclude (list
+                                          (concat "\\`" (expand-file-name (tkareine/dotfile-path "recentf")) "\\'")
+                                          (concat "\\`" (expand-file-name (tkareine/dotfile-path "elpa")) "/.*-autoloads.elc?\\'")))
 ;; Recentf: save the list of recent files periodically. Normally,
 ;; Recentf saves the list when Emacs exits cleanly. If Emacs crashes,
 ;; that save is probably not done.
