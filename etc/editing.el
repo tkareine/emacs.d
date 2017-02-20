@@ -104,13 +104,17 @@
     (list (line-beginning-position)
           (line-beginning-position 2))))
 
-(defadvice kill-ring-save (before slickcopy activate compile)
+(defun tkareine/kill-ring-save-advice (adviced &rest arguments)
   "When called interactively with no active region, copy a single line instead."
-  (interactive (tkareine/active-region-or-line)))
+  (interactive (tkareine/active-region-or-line))
+  (apply adviced arguments))
+(advice-add #'kill-ring-save :around #'tkareine/kill-ring-save-advice)
 
-(defadvice kill-region (before slickcut activate compile)
+(defun tkareine/kill-region-advice (adviced &rest arguments)
   "When called interactively with no active region, kill a single line instead."
-  (interactive (tkareine/active-region-or-line)))
+  (interactive (tkareine/active-region-or-line))
+  (apply adviced arguments))
+(advice-add #'kill-region :around #'tkareine/kill-region-advice)
 
 (global-set-key (kbd "M-<kp-delete>") #'kill-word)
 
