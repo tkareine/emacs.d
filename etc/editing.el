@@ -92,6 +92,10 @@
 (global-set-key (kbd "M-ESC")     #'other-frame)
 (global-set-key (kbd "M-§")       #'other-frame)
 
+;; Force learning to avoid using M-<left|right> for movement between words
+(global-unset-key (kbd "M-<left>"))
+(global-unset-key (kbd "M-<right>"))
+
 ;; Kill ring
 
 (defun tkareine/active-region-or-line ()

@@ -139,7 +139,14 @@
 ;; Magit
 (global-set-key (kbd "C-x g") #'magit-status)
 
-;; Paredit: just use C-<left|right> to move within subwords
+;; Paredit
+(eval-after-load "paredit"
+  (lambda ()
+    (define-key paredit-mode-map (kbd "C-<left>")  nil)
+    (define-key paredit-mode-map (kbd "C-<right>") nil)
+    (define-key paredit-mode-map (kbd "M-<left>")  #'paredit-forward-barf-sexp)
+    (define-key paredit-mode-map (kbd "M-<right>") #'paredit-forward-slurp-sexp)))
+
 (add-hook 'clojure-mode-hook                     #'paredit-mode)
 (add-hook 'emacs-lisp-mode-hook                  #'paredit-mode)
 (add-hook 'eval-expression-minibuffer-setup-hook #'paredit-mode)
