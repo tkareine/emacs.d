@@ -9,7 +9,9 @@
 
 ;; C language family customizations
 (customize-set-variable 'c-basic-offset 4)
-(customize-set-variable 'c-default-style "linux")
+(customize-set-variable 'c-default-style '((awk-mode  . "awk")
+                                           (java-mode . "java")
+                                           (other     . "linux")))
 
 ;; Ediff: use current frame for control panel
 (customize-set-variable 'ediff-window-setup-function 'ediff-setup-windows-plain)
