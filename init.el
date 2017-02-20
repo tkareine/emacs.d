@@ -18,6 +18,9 @@
 ;; Set no content in *scratch* buffer
 (customize-set-variable 'initial-scratch-message "")
 
+;; Network security
+(customize-set-variable 'network-security-level 'high)
+
 ;; Define rudimentary functions for loading the rest of init
 (defun tkareine/dotfile-path (p)
   (concat user-emacs-directory p))
@@ -25,8 +28,8 @@
 (defun tkareine/load-dotfile (f)
   (load-file (tkareine/dotfile-path f)))
 
-;; Load the rest of my functions
-(tkareine/load-dotfile "etc/functions.el")
+;; Load support functions
+(tkareine/load-dotfile "etc/support.el")
 
 ;; Start package system, make installed packages available
 (require 'package)
@@ -35,7 +38,7 @@
 (package-initialize)
 
 ;; Check that minimum set of packages is installed
-(tkareine/load-dotfile "etc/dependencies.el")
+(tkareine/load-dotfile "etc/packages.el")
 (tkareine/add-selected-packages tkareine/package-dependencies)
 (tkareine/install-missing-packages tkareine/package-dependencies)
 
@@ -57,7 +60,11 @@
 (tkareine/load-dotfile "etc/major-modes.el")
 (tkareine/load-dotfile "etc/backups.el")
 (tkareine/load-dotfile "etc/looks.el")
+(tkareine/load-dotfile "etc/editing.el")
 (tkareine/load-dotfile "etc/misc.el")
 
 (setq custom-file (tkareine/dotfile-path ".custom.el"))
 (load custom-file)
+
+;; Server mode
+(server-start)

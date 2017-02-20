@@ -39,6 +39,10 @@
 (customize-set-variable 'js2-missing-semi-one-line-override t)
 (customize-set-variable 'js2-strict-missing-semi-warning nil)
 (custom-set-faces '(js2-private-member ((t (:foreground "coral1")))))
+(defun tkareine/js2-mode-toggle-strict-missing-semi-warning ()
+  (interactive)
+  (setq js2-strict-missing-semi-warning (eq js2-strict-missing-semi-warning nil))
+  (js2-mode))
 (add-hook 'js2-mode-hook
           (lambda ()
             (set-fill-column 300)
@@ -110,3 +114,6 @@
 ;; Misc template engines support
 (add-to-list 'auto-mode-alist '("\\.erb\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.ftl\\'" . web-mode))
+
+;; Default major-mode
+(customize-set-variable 'major-mode 'text-mode)

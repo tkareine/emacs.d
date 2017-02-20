@@ -51,6 +51,19 @@
 ;; Recentf: enable globally
 (recentf-mode)
 
+;; Hippie-expand
+(global-set-key (kbd "s-SPC") #'hippie-expand)
+
+;; xref: ctags
+(defun tkareine/make-ctags (dir-name)
+  "Make tags file."
+  (interactive "DDirectory: ")
+  (let ((d-name (directory-file-name dir-name)))
+    (async-shell-command (format "ctags -e -R -f \"%s/TAGS\" \"%s\"" d-name d-name)
+                         "*ctags Command Output*")))
+(global-set-key (kbd "C-c T") #'tkareine/make-ctags)
+(global-set-key (kbd "C-c t") #'visit-tags-table)
+
 ;; Company: auto completion
 (require 'company)
 (global-company-mode)
@@ -58,16 +71,16 @@
 ;; Helm
 (require 'helm)
 (require 'helm-config)
-(global-set-key (kbd "C-c C-SPC")      #'helm-all-mark-rings)
-(global-set-key (kbd "C-c b")          #'helm-resume)
-(global-set-key (kbd "C-c h o")        #'helm-occur)
-(global-set-key (kbd "C-c h x")        #'helm-register)
-(global-set-key (kbd "C-c h")          #'helm-command-prefix)
-(global-set-key (kbd "C-x C-f")        #'helm-find-files)
-(global-set-key (kbd "C-x b")          #'helm-mini)
-(global-set-key (kbd "M-x")            #'helm-M-x)
-(global-set-key (kbd "M-y")            #'helm-show-kill-ring)
-(global-set-key (kbd "s-.")            #'helm-semantic-or-imenu)
+(global-set-key (kbd "C-c C-SPC") #'helm-all-mark-rings)
+(global-set-key (kbd "C-c b")     #'helm-resume)
+(global-set-key (kbd "C-c h o")   #'helm-occur)
+(global-set-key (kbd "C-c h x")   #'helm-register)
+(global-set-key (kbd "C-c h")     #'helm-command-prefix)
+(global-set-key (kbd "C-x C-f")   #'helm-find-files)
+(global-set-key (kbd "C-x b")     #'helm-mini)
+(global-set-key (kbd "M-x")       #'helm-M-x)
+(global-set-key (kbd "M-y")       #'helm-show-kill-ring)
+(global-set-key (kbd "s-.")       #'helm-semantic-or-imenu)
 ;; Helm: switch bindings for TAB andn C-z
 (define-key helm-map (kbd "TAB") #'helm-execute-persistent-action)
 (define-key helm-map (kbd "C-z") #'helm-select-action)
@@ -92,16 +105,16 @@
 
 ;; Helm-ag
 (customize-set-variable 'helm-ag-insert-at-point 'symbol)
-(global-set-key (kbd "C-c C-s")        #'helm-do-ag)
-(global-set-key (kbd "C-c S")          #'helm-ag-this-file)
+(global-set-key (kbd "C-c C-s") #'helm-do-ag)
+(global-set-key (kbd "C-c S")   #'helm-ag-this-file)
 
 ;; Projectile
 (require 'helm-projectile)
-(global-set-key (kbd "C-c d")          #'helm-projectile-find-dir)
-(global-set-key (kbd "C-c f")          #'helm-projectile-find-file)
-(global-set-key (kbd "C-c g")          #'helm-projectile-find-file-dwim)
-(global-set-key (kbd "C-c s")          #'helm-projectile-ag)
-(global-set-key (kbd "C-c v")          #'helm-projectile-find-other-file)
+(global-set-key (kbd "C-c d") #'helm-projectile-find-dir)
+(global-set-key (kbd "C-c f") #'helm-projectile-find-file)
+(global-set-key (kbd "C-c g") #'helm-projectile-find-file-dwim)
+(global-set-key (kbd "C-c s") #'helm-projectile-ag)
+(global-set-key (kbd "C-c v") #'helm-projectile-find-other-file)
 (customize-set-variable 'projectile-completion-system 'helm)
 (customize-set-variable 'projectile-switch-project-action 'helm-projectile)
 (add-to-list 'projectile-other-file-alist '("html" "js" "css"))
@@ -115,16 +128,16 @@
 
 ;; Ag: enable search highlighting
 (customize-set-variable 'ag-highlight-search t)
-(global-set-key (kbd "C-c A")          #'ag)
-(global-set-key (kbd "C-c a")          #'ag-project-regexp)
-(global-set-key (kbd "C-c C-a")        #'ag-regexp)
+(global-set-key (kbd "C-c A")   #'ag)
+(global-set-key (kbd "C-c a")   #'ag-project-regexp)
+(global-set-key (kbd "C-c C-a") #'ag-regexp)
 
 ;; GitGutter
 (global-git-gutter-mode t)
 (customize-set-variable 'git-gutter:lighter " GG")
 
 ;; Magit
-(global-set-key (kbd "C-x g")          #'magit-status)
+(global-set-key (kbd "C-x g") #'magit-status)
 
 ;; Paredit: just use C-<left|right> to move within subwords
 (add-hook 'clojure-mode-hook                     #'paredit-mode)
@@ -137,10 +150,10 @@
 
 ;; Dash
 (if (eq system-type 'darwin)
-    (global-set-key (kbd "C-c ?")      #'dash-at-point))
+    (global-set-key (kbd "C-c ?") #'dash-at-point))
 
 ;; Expand-reqion
-(global-set-key (kbd "C-=")            #'er/expand-region)
+(global-set-key (kbd "C-=") #'er/expand-region)
 
 ;; Flycheck: enable globally
 (add-hook 'after-init-hook #'global-flycheck-mode)

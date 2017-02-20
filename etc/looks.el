@@ -1,7 +1,11 @@
 ;; Disable visible bell, is broken on OS X El Capitan
 (customize-set-variable 'visible-bell nil)
 
-;; Replace ring-bell with my own function
+;; Replace ring-bell. Adapted from
+;; <https://www.emacswiki.org/emacs/AlarmBell>
+(defun tkareine/visible-bell ()
+  (invert-face 'mode-line)
+  (run-with-timer 0.1 nil 'invert-face 'mode-line))
 (customize-set-variable 'ring-bell-function #'tkareine/visible-bell)
 
 ;; Syntax higlighting where applicable
@@ -165,3 +169,6 @@
 ;; Highlight color for next-error, used by 'compilation-display-error
 (custom-set-faces '(next-error
                     ((t (:background "SkyBlue3" :foreground "#DCDCCC")))))
+
+(global-set-key (kbd "C-'") #'text-scale-increase)
+(global-set-key (kbd "C-;") #'text-scale-decrease)
