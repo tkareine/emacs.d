@@ -98,12 +98,6 @@
 
 ;; Kill ring
 
-(defun tkareine/active-region-or-line ()
-  (if (use-region-p)
-      (list (region-beginning) (region-end))
-    (list (line-beginning-position)
-          (line-beginning-position 2))))
-
 (defun tkareine/kill-ring-save-advice (adviced &rest arguments)
   "When called interactively with no active region, copy a single line instead."
   (interactive (tkareine/active-region-or-line))

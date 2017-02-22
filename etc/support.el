@@ -5,6 +5,12 @@
   (delq nil
         (mapcar (lambda (x) (and (funcall condp x) x)) lst)))
 
+(defun tkareine/active-region-or-line ()
+  (if (use-region-p)
+      (list (region-beginning) (region-end))
+    (list (line-beginning-position)
+          (line-beginning-position 2))))
+
 (defun tkareine/pretty-print-xml (begin end)
   "Pretty format XML markup in region with nxml-mode."
   (interactive (progn
