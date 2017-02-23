@@ -49,6 +49,7 @@
           (lambda ()
             (setq mode-name "JS2")
             (set-fill-column 300)
+            (local-unset-key (kbd "M-."))
             (local-set-key (kbd "C-c j") #'tkareine/js2-mode-toggle-strict-missing-semi-warning)))
 (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
 (add-to-list 'auto-mode-alist '("\\.javascript\\'" . js2-mode))
