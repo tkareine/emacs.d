@@ -54,15 +54,41 @@
 ;; Hippie-expand
 (global-set-key (kbd "s-SPC") #'hippie-expand)
 
-;; xref: ctags
-(defun tkareine/make-ctags (dir-name)
-  "Make tags file."
-  (interactive "DDirectory: ")
-  (let ((d-name (directory-file-name dir-name)))
-    (async-shell-command (format "ctags -e -R -f \"%s/TAGS\" \"%s\"" d-name d-name)
-                         "*ctags Command Output*")))
-(global-set-key (kbd "C-c T") #'tkareine/make-ctags)
-(global-set-key (kbd "C-c t") #'visit-tags-table)
+;; xref: tags
+(defun tkareine/make-tags-table (&optional directory)
+  "Make tags file to the current project. With prefix arg, specify file path."
+  (interactive (if current-prefix-arg
+                   (list (read-directory-name "Make TAGS to: " nil nil t))
+                 nil))
+  (let* ((current-prefix-arg nil) ; reset as it might affect future commands
+         (dir (if directory
+                  directory
+                (if-let ((proj-dir (projectile-project-root)))
+                    proj-dir
+                  (read-directory-name "Make TAGS to: " nil nil t))))
+         (file (concat dir "TAGS")))
+    (shell-command (format "ctags -e -R -f \"%s\" \"%s\"" file dir)
+                   "*ctags Command Output*")
+    (visit-tags-table file)
+    (message "Made and visited TAGS: %s" file)))
+
+(global-set-key (kbd "C-c T") #'tkareine/make-tags-table)
+
+(defun tkareine/visit-tags-table (&optional tags-file)
+  "Visit TAGS file of the current project. With prefix arg, specify the file path."
+  (interactive (if current-prefix-arg
+                   (list (read-file-name "Visit TAGS: " nil nil t))
+                 nil))
+  (let ((current-prefix-arg nil) ; reset as it might affect future commands
+        (file (if tags-file
+                  tags-file
+                (if-let ((proj-file (tkareine/try-projectile-expand-root-readable-file-p "TAGS" #'file-readable-p)))
+                    proj-file
+                  (read-file-name "Visit TAGS: " nil nil t)))))
+    (visit-tags-table file)
+    (message "Visited TAGS: %s" file)))
+
+(global-set-key (kbd "C-c t") #'tkareine/visit-tags-table)
 
 ;; Company: auto completion
 (require 'company)

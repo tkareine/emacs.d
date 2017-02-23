@@ -43,3 +43,8 @@
           (insert-buffer-substring tmp-buf))
     (kill-buffer tmp-buf))))
 
+(defun tkareine/try-projectile-expand-root-file-p (file predicate)
+  (if (projectile-project-p)
+      (let ((file (projectile-expand-root file)))
+        (when (funcall predicate file)
+          file))))
