@@ -128,6 +128,8 @@
 
 ;; Ag: enable search highlighting
 (customize-set-variable 'ag-highlight-search t)
+(customize-set-variable 'ag-project-root-function
+                        (lambda (_dir) (projectile-project-root)))
 (global-set-key (kbd "C-c A")   #'ag)
 (global-set-key (kbd "C-c a")   #'ag-project-regexp)
 (global-set-key (kbd "C-c C-a") #'ag-regexp)
