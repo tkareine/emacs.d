@@ -52,8 +52,7 @@
                             "chmod 600 ~/.cider_history"
                             ,(concat "touch " (tkareine/dotfile-path ".custom.el")))
                           " && ")
-               t
-               nil)
+               t)
 
 ;; Load configuration
 (tkareine/load-dotfile "etc/minor-modes.el")
