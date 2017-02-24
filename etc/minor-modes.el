@@ -56,7 +56,7 @@
 
 ;; xref: tags
 (defun tkareine/make-tags-table (&optional directory)
-  "Make tags file to the current project. With prefix arg, specify file path."
+  "Make tags file to the current project. With prefix arg, specify the file path."
   (interactive (if current-prefix-arg
                    (list (read-directory-name "Make TAGS to: " nil nil t))
                  nil))
