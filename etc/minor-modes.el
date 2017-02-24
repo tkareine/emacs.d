@@ -82,7 +82,7 @@
   (let ((current-prefix-arg nil) ; reset as it might affect future commands
         (file (if tags-file
                   tags-file
-                (if-let ((proj-file (tkareine/try-projectile-expand-root-readable-file-p "TAGS" #'file-readable-p)))
+                (if-let ((proj-file (tkareine/try-projectile-expand-root-file-p "TAGS" #'file-readable-p)))
                     proj-file
                   (read-file-name "Visit TAGS: " nil nil t)))))
     (visit-tags-table file)
