@@ -55,38 +55,40 @@
 (global-set-key (kbd "s-SPC") #'hippie-expand)
 
 ;; xref: tags
-(defun tkareine/make-tags-table (&optional directory)
-  "Make tags file to the current project. With prefix arg, specify the file path."
-  (interactive (if current-prefix-arg
-                   (list (read-directory-name "Make TAGS to: " nil nil t))
-                 nil))
+(defun tkareine/make-tags-table (command directory)
+  "Make TAGS file to the current project.
+
+If called with a prefix, specify the directory to make the tags file for."
+  (interactive (let ((cmd (read-from-minibuffer "tags command: "
+                                                "ctags -e -R "))
+                     (dir (if current-prefix-arg
+                              (read-directory-name "Make TAGS to: " nil nil t)
+                            (if-let ((proj-dir (projectile-project-root)))
+                                proj-dir
+                              (read-directory-name "Make TAGS to: " nil nil t)))))
+                 (list cmd dir)))
   (let* ((current-prefix-arg nil) ; reset as it might affect future commands
-         (dir (if directory
-                  directory
-                (if-let ((proj-dir (projectile-project-root)))
-                    proj-dir
-                  (read-directory-name "Make TAGS to: " nil nil t))))
-         (file (concat dir "TAGS")))
-    (shell-command (format "ctags -e -R -f \"%s\" \"%s\"" file dir)
-                   "*ctags Command Output*")
+         (file (concat directory "TAGS"))
+         (full-cmd (format "%s -f \"%s\" \"%s\"" command file directory)))
+    (shell-command full-cmd "*tags Command Output*")
     (visit-tags-table file)
-    (message "Made and visited TAGS: %s" file)))
+    (message "Made and visited TAGS: %s" full-cmd)))
 
 (global-set-key (kbd "C-c T") #'tkareine/make-tags-table)
 
-(defun tkareine/visit-tags-table (&optional tags-file)
-  "Visit TAGS file of the current project. With prefix arg, specify the file path."
-  (interactive (if current-prefix-arg
-                   (list (read-file-name "Visit TAGS: " nil nil t))
-                 nil))
-  (let ((current-prefix-arg nil) ; reset as it might affect future commands
-        (file (if tags-file
-                  tags-file
-                (if-let ((proj-file (tkareine/try-projectile-expand-root-file-p "TAGS" #'file-readable-p)))
-                    proj-file
-                  (read-file-name "Visit TAGS: " nil nil t)))))
-    (visit-tags-table file)
-    (message "Visited TAGS: %s" file)))
+(defun tkareine/visit-tags-table (tags-file)
+  "Visit TAGS file of the current project.
+
+If called with a prefix, specify the file path."
+  (interactive (let ((tags-file (if current-prefix-arg
+                                    (read-file-name "Visit TAGS: " nil nil t)
+                                  (if-let ((proj-file (tkareine/try-projectile-expand-root-file-p "TAGS" #'file-readable-p)))
+                                      proj-file
+                                    (read-file-name "Visit TAGS: " nil nil t)))))
+                 (list tags-file)))
+  (let ((current-prefix-arg nil)) ; reset as it might affect future commands
+    (visit-tags-table tags-file)
+    (message "Visited TAGS: %s" tags-file)))
 
 (global-set-key (kbd "C-c t") #'tkareine/visit-tags-table)
 
