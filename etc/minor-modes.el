@@ -26,10 +26,12 @@
 (require 'uniquify)
 (customize-set-variable 'uniquify-buffer-name-style 'forward)
 
+;; Minibuffer history: remove duplicate elements from history lists
+(customize-set-variable 'history-delete-duplicates t)
+
 ;; Saveplace: save point location in the buffer when revisiting the buffer
 (require 'saveplace)
 (customize-set-variable 'save-place t)
-(customize-set-variable 'history-delete-duplicates t)
 (customize-set-variable 'save-place-file (tkareine/dotfile-path "saveplace"))
 (customize-set-variable 'savehist-file (tkareine/dotfile-path "savehist"))
 (savehist-mode 1)
