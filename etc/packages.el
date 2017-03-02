@@ -42,4 +42,4 @@
     web-mode
     which-key
     zenburn-theme)
-  "Minimum set of packages required for my configuration")
+  "Minimum set of packages required for my configuration.")

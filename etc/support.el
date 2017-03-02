@@ -28,11 +28,11 @@
             (insert-buffer-substring-no-properties last-buf begin end)
             (nxml-mode)
             (goto-char (point-min))
-            ;; split <foo><foo> or </foo><foo>, but not <foo></foo>
+            ;; split `<foo><foo>' or `</foo><foo>', but not `<foo></foo>'
             (while (search-forward-regexp ">[ \t]*<[^/]" end t)
               (backward-char 2)
               (insert "\n"))
-            ;; split <foo/></foo> and </foo></foo>
+            ;; split `<foo/></foo>' and `</foo></foo>'
             (goto-char (point-min))
             (while (search-forward-regexp "<.*?/.*?>[ \t]*<" end t)
               (backward-char)

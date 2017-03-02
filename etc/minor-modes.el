@@ -118,7 +118,7 @@ If called with a prefix, specify the file path."
 (global-set-key (kbd "M-x")       #'helm-M-x)
 (global-set-key (kbd "M-y")       #'helm-show-kill-ring)
 (global-set-key (kbd "s-.")       #'helm-semantic-or-imenu)
-;; Helm: switch bindings for TAB andn C-z
+;; Helm: switch bindings for TAB and C-z
 (define-key helm-map (kbd "TAB") #'helm-execute-persistent-action)
 (define-key helm-map (kbd "C-z") #'helm-select-action)
 ;; Helm: make TAB work in terminal

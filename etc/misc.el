@@ -1,4 +1,4 @@
-;; OS X: Use `mdfind` for locate
+;; OS X: Use `mdfind' for locate
 (if (eq system-type 'darwin)
     (customize-set-variable 'locate-command "mdfind"))
 

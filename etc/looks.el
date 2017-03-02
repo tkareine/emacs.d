@@ -49,7 +49,7 @@
     (size-indication-mode ("/" (-4 "%I")))
     " "
     (line-number-mode ("%l" (column-number-mode ":%c"))))
-  "Mode line construct for point position in the buffer. Example: `27%/3.0k`")
+  "Mode line construct for point position in the buffer. Example: `27%/3.0k'.")
 
 (put 'tkareine/mode-line-position 'risky-local-variable t)
 
@@ -166,7 +166,7 @@
 (set-face-font 'default "Input-14")
 (customize-set-variable 'line-spacing 2)
 
-;; Highlight color for next-error, used by 'compilation-display-error
+;; Highlight color for next-error, used by `compilation-display-error'
 (custom-set-faces '(next-error
                     ((t (:background "SkyBlue3" :foreground "#DCDCCC")))))
 
