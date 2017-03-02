@@ -57,12 +57,19 @@
 (global-set-key (kbd "s-SPC") #'hippie-expand)
 
 ;; xref: tags
+(defvar tkareine/tags-command-history
+  nil
+  "History list for the tags command asked in `tkareine/make-tags-table'.")
+
 (defun tkareine/make-tags-table (command directory)
   "Make TAGS file to the current project.
 
 If called with a prefix, specify the directory to make the tags file for."
   (interactive (let ((cmd (read-from-minibuffer "tags command: "
-                                                "ctags -e -R "))
+                                                "ctags -e -R "
+                                                nil
+                                                nil
+                                                'tkareine/tags-command-history))
                      (dir (if current-prefix-arg
                               (read-directory-name "Make TAGS to: " nil nil t)
                             (if-let ((proj-dir (projectile-project-root)))
