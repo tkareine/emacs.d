@@ -61,6 +61,9 @@
 (customize-set-variable 'cider-eval-result-prefix ";; => ")
 (customize-set-variable 'cider-repl-result-prefix ";; => ")
 (customize-set-variable 'cider-repl-history-file "~/.cider_history")
+;; Cider: attempt to use the symbol at point as input for
+;; `cider-find-var', and only prompt if that throws an error
+(customize-set-variable 'cider-prompt-for-symbol nil)
 (custom-set-faces '(cider-result-overlay-face ((t (:background "grey30")))))
 (defun tkareine/cider-mode-hook ()
   (local-set-key (kbd "C-c M-R") #'cider-restart))
