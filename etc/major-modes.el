@@ -66,7 +66,8 @@
 (customize-set-variable 'cider-prompt-for-symbol nil)
 (custom-set-faces '(cider-result-overlay-face ((t (:background "grey30")))))
 (defun tkareine/cider-mode-hook ()
-  (local-set-key (kbd "C-c M-R") #'cider-restart))
+  (local-set-key (kbd "C-c C-v C-b") #'cider-eval-buffer)
+  (local-set-key (kbd "C-c M-R")     #'cider-restart))
 (add-hook 'cider-mode-hook #'tkareine/cider-mode-hook)
 (add-hook 'cider-repl-mode-hook #'tkareine/cider-mode-hook)
 
