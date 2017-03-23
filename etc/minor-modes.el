@@ -101,9 +101,15 @@ If called with a prefix, specify the file path."
 
 (global-set-key (kbd "C-c t") #'tkareine/visit-tags-table)
 
-;; Company: auto completion
+;; Company: enable auto completion globally
 (require 'company)
 (global-company-mode)
+;; Company: don't lowercase completion candidates (dabbrev backend)
+(customize-set-variable 'company-dabbrev-downcase nil)
+;; Company: ignore case when collecting completion candidates and copy
+;; candidate verbatim (dabbrev and dabbrev-code backends)
+(customize-set-variable 'company-dabbrev-ignore-case t)
+(customize-set-variable 'company-dabbrev-code-ignore-case t)
 
 ;; Helm
 (require 'helm)
