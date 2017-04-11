@@ -149,6 +149,6 @@
 (global-set-key (kbd "M-]") #'jump-to-register)
 
 ;; Other
-(global-set-key (kbd "C-c B")       #'browse-url-at-point)
 (global-set-key (kbd "C-c C-c M-x") #'execute-extended-command)
 (global-set-key (kbd "C-x C-b")     #'ibuffer)
+(global-set-key (kbd "C-c U")       #'browse-url-at-point)
