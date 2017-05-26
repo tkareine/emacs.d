@@ -53,6 +53,8 @@
             (local-set-key (kbd "C-c j") #'tkareine/js2-mode-toggle-strict-missing-semi-warning)))
 (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
 (add-to-list 'auto-mode-alist '("\\.javascript\\'" . js2-mode))
+(add-to-list 'auto-mode-alist '("\\.json\\'" . js2-mode))
+(add-to-list 'interpreter-mode-alist '("node\\(?:js\\)?" . js2-mode))
 
 ;; ELisp support
 (add-hook 'emacs-lisp-mode-hook (lambda () (setq mode-name "ELisp")))
