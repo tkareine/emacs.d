@@ -102,12 +102,13 @@
 (add-to-list 'auto-mode-alist '("\\.md\\'" . gfm-mode))
 
 ;; Ruby file types
-(add-to-list 'auto-mode-alist '("/gemfile\\'" . ruby-mode))
-(add-to-list 'auto-mode-alist '("/guardfile\\'" . ruby-mode))
-(add-to-list 'auto-mode-alist '("/procfile\\'" . ruby-mode))
-(add-to-list 'auto-mode-alist '("/rakefile\\'" . ruby-mode))
-(add-to-list 'auto-mode-alist '("/vagrantfile\\'" . ruby-mode))
-(add-to-list 'auto-mode-alist '("\\.rake\\'" . ruby-mode))
+(add-to-list 'auto-mode-alist '("/gemfile\\'" . enh-ruby-mode))
+(add-to-list 'auto-mode-alist '("/guardfile\\'" . enh-ruby-mode))
+(add-to-list 'auto-mode-alist '("/procfile\\'" . enh-ruby-mode))
+(add-to-list 'auto-mode-alist '("/rakefile\\'" . enh-ruby-mode))
+(add-to-list 'auto-mode-alist '("/vagrantfile\\'" . enh-ruby-mode))
+(add-to-list 'auto-mode-alist '("\\.rake\\'" . enh-ruby-mode))
+(add-to-list 'interpreter-mode-alist '("j?ruby\\(?:1.8\\|1.9\\)?" . enh-ruby-mode))
 
 ;; Shell script file types
 (add-to-list 'auto-mode-alist '("\\.bashrc\\." . shell-script-mode))
