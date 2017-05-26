@@ -124,5 +124,9 @@
 (add-to-list 'auto-mode-alist '("\\.erb\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.ftl\\'" . web-mode))
 
+;; Interactive regexp builder
+(require 're-builder)
+(customize-set-variable 'reb-re-syntax 'string)
+
 ;; Default major-mode
 (customize-set-variable 'major-mode 'text-mode)
