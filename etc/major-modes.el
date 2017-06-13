@@ -98,6 +98,8 @@
 
 ;; Markdown language support
 (customize-set-variable 'markdown-command "marked --gfm --tables")
+(customize-set-variable 'markdown-hide-urls nil)
+(custom-set-faces '(markdown-code-face ((t (:background "#4b4b4b")))))
 (add-to-list 'auto-mode-alist '("\\.markdown\\'" . gfm-mode))
 (add-to-list 'auto-mode-alist '("\\.md\\'" . gfm-mode))
 
