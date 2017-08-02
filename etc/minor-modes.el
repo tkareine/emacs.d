@@ -183,6 +183,9 @@ If called with a prefix, specify the file path."
 
 ;; Magit
 (global-set-key (kbd "C-x g") #'magit-status)
+(custom-set-faces '(magit-diff-context-highlight ((t (:background "#494949")))))
+(custom-set-faces '(magit-diff-hunk-heading ((t (:background "#545454")))))
+(custom-set-faces '(magit-diff-hunk-heading-highlight ((t (:background "#686868")))))
 
 ;; Paredit
 (eval-after-load "paredit"
