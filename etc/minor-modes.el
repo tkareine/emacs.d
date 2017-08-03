@@ -186,6 +186,12 @@ If called with a prefix, specify the file path."
 (custom-set-faces '(magit-diff-context-highlight ((t (:background "#494949")))))
 (custom-set-faces '(magit-diff-hunk-heading ((t (:background "#545454")))))
 (custom-set-faces '(magit-diff-hunk-heading-highlight ((t (:background "#686868")))))
+;; Magit: disable magit-auto-revert-mode, because we're using
+;; global-auto-revert-mode
+(customize-set-variable 'magit-auto-revert-mode nil)
+;; Magit: disable Emacs' Version Control interface
+;; (customize-set-variable 'vc-handled-backends '(RCS CVS SVN SCCS SRC Bzr Git Hg Mtn))
+(customize-set-variable 'vc-handled-backends nil)
 
 ;; Paredit
 (eval-after-load "paredit"
