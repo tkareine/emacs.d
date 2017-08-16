@@ -111,6 +111,7 @@
 (add-to-list 'auto-mode-alist '("/rakefile\\'" . enh-ruby-mode))
 (add-to-list 'auto-mode-alist '("/vagrantfile\\'" . enh-ruby-mode))
 (add-to-list 'auto-mode-alist '("\\.rake\\'" . enh-ruby-mode))
+(add-to-list 'auto-mode-alist '("\\.rb\\'" . enh-ruby-mode))
 (add-to-list 'interpreter-mode-alist '("j?ruby\\(?:1.8\\|1.9\\)?" . enh-ruby-mode))
 
 ;; Shell script file types
