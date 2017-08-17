@@ -99,6 +99,7 @@
 ;; Markdown language support
 (customize-set-variable 'markdown-command "marked --gfm --tables")
 (customize-set-variable 'markdown-hide-urls nil)
+(customize-set-variable 'markdown-asymmetric-header t)
 (customize-set-variable 'markdown-live-preview-delete-export 'delete-on-export)
 (custom-set-faces '(markdown-code-face ((t (:background "#4b4b4b")))))
 (add-to-list 'auto-mode-alist '("\\.markdown\\'" . gfm-mode))
