@@ -38,18 +38,25 @@
 
 ;; Recentf: for showing list of recently opened files
 (require 'recentf)
+
 ;; Recentf: store save file under emacs conf dir
 (customize-set-variable 'recentf-save-file (tkareine/dotfile-path "recentf"))
+
 ;; Recentf: exclude the recentf save file and Emacs ELPA autoloads
-(customize-set-variable 'recentf-exclude (list
-                                          (concat "\\`" (expand-file-name (tkareine/dotfile-path "recentf")) "\\'")
-                                          (concat "\\`" (expand-file-name (tkareine/dotfile-path "elpa")) "/.*-autoloads.elc?\\'")))
+(customize-set-variable 'recentf-exclude
+                        (list
+                         (concat "\\`" (expand-file-name (tkareine/dotfile-path "recentf")) "\\'")
+                         (concat "\\`" (expand-file-name (tkareine/dotfile-path "elpa")) "/.*-autoloads.elc?\\'")))
+
 ;; Recentf: save the list of recent files periodically. Normally,
 ;; Recentf saves the list when Emacs exits cleanly. If Emacs crashes,
 ;; that save is probably not done.
-(run-at-time (* 5 60) (* 5 60) (lambda ()
-                                 (let ((inhibit-message t))
-                                   (recentf-save-list))))
+(defun tkareine/recentf-save-list-silent ()
+  (let ((inhibit-message t))
+    (recentf-save-list)))
+
+(run-at-time (* 5 60) (* 5 60) #'tkareine/recentf-save-list-silent)
+
 ;; Recentf: enable globally
 (recentf-mode)
 
@@ -104,8 +111,10 @@ If called with a prefix, specify the file path."
 ;; Company: enable auto completion globally
 (require 'company)
 (global-company-mode)
+
 ;; Company: don't lowercase completion candidates (dabbrev backend)
 (customize-set-variable 'company-dabbrev-downcase nil)
+
 ;; Company: ignore case when collecting completion candidates and copy
 ;; candidate verbatim (dabbrev and dabbrev-code backends)
 (customize-set-variable 'company-dabbrev-ignore-case t)
@@ -124,14 +133,18 @@ If called with a prefix, specify the file path."
 (global-set-key (kbd "M-x")       #'helm-M-x)
 (global-set-key (kbd "M-y")       #'helm-show-kill-ring)
 (global-set-key (kbd "s-.")       #'helm-semantic-or-imenu)
+
 ;; Helm: switch bindings for TAB and C-z
 (define-key helm-map (kbd "TAB") #'helm-execute-persistent-action)
 (define-key helm-map (kbd "C-z") #'helm-select-action)
+
 ;; Helm: make TAB work in terminal
 (define-key helm-map (kbd "C-i") #'helm-execute-persistent-action)
+
 ;; Helm: enter directory automatically when only one candidate matches
 ;; input
 (customize-set-variable 'helm-ff-auto-update-initial-value t)
+
 ;; Helm: always show helm buffers below
 (customize-set-variable 'helm-split-window-default-side 'below)
 (customize-set-variable 'helm-always-two-windows t)
@@ -141,8 +154,10 @@ If called with a prefix, specify the file path."
         (`darwin "mdfind -name %s %s")
         (`windows-nt "es %s %s")
         (_ "locate %s %s")))
+
 ;; Helm: always show full buffer name in helm-M-x
 (customize-set-variable 'helm-buffer-max-length nil)
+
 ;; Helm: enable
 (helm-mode t)
 
@@ -169,13 +184,17 @@ If called with a prefix, specify the file path."
 ;; UndoTree
 (global-undo-tree-mode)
 
-;; Ag: enable search highlighting
-(customize-set-variable 'ag-highlight-search t)
-(customize-set-variable 'ag-project-root-function
-                        (lambda (_dir) (projectile-project-root)))
+;; Ag
 (global-set-key (kbd "C-c A")   #'ag)
 (global-set-key (kbd "C-c a")   #'ag-project-regexp)
 (global-set-key (kbd "C-c C-a") #'ag-regexp)
+
+;; Ag: enable search highlighting
+(customize-set-variable 'ag-highlight-search t)
+
+;; Ag: projectile determines project root
+(customize-set-variable 'ag-project-root-function
+                        (lambda (_dir) (projectile-project-root)))
 
 ;; GitGutter
 (global-git-gutter-mode t)
@@ -187,20 +206,23 @@ If called with a prefix, specify the file path."
 (custom-set-faces '(magit-diff-context-highlight ((t (:background "grey32")))))
 (custom-set-faces '(magit-diff-hunk-heading ((t (:background "#3E5F76")))))
 (custom-set-faces '(magit-diff-hunk-heading-highlight ((t (:background "#619ABF")))))
+
 ;; Magit: disable magit-auto-revert-mode, because we're using
 ;; global-auto-revert-mode
 (customize-set-variable 'magit-auto-revert-mode nil)
+
 ;; Magit: disable Emacs' Version Control interface
 ;; (customize-set-variable 'vc-handled-backends '(RCS CVS SVN SCCS SRC Bzr Git Hg Mtn))
 (customize-set-variable 'vc-handled-backends nil)
 
 ;; Paredit
-(eval-after-load "paredit"
-  (lambda ()
-    (define-key paredit-mode-map (kbd "C-<left>")  nil)
-    (define-key paredit-mode-map (kbd "C-<right>") nil)
-    (define-key paredit-mode-map (kbd "M-<left>")  #'paredit-forward-barf-sexp)
-    (define-key paredit-mode-map (kbd "M-<right>") #'paredit-forward-slurp-sexp)))
+(defun tkareine/paredit-customizations ()
+  (define-key paredit-mode-map (kbd "C-<left>")  nil)
+  (define-key paredit-mode-map (kbd "C-<right>") nil)
+  (define-key paredit-mode-map (kbd "M-<left>")  #'paredit-forward-barf-sexp)
+  (define-key paredit-mode-map (kbd "M-<right>") #'paredit-forward-slurp-sexp))
+
+(eval-after-load "paredit" #'tkareine/paredit-customizations)
 
 (add-hook 'clojure-mode-hook                     #'paredit-mode)
 (add-hook 'emacs-lisp-mode-hook                  #'paredit-mode)
