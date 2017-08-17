@@ -40,6 +40,7 @@
 (customize-set-variable 'js2-highlight-level 3)
 (customize-set-variable 'js2-missing-semi-one-line-override t)
 (customize-set-variable 'js2-strict-missing-semi-warning nil)
+(advice-add #'js--multi-line-declaration-indentation :around (lambda (orig-fun &rest args))) ; Don't double-indent multiline statement
 (custom-set-faces '(js2-private-member ((t (:foreground "coral1")))))
 (defun tkareine/js2-mode-toggle-strict-missing-semi-warning ()
   (interactive)
