@@ -55,6 +55,10 @@
 (add-to-list 'auto-mode-alist '("\\.javascript\\'" . js2-mode))
 (add-to-list 'auto-mode-alist '("\\.json\\'" . js2-mode))
 (add-to-list 'interpreter-mode-alist '("node\\(?:js\\)?" . js2-mode))
+;; JavaScript: JSX files
+(add-hook 'rjsx-mode-hook
+          (lambda ()
+            (setq mode-name "RJSX")))
 
 ;; ELisp support
 (add-hook 'emacs-lisp-mode-hook (lambda () (setq mode-name "ELisp")))
