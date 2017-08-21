@@ -155,5 +155,9 @@
 (require 're-builder)
 (customize-set-variable 'reb-re-syntax 'string)
 
+;; Compilation
+(define-key compilation-mode-map (kbd "M-N") #'compilation-next-file)
+(define-key compilation-mode-map (kbd "M-P") #'compilation-previous-file)
+
 ;; Default major-mode
 (customize-set-variable 'major-mode 'text-mode)
