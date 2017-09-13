@@ -21,6 +21,10 @@
 ;; Network security
 (customize-set-variable 'network-security-level 'high)
 
+;; TLS: Use OpenSSL and verify server certificate
+(customize-set-variable 'tls-checktrust t)
+(customize-set-variable 'tls-program '("openssl s_client -connect %h:%p -no_ssl2 -ign_eof -verify 9 -verify_return_error"))
+
 ;; Define rudimentary functions for loading the rest of init
 (defun tkareine/dotfile-path (p)
   (concat user-emacs-directory p))
@@ -31,10 +35,11 @@
 ;; Load support functions
 (tkareine/load-dotfile "etc/support.el")
 
-;; Start package system, make installed packages available
 (require 'package)
-(customize-set-variable 'package-archives '(("melpa" . "https://melpa.milkbox.net/packages/")
-                                            ("gnu"   . "https://elpa.gnu.org/packages/")))
+;; Remove GNU Elpa package package archive, because the archive signature is invalid
+;; <https://lists.gnu.org/archive/html/bug-gnu-emacs/2014-12/msg00781.html>
+(customize-set-variable 'package-archives '(("melpa" . "https://melpa.org/packages/")))
+;; Start package system, make installed packages available
 (package-initialize)
 
 ;; Check that minimum set of packages is installed
