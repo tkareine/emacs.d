@@ -18,13 +18,6 @@
 ;; Set no content in *scratch* buffer
 (customize-set-variable 'initial-scratch-message "")
 
-;; Network security
-(customize-set-variable 'network-security-level 'high)
-
-;; TLS: Use OpenSSL and verify server certificate
-(customize-set-variable 'tls-checktrust t)
-(customize-set-variable 'tls-program '("openssl s_client -connect %h:%p -no_ssl2 -ign_eof -verify 9 -verify_return_error"))
-
 ;; Define rudimentary functions for loading the rest of init
 (defun tkareine/dotfile-path (p)
   (concat user-emacs-directory p))
@@ -38,6 +31,7 @@
 ;; Provide other libraries than packages
 (tkareine/add-dotfile-to-load-path "lib")
 
+(tkareine/load-dotfile "etc/network.el")
 (tkareine/load-dotfile "etc/packages.el")
 
 ;; Start package system, make installed packages available
