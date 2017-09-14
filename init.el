@@ -35,15 +35,13 @@
 ;; Load support functions
 (tkareine/load-dotfile "etc/support.el")
 
-(require 'package)
-;; Remove GNU Elpa package package archive, because the archive signature is invalid
-;; <https://lists.gnu.org/archive/html/bug-gnu-emacs/2014-12/msg00781.html>
-(customize-set-variable 'package-archives '(("melpa" . "https://melpa.org/packages/")))
+;; Provide other libraries than packages
+(tkareine/add-dotfile-to-load-path "lib")
+
+(tkareine/load-dotfile "etc/packages.el")
+
 ;; Start package system, make installed packages available
 (package-initialize)
-
-;; Check that minimum set of packages is installed
-(tkareine/load-dotfile "etc/packages.el")
 (tkareine/add-selected-packages tkareine/package-dependencies)
 (tkareine/install-missing-packages tkareine/package-dependencies)
 
