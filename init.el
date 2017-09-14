@@ -51,7 +51,6 @@
                           " && ")
                t)
 
-;; Load configuration
 (tkareine/load-dotfile "etc/minor-modes.el")
 (tkareine/load-dotfile "etc/major-modes.el")
 (tkareine/load-dotfile "etc/backups.el")
