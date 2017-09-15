@@ -28,6 +28,18 @@
 ;; Load support functions
 (tkareine/load-dotfile "etc/support.el")
 
+;; Shell command to setup external files as required by Emacs
+;; configuration.
+(shell-command (mapconcat #'identity
+                          `("touch ~/.cider_history"
+                            "chmod 600 ~/.cider_history"
+                            ,(concat "touch " (tkareine/dotfile-path ".custom.el")))
+                          " && ")
+               t)
+
+(setq custom-file (tkareine/dotfile-path ".custom.el"))
+(load custom-file)
+
 ;; Provide other libraries than packages
 (tkareine/add-dotfile-to-load-path "lib")
 
@@ -42,24 +54,12 @@
 ;; Provide other libraries than packages
 (tkareine/add-dotfile-to-load-path "lib")
 
-;; Shell command to setup external files as required by Emacs
-;; configuration.
-(shell-command (mapconcat #'identity
-                          `("touch ~/.cider_history"
-                            "chmod 600 ~/.cider_history"
-                            ,(concat "touch " (tkareine/dotfile-path ".custom.el")))
-                          " && ")
-               t)
-
 (tkareine/load-dotfile "etc/minor-modes.el")
 (tkareine/load-dotfile "etc/major-modes.el")
 (tkareine/load-dotfile "etc/backups.el")
 (tkareine/load-dotfile "etc/looks.el")
 (tkareine/load-dotfile "etc/editing.el")
 (tkareine/load-dotfile "etc/misc.el")
-
-(setq custom-file (tkareine/dotfile-path ".custom.el"))
-(load custom-file)
 
 ;; Server mode
 (server-start)
