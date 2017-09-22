@@ -80,10 +80,6 @@
 
 (global-set-key (kbd "C-c P") #'tkareine/file-path-to-clipboard)
 
-(global-set-key (kbd "C-M-r")     #'isearch-backward)
-(global-set-key (kbd "C-M-s")     #'isearch-forward)
-(global-set-key (kbd "C-r")       #'isearch-backward-regexp)
-(global-set-key (kbd "C-s")       #'isearch-forward-regexp)
 (global-set-key (kbd "C-c F")     #'find-file-at-point)
 (global-set-key (kbd "S-<down>")  #'windmove-down)
 (global-set-key (kbd "S-<left>")  #'windmove-left)
