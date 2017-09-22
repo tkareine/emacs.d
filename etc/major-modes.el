@@ -84,6 +84,13 @@
 ;; Cider: attempt to use the symbol at point as input for
 ;; `cider-find-var', and only prompt if that throws an error
 (customize-set-variable 'cider-prompt-for-symbol nil)
+
+;; Cider: I want to inject dependencies manually via
+;; `~/.lein/profiles.clj'. Otherwise Leiningen's `:pedantic? :abort'
+;; setting causes `lein repl' to abort due to overriding version of
+;; `org.clojure/tools.nrepl'.
+(customize-set-variable 'cider-inject-dependencies-at-jack-in nil)
+
 (custom-set-faces '(cider-result-overlay-face ((t (:background "grey30")))))
 
 (defun tkareine/cider-mode-hook ()
