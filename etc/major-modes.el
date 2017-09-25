@@ -77,6 +77,24 @@
 (add-hook 'emacs-lisp-mode-hook #'tkareine/emacs-lisp-mode-hook)
 
 ;; Clojure support
+(defun tkareine/clojure-mode-customizations ()
+  (let ((default-indent 2))
+    (define-clojure-indent
+      (ANY       default-indent)
+      (DELETE    default-indent)
+      (GET       default-indent)
+      (HEAD      default-indent)
+      (OPTIONS   default-indent)
+      (PATCH     default-indent)
+      (POST      default-indent)
+      (PUT       default-indent)
+      (context   default-indent)
+      (describe  default-indent)
+      (it        default-indent)
+      (defroutes 'defun))))
+
+(eval-after-load "clojure-mode" #'tkareine/clojure-mode-customizations)
+
 (customize-set-variable 'cider-eval-result-prefix ";; => ")
 (customize-set-variable 'cider-repl-result-prefix ";; => ")
 (customize-set-variable 'cider-repl-history-file "~/.cider_history")
