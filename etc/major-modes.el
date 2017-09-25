@@ -20,19 +20,6 @@
 ;; left and another on the right
 (customize-set-variable 'ediff-split-window-function 'split-window-horizontally)
 
-;; Erlang language support
-(let* ((root-dir  (tkareine/dotfile-path "lib/erlang-mode"))
-       (bin-dir   (concat root-dir "/bin"))
-       (elisp-dir (car (file-expand-wildcards (concat root-dir
-                                                      "/lib/tools-*/emacs") t))))
-  (when (and (file-exists-p bin-dir)
-             elisp-dir
-             (file-exists-p elisp-dir))
-    (setq erlang-root-dir root-dir)
-    (add-to-list 'load-path elisp-dir)
-    (add-to-list 'exec-path bin-dir)
-    (require 'erlang-start)))
-
 ;; JavaScript language support
 (customize-set-variable 'js-indent-level 2)
 (customize-set-variable 'js2-basic-offset 2)
