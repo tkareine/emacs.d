@@ -165,8 +165,8 @@
 ;; Shell script file types
 (add-to-list 'auto-mode-alist '("\\.bashrc\\.[a-z0-9-]+\\'" . sh-mode))
 
-;; Textile language support
-(require 'textile-mode)
+;; Textile file types
+(add-to-list 'auto-mode-alist '("\\.textile\\'" . textile-mode))
 
 ;; Visual Basic support
 (autoload 'visual-basic-mode "visual-basic-mode" "Visual Basic mode." t)

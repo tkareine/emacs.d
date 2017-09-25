@@ -39,6 +39,7 @@
     projectile
     rjsx-mode
     scss-mode
+    textile-mode
     undo-tree
     yaml-mode
     web-mode
