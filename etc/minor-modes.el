@@ -216,13 +216,13 @@ If called with a prefix, specify the file path."
 (customize-set-variable 'vc-handled-backends nil)
 
 ;; Paredit
-(defun tkareine/paredit-customizations ()
+(defun tkareine/paredit-mode-customizations ()
   (define-key paredit-mode-map (kbd "C-<left>")  nil)
   (define-key paredit-mode-map (kbd "C-<right>") nil)
   (define-key paredit-mode-map (kbd "M-<left>")  #'paredit-forward-barf-sexp)
   (define-key paredit-mode-map (kbd "M-<right>") #'paredit-forward-slurp-sexp))
 
-(eval-after-load "paredit" #'tkareine/paredit-customizations)
+(eval-after-load "paredit" #'tkareine/paredit-mode-customizations)
 
 (add-hook 'clojure-mode-hook                     #'paredit-mode)
 (add-hook 'emacs-lisp-mode-hook                  #'paredit-mode)
