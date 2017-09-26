@@ -119,14 +119,18 @@
 (customize-set-variable 'haskell-process-log t)
 (customize-set-variable 'haskell-process-type 'cabal-repl)
 
+(defun tkareine/haskell-mode-customizations ()
+  (define-key haskell-mode-map (kbd "<f8>")  #'haskell-navigate-imports)
+  (define-key haskell-mode-map (kbd "C-`")   #'haskell-interactive-bring)
+  (define-key haskell-mode-map (kbd "C-c c") #'haskell-process-cabal)
+  (define-key haskell-mode-map (kbd "C-c o") #'haskell-hoogle))
+
+(eval-after-load "haskell-mode" #'tkareine/haskell-mode-customizations)
+
 (defun tkareine/haskell-mode-hook ()
   (turn-on-haskell-indentation)
   (turn-on-haskell-decl-scan)
-  (interactive-haskell-mode)
-  (local-set-key (kbd "<f8>")  #'haskell-navigate-imports)
-  (local-set-key (kbd "C-`")   #'haskell-interactive-bring)
-  (local-set-key (kbd "C-c c") #'haskell-process-cabal)
-  (local-set-key (kbd "C-c o") #'haskell-hoogle))
+  (interactive-haskell-mode))
 
 (add-hook 'haskell-mode-hook #'tkareine/haskell-mode-hook)
 
