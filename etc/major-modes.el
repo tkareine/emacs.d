@@ -168,8 +168,15 @@
 (add-to-list 'auto-mode-alist '("\\.ftl\\'" . web-mode))
 
 ;; Interactive regexp builder
-(require 're-builder)
+(global-set-key (kbd "C-c R") #'re-builder)
+
 (customize-set-variable 'reb-re-syntax 'string)
+
+(defun tkareine/re-builder-mode-customizations ()
+  (define-key reb-mode-map (kbd "M-n") #'reb-next-match)
+  (define-key reb-mode-map (kbd "M-p") #'reb-prev-match))
+
+(eval-after-load "re-builder" #'tkareine/re-builder-mode-customizations)
 
 ;; Compilation
 (define-key compilation-mode-map (kbd "M-N") #'compilation-next-file)
