@@ -38,11 +38,15 @@
   (setq js2-strict-missing-semi-warning (eq js2-strict-missing-semi-warning nil))
   (js2-mode))
 
+(defun tkareine/js2-mode-customizations ()
+  (define-key js2-mode-map (kbd "M-.")   nil)
+  (define-key js2-mode-map (kbd "C-c j") #'tkareine/js2-mode-toggle-strict-missing-semi-warning))
+
+(eval-after-load "js2-mode" #'tkareine/js2-mode-customizations)
+
 (defun tkareine/js2-mode-hook ()
   (setq mode-name "JS2")
-  (set-fill-column 300)
-  (local-unset-key (kbd "M-."))
-  (local-set-key (kbd "C-c j") #'tkareine/js2-mode-toggle-strict-missing-semi-warning))
+  (set-fill-column 300))
 
 (add-hook 'js2-mode-hook #'tkareine/js2-mode-hook)
 
