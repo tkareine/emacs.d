@@ -103,6 +103,7 @@
 (custom-set-faces '(cider-result-overlay-face ((t (:background "grey30")))))
 
 (defun tkareine/cider-mode-hook ()
+  (helm-cider-mode t)
   (local-set-key (kbd "C-c B")       #'cider-connection-browser)
   (local-set-key (kbd "C-c C-v C-b") #'cider-eval-buffer)
   (local-set-key (kbd "C-c M-R")     #'cider-restart))
