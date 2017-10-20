@@ -232,6 +232,32 @@ If called with a prefix, specify the file path."
 (add-hook 'lisp-mode-hook                        #'paredit-mode)
 (add-hook 'scheme-mode-hook                      #'paredit-mode)
 
+;; Cider
+(customize-set-variable 'cider-eval-result-prefix ";; => ")
+(customize-set-variable 'cider-repl-result-prefix ";; => ")
+(customize-set-variable 'cider-repl-history-file "~/.cider_history")
+
+;; Cider: attempt to use the symbol at point as input for
+;; `cider-find-var', and only prompt if that throws an error
+(customize-set-variable 'cider-prompt-for-symbol nil)
+
+;; Cider: I want to inject dependencies manually via
+;; `~/.lein/profiles.clj'. Otherwise Leiningen's `:pedantic? :abort'
+;; setting causes `lein repl' to abort due to overriding version of
+;; `org.clojure/tools.nrepl'.
+(customize-set-variable 'cider-inject-dependencies-at-jack-in nil)
+
+(custom-set-faces '(cider-result-overlay-face ((t (:background "grey30")))))
+
+(defun tkareine/cider-mode-hook ()
+  (helm-cider-mode t)
+  (local-set-key (kbd "C-c B")       #'cider-connection-browser)
+  (local-set-key (kbd "C-c C-v C-b") #'cider-eval-buffer)
+  (local-set-key (kbd "C-c M-R")     #'cider-restart))
+
+(add-hook 'cider-mode-hook #'tkareine/cider-mode-hook)
+(add-hook 'cider-repl-mode-hook #'tkareine/cider-mode-hook)
+
 ;; Dash
 (if (eq system-type 'darwin)
     (global-set-key (kbd "C-c ?") #'dash-at-point))
