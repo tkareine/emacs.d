@@ -232,6 +232,8 @@ If called with a prefix, specify the file path."
 (add-hook 'lisp-mode-hook                        #'paredit-mode)
 (add-hook 'scheme-mode-hook                      #'paredit-mode)
 
+(global-set-key (kbd "C-c (") #'paredit-mode)
+
 ;; Cider
 (customize-set-variable 'cider-eval-result-prefix ";; => ")
 (customize-set-variable 'cider-repl-result-prefix ";; => ")
