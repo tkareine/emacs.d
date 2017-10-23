@@ -53,6 +53,7 @@
 
 (put 'tkareine/mode-line-position 'risky-local-variable t)
 
+(require 'projectile)
 (defvar tkareine/mode-line-projectile-project
   '(:eval (when (ignore-errors (projectile-project-root))
             (let ((project-name (projectile-project-name)))

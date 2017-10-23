@@ -54,10 +54,10 @@
 ;; Provide other libraries than packages
 (tkareine/add-dotfile-to-load-path "lib")
 
+(tkareine/load-dotfile "etc/looks.el")
 (tkareine/load-dotfile "etc/minor-modes.el")
 (tkareine/load-dotfile "etc/major-modes.el")
 (tkareine/load-dotfile "etc/backups.el")
-(tkareine/load-dotfile "etc/looks.el")
 (tkareine/load-dotfile "etc/editing.el")
 (tkareine/load-dotfile "etc/misc.el")
 
