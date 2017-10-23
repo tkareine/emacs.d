@@ -234,22 +234,34 @@ If called with a prefix, specify the file path."
 
 (global-set-key (kbd "C-c (") #'paredit-mode)
 
-;; Cider
+;; CIDER
 (customize-set-variable 'cider-eval-result-prefix ";; => ")
 (customize-set-variable 'cider-repl-result-prefix ";; => ")
 (customize-set-variable 'cider-repl-history-file "~/.cider_history")
 
-;; Cider: attempt to use the symbol at point as input for
+;; CIDER: attempt to use the symbol at point as input for
 ;; `cider-find-var', and only prompt if that throws an error
 (customize-set-variable 'cider-prompt-for-symbol nil)
 
-;; Cider: I want to inject dependencies manually via
+;; CIDER: I want to inject dependencies manually via
 ;; `~/.lein/profiles.clj'. Otherwise Leiningen's `:pedantic? :abort'
 ;; setting causes `lein repl' to abort due to overriding version of
 ;; `org.clojure/tools.nrepl'.
 (customize-set-variable 'cider-inject-dependencies-at-jack-in nil)
 
 (custom-set-faces '(cider-result-overlay-face ((t (:background "grey30")))))
+
+;; CIDER: shorten mode line info
+(customize-set-variable 'cider-mode-line '(:eval (cider--modeline-info)))
+
+;; CIDER: add related info to mode line
+(defun tkareine/cider-mode-customizations ()
+  (add-to-list 'tkareine/minor-mode-alist '(cider-popup-buffer-mode (" cider-tmp")))
+  (add-to-list 'tkareine/minor-mode-alist '(cider-auto-test-mode (cider-mode " Test")))
+  (add-to-list 'tkareine/minor-mode-alist '(cider-mode cider-mode-line))
+  (add-to-list 'tkareine/minor-mode-alist '(cider--debug-mode " DEBUG")))
+
+(eval-after-load "cider-mode" #'tkareine/cider-mode-customizations)
 
 (defun tkareine/cider-mode-hook ()
   (helm-cider-mode t)
