@@ -107,6 +107,8 @@
     (paredit-mode paredit-lighter))
   "Alist of selected minor modes to be shown in the mode line.")
 
+(put 'tkareine/minor-mode-alist 'risky-local-variable t)
+
 (defvar tkareine/mode-line-modes
   '(#("%[" 0 2 (face font-lock-warning-face help-echo "Recursive edit, type C-M-c to cancel"))
     "("
