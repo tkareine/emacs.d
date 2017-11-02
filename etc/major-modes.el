@@ -134,7 +134,7 @@
 (add-to-list 'interpreter-mode-alist '("j?ruby\\(?:1.8\\|1.9\\)?" . enh-ruby-mode))
 
 ;; Shell script file types
-(add-to-list 'auto-mode-alist '("\\.bashrc\\.[a-z0-9-]+\\'" . sh-mode))
+(add-to-list 'auto-mode-alist '("\\.bashrc\\.[a-z0-9-.]+\\'" . sh-mode))
 
 ;; Textile file types
 (add-to-list 'auto-mode-alist '("\\.textile\\'" . textile-mode))
