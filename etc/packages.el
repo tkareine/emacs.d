@@ -39,6 +39,7 @@
     projectile
     rjsx-mode
     scss-mode
+    sql-indent
     textile-mode
     undo-tree
     yaml-mode

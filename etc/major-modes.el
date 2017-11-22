@@ -136,6 +136,9 @@
 ;; Shell script file types
 (add-to-list 'auto-mode-alist '("\\.bashrc\\.[a-z0-9-.]+\\'" . sh-mode))
 
+;; SQL indentation
+(eval-after-load "sql" '(load-library "sql-indent"))
+
 ;; Textile file types
 (add-to-list 'auto-mode-alist '("\\.textile\\'" . textile-mode))
 
