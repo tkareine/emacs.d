@@ -23,15 +23,15 @@
 (defvar tkareine/package-dependencies
   '(ag
     company
+    counsel
+    counsel-projectile
     dash-at-point
     enh-ruby-mode
     expand-region
     flycheck
     git-gutter
-    helm
-    helm-ag
-    helm-projectile
     highlight-symbol
+    ivy
     js2-mode
     magit
     markdown-mode
@@ -40,11 +40,12 @@
     rjsx-mode
     scss-mode
     sql-indent
+    swiper
     textile-mode
     undo-tree
-    yaml-mode
     web-mode
     which-key
+    yaml-mode
     zenburn-theme)
   "Minimum set of packages required for my configuration.")
 

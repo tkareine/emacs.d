@@ -123,66 +123,51 @@ If called with a prefix, specify the file path."
 (customize-set-variable 'company-dabbrev-ignore-case t)
 (customize-set-variable 'company-dabbrev-code-ignore-case t)
 
-;; Helm
-(require 'helm)
-(require 'helm-config)
-(global-set-key (kbd "C-c C-SPC") #'helm-all-mark-rings)
-(global-set-key (kbd "C-c b")     #'helm-resume)
-(global-set-key (kbd "C-c h")     #'helm-command-prefix)
-(global-set-key (kbd "C-c o")     #'helm-occur)
-(global-set-key (kbd "C-c r")     #'helm-register)
-(global-set-key (kbd "C-x C-f")   #'helm-find-files)
-(global-set-key (kbd "C-x b")     #'helm-mini)
-(global-set-key (kbd "M-x")       #'helm-M-x)
-(global-set-key (kbd "M-y")       #'helm-show-kill-ring)
-(global-set-key (kbd "s-.")       #'helm-semantic-or-imenu)
+;; Ivy, Counsel, and Swiper
+(customize-set-variable 'ivy-use-virtual-buffers t)
+(customize-set-variable 'ivy-count-format "(%d/%d) ")
+(customize-set-variable 'ivy-height 20)
 
-;; Helm: switch bindings for TAB and C-z
-(define-key helm-map (kbd "TAB") #'helm-execute-persistent-action)
-(define-key helm-map (kbd "C-z") #'helm-select-action)
+(custom-set-faces '(ivy-current-match ((t (:weight bold
+                                           :underline nil
+                                           :foreground nil
+                                           :background "grey35"))))
+                  '(ivy-subdir ((t (:background nil))))
+                  '(ivy-virtual ((t (:foreground "grey70")))))
 
-;; Helm: make TAB work in terminal
-(define-key helm-map (kbd "C-i") #'helm-execute-persistent-action)
+(global-set-key (kbd "C-c b")   #'ivy-resume)
+(global-set-key (kbd "C-c g")   #'counsel-git)
+(global-set-key (kbd "C-c j")   #'counsel-git-grep)
+(global-set-key (kbd "C-c l")   #'counsel-locate)
+(global-set-key (kbd "C-c m")   #'counsel-bookmark)
+(global-set-key (kbd "C-c s")   #'counsel-ag)
+(global-set-key (kbd "C-h f")   #'counsel-describe-function)
+(global-set-key (kbd "C-h i")   #'counsel-info-lookup-symbol)
+(global-set-key (kbd "C-h l")   #'counsel-find-library)
+(global-set-key (kbd "C-h u")   #'counsel-unicode-char)
+(global-set-key (kbd "C-h v")   #'counsel-describe-variable)
+(global-set-key (kbd "C-x C-f") #'counsel-find-file)
+(global-set-key (kbd "M-x")     #'counsel-M-x)
+(global-set-key (kbd "s-.")     #'counsel-semantic-or-imenu)
 
-;; Helm: enter directory automatically when only one candidate matches
-;; input
-(customize-set-variable 'helm-ff-auto-update-initial-value t)
+(dolist (m (list text-mode-map prog-mode-map))
+  (define-key m (kbd "C-s") #'swiper))
 
-;; Helm: always show helm buffers below
-(customize-set-variable 'helm-split-window-default-side 'below)
-(customize-set-variable 'helm-always-two-windows t)
-(customize-set-variable 'helm-locate-command
-      (pcase system-type
-        (`gnu/linux "locate %s -e -A %s")
-        (`darwin "mdfind -name %s %s")
-        (`windows-nt "es %s %s")
-        (_ "locate %s %s")))
+(define-key minibuffer-local-map (kbd "C-r") #'counsel-minibuffer-history)
 
-;; Helm: always show full buffer name in helm-M-x
-(customize-set-variable 'helm-buffer-max-length nil)
-
-;; Helm: enable
-(helm-mode t)
-
-;; Helm-ag
-(customize-set-variable 'helm-ag-insert-at-point 'symbol)
-(global-set-key (kbd "C-c C-s") #'helm-do-ag)
-(global-set-key (kbd "C-c S")   #'helm-ag-this-file)
+(ivy-mode 1)
 
 ;; Projectile
-(require 'helm-projectile)
-(global-set-key (kbd "C-c d") #'helm-projectile-find-dir)
-(global-set-key (kbd "C-c f") #'helm-projectile-find-file)
-(global-set-key (kbd "C-c g") #'helm-projectile-find-file-dwim)
-(global-set-key (kbd "C-c s") #'helm-projectile-ag)
-(global-set-key (kbd "C-c v") #'helm-projectile-find-other-file)
-(customize-set-variable 'projectile-completion-system 'helm)
-(customize-set-variable 'projectile-switch-project-action 'helm-projectile)
+(global-set-key (kbd "C-c d") #'counsel-projectile-find-dir)
+(global-set-key (kbd "C-c f") #'counsel-projectile-find-file)
+(global-set-key (kbd "C-c s") #'counsel-projectile-ag)
+(customize-set-variable 'projectile-completion-system 'ivy)
+(require 'projectile)
 (add-to-list 'projectile-other-file-alist '("html" "js" "css"))
 (add-to-list 'projectile-other-file-alist '("js" "html" "css"))
 (add-to-list 'projectile-other-file-alist '("css" "html" "js"))
 (projectile-mode)
-(helm-projectile-on)
+(counsel-projectile-mode)
 
 ;; UndoTree
 (global-undo-tree-mode)
@@ -268,7 +253,6 @@ If called with a prefix, specify the file path."
 (eval-after-load "cider-mode" #'tkareine/cider-mode-customizations)
 
 (defun tkareine/cider-mode-hook ()
-  (helm-cider-mode t)
   (local-set-key (kbd "C-c B")       #'cider-connection-browser)
   (local-set-key (kbd "C-c C-v C-b") #'cider-eval-buffer)
   (local-set-key (kbd "C-c M-R")     #'cider-restart))
