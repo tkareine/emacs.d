@@ -1,3 +1,6 @@
+;; Minibuffer
+(customize-set-variable 'enable-recursive-minibuffers t)
+
 ;; Typing text replaces active selection
 (delete-selection-mode t)
 
