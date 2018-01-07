@@ -232,7 +232,7 @@ If called with a prefix, specify the file path."
 (add-hook 'lisp-mode-hook                        #'paredit-mode)
 (add-hook 'scheme-mode-hook                      #'paredit-mode)
 
-(global-set-key (kbd "C-c (") #'paredit-mode)
+(define-key prog-mode-map (kbd "C-c (") #'paredit-mode)
 
 ;; CIDER
 (customize-set-variable 'cider-eval-result-prefix ";; => ")
@@ -274,10 +274,12 @@ If called with a prefix, specify the file path."
 
 ;; Dash
 (if (eq system-type 'darwin)
-    (global-set-key (kbd "C-c ?") #'dash-at-point))
+    (dolist (m (list text-mode-map prog-mode-map))
+      (define-key m (kbd "C-c ?") #'dash-at-point)))
 
 ;; Expand-reqion
-(global-set-key (kbd "C-=") #'er/expand-region)
+(dolist (m (list text-mode-map prog-mode-map))
+  (define-key m (kbd "C-=") #'er/expand-region))
 
 ;; Flycheck: enable globally
 (add-hook 'after-init-hook #'global-flycheck-mode)
@@ -297,7 +299,9 @@ If called with a prefix, specify the file path."
                                                    "RoyalBlue1"
                                                    "OliveDrab"))
 (customize-set-variable 'highlight-symbol-foreground-color "#DCDCCC")
-(global-set-key (kbd "C-<f5>") #'highlight-symbol)
-(global-set-key (kbd "<f5>")   #'highlight-symbol-next)
-(global-set-key (kbd "S-<f5>") #'highlight-symbol-prev)
-(global-set-key (kbd "M-<f5>") #'highlight-symbol-query-replace)
+
+(dolist (m (list text-mode-map prog-mode-map))
+  (define-key m (kbd "C-<f5>") #'highlight-symbol)
+  (define-key m (kbd "<f5>")   #'highlight-symbol-next)
+  (define-key m (kbd "S-<f5>") #'highlight-symbol-prev)
+  (define-key m (kbd "M-<f5>") #'highlight-symbol-query-replace))
