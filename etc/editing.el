@@ -36,38 +36,26 @@
   (interactive)
   (join-line -1))
 
-(global-set-key (kbd "M-j") #'tkareine/join-line)
-
 (defun tkareine/next-line-5 ()
   (interactive)
   (ignore-errors (forward-line 5)))
-
-(global-set-key (kbd "C-n") #'tkareine/next-line-5)
 
 (defun tkareine/previous-line-5 ()
   (interactive)
   (ignore-errors (forward-line -5)))
 
-(global-set-key (kbd "C-p") #'tkareine/previous-line-5)
-
 (defun tkareine/forward-char-5 ()
   (interactive)
   (ignore-errors (forward-char 5)))
-
-(global-set-key (kbd "C-f") #'tkareine/forward-char-5)
 
 (defun tkareine/backward-char-5 ()
   (interactive)
   (ignore-errors (backward-char 5)))
 
-(global-set-key (kbd "C-b") #'tkareine/backward-char-5)
-
 (defun tkareine/eol-newline-and-indent ()
   (interactive)
   (end-of-line)
   (newline-and-indent))
-
-(global-set-key (kbd "S-<return>") #'tkareine/eol-newline-and-indent)
 
 (defun tkareine/file-path-to-clipboard ()
   "Copy the current file name to the clipboard."
@@ -78,7 +66,33 @@
       (kill-new path)
       (message path))))
 
-(global-set-key (kbd "C-c P") #'tkareine/file-path-to-clipboard)
+(defun tkareine/comment-or-uncomment-region-or-line ()
+  (interactive)
+  (let ((region (tkareine/active-region-or-line)))
+    (when region
+      (let ((rbegin (car region))
+            (rend (cadr region)))
+        (comment-or-uncomment-region rbegin rend)))))
+
+(defun tkareine/toggle-show-trailing-whitespace ()
+  (interactive)
+  (customize-set-variable 'show-trailing-whitespace (eq show-trailing-whitespace nil)))
+
+(dolist (m (list text-mode-map prog-mode-map))
+  (define-key m (kbd "C-b")        #'tkareine/backward-char-5)
+  (define-key m (kbd "C-c C")      #'comment-dwim)
+  (define-key m (kbd "C-c P")      #'tkareine/file-path-to-clipboard)
+  (define-key m (kbd "C-f")        #'tkareine/forward-char-5)
+  (define-key m (kbd "C-n")        #'tkareine/next-line-5)
+  (define-key m (kbd "C-p")        #'tkareine/previous-line-5)
+  (define-key m (kbd "C-x W")      #'tkareine/toggle-show-trailing-whitespace)
+  (define-key m (kbd "C-x t")      #'delete-trailing-whitespace)
+  (define-key m (kbd "C-x w")      #'whitespace-mode)
+  (define-key m (kbd "M-/")        #'tkareine/comment-or-uncomment-region-or-line)
+  (define-key m (kbd "M-J")        #'delete-indentation)
+  (define-key m (kbd "M-S-SPC")    #'fixup-whitespace)
+  (define-key m (kbd "M-j")        #'tkareine/join-line)
+  (define-key m (kbd "S-<return>") #'tkareine/eol-newline-and-indent))
 
 (global-set-key (kbd "C-c F")     #'find-file-at-point)
 (global-set-key (kbd "S-<down>")  #'windmove-down)
@@ -113,32 +127,6 @@
 
 ;; Mouse yanking inserts at the point instead of the location of the click
 (customize-set-variable 'mouse-yank-at-point t)
-
-;; Commenting
-
-(defun tkareine/comment-or-uncomment-region-or-line ()
-  (interactive)
-  (let ((region (tkareine/active-region-or-line)))
-    (when region
-      (let ((rbegin (car region))
-            (rend (cadr region)))
-        (comment-or-uncomment-region rbegin rend)))))
-
-(global-set-key (kbd "M-/")   #'tkareine/comment-or-uncomment-region-or-line)
-(global-set-key (kbd "C-c C") #'comment-dwim)
-
-;; Whitespace
-
-(defun tkareine/toggle-show-trailing-whitespace ()
-  (interactive)
-  (customize-set-variable 'show-trailing-whitespace (eq show-trailing-whitespace nil)))
-
-(global-set-key (kbd "C-x W")   #'tkareine/toggle-show-trailing-whitespace)
-
-(global-set-key (kbd "C-x t")   #'delete-trailing-whitespace)
-(global-set-key (kbd "C-x w")   #'whitespace-mode)
-(global-set-key (kbd "M-S-SPC") #'fixup-whitespace)
-(global-set-key (kbd "M-J")     #'delete-indentation)
 
 ;; Registers
 (global-set-key (kbd "M-[") #'point-to-register)
