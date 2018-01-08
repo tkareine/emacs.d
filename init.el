@@ -15,6 +15,9 @@
 ;; Do not show splash screen
 (customize-set-variable 'inhibit-startup-message t)
 
+;; Do not show startup message
+(customize-set-variable 'inhibit-startup-echo-area-message (user-login-name))
+
 ;; Set no content in *scratch* buffer
 (customize-set-variable 'initial-scratch-message "")
 
@@ -63,3 +66,5 @@
 
 ;; Server mode
 (server-start)
+
+(message "Started in %s" (emacs-init-time))
