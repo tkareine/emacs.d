@@ -170,7 +170,7 @@
 (customize-set-variable 'line-spacing 2)
 
 ;; Highlight color for next-error, used by `compilation-display-error'
-(custom-set-faces '(next-error ((t (:background "SkyBlue3" :foreground "#DCDCCC")))))
+(custom-set-faces '(next-error ((t (:background "SkyBlue3" :foreground "#dcdccc")))))
 
 (global-set-key (kbd "C-'") #'text-scale-increase)
 (global-set-key (kbd "C-;") #'text-scale-decrease)

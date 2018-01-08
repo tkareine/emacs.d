@@ -128,15 +128,18 @@ If called with a prefix, specify the file path."
 (customize-set-variable 'ivy-count-format "(%d/%d) ")
 (customize-set-variable 'ivy-height 20)
 
-(custom-set-faces '(ivy-current-match ((t (:weight bold
-                                           :underline nil
-                                           :foreground nil
-                                           :background "grey15"))))
-                  '(ivy-action ((t (:weight bold
-                                    :foreground "#bfe79d"))))
-                  '(ivy-subdir ((t (:background nil))))
-                  '(ivy-virtual ((t (:foreground "grey65"))))
-                  '(ivy-modified-buffer ((t (:foreground "#a6cca5")))))
+(custom-set-faces '(ivy-current-match   ((t (:weight bold
+                                             :underline nil
+                                             :foreground nil
+                                             :background "grey15"))))
+                  '(ivy-action          ((t (:weight bold
+                                             :foreground "#f0dfaf"))))
+                  '(ivy-subdir          ((t (:weight bold
+                                             :foreground "#ffffef"))))
+                  '(ivy-virtual         ((t (:foreground "grey70"))))
+                  '(ivy-remote          ((t (:foreground "#cc9393"))))
+                  '(ivy-modified-buffer ((t (:weight bold
+                                             :foreground "#bfebbf")))))
 
 (global-set-key (kbd "C-c b")   #'ivy-resume)
 (global-set-key (kbd "C-c g")   #'counsel-git)
@@ -197,8 +200,8 @@ If called with a prefix, specify the file path."
 (customize-set-variable 'magit-completing-read-function 'ivy-completing-read)
 (custom-set-faces '(magit-diff-context ((t (:background "grey25"))))
                   '(magit-diff-context-highlight ((t (:background "grey32"))))
-                  '(magit-diff-hunk-heading ((t (:background "#3E5F76"))))
-                  '(magit-diff-hunk-heading-highlight ((t (:background "#619ABF")))))
+                  '(magit-diff-hunk-heading ((t (:background "#3e5f76"))))
+                  '(magit-diff-hunk-heading-highlight ((t (:background "#619abf")))))
 
 ;; Magit: disable magit-auto-revert-mode, because we're using
 ;; global-auto-revert-mode
