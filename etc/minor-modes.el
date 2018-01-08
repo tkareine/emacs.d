@@ -151,6 +151,7 @@ If called with a prefix, specify the file path."
 (global-set-key (kbd "C-h v")   #'counsel-describe-variable)
 (global-set-key (kbd "C-x C-f") #'counsel-find-file)
 (global-set-key (kbd "M-x")     #'counsel-M-x)
+(global-set-key (kbd "M-y")     #'counsel-yank-pop)
 (global-set-key (kbd "s-.")     #'counsel-semantic-or-imenu)
 
 (dolist (m (list text-mode-map prog-mode-map))
