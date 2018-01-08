@@ -131,9 +131,12 @@ If called with a prefix, specify the file path."
 (custom-set-faces '(ivy-current-match ((t (:weight bold
                                            :underline nil
                                            :foreground nil
-                                           :background "grey35"))))
+                                           :background "grey15"))))
+                  '(ivy-action ((t (:weight bold
+                                    :foreground "#bfe79d"))))
                   '(ivy-subdir ((t (:background nil))))
-                  '(ivy-virtual ((t (:foreground "grey70")))))
+                  '(ivy-virtual ((t (:foreground "grey65"))))
+                  '(ivy-modified-buffer ((t (:foreground "#a6cca5")))))
 
 (global-set-key (kbd "C-c b")   #'ivy-resume)
 (global-set-key (kbd "C-c g")   #'counsel-git)
