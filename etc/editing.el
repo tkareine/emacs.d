@@ -30,7 +30,7 @@
 ;; Save typing chars when answering yes-or-no-p questions
 (defalias 'yes-or-no-p 'y-or-n-p)
 
-;; Navigation
+;; Navigation, editing, and some helpers in text-mode and prog-mode
 
 (defun tkareine/join-line ()
   (interactive)
@@ -89,11 +89,12 @@
   (define-key m (kbd "C-x t")      #'delete-trailing-whitespace)
   (define-key m (kbd "C-x w")      #'whitespace-mode)
   (define-key m (kbd "M-/")        #'tkareine/comment-or-uncomment-region-or-line)
-  (define-key m (kbd "M-J")        #'delete-indentation)
-  (define-key m (kbd "M-S-SPC")    #'fixup-whitespace)
+  (define-key m (kbd "M-J")        #'join-line)
+  (define-key m (kbd "M-S-SPC")    #'cycle-spacing)
   (define-key m (kbd "M-j")        #'tkareine/join-line)
   (define-key m (kbd "S-<return>") #'tkareine/eol-newline-and-indent))
 
+;; Global navigation and window management
 (global-set-key (kbd "C-c F")     #'find-file-at-point)
 (global-set-key (kbd "S-<down>")  #'windmove-down)
 (global-set-key (kbd "S-<left>")  #'windmove-left)
@@ -102,7 +103,8 @@
 (global-set-key (kbd "M-ESC")     #'other-frame)
 (global-set-key (kbd "M-§")       #'other-frame)
 
-;; Force learning to avoid using M-<left|right> for movement between words
+;; Force your learning to avoid using M-<left|right> for movement
+;; between words
 (global-unset-key (kbd "M-<left>"))
 (global-unset-key (kbd "M-<right>"))
 
