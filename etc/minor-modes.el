@@ -222,7 +222,7 @@ If called with a prefix, specify the file path."
   (define-key paredit-mode-map (kbd "M-<left>")  #'paredit-forward-barf-sexp)
   (define-key paredit-mode-map (kbd "M-<right>") #'paredit-forward-slurp-sexp))
 
-(eval-after-load "paredit" #'tkareine/paredit-mode-customizations)
+(eval-after-load 'paredit #'tkareine/paredit-mode-customizations)
 
 (add-hook 'clojure-mode-hook                     #'paredit-mode)
 (add-hook 'emacs-lisp-mode-hook                  #'paredit-mode)
@@ -261,7 +261,7 @@ If called with a prefix, specify the file path."
   (add-to-list 'tkareine/minor-mode-alist '(cider-mode cider-mode-line))
   (add-to-list 'tkareine/minor-mode-alist '(cider--debug-mode " DEBUG")))
 
-(eval-after-load "cider-mode" #'tkareine/cider-mode-customizations)
+(eval-after-load 'cider-mode #'tkareine/cider-mode-customizations)
 
 (defun tkareine/cider-mode-hook ()
   (local-set-key (kbd "C-c B")       #'cider-connection-browser)

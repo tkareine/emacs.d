@@ -42,7 +42,7 @@
   (define-key js2-mode-map (kbd "M-.")   nil)
   (define-key js2-mode-map (kbd "C-c j") #'tkareine/js2-mode-toggle-strict-missing-semi-warning))
 
-(eval-after-load "js2-mode" #'tkareine/js2-mode-customizations)
+(eval-after-load 'js2-mode #'tkareine/js2-mode-customizations)
 
 (defun tkareine/js2-mode-hook ()
   (setq mode-name "JS2")
@@ -85,7 +85,7 @@
       (it        default-indent)
       (defroutes 'defun))))
 
-(eval-after-load "clojure-mode" #'tkareine/clojure-mode-customizations)
+(eval-after-load 'clojure-mode #'tkareine/clojure-mode-customizations)
 
 ;; CoffeeScript support
 (customize-set-variable 'coffee-tab-width 2)
@@ -102,7 +102,7 @@
   (define-key haskell-mode-map (kbd "C-c c") #'haskell-process-cabal)
   (define-key haskell-mode-map (kbd "C-c o") #'haskell-hoogle))
 
-(eval-after-load "haskell-mode" #'tkareine/haskell-mode-customizations)
+(eval-after-load 'haskell-mode #'tkareine/haskell-mode-customizations)
 
 (defun tkareine/haskell-mode-hook ()
   (turn-on-haskell-indentation)
@@ -138,7 +138,7 @@
 (add-to-list 'auto-mode-alist '("\\.bashrc\\.[a-z0-9-.]+\\'" . sh-mode))
 
 ;; SQL indentation
-(eval-after-load "sql" '(load-library "sql-indent"))
+(eval-after-load 'sql '(load-library "sql-indent"))
 
 ;; Textile file types
 (add-to-list 'auto-mode-alist '("\\.textile\\'" . textile-mode))
@@ -160,7 +160,7 @@
   (define-key reb-mode-map (kbd "M-n") #'reb-next-match)
   (define-key reb-mode-map (kbd "M-p") #'reb-prev-match))
 
-(eval-after-load "re-builder" #'tkareine/re-builder-mode-customizations)
+(eval-after-load 're-builder #'tkareine/re-builder-mode-customizations)
 
 ;; Compilation
 (define-key compilation-mode-map (kbd "M-N") #'compilation-next-file)
