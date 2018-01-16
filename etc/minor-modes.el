@@ -162,6 +162,10 @@ If called with a prefix, specify the file path."
 
 (define-key minibuffer-local-map (kbd "C-r") #'counsel-minibuffer-history)
 
+(require 'ivy)
+(require 'counsel)
+(ivy-add-actions 'counsel-find-file '(("D" delete-file "delete")))
+
 (ivy-mode 1)
 
 ;; Projectile
