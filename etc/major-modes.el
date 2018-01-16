@@ -45,8 +45,7 @@
 (eval-after-load 'js2-mode #'tkareine/js2-mode-customizations)
 
 (defun tkareine/js2-mode-hook ()
-  (setq mode-name "JS2")
-  (set-fill-column 300))
+  (setq mode-name "JS2"))
 
 (add-hook 'js2-mode-hook #'tkareine/js2-mode-hook)
 
