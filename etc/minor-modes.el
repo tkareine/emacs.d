@@ -107,7 +107,10 @@ If called with a prefix, specify the file path."
     (visit-tags-table tags-file)
     (message "Visited TAGS: %s" tags-file)))
 
-;; GNU Global
+;; ggtags: use GNU Global with Emacs's xref facility
+
+(require 'ggtags)
+
 (defun tkareine/make-gtags (rootdir)
   "Make gtags files to the current project.
 
@@ -124,6 +127,10 @@ If called with a prefix, specify the directory to make gtags files for."
     (ggtags-create-tags rootdir)))
 
 (customize-set-variable 'ggtags-process-environment '("GTAGSLABEL=default"))
+
+;; ggtags: don't change `mode-line-buffer-identification', because we
+;; show project root dir in the mode line with projectile
+(setq ggtags-mode-line-project-name nil)
 
 (add-hook 'enh-ruby-mode-hook #'ggtags-mode)
 (add-hook 'js2-mode-hook      #'ggtags-mode)
