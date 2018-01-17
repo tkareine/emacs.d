@@ -104,7 +104,8 @@
     (next-error-follow-minor-mode " Fol")
     (abbrev-mode " Abbrev")
     (auto-fill-function " Fill")
-    (paredit-mode paredit-lighter))
+    (paredit-mode paredit-lighter)
+    (ggtags-mode " GG"))
   "Alist of selected minor modes to be shown in the mode line.")
 
 (put 'tkareine/minor-mode-alist 'risky-local-variable t)
