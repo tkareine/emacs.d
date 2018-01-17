@@ -66,47 +66,6 @@
 ;; Hippie-expand
 (global-set-key (kbd "s-SPC") #'hippie-expand)
 
-;; xref: tags
-(defvar tkareine/tags-command-history
-  nil
-  "History list for the tags command asked in `tkareine/make-tags-table'.")
-
-(defun tkareine/make-tags-table (command directory)
-  "Make TAGS file to the current project.
-
-If called with a prefix, specify the directory to make the tags file for."
-  (interactive (let ((cmd (read-from-minibuffer "tags command: "
-                                                "ctags -e -R "
-                                                nil
-                                                nil
-                                                'tkareine/tags-command-history))
-                     (dir (if current-prefix-arg
-                              (read-directory-name "Make TAGS to: " nil nil t)
-                            (if-let ((proj-dir (projectile-project-root)))
-                                proj-dir
-                              (read-directory-name "Make TAGS to: " nil nil t)))))
-                 (list cmd dir)))
-  (let* ((current-prefix-arg nil) ; reset as it might affect future commands
-         (file (concat directory "TAGS"))
-         (full-cmd (format "%s -f \"%s\" \"%s\"" command file directory)))
-    (shell-command full-cmd "*tags Command Output*")
-    (visit-tags-table file)
-    (message "Made and visited TAGS: %s" full-cmd)))
-
-(defun tkareine/visit-tags-table (tags-file)
-  "Visit TAGS file of the current project.
-
-If called with a prefix, specify the file path."
-  (interactive (let ((tags-file (if current-prefix-arg
-                                    (read-file-name "Visit TAGS: " nil nil t)
-                                  (if-let ((proj-file (tkareine/try-projectile-expand-root-file-p "TAGS" #'file-readable-p)))
-                                      proj-file
-                                    (read-file-name "Visit TAGS: " nil nil t)))))
-                 (list tags-file)))
-  (let ((current-prefix-arg nil)) ; reset as it might affect future commands
-    (visit-tags-table tags-file)
-    (message "Visited TAGS: %s" tags-file)))
-
 ;; ggtags: use GNU Global with Emacs's xref facility
 
 (require 'ggtags)
