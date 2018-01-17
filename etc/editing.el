@@ -36,35 +36,48 @@
   (interactive)
   (join-line -1))
 
+(global-set-key (kbd "M-J") #'join-line)
+(global-set-key (kbd "M-j") #'tkareine/join-line)
+
 (defun tkareine/next-line-5 ()
   (interactive)
   (ignore-errors (forward-line 5)))
+
+(global-set-key (kbd "C-n") #'tkareine/next-line-5)
 
 (defun tkareine/previous-line-5 ()
   (interactive)
   (ignore-errors (forward-line -5)))
 
+(global-set-key (kbd "C-p") #'tkareine/previous-line-5)
+
 (defun tkareine/forward-char-5 ()
   (interactive)
   (ignore-errors (forward-char 5)))
 
+(global-set-key (kbd "C-f") #'tkareine/forward-char-5)
+
 (defun tkareine/backward-char-5 ()
   (interactive)
   (ignore-errors (backward-char 5)))
+
+(global-set-key (kbd "C-b") #'tkareine/backward-char-5)
 
 (defun tkareine/eol-newline-and-indent ()
   (interactive)
   (end-of-line)
   (newline-and-indent))
 
-(defun tkareine/file-path-to-clipboard ()
-  "Copy the current file name to the clipboard."
+(global-set-key (kbd "S-<return>") #'tkareine/eol-newline-and-indent)
+
+(defun tkareine/toggle-show-trailing-whitespace ()
   (interactive)
-  (let ((path (expand-file-name (or (buffer-file-name) default-directory))))
-    (when path
-      (let ((select-enable-clipboard t)) (gui-select-text path))
-      (kill-new path)
-      (message path))))
+  (customize-set-variable 'show-trailing-whitespace (eq show-trailing-whitespace nil)))
+
+(global-set-key (kbd "C-x W")   #'tkareine/toggle-show-trailing-whitespace)
+(global-set-key (kbd "C-x t")   #'delete-trailing-whitespace)
+(global-set-key (kbd "C-x w")   #'whitespace-mode)
+(global-set-key (kbd "M-S-SPC") #'cycle-spacing)
 
 (defun tkareine/comment-or-uncomment-region-or-line ()
   (interactive)
@@ -74,25 +87,8 @@
             (rend (cadr region)))
         (comment-or-uncomment-region rbegin rend)))))
 
-(defun tkareine/toggle-show-trailing-whitespace ()
-  (interactive)
-  (customize-set-variable 'show-trailing-whitespace (eq show-trailing-whitespace nil)))
-
-(dolist (m (list text-mode-map prog-mode-map))
-  (define-key m (kbd "C-b")        #'tkareine/backward-char-5)
-  (define-key m (kbd "C-c C")      #'comment-dwim)
-  (define-key m (kbd "C-c P")      #'tkareine/file-path-to-clipboard)
-  (define-key m (kbd "C-f")        #'tkareine/forward-char-5)
-  (define-key m (kbd "C-n")        #'tkareine/next-line-5)
-  (define-key m (kbd "C-p")        #'tkareine/previous-line-5)
-  (define-key m (kbd "C-x W")      #'tkareine/toggle-show-trailing-whitespace)
-  (define-key m (kbd "C-x t")      #'delete-trailing-whitespace)
-  (define-key m (kbd "C-x w")      #'whitespace-mode)
-  (define-key m (kbd "M-/")        #'tkareine/comment-or-uncomment-region-or-line)
-  (define-key m (kbd "M-J")        #'join-line)
-  (define-key m (kbd "M-S-SPC")    #'cycle-spacing)
-  (define-key m (kbd "M-j")        #'tkareine/join-line)
-  (define-key m (kbd "S-<return>") #'tkareine/eol-newline-and-indent))
+(global-set-key (kbd "C-c C") #'comment-dwim)
+(global-set-key (kbd "M-/")   #'tkareine/comment-or-uncomment-region-or-line)
 
 ;; Global navigation and window management
 (global-set-key (kbd "C-c F")     #'find-file-at-point)
@@ -122,6 +118,16 @@
   (apply adviced arguments))
 (advice-add #'kill-region :around #'tkareine/kill-region-advice)
 
+(defun tkareine/file-path-to-clipboard ()
+  "Copy the current file name to the clipboard."
+  (interactive)
+  (let ((path (expand-file-name (or (buffer-file-name) default-directory))))
+    (when path
+      (let ((select-enable-clipboard t)) (gui-select-text path))
+      (kill-new path)
+      (message path))))
+
+(global-set-key (kbd "C-c P")         #'tkareine/file-path-to-clipboard)
 (global-set-key (kbd "M-<kp-delete>") #'kill-word)
 
 ;; Save clipboard strings into kill ring before replacing them
