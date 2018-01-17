@@ -176,9 +176,9 @@ If called with a prefix, specify the file path."
 
 ;; Counsel interface for GNU Global
 (defun tkareine/make-gtags (rootdir)
-  "Make GTAGS file to the current project.
+  "Make gtags files to the current project.
 
-If called with a prefix, specify the directory to make the tags file for."
+If called with a prefix, specify the directory to make gtags files for."
   (interactive (cl-flet ((read-dir ()
                                    (read-directory-name "Make GTAGS to: " nil nil t)))
                  (let ((dir (if current-prefix-arg
