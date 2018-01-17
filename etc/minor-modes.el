@@ -148,13 +148,11 @@ If called with a prefix, specify the file path."
 (global-set-key (kbd "C-h l")   #'counsel-find-library)
 (global-set-key (kbd "C-h u")   #'counsel-unicode-char)
 (global-set-key (kbd "C-h v")   #'counsel-describe-variable)
+(global-set-key (kbd "C-s")     #'swiper)
 (global-set-key (kbd "C-x C-f") #'counsel-find-file)
 (global-set-key (kbd "M-x")     #'counsel-M-x)
 (global-set-key (kbd "M-y")     #'counsel-yank-pop)
 (global-set-key (kbd "s-.")     #'counsel-semantic-or-imenu)
-
-(dolist (m (list text-mode-map prog-mode-map))
-  (define-key m (kbd "C-s") #'swiper))
 
 (define-key minibuffer-local-map (kbd "C-r") #'counsel-minibuffer-history)
 
@@ -298,8 +296,7 @@ If called with a prefix, specify the directory to make the tags file for."
       (define-key m (kbd "C-c ?") #'dash-at-point)))
 
 ;; Expand-reqion
-(dolist (m (list text-mode-map prog-mode-map))
-  (define-key m (kbd "C-=") #'er/expand-region))
+(global-set-key (kbd "C-=") #'er/expand-region)
 
 ;; Flycheck: enable globally
 (add-hook 'after-init-hook #'global-flycheck-mode)
@@ -318,10 +315,9 @@ If called with a prefix, specify the directory to make the tags file for."
                                                    "HotPink3"
                                                    "RoyalBlue1"
                                                    "OliveDrab"))
-(customize-set-variable 'highlight-symbol-foreground-color "#DCDCCC")
+(customize-set-variable 'highlight-symbol-foreground-color "#dcdccc")
 
-(dolist (m (list text-mode-map prog-mode-map))
-  (define-key m (kbd "C-<f5>") #'highlight-symbol)
-  (define-key m (kbd "<f5>")   #'highlight-symbol-next)
-  (define-key m (kbd "S-<f5>") #'highlight-symbol-prev)
-  (define-key m (kbd "M-<f5>") #'highlight-symbol-query-replace))
+(global-set-key (kbd "C-<f5>") #'highlight-symbol)
+(global-set-key (kbd "<f5>")   #'highlight-symbol-next)
+(global-set-key (kbd "S-<f5>") #'highlight-symbol-prev)
+(global-set-key (kbd "M-<f5>") #'highlight-symbol-query-replace)
