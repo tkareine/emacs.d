@@ -107,6 +107,32 @@ If called with a prefix, specify the file path."
     (visit-tags-table tags-file)
     (message "Visited TAGS: %s" tags-file)))
 
+;; GNU Global
+(defun tkareine/make-gtags (rootdir)
+  "Make gtags files to the current project.
+
+If called with a prefix, specify the directory to make gtags files for."
+  (interactive (cl-flet ((read-dir ()
+                                   (read-directory-name "Make GTAGS to: " nil nil t)))
+                 (let ((dir (if current-prefix-arg
+                                (read-dir)
+                              (if-let ((proj-dir (projectile-project-root)))
+                                  proj-dir
+                                (read-dir)))))
+                    (list dir))))
+  (let ((current-prefix-arg nil)) ; reset as it might affect future commands
+    (ggtags-create-tags rootdir)))
+
+(customize-set-variable 'ggtags-process-environment '("GTAGSLABEL=default"))
+
+(add-hook 'enh-ruby-mode-hook #'ggtags-mode)
+(add-hook 'js2-mode-hook      #'ggtags-mode)
+(add-hook 'less-css-mode-hook #'ggtags-mode)
+(add-hook 'scss-mode-hook     #'ggtags-mode)
+
+(global-set-key (kbd "C-c T") #'tkareine/make-gtags)
+(global-set-key (kbd "C-c t") #'ggtags-find-tag-dwim)
+
 ;; Company: enable auto completion globally
 (require 'company)
 (global-company-mode)
@@ -173,31 +199,6 @@ If called with a prefix, specify the file path."
 (add-to-list 'projectile-other-file-alist '("css" "html" "js"))
 (projectile-mode)
 (counsel-projectile-mode)
-
-;; Counsel interface for GNU Global
-(defun tkareine/make-gtags (rootdir)
-  "Make gtags files to the current project.
-
-If called with a prefix, specify the directory to make gtags files for."
-  (interactive (cl-flet ((read-dir ()
-                                   (read-directory-name "Make GTAGS to: " nil nil t)))
-                 (let ((dir (if current-prefix-arg
-                                (read-dir)
-                              (if-let ((proj-dir (projectile-project-root)))
-                                  proj-dir
-                                (read-dir)))))
-                    (list dir))))
-  (let ((current-prefix-arg nil)) ; reset as it might affect future commands
-    (counsel-gtags-create-tags rootdir "default")))
-
-(global-set-key (kbd "C-M-.") #'counsel-gtags-find-definition)
-(global-set-key (kbd "C-c T") #'tkareine/make-gtags)
-(global-set-key (kbd "C-c r") #'counsel-gtags-find-reference)
-(global-set-key (kbd "C-c t") #'counsel-gtags-update-tags)
-(global-set-key (kbd "M-,")   #'counsel-gtags-go-backward)
-(global-set-key (kbd "M-.")   #'counsel-gtags-dwim)
-
-(counsel-gtags-mode)
 
 ;; UndoTree
 (global-undo-tree-mode)

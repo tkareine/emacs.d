@@ -24,12 +24,12 @@
   '(ag
     company
     counsel
-    counsel-gtags
     counsel-projectile
     dash-at-point
     enh-ruby-mode
     expand-region
     flycheck
+    ggtags
     git-gutter
     highlight-symbol
     ivy
