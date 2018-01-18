@@ -159,15 +159,23 @@ If called with a prefix, specify the directory to make gtags files for."
 (ivy-mode 1)
 
 ;; Projectile
+
 (global-set-key (kbd "C-c d") #'counsel-projectile-find-dir)
 (global-set-key (kbd "C-c f") #'counsel-projectile-find-file)
 (global-set-key (kbd "C-c s") #'counsel-projectile-ag)
+
 (customize-set-variable 'projectile-completion-system 'ivy)
+
 (require 'projectile)
-(add-to-list 'projectile-other-file-alist '("html" "js" "css"))
-(add-to-list 'projectile-other-file-alist '("js" "html" "css"))
-(add-to-list 'projectile-other-file-alist '("css" "html" "js"))
-(projectile-mode)
+(dolist (l '(("js" "scss" "less" "css" "html")
+             ("jsx" "scss" "less" "css" "html")
+             ("scss" "jsx" "js" "html")
+             ("less" "jsx" "js" "html")
+             ("css" "jsx" "js" "html")))
+  (add-to-list 'projectile-other-file-alist l))
+
+(global-set-key (kbd "C-c o") #'projectile-find-other-file)
+
 (counsel-projectile-mode)
 
 ;; UndoTree
