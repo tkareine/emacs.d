@@ -68,8 +68,6 @@
 
 ;; ggtags: use GNU Global with Emacs's xref facility
 
-(require 'ggtags)
-
 (defun tkareine/make-gtags (rootdir)
   "Make gtags files to the current project.
 
@@ -85,11 +83,16 @@ If called with a prefix, specify the directory to make gtags files for."
   (let ((current-prefix-arg nil)) ; reset as it might affect future commands
     (ggtags-create-tags rootdir)))
 
-(customize-set-variable 'ggtags-process-environment '("GTAGSLABEL=default"))
+(defun tkareine/ggtags-mode-customizations ()
+  (define-key ggtags-mode-map (kbd "M-]") nil)
 
-;; ggtags: don't change `mode-line-buffer-identification', because we
-;; show project root dir in the mode line with projectile
-(setq ggtags-mode-line-project-name nil)
+  ;; don't change `mode-line-buffer-identification', because we
+  ;; show project root dir in the mode line with projectile
+  (setq ggtags-mode-line-project-name nil))
+
+(eval-after-load 'ggtags #'tkareine/ggtags-mode-customizations)
+
+(customize-set-variable 'ggtags-process-environment '("GTAGSLABEL=default"))
 
 (add-hook 'enh-ruby-mode-hook #'ggtags-mode)
 (add-hook 'js2-mode-hook      #'ggtags-mode)
@@ -97,6 +100,7 @@ If called with a prefix, specify the directory to make gtags files for."
 (add-hook 'scss-mode-hook     #'ggtags-mode)
 
 (global-set-key (kbd "C-c T") #'tkareine/make-gtags)
+(global-set-key (kbd "C-c r") #'ggtags-find-reference)
 (global-set-key (kbd "C-c t") #'ggtags-find-tag-dwim)
 
 ;; Company: enable auto completion globally
