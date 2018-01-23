@@ -162,6 +162,8 @@ If called with a prefix, specify the directory to make gtags files for."
 
 (global-set-key (kbd "C-c d") #'counsel-projectile-find-dir)
 (global-set-key (kbd "C-c f") #'counsel-projectile-find-file)
+(global-set-key (kbd "C-c i") #'projectile-toggle-between-implementation-and-test)
+(global-set-key (kbd "C-c o") #'projectile-find-other-file)
 (global-set-key (kbd "C-c s") #'counsel-projectile-ag)
 
 (customize-set-variable 'projectile-completion-system 'ivy)
@@ -174,7 +176,10 @@ If called with a prefix, specify the directory to make gtags files for."
              ("css" "jsx" "js" "html")))
   (add-to-list 'projectile-other-file-alist l))
 
-(global-set-key (kbd "C-c o") #'projectile-find-other-file)
+(projectile-register-project-type 'npm '("package.json")
+                                  :compile "npm install"
+                                  :test "npm test"
+                                  :test-suffix ".test")
 
 (counsel-projectile-mode)
 
