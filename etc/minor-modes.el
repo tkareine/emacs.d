@@ -139,6 +139,7 @@ If called with a prefix, specify the directory to make gtags files for."
 (global-set-key (kbd "C-c l")   #'counsel-locate)
 (global-set-key (kbd "C-c m")   #'counsel-bookmark)
 (global-set-key (kbd "C-c s")   #'counsel-ag)
+(global-set-key (kbd "C-h b")   #'counsel-descbinds)
 (global-set-key (kbd "C-h f")   #'counsel-describe-function)
 (global-set-key (kbd "C-h i")   #'counsel-info-lookup-symbol)
 (global-set-key (kbd "C-h l")   #'counsel-find-library)
