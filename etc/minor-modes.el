@@ -119,6 +119,7 @@ If called with a prefix, specify the directory to make gtags files for."
 (customize-set-variable 'ivy-use-virtual-buffers t)
 (customize-set-variable 'ivy-count-format "(%d/%d) ")
 (customize-set-variable 'ivy-height 20)
+(customize-set-variable 'counsel-find-file-at-point t)
 
 (custom-set-faces '(ivy-current-match   ((t (:weight bold
                                              :underline nil
