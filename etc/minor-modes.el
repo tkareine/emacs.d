@@ -162,6 +162,7 @@ If called with a prefix, specify the directory to make gtags files for."
 
 ;; Projectile
 
+(global-set-key (kbd "C-c F") #'projectile-find-file-dwim)
 (global-set-key (kbd "C-c d") #'counsel-projectile-find-dir)
 (global-set-key (kbd "C-c f") #'counsel-projectile-find-file)
 (global-set-key (kbd "C-c i") #'projectile-toggle-between-implementation-and-test)

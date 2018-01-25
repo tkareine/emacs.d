@@ -91,7 +91,6 @@
 (global-set-key (kbd "M-/")   #'tkareine/comment-or-uncomment-region-or-line)
 
 ;; Global navigation and window management
-(global-set-key (kbd "C-c F")     #'find-file-at-point)
 (global-set-key (kbd "S-<down>")  #'windmove-down)
 (global-set-key (kbd "S-<left>")  #'windmove-left)
 (global-set-key (kbd "S-<right>") #'windmove-right)
