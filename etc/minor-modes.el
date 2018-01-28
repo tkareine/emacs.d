@@ -94,6 +94,28 @@ If called with a prefix, specify the directory to make gtags files for."
 
 (customize-set-variable 'ggtags-process-environment '("GTAGSLABEL=default"))
 
+(defun tkareine/ggtags-adjust-tag-bounds-for-scss-mode (org-bounds)
+  "Adjusts tag bounds so that `$var' gets converted to `var'. The
+dollar sign does not belong to SCSS variable symbol in our
+configuration for GNU Global."
+  (pcase org-bounds
+    (`(,org-beg . ,org-end)
+     (let* ((tag-str (buffer-substring org-beg org-end))
+            (dollar-prefix-length (tkareine/string-prefix-length-with-char ?$ tag-str))
+            (new-beg (+ org-beg dollar-prefix-length))
+            (new-bounds (if (< new-beg org-end)
+                            (cons new-beg org-end)
+                          org-bounds)))
+       new-bounds))))
+
+(defun tkareine/ggtags-bounds-of-tag ()
+  (let ((bounds (bounds-of-thing-at-point 'symbol)))
+    (pcase major-mode
+      ('scss-mode (tkareine/ggtags-adjust-tag-bounds-for-scss-mode bounds))
+      (- bounds))))
+
+(customize-set-variable 'ggtags-bounds-of-tag-function #'tkareine/ggtags-bounds-of-tag)
+
 (add-hook 'enh-ruby-mode-hook #'ggtags-mode)
 (add-hook 'js2-mode-hook      #'ggtags-mode)
 (add-hook 'less-css-mode-hook #'ggtags-mode)

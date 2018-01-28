@@ -48,3 +48,13 @@
       (let ((file (projectile-expand-root file)))
         (when (funcall predicate file)
           file))))
+
+(defun tkareine/string-prefix-length-with-char (char str)
+  (let* ((str-len (length str))
+         (idx 0)
+         (should-continue t))
+    (while (and should-continue (< idx str-len))
+      (if (char-equal (aref str idx) char)
+          (setq idx (1+ idx))
+        (setq should-continue nil)))
+    idx))
