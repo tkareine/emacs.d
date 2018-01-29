@@ -145,8 +145,8 @@ configuration for GNU Global."
 
 (custom-set-faces '(ivy-current-match   ((t (:weight bold
                                              :underline nil
-                                             :foreground nil
-                                             :background "grey15"))))
+                                             :foreground "#f0dfaf"
+                                             :background "grey10"))))
                   '(ivy-action          ((t (:weight bold
                                              :foreground "#f0dfaf"))))
                   '(ivy-subdir          ((t (:weight bold
