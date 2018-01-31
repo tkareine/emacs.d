@@ -1,11 +1,12 @@
 (require 'package)
+(require 'tk-support)
 
-(defun tkareine/add-selected-packages (packages)
+(defun tk-packages/push-selected (packages)
   (let ((new-packages (delete-dups (append packages
                                            package-selected-packages))))
     (customize-set-variable 'package-selected-packages new-packages)))
 
-(defun tkareine/install-packages (packages)
+(defun tk-packages/install (packages)
   (message "Refreshing packages from repositories...")
   (package-refresh-contents)
   (message "Done refreshing packages from repositories.")
@@ -13,14 +14,14 @@
     (message "Installing package: %s" p)
     (package-install p)))
 
-(defun tkareine/install-missing-packages (packages)
-  (let ((missing-packages (tkareine/filter (lambda (x) (not (package-installed-p x)))
-                                           packages)))
+(defun tk-packages/install-missing (packages)
+  (let ((missing-packages (tk-support/filter (lambda (x) (not (package-installed-p x)))
+					     packages)))
     (when missing-packages
       (message "Installing missing packages: %s" missing-packages)
-      (tkareine/install-packages missing-packages))))
+      (tk-packages/install missing-packages))))
 
-(defvar tkareine/package-dependencies
+(defvar tk-packages/minimum-set
   '(ag
     company
     counsel

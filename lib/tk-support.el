@@ -1,17 +1,20 @@
-(defun tkareine/add-dotfile-to-load-path (p)
-  (add-to-list 'load-path (tkareine/dotfile-path p)))
+(defun tk-support/dotfile-path (&rest paths)
+  "Expand file path components inside user emacs directory."
+  (concat (expand-file-name user-emacs-directory)
+          (mapconcat #'file-name-as-directory (butlast paths) "")
+          (car (last paths))))
 
-(defun tkareine/filter (condp lst)
+(defun tk-support/filter (condp lst)
   (delq nil
         (mapcar (lambda (x) (and (funcall condp x) x)) lst)))
 
-(defun tkareine/active-region-or-line ()
+(defun tk-support/active-region-or-line ()
   (if (use-region-p)
       (list (region-beginning) (region-end))
     (list (line-beginning-position)
           (line-beginning-position 2))))
 
-(defun tkareine/pretty-print-xml (begin end)
+(defun tk-support/pretty-print-xml (begin end)
   "Pretty format XML markup in region with nxml-mode."
   (interactive (progn
                  (barf-if-buffer-read-only)
@@ -43,18 +46,14 @@
           (insert-buffer-substring tmp-buf))
     (kill-buffer tmp-buf))))
 
-(defun tkareine/try-projectile-expand-root-file-p (file predicate)
-  (if (projectile-project-p)
-      (let ((file (projectile-expand-root file)))
-        (when (funcall predicate file)
-          file))))
-
-(defun tkareine/string-prefix-length-with-char (char str)
-  (let* ((str-len (length str))
-         (idx 0)
-         (should-continue t))
+(defun tk-support/string-prefix-length-with-char (char str)
+  (let ((str-len (length str))
+        (idx 0)
+        (should-continue t))
     (while (and should-continue (< idx str-len))
       (if (char-equal (aref str idx) char)
           (setq idx (1+ idx))
         (setq should-continue nil)))
     idx))
+
+(provide 'tk-support)

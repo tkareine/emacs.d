@@ -3,35 +3,26 @@
 
 ;; Replace ring-bell. Adapted from
 ;; <https://www.emacswiki.org/emacs/AlarmBell>
-(defun tkareine/visible-bell ()
+(defun tk-looks/visible-bell ()
   (invert-face 'mode-line)
   (run-with-timer 0.1 nil 'invert-face 'mode-line))
-(customize-set-variable 'ring-bell-function #'tkareine/visible-bell)
+
+(customize-set-variable 'ring-bell-function #'tk-looks/visible-bell)
 
 ;; Syntax higlighting where applicable
-(global-font-lock-mode t)
+(global-font-lock-mode)
 
 ;; Highlight current line
-(global-hl-line-mode t)
+(global-hl-line-mode)
 
-;; Standard selection-highlighting behavior of other edit
-(transient-mark-mode t)
+;; Selection-highlighting behavior like in other editors
+(transient-mark-mode)
 
 ;; See matching pairs of parentheses and other characters
-(show-paren-mode t)
-
-;; Show current line and column in the mode line
-(line-number-mode t)
-(column-number-mode t)
-
-;; Don't show line number if buffer is too big; value in bytes
-(customize-set-variable 'line-number-display-limit (* 1024 1024 64))
-
-;; Show buffer size in the mode line
-(size-indication-mode 1)
+(show-paren-mode)
 
 ;; No blinking cursor
-(blink-cursor-mode 0)
+(blink-cursor-mode -1)
 
 ;; Highlight long lines when whitespace-mode is enabled
 (customize-set-variable 'whitespace-line-column 140)
@@ -39,22 +30,35 @@
 ;; Highlight trailing whitespaces in lines
 (customize-set-variable 'show-trailing-whitespace t)
 
-;; Show file size
-(size-indication-mode t)
+;;; Mode line
+
+;; Show current line and column in mode line
+(line-number-mode)
+(column-number-mode)
+
+;; Show buffer size in mode line
+(size-indication-mode)
+
+;; Don't show line number if buffer is too big; value in bytes
+(customize-set-variable 'line-number-display-limit (* 1024 1024 64))
+
+;; Show current function in mode line
+(which-function-mode)
 
 ;; Adapted from
 ;; <http://www.lunaryorn.com/posts/make-your-emacs-mode-line-more-useful.html>
-(defvar tkareine/mode-line-position
+(defvar tk-looks/mode-line-position
   '((-3 "%p")
     (size-indication-mode ("/" (-4 "%I")))
     " "
     (line-number-mode ("%l" (column-number-mode ":%c"))))
   "Mode line construct for point position in the buffer. Example: `27%/3.0k'.")
 
-(put 'tkareine/mode-line-position 'risky-local-variable t)
+(put 'tk-looks/mode-line-position 'risky-local-variable t)
 
 (require 'projectile)
-(defvar tkareine/mode-line-projectile-project
+
+(defvar tk-looks/mode-line-projectile-project
   '(:eval (when (ignore-errors (projectile-project-root))
             (let ((project-name (projectile-project-name)))
               (put-text-property 0
@@ -65,25 +69,25 @@
               (concat "  " project-name))))
   "Mode line construct for project name from Projectile.")
 
-(put 'tkareine/mode-line-projectile-project 'risky-local-variable t)
+(put 'tk-looks/mode-line-projectile-project 'risky-local-variable t)
 
-(defvar tkareine/mode-line-vc
+(defvar tk-looks/mode-line-vc
   '(vc-mode (" "
              (:propertize vc-mode
                           face
                           font-lock-variable-name-face)))
   "Mode line construct for VC mode.")
 
-(put 'tkareine/mode-line-vc 'risky-local-variable t)
+(put 'tk-looks/mode-line-vc 'risky-local-variable t)
 
-(defvar tkareine/mode-line-flycheck
+(defvar tk-looks/mode-line-flycheck
   '(flycheck-mode (" "
                    (11 "" flycheck-mode-line)))
   "Mode line construct for Flycheck.")
 
-(put 'tkareine/mode-line-flycheck 'risky-local-variable t)
+(put 'tk-looks/mode-line-flycheck 'risky-local-variable t)
 
-(defvar tkareine/minor-mode-alist
+(defvar tk-looks/minor-mode-alist
   '((defining-kbd-macro " Def")
     (server-buffer-clients " Server")
     (overwrite-mode overwrite-mode)
@@ -106,11 +110,11 @@
     (auto-fill-function " Fill")
     (paredit-mode paredit-lighter)
     (ggtags-mode (:eval (if ggtags-navigation-mode " GG[nav]" " GG"))))
-  "Alist of selected minor modes to be shown in the mode line.")
+  "Alist of selected minor modes to be shown in mode line.")
 
-(put 'tkareine/minor-mode-alist 'risky-local-variable t)
+(put 'tk-looks/minor-mode-alist 'risky-local-variable t)
 
-(defvar tkareine/mode-line-modes
+(defvar tk-looks/mode-line-modes
   '(#("%[" 0 2 (face font-lock-warning-face help-echo "Recursive edit, type C-M-c to cancel"))
     "("
     mode-name
@@ -119,11 +123,11 @@
     ")"
     #("%]" 0 2 (face font-lock-warning-face help-echo "Recursive edit, type C-M-c to cancel"))
     " "
-    tkareine/minor-mode-alist)
+    tk-looks/minor-mode-alist)
   "Mode line construct for major mode (with recursive edit,
   mode-line-process, and narrowing) and selected minor modes.")
 
-(put 'tkareine/mode-line-modes 'risky-local-variable t)
+(put 'tk-looks/mode-line-modes 'risky-local-variable t)
 
 (customize-set-variable 'mode-line-format
                         '("%e"
@@ -135,15 +139,17 @@
                           mode-line-frame-identification
                           mode-line-buffer-identification
                           "  "
-                          tkareine/mode-line-position
-                          tkareine/mode-line-projectile-project
-                          tkareine/mode-line-vc
-                          tkareine/mode-line-flycheck
+                          tk-looks/mode-line-position
+                          tk-looks/mode-line-projectile-project
+                          tk-looks/mode-line-vc
+                          tk-looks/mode-line-flycheck
                           " "
                           mode-line-misc-info
                           " "
-                          tkareine/mode-line-modes
+                          tk-looks/mode-line-modes
                           mode-line-end-spaces))
+
+;;; Frames
 
 ;; Frame title: show
 ;; 1. hostname
@@ -160,18 +166,25 @@
 (customize-set-variable 'initial-frame-alist
                         '((fullscreen . maximized)))
 
-;; Color theme
-;;(require 'color-theme-my-twilight)
-;;(color-theme-my-twilight)
+;;; Color theme
+
 (load-theme 'zenburn t)
 
-;; Font
-;; (set-face-font 'default "Inconsolata-16")
-(set-face-font 'default "Input-14")
-(customize-set-variable 'line-spacing 2)
+;;; Font
 
-;; Highlight color for next-error, used by `compilation-display-error'
-(custom-set-faces '(next-error ((t (:background "SkyBlue3" :foreground "#dcdccc")))))
+(set-face-font 'default "Input-14")
+
+(customize-set-variable 'line-spacing 2)
 
 (global-set-key (kbd "C-'") #'text-scale-increase)
 (global-set-key (kbd "C-;") #'text-scale-decrease)
+
+;;; GitGutter
+
+(customize-set-variable 'git-gutter:lighter " GG")
+
+(global-git-gutter-mode)
+
+;;; Which-key: show available key bindings
+
+(which-key-mode)

@@ -1,6 +1,6 @@
 ;; Adapted from
 ;; <https://glyph.twistedmatrix.com/2015/11/editor-malware.html>
-(defun tkareine/test-tls-security ()
+(defun tk-network/test-tls-security ()
   (interactive)
   (let* ((bad-hosts (cl-loop for bad-url
                              in '("https://wrong.host.badssl.com/"
