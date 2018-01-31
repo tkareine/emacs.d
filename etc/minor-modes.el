@@ -93,8 +93,6 @@ If called with a prefix, specify the directory to make gtags files for."
 
 (eval-after-load 'ggtags #'tkareine/ggtags-mode-customizations)
 
-(customize-set-variable 'ggtags-process-environment '("GTAGSLABEL=default"))
-
 (defun tkareine/ggtags-adjust-tag-bounds-for-scss-mode (org-bounds)
   "Adjusts tag bounds so that `$var' gets converted to `var'. The
 dollar sign does not belong to SCSS variable symbol in our
@@ -116,6 +114,8 @@ configuration for GNU Global."
       (- bounds))))
 
 (customize-set-variable 'ggtags-bounds-of-tag-function #'tkareine/ggtags-bounds-of-tag)
+
+(customize-set-variable 'ggtags-process-environment '("GTAGSLABEL=default"))
 
 (add-hook 'enh-ruby-mode-hook #'ggtags-mode)
 (add-hook 'js2-mode-hook      #'ggtags-mode)
