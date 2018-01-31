@@ -2,7 +2,7 @@
 
 ;;; Ediff
 
-;; use current frame for control panel
+;; Use current frame for control panel
 (customize-set-variable 'ediff-window-setup-function 'ediff-setup-windows-plain)
 
 ;; I find it easier to read a diff by having one buffer on the left and
@@ -90,6 +90,7 @@ configuration for GNU Global."
 ;;; C family
 
 (customize-set-variable 'c-basic-offset 4)
+
 (customize-set-variable 'c-default-style '((awk-mode  . "awk")
                                            (java-mode . "java")
                                            (other     . "linux")))
@@ -331,7 +332,7 @@ configuration for GNU Global."
                   '(magit-diff-hunk-heading ((t (:background "#3e5f76"))))
                   '(magit-diff-hunk-heading-highlight ((t (:background "#619abf")))))
 
-;; Disable magit-auto-revert-mode, because we're using
+;; Disable `magit-auto-revert-mode', because we're using
 ;; global-auto-revert-mode
 (customize-set-variable 'magit-auto-revert-mode nil)
 
@@ -345,7 +346,8 @@ configuration for GNU Global."
 
 (customize-set-variable 'flycheck-disabled-checkers '(emacs-lisp-checkdoc))
 
-;; Dash
+;;; Dash
+
 (if (eq system-type 'darwin)
     (dolist (m (list text-mode-map prog-mode-map))
       (define-key m (kbd "C-c ?") #'dash-at-point)))
