@@ -81,6 +81,7 @@ If called with a prefix, specify the directory to make gtags files for."
                                 (read-dir)))))
                     (list dir))))
   (let ((current-prefix-arg nil)) ; reset as it might affect future commands
+    (require 'ggtags)
     (ggtags-create-tags rootdir)))
 
 (defun tkareine/ggtags-mode-customizations ()
