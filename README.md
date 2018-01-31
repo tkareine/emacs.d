@@ -12,7 +12,7 @@ retained the original copyright in the file. Thank you all!
 ### GNU Global
 
 Used by [ggtags.el][ggtags.el], configured in
-[etc/minor-modes.el][etc-minor-modes.el].
+[etc/tk-dev.el][etc-tk-dev.el].
 
 Configure Global to use Exuberant Ctags for finding symbol definitions
 Pygments for symbol references.
@@ -38,11 +38,11 @@ brew install libressl
 export PATH="$(brew --prefix libressl)/bin:$PATH"
 ```
 
-In [etc/network.el][etc-network.el], I customize variable
+In [etc/tk-network.el][etc-tk-network.el], I customize variable
 `gnutls-trustfiles` to point to the cert store file of LibreSSL.
 
 [conf-ctags]: https://github.com/tkareine/dotfiles/blob/master/.ctags
 [conf-globalrc]: https://github.com/tkareine/dotfiles/blob/master/.globalrc
-[etc-minor-modes.el]: etc/minor-modes.el
-[etc-network.el]: etc/network.el
+[etc-tk-dev.el]: etc/tk-dev.el
+[etc-tk-network.el]: etc/tk-network.el
 [ggtags.el]: https://github.com/leoliu/ggtags
