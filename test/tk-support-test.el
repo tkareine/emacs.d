@@ -1,6 +1,17 @@
 (require 'ert)
 (require 'tk-support)
 
+(ert-deftest tk-support/dotfiles-path-test ()
+  (should (equal (tk-support/dotfile-path "") (concat (expand-file-name user-emacs-directory))))
+  (should (equal (tk-support/dotfile-path "a") (concat (expand-file-name user-emacs-directory) "a")))
+  (should (equal (tk-support/dotfile-path "a/b") (concat (expand-file-name user-emacs-directory) "a/b")))
+  (should (equal (tk-support/dotfile-path "a" "b") (concat (expand-file-name user-emacs-directory) "a/b"))))
+
+(ert-deftest tk-support/filter-test ()
+  (cl-flet ((even-p (int) (eql 0 (mod int 2))))
+    (should (equal (tk-support/filter #'even-p nil) nil))
+    (should (equal (tk-support/filter #'even-p '(1 2 3 4 5)) '(2 4)))))
+
 (ert-deftest tk-support/string-prefix-length-with-char-test ()
   (should (equal (tk-support/string-prefix-length-with-char ?a "") 0))
   (should (equal (tk-support/string-prefix-length-with-char ?a "b") 0))
