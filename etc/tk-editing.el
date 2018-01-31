@@ -298,7 +298,7 @@
 
 (define-key minibuffer-local-map (kbd "C-r") #'counsel-minibuffer-history)
 
-(ivy-add-actions 'counsel-find-file '(("D" delete-file "delete")))
+(ivy-add-actions 'counsel-find-file '(("D" dired-delete-file "delete")))
 
 (ivy-mode)
 
