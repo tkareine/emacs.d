@@ -10,7 +10,7 @@ help:
 
 .PHONY: test
 test:
-	$(EMACS) -batch -l ert $(foreach test,$(TEST_FILES),-l $(test)) -f ert-run-tests-batch-and-exit
+	$(EMACS) -Q -batch -l ert $(foreach test,$(TEST_FILES),-l $(test)) -f ert-run-tests-batch-and-exit
 
 define newline
 
