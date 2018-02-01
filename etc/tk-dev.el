@@ -191,10 +191,10 @@ configuration for GNU Global."
 
 ;; Add related info to mode line
 (defun tk-dev/cider-mode-customizations ()
-  (add-to-list 'tk-dev/minor-mode-alist '(cider-popup-buffer-mode (" cider-tmp")))
-  (add-to-list 'tk-dev/minor-mode-alist '(cider-auto-test-mode (cider-mode " Test")))
-  (add-to-list 'tk-dev/minor-mode-alist '(cider-mode cider-mode-line))
-  (add-to-list 'tk-dev/minor-mode-alist '(cider--debug-mode " DEBUG")))
+  (add-to-list 'tk-looks/minor-mode-alist '(cider-popup-buffer-mode (" cider-tmp")))
+  (add-to-list 'tk-looks/minor-mode-alist '(cider-auto-test-mode (cider-mode " Test")))
+  (add-to-list 'tk-looks/minor-mode-alist '(cider-mode cider-mode-line))
+  (add-to-list 'tk-looks/minor-mode-alist '(cider--debug-mode " DEBUG")))
 
 (eval-after-load 'cider-mode #'tk-dev/cider-mode-customizations)
 
