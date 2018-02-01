@@ -51,6 +51,9 @@
     zenburn-theme)
   "Minimum set of packages required for my configuration.")
 
+;; We call `package-initialize' ourselves.
+(customize-set-variable 'package-enable-at-startup nil)
+
 ;; Remove GNU Elpa package package archive, because the archive signature is invalid
 ;; <https://lists.gnu.org/archive/html/bug-gnu-emacs/2014-12/msg00781.html>
 (customize-set-variable 'package-archives '(("melpa"        . "https://melpa.org/packages/")
