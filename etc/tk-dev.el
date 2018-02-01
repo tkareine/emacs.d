@@ -342,9 +342,9 @@ configuration for GNU Global."
 
 ;;; Flycheck
 
-(add-hook 'after-init-hook #'global-flycheck-mode)
-
 (customize-set-variable 'flycheck-disabled-checkers '(emacs-lisp-checkdoc))
+
+(global-flycheck-mode)
 
 ;;; Dash
 
