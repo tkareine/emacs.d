@@ -1,3 +1,21 @@
+;; Hide menu bar
+(if (fboundp 'menu-bar-mode) (menu-bar-mode -1))
+
+;; Hide tool bar
+(if (fboundp 'tool-bar-mode) (tool-bar-mode -1))
+
+;; Hide scroll bar
+(if (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
+
+;; Do not show splash screen
+(customize-set-variable 'inhibit-startup-message t)
+
+;; Do not show startup message
+(customize-set-variable 'inhibit-startup-echo-area-message (user-login-name))
+
+;; Set no content in *scratch* buffer
+(customize-set-variable 'initial-scratch-message "")
+
 ;; Disable visible bell, is broken on OS X El Capitan
 (customize-set-variable 'visible-bell nil)
 

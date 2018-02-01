@@ -1,26 +1,6 @@
 ;; This file is originally based on @overtone's live-coding-emacs
 ;; <https://github.com/overtone/live-coding-emacs>. Thanks!
 
-;; Configuration that must be done early
-
-;; Hide menu bar
-(if (fboundp 'menu-bar-mode) (menu-bar-mode -1))
-
-;; Hide tool bar
-(if (fboundp 'tool-bar-mode) (tool-bar-mode -1))
-
-;; Hide scroll bar
-(if (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
-
-;; Do not show splash screen
-(customize-set-variable 'inhibit-startup-message t)
-
-;; Do not show startup message
-(customize-set-variable 'inhibit-startup-echo-area-message (user-login-name))
-
-;; Set no content in *scratch* buffer
-(customize-set-variable 'initial-scratch-message "")
-
 ;; Provide other libraries than packages
 (add-to-list 'load-path (concat (expand-file-name user-emacs-directory) "lib"))
 
