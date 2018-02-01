@@ -132,6 +132,7 @@ configuration for GNU Global."
 (add-to-list 'auto-mode-alist '("\\.javascript\\'" . js2-mode))
 (add-to-list 'auto-mode-alist '("\\.json\\'" . js2-mode))
 (add-to-list 'auto-mode-alist '("\\.mjs\\'" . js2-mode))
+
 (add-to-list 'interpreter-mode-alist '("node\\(?:js\\)?" . js2-mode))
 
 ;;; RJSX: js2-mode with jsx
@@ -263,7 +264,9 @@ configuration for GNU Global."
 (customize-set-variable 'markdown-hide-urls nil)
 (customize-set-variable 'markdown-asymmetric-header t)
 (customize-set-variable 'markdown-live-preview-delete-export 'delete-on-export)
+
 (custom-set-faces '(markdown-code-face ((t (:background "#4b4b4b")))))
+
 (add-to-list 'auto-mode-alist '("\\.markdown\\'" . gfm-mode))
 (add-to-list 'auto-mode-alist '("\\.md\\'" . gfm-mode))
 
@@ -276,6 +279,7 @@ configuration for GNU Global."
 (add-to-list 'auto-mode-alist '("/vagrantfile\\'" . enh-ruby-mode))
 (add-to-list 'auto-mode-alist '("\\.rake\\'" . enh-ruby-mode))
 (add-to-list 'auto-mode-alist '("\\.rb\\'" . enh-ruby-mode))
+
 (add-to-list 'interpreter-mode-alist '("j?ruby\\(?:1.8\\|1.9\\)?" . enh-ruby-mode))
 
 ;;; Shell script
