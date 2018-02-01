@@ -64,6 +64,7 @@ configuration for GNU Global."
 (add-hook 'js2-mode-hook      #'ggtags-mode)
 (add-hook 'less-css-mode-hook #'ggtags-mode)
 (add-hook 'scss-mode-hook     #'ggtags-mode)
+(add-hook 'sh-mode-hook       #'ggtags-mode)
 (add-hook 'yaml-mode-hook     #'ggtags-mode)
 
 (global-set-key (kbd "C-c T") #'tk-dev/make-gtags)
