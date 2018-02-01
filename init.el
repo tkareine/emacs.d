@@ -1,6 +1,3 @@
-;; This file is originally based on @overtone's live-coding-emacs
-;; <https://github.com/overtone/live-coding-emacs>. Thanks!
-
 ;; Provide other libraries than packages
 (add-to-list 'load-path (concat (expand-file-name user-emacs-directory) "lib"))
 
