@@ -284,7 +284,7 @@ configuration for GNU Global."
 
 ;;; SQL
 
-(eval-after-load 'sql '(load-library "sql-indent"))
+(with-eval-after-load 'sql (load-library "sql-indent"))
 
 ;;; Textile
 
