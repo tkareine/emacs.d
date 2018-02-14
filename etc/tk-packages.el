@@ -36,6 +36,8 @@
     highlight-symbol
     ivy
     js2-mode
+    lsp-mode
+    lsp-ui
     magit
     markdown-mode
     paredit

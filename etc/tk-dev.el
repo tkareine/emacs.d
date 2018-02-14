@@ -61,7 +61,7 @@ configuration for GNU Global."
 (customize-set-variable 'ggtags-process-environment '("GTAGSLABEL=default"))
 
 (add-hook 'enh-ruby-mode-hook #'ggtags-mode)
-(add-hook 'js2-mode-hook      #'ggtags-mode)
+;; (add-hook 'js2-mode-hook      #'ggtags-mode)
 (add-hook 'less-css-mode-hook #'ggtags-mode)
 (add-hook 'scss-mode-hook     #'ggtags-mode)
 (add-hook 'sh-mode-hook       #'ggtags-mode)
@@ -70,6 +70,23 @@ configuration for GNU Global."
 (global-set-key (kbd "C-c T") #'tk-dev/make-gtags)
 (global-set-key (kbd "C-c r") #'ggtags-find-reference)
 (global-set-key (kbd "C-c t") #'ggtags-find-tag-dwim)
+
+;;; Language Server Protocol
+
+(require 'lsp-mode)
+(require 'lsp-ui)
+
+(add-hook 'lsp-mode-hook #'lsp-ui-mode)
+
+(lsp-define-stdio-client lsp-javascript-mode
+                         "javascript"
+                         #'projectile-project-root
+                         (list "node"
+                               (expand-file-name "~/Projects/javascript-typescript-langserver/lib/language-server-stdio")
+                               "-l"
+                               (expand-file-name "~/tmp/lsp-javascript.log")))
+
+(add-hook 'js2-mode-hook #'lsp-javascript-mode-enable)
 
 ;;; Company
 
