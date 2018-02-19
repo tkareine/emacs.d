@@ -154,20 +154,19 @@ configuration for GNU Global."
 ;;; Clojure
 
 (defun tk-dev/clojure-mode-customizations ()
-  (let ((default-indent 2))
-    (define-clojure-indent
-      (ANY       default-indent)
-      (DELETE    default-indent)
-      (GET       default-indent)
-      (HEAD      default-indent)
-      (OPTIONS   default-indent)
-      (PATCH     default-indent)
-      (POST      default-indent)
-      (PUT       default-indent)
-      (context   default-indent)
-      (describe  default-indent)
-      (it        default-indent)
-      (defroutes 'defun))))
+  (define-clojure-indent
+    (ANY       2)
+    (DELETE    2)
+    (GET       2)
+    (HEAD      2)
+    (OPTIONS   2)
+    (PATCH     2)
+    (POST      2)
+    (PUT       2)
+    (context   1)
+    (defroutes 'defun)
+    (describe  1)
+    (it        1)))
 
 (eval-after-load 'clojure-mode #'tk-dev/clojure-mode-customizations)
 
