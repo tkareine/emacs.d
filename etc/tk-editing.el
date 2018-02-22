@@ -59,6 +59,9 @@
 (add-to-list 'safe-local-variable-values '(lexical-binding . t))
 (add-to-list 'safe-local-variable-values '(whitespace-line-column . 80))
 
+;; Enable narrowing to a region (hiding warning text).
+(put 'narrow-to-region 'disabled nil)
+
 ;;; Navigation, editing, and some helpers in text-mode and prog-mode
 
 (defun tk-editing/join-line ()
