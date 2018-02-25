@@ -55,9 +55,12 @@
 (customize-set-variable 'apropos-do-all t)
 
 ;; Safe buffer-local variables
-(add-to-list 'safe-local-variable-values '(encoding . utf-8))
-(add-to-list 'safe-local-variable-values '(lexical-binding . t))
-(add-to-list 'safe-local-variable-values '(whitespace-line-column . 80))
+(dolist (p '((encoding . stringp)
+             (indent-tabs-mode . booleanp)
+             (lexical-binding . booleanp)
+             (tab-width . integerp)
+             (whitespace-line-column . integerp)))
+  (add-to-list 'safe-local-variable-values p))
 
 ;; Enable narrowing to a region (hiding warning text).
 (put 'narrow-to-region 'disabled nil)
