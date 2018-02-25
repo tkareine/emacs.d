@@ -204,6 +204,26 @@ mode-line-process, and narrowing) and selected minor modes.")
 
 (global-git-gutter-mode)
 
+;;; Highlight-symbol
+
+(customize-set-variable 'highlight-symbol-colors '("orange3"
+                                                   "DeepPink3"
+                                                   "cyan4"
+                                                   "MediumPurple3"
+                                                   "SpringGreen4"
+                                                   "DarkOrange3"
+                                                   "HotPink3"
+                                                   "RoyalBlue1"
+                                                   "OliveDrab"))
+
+(customize-set-variable 'highlight-symbol-foreground-color
+                        (face-attribute 'default :foreground))
+
+(global-set-key (kbd "C-<f5>") #'highlight-symbol)
+(global-set-key (kbd "<f5>")   #'highlight-symbol-next)
+(global-set-key (kbd "S-<f5>") #'highlight-symbol-prev)
+(global-set-key (kbd "M-<f5>") #'highlight-symbol-query-replace)
+
 ;;; Which-key: show available key bindings
 
 (which-key-mode)
