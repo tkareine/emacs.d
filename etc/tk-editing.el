@@ -242,10 +242,10 @@
                          (concat "\\`" (tk-support/dotfile-path "recentf") "\\'")
                          (concat "\\`" (tk-support/dotfile-path "elpa") "/.*-autoloads.elc?\\'")))
 
-;; Save the list of recent files periodically. Normally, recentf saves
-;; the list when Emacs exits cleanly. If Emacs crashes, that save is
-;; probably not done.
 (defun tk-editing/recentf-save-list-silent ()
+  "Save the list of recent files periodically. Normally, recentf saves
+the list when Emacs exits cleanly. If Emacs crashes, that save is
+probably not done."
   (let ((inhibit-message t))
     (recentf-save-list)))
 

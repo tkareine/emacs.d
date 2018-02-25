@@ -19,9 +19,9 @@
 ;; Disable visible bell, is broken on OS X El Capitan
 (customize-set-variable 'visible-bell nil)
 
-;; Replace ring-bell. Adapted from
-;; <https://www.emacswiki.org/emacs/AlarmBell>
 (defun tk-looks/visible-bell ()
+  "Replace ring-bell. Adapted from URL
+`https://www.emacswiki.org/emacs/AlarmBell'."
   (invert-face 'mode-line)
   (run-with-timer 0.1 nil 'invert-face 'mode-line))
 
@@ -63,14 +63,15 @@
 ;; Show current function in mode line
 (which-function-mode)
 
-;; Adapted from
-;; <http://www.lunaryorn.com/posts/make-your-emacs-mode-line-more-useful.html>
 (defvar tk-looks/mode-line-position
   '((-3 "%p")
     (size-indication-mode ("/" (-4 "%I")))
     " "
     (line-number-mode ("%l" (column-number-mode ":%c"))))
-  "Mode line construct for point position in the buffer. Example: `27%/3.0k'.")
+  "Mode line construct for point position in the buffer. Example: `27%/3.0k'.
+
+Adapted from URL
+`http://www.lunaryorn.com/posts/make-your-emacs-mode-line-more-useful.html'.")
 
 (put 'tk-looks/mode-line-position 'risky-local-variable t)
 
@@ -143,7 +144,7 @@
     " "
     tk-looks/minor-mode-alist)
   "Mode line construct for major mode (with recursive edit,
-  mode-line-process, and narrowing) and selected minor modes.")
+mode-line-process, and narrowing) and selected minor modes.")
 
 (put 'tk-looks/mode-line-modes 'risky-local-variable t)
 
