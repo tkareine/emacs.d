@@ -48,6 +48,10 @@
 ;; Highlight trailing whitespaces in lines
 (customize-set-variable 'show-trailing-whitespace t)
 
+;; Color theme
+(require 'zenburn-theme)
+(load-theme 'zenburn t)
+
 ;;; Mode line
 
 ;; Show current line and column in mode line
@@ -168,6 +172,12 @@ mode-line-process, and narrowing) and selected minor modes.")
                           tk-looks/mode-line-modes
                           mode-line-end-spaces))
 
+(zenburn-with-color-variables
+  (custom-set-faces `(mode-line ((t (:box (:line-width 1
+                                           :color ,zenburn-green-2)))))
+                    `(mode-line-inactive ((t (:box (:line-width 1
+                                                    :color ,(face-attribute 'mode-line-inactive :background))))))))
+
 ;;; Frames
 
 ;; Frame title: show
@@ -184,10 +194,6 @@ mode-line-process, and narrowing) and selected minor modes.")
 ;; Maximize initial frame
 (customize-set-variable 'initial-frame-alist
                         '((fullscreen . maximized)))
-
-;;; Color theme
-
-(load-theme 'zenburn t)
 
 ;;; Font
 
