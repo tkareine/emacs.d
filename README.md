@@ -15,7 +15,7 @@ Used by [ggtags.el][ggtags.el], configured in
 [etc/tk-dev.el][etc-tk-dev.el].
 
 Configure Global to use Exuberant Ctags for finding symbol definitions
-Pygments for symbol references.
+and Pygments for symbol references.
 
 Installation, on MacOS:
 
