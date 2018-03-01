@@ -64,11 +64,11 @@
 (which-function-mode)
 
 (defvar tk-looks/mode-line-position
-  '((-3 "%p")
-    (size-indication-mode ("/" (-4 "%I")))
+  '((line-number-mode ("%l" (column-number-mode ":%c")))
     " "
-    (line-number-mode ("%l" (column-number-mode ":%c"))))
-  "Mode line construct for point position in the buffer. Example: `27%/3.0k'.
+    (-3 "%p")
+    (size-indication-mode ("/" (-4 "%I"))))
+  "Mode line construct for point position in the buffer. Example: `71:0 23%/7.7k'.
 
 Adapted from URL
 `http://www.lunaryorn.com/posts/make-your-emacs-mode-line-more-useful.html'.")
