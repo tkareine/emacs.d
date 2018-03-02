@@ -312,6 +312,7 @@ probably not done."
 
 (require 'projectile)
 
+(global-set-key (kbd "C-c D") #'projectile-dired)
 (global-set-key (kbd "C-c F") #'projectile-find-file-dwim)
 (global-set-key (kbd "C-c d") #'counsel-projectile-find-dir)
 (global-set-key (kbd "C-c f") #'counsel-projectile-find-file)
