@@ -27,6 +27,7 @@
     counsel
     counsel-projectile
     dash-at-point
+    edit-indirect
     enh-ruby-mode
     expand-region
     flycheck
