@@ -329,7 +329,8 @@ probably not done."
              ("css" "jsx" "js" "html")))
   (add-to-list 'projectile-other-file-alist l))
 
-(projectile-register-project-type 'npm '("package.json")
+(projectile-register-project-type 'npm
+                                  '("package.json")
                                   :compile "npm install"
                                   :test "npm test"
                                   :test-suffix ".test")
