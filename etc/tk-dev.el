@@ -27,15 +27,6 @@ If called with a prefix, specify the directory to make gtags files for."
     (require 'ggtags)
     (ggtags-create-tags rootdir)))
 
-(defun tk-dev/ggtags-mode-customizations ()
-  (define-key ggtags-mode-map (kbd "M-]") nil)
-
-  ;; don't change `mode-line-buffer-identification', because we
-  ;; show project root dir in the mode line with projectile
-  (setq ggtags-mode-line-project-name nil))
-
-(eval-after-load 'ggtags #'tk-dev/ggtags-mode-customizations)
-
 (defun tk-dev/ggtags-adjust-tag-bounds-for-scss-mode (org-bounds)
   "Adjusts tag bounds so that `$var' gets converted to `var'. The
 dollar sign does not belong to SCSS variable symbol in our
@@ -60,16 +51,26 @@ configuration for GNU Global."
 
 (customize-set-variable 'ggtags-process-environment '("GTAGSLABEL=default"))
 
+(defun tk-dev/ggtags-mode-customizations ()
+  (define-key ggtags-mode-map (kbd "M-]") nil)
+  (define-key ggtags-mode-map (kbd "M-?") #'ggtags-find-reference)
+
+  ;; don't change `mode-line-buffer-identification', because we
+  ;; show project root dir in the mode line with projectile
+  (setq ggtags-mode-line-project-name nil))
+
+(eval-after-load 'ggtags #'tk-dev/ggtags-mode-customizations)
+
+(global-set-key (kbd "C-c T") #'tk-dev/make-gtags)
+(global-set-key (kbd "C-c r") #'ggtags-find-reference)
+(global-set-key (kbd "C-c t") #'ggtags-find-tag-dwim)
+
 (add-hook 'enh-ruby-mode-hook #'ggtags-mode)
 (add-hook 'js2-mode-hook      #'ggtags-mode)
 (add-hook 'less-css-mode-hook #'ggtags-mode)
 (add-hook 'scss-mode-hook     #'ggtags-mode)
 (add-hook 'sh-mode-hook       #'ggtags-mode)
 (add-hook 'yaml-mode-hook     #'ggtags-mode)
-
-(global-set-key (kbd "C-c T") #'tk-dev/make-gtags)
-(global-set-key (kbd "C-c r") #'ggtags-find-reference)
-(global-set-key (kbd "C-c t") #'ggtags-find-tag-dwim)
 
 ;;; Company
 
