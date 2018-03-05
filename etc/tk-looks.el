@@ -176,7 +176,7 @@ mode-line-process, and narrowing) and selected minor modes.")
   (custom-set-faces `(mode-line ((t (:box (:line-width 1
                                            :color ,zenburn-green-2)))))
                     `(mode-line-inactive ((t (:box (:line-width 1
-                                                    :color ,(face-attribute 'mode-line-inactive :background))))))))
+                                                    :color ,zenburn-bg-2)))))))
 
 ;;; Frames
 
