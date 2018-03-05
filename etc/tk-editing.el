@@ -343,7 +343,7 @@ probably not done."
 (global-set-key (kbd "C-c a")   #'ag-project-regexp)
 (global-set-key (kbd "C-c C-a") #'ag-regexp)
 
-;; Enable search highlighting
+;; Highlight matches in compilation buffer
 (customize-set-variable 'ag-highlight-search t)
 
 ;; Projectile determines project root
