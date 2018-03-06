@@ -222,12 +222,10 @@
 
 ;;; Saveplace: save point location in the buffer when revisiting the buffer
 
-(require 'saveplace)
-
-(customize-set-variable 'save-place t)
 (customize-set-variable 'save-place-file (tk-support/dotfile-path "saveplace"))
 (customize-set-variable 'savehist-file (tk-support/dotfile-path "savehist"))
 
+(save-place-mode)
 (savehist-mode)
 
 ;;; Recentf: shows list of recently opened files
