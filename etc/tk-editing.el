@@ -33,7 +33,7 @@
 (customize-set-variable 'mac-command-modifier 'meta)
 
 ;; Bind Ns key to Super modifer
-(customize-set-variable 'ns-function-modifier 'super)
+(customize-set-variable 'mac-function-modifier 'super)
 
 ;; Typing text replaces active selection
 (delete-selection-mode)
@@ -109,10 +109,11 @@
   (interactive)
   (customize-set-variable 'show-trailing-whitespace (eq show-trailing-whitespace nil)))
 
-(global-set-key (kbd "C-x W")   #'tk-editing/toggle-show-trailing-whitespace)
-(global-set-key (kbd "C-x t")   #'delete-trailing-whitespace)
-(global-set-key (kbd "C-x w")   #'whitespace-mode)
-(global-set-key (kbd "M-S-SPC") #'cycle-spacing)
+(global-set-key (kbd "C-x W")         #'tk-editing/toggle-show-trailing-whitespace)
+(global-set-key (kbd "C-x t")         #'delete-trailing-whitespace)
+(global-set-key (kbd "C-x w")         #'whitespace-mode)
+(global-set-key (kbd "M-S-SPC")       #'cycle-spacing)
+(global-set-key (kbd "s-<backspace>") #'delete-char)
 
 (defun tk-editing/comment-or-uncomment-region-or-line ()
   (interactive)
@@ -131,8 +132,13 @@
 (global-set-key (kbd "S-<left>")  #'windmove-left)
 (global-set-key (kbd "S-<right>") #'windmove-right)
 (global-set-key (kbd "S-<up>")    #'windmove-up)
-(global-set-key (kbd "M-ESC")     #'other-frame)
-(global-set-key (kbd "M-§")       #'other-frame)
+(global-set-key (kbd "s-<down>")  #'scroll-up)
+(global-set-key (kbd "s-<left>")  #'beginning-of-buffer)
+(global-set-key (kbd "s-<right>") #'end-of-buffer)
+(global-set-key (kbd "s-<up>")    #'scroll-down)
+(global-set-key (kbd "s-W")       #'delete-other-frames)
+(global-set-key (kbd "s-n")       #'make-frame-command)
+(global-set-key (kbd "s-w")       #'delete-frame)
 
 ;; Force your learning to avoid using M-<left|right> for movement
 ;; between words
