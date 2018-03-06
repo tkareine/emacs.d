@@ -184,6 +184,7 @@ mode-line-process, and narrowing) and selected minor modes.")
 ;; 1. hostname
 ;; 2. buffer file name, dired directory, or buffer name
 ;; 3. buffer modification marker
+;; 4. number of frames
 (customize-set-variable 'frame-title-format
                         `(,(system-name)
                           ": "
