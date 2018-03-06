@@ -4,10 +4,6 @@
           (mapconcat #'file-name-as-directory (butlast paths) "")
           (car (last paths))))
 
-(defun tk-support/filter (condp lst)
-  (delq nil
-        (mapcar (lambda (x) (and (funcall condp x) x)) lst)))
-
 (defun tk-support/active-region-or-line ()
   (if (use-region-p)
       (list (region-beginning) (region-end))

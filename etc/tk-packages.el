@@ -1,5 +1,5 @@
 (require 'package)
-(require 'tk-support)
+(require 'seq)
 
 (defun tk-packages/push-selected (packages)
   (let ((new-packages (delete-dups (append packages
@@ -15,8 +15,8 @@
     (package-install p)))
 
 (defun tk-packages/install-missing (packages)
-  (let ((missing-packages (tk-support/filter (lambda (x) (not (package-installed-p x)))
-					     packages)))
+  (let ((missing-packages (seq-filter (lambda (x) (not (package-installed-p x)))
+                                      packages)))
     (when missing-packages
       (message "Installing missing packages: %s" missing-packages)
       (tk-packages/install missing-packages))))
