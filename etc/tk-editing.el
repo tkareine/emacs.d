@@ -194,7 +194,6 @@
 (global-set-key (kbd "C-c C-c M-x") #'execute-extended-command)
 (global-set-key (kbd "C-x C-b")     #'ibuffer)
 (global-set-key (kbd "C-c U")       #'browse-url-at-point)
-(global-set-key (kbd "C-S-s")       #'isearch-forward)
 
 ;;; Minibuffer
 
@@ -295,7 +294,7 @@ probably not done."
 (global-set-key (kbd "C-h l")   #'counsel-find-library)
 (global-set-key (kbd "C-h u")   #'counsel-unicode-char)
 (global-set-key (kbd "C-h v")   #'counsel-describe-variable)
-(global-set-key (kbd "C-s")     #'swiper)
+(global-set-key (kbd "C-S-s")   #'swiper)
 (global-set-key (kbd "C-x C-f") #'counsel-find-file)
 (global-set-key (kbd "M-x")     #'counsel-M-x)
 (global-set-key (kbd "M-y")     #'counsel-yank-pop)
