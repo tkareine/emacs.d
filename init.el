@@ -7,13 +7,12 @@
 ;; configuration.
 (shell-command (mapconcat #'identity
                           `("touch ~/.cider_history"
-                            "chmod 600 ~/.cider_history"
-                            ,(concat "touch " (tk-support/dotfile-path ".custom.el")))
+                            "chmod 600 ~/.cider_history")
                           " && ")
                t)
 
-(setq custom-file (tk-support/dotfile-path ".custom.el"))
-(load custom-file)
+(setq custom-file (tk-support/dotfile-path "custom.el"))
+(load custom-file t)
 
 (dolist (l '("tk-network.el" "tk-packages.el"))
   (load-file (tk-support/dotfile-path "etc" l)))
