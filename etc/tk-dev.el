@@ -53,7 +53,7 @@ configuration for GNU Global."
 
 (defun tk-dev/ggtags-mode-customizations ()
   (define-key ggtags-mode-map (kbd "M-]") nil)
-  (define-key ggtags-mode-map (kbd "M-?") #'ggtags-find-reference)
+  (define-key ggtags-mode-map (kbd "C-M-/") #'ggtags-find-reference)
 
   ;; don't change `mode-line-buffer-identification', because we
   ;; show project root dir in the mode line with projectile
@@ -71,6 +71,11 @@ configuration for GNU Global."
 (add-hook 'scss-mode-hook     #'ggtags-mode)
 (add-hook 'sh-mode-hook       #'ggtags-mode)
 (add-hook 'yaml-mode-hook     #'ggtags-mode)
+
+;;; Xref
+
+;; Add additional keybinding, as macOS interprets M-? to show menu bar
+(global-set-key (kbd "C-M-/") #'xref-find-references)
 
 ;;; Company
 
