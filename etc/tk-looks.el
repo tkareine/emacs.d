@@ -190,7 +190,7 @@ mode-line-process, and narrowing) and selected minor modes.")
                           (multiple-frames (:eval (concat " [" (number-to-string (length (frame-list))) "]")))))
 
 ;; Maximize initial frame
-(customize-set-variable 'initial-frame-alist
+(customize-set-variable 'default-frame-alist
                         '((fullscreen . maximized)))
 
 ;;; Font
