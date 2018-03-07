@@ -132,13 +132,13 @@
 (global-set-key (kbd "S-<left>")  #'windmove-left)
 (global-set-key (kbd "S-<right>") #'windmove-right)
 (global-set-key (kbd "S-<up>")    #'windmove-up)
+(global-set-key (kbd "s-0")       #'delete-frame)
+(global-set-key (kbd "s-1")       #'delete-other-frames)
+(global-set-key (kbd "s-2")       #'make-frame-command)
 (global-set-key (kbd "s-<down>")  #'scroll-up)
 (global-set-key (kbd "s-<left>")  #'beginning-of-buffer)
 (global-set-key (kbd "s-<right>") #'end-of-buffer)
 (global-set-key (kbd "s-<up>")    #'scroll-down)
-(global-set-key (kbd "s-W")       #'delete-other-frames)
-(global-set-key (kbd "s-n")       #'make-frame-command)
-(global-set-key (kbd "s-w")       #'delete-frame)
 
 ;; Force your learning to avoid using M-<left|right> for movement
 ;; between words
