@@ -25,7 +25,7 @@ Used by [ggtags], configured in [etc/tk-dev.el][etc-tk-dev.el].
 Configure Global to use Exuberant Ctags for finding symbol definitions
 and Pygments for symbol references.
 
-Installation, on MacOS:
+Installation, on macOS:
 
 ``` bash
 brew install ctags
@@ -39,7 +39,7 @@ I use configuration files for [Ctags][conf-ctags] and
 
 Used by TLS connections established by Emacs.
 
-Installation, on MacOS:
+Installation, on macOS:
 
 ``` bash
 brew install libressl

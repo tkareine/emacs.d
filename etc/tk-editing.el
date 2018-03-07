@@ -26,10 +26,10 @@
 (put 'downcase-region 'disabled nil)
 (put 'upcase-region 'disabled nil)
 
-;; MacOS: allow entering special chars via Option key
+;; macOS: allow entering special chars via Option key
 (customize-set-variable 'mac-option-modifier nil)
 
-;; MacOS: use Cmd as Meta modifier
+;; macOS: use Cmd as Meta modifier
 (customize-set-variable 'mac-command-modifier 'meta)
 
 ;; Bind Ns key to Super modifer
@@ -47,7 +47,7 @@
 ;; Save typing chars when answering yes-or-no-p questions
 (defalias 'yes-or-no-p 'y-or-n-p)
 
-;; MacOS: Use `mdfind' for locate
+;; macOS: Use `mdfind' for locate
 (if (eq system-type 'darwin)
     (customize-set-variable 'locate-command "mdfind"))
 
