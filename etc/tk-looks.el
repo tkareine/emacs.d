@@ -208,25 +208,24 @@ mode-line-process, and narrowing) and selected minor modes.")
 
 (global-git-gutter-mode)
 
-;;; Highlight-symbol
+;;; Symbol-overlay
 
-(customize-set-variable 'highlight-symbol-colors '("orange3"
-                                                   "DeepPink3"
-                                                   "cyan4"
-                                                   "MediumPurple3"
-                                                   "SpringGreen4"
-                                                   "DarkOrange3"
-                                                   "HotPink3"
-                                                   "RoyalBlue1"
-                                                   "OliveDrab"))
+(let ((symbol-overlay-faces
+       (cl-loop for (face . color) in '((symbol-overlay-face-1 . "orange3")
+                                        (symbol-overlay-face-2 . "DeepPink3")
+                                        (symbol-overlay-face-3 . "cyan4")
+                                        (symbol-overlay-face-4 . "MediumPurple3")
+                                        (symbol-overlay-face-5 . "SpringGreen4")
+                                        (symbol-overlay-face-6 . "DarkOrange3")
+                                        (symbol-overlay-face-7 . "HotPink3")
+                                        (symbol-overlay-face-8 . "RoyalBlue1"))
+                collect `(,face ((t (:background ,color)))))))
+  (apply 'custom-set-faces symbol-overlay-faces))
 
-(customize-set-variable 'highlight-symbol-foreground-color
-                        (face-attribute 'default :foreground))
-
-(global-set-key (kbd "C-<f5>") #'highlight-symbol)
-(global-set-key (kbd "<f5>")   #'highlight-symbol-next)
-(global-set-key (kbd "S-<f5>") #'highlight-symbol-prev)
-(global-set-key (kbd "M-<f5>") #'highlight-symbol-query-replace)
+(global-set-key (kbd "s-O") #'symbol-overlay-remove-all)
+(global-set-key (kbd "s-n") #'symbol-overlay-switch-forward)
+(global-set-key (kbd "s-o") #'symbol-overlay-put)
+(global-set-key (kbd "s-p") #'symbol-overlay-switch-backward)
 
 ;;; Which-key: show available key bindings
 

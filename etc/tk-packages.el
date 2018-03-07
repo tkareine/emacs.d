@@ -33,7 +33,6 @@
     flycheck
     ggtags
     git-gutter
-    highlight-symbol
     ivy
     js2-mode
     magit
@@ -44,6 +43,7 @@
     scss-mode
     sql-indent
     swiper
+    symbol-overlay
     textile-mode
     undo-tree
     web-mode
