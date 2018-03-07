@@ -204,7 +204,7 @@ mode-line-process, and narrowing) and selected minor modes.")
 
 ;;; GitGutter
 
-(customize-set-variable 'git-gutter:lighter " GG")
+(customize-set-variable 'git-gutter:lighter " gg")
 
 (global-git-gutter-mode)
 
