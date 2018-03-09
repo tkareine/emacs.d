@@ -54,14 +54,6 @@
 ;; Apropos commands perform more extensive searches than default
 (customize-set-variable 'apropos-do-all t)
 
-;; Safe buffer-local variables
-(dolist (p '((encoding . stringp)
-             (indent-tabs-mode . booleanp)
-             (lexical-binding . booleanp)
-             (tab-width . integerp)
-             (whitespace-line-column . integerp)))
-  (add-to-list 'safe-local-variable-values p))
-
 ;; Enable narrowing to a region (hiding warning text).
 (put 'narrow-to-region 'disabled nil)
 
