@@ -157,6 +157,8 @@ configuration for GNU Global."
 
 (add-hook 'emacs-lisp-mode-hook #'tk-dev/emacs-lisp-mode-hook)
 
+(define-key emacs-lisp-mode-map (kbd "C-c e") #'macrostep-expand)
+
 ;;; Clojure
 
 (defun tk-dev/clojure-mode-customizations ()

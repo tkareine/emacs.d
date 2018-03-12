@@ -35,6 +35,7 @@
     git-gutter
     ivy
     js2-mode
+    macrostep
     magit
     markdown-mode
     paredit
