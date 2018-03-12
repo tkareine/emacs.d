@@ -59,7 +59,9 @@ configuration for GNU Global."
 
   ;; don't change `mode-line-buffer-identification', because we
   ;; show project root dir in the mode line with projectile
-  (setq ggtags-mode-line-project-name nil))
+  (setq ggtags-mode-line-project-name nil)
+
+  (add-to-list 'tk-looks/minor-mode-alist '(ggtags-mode (:eval (if ggtags-navigation-mode " GG[nav]" " GG")))))
 
 (eval-after-load 'ggtags #'tk-dev/ggtags-mode-customizations)
 
@@ -223,7 +225,8 @@ configuration for GNU Global."
   (define-key paredit-mode-map (kbd "C-<left>")  nil)
   (define-key paredit-mode-map (kbd "C-<right>") nil)
   (define-key paredit-mode-map (kbd "M-<left>")  #'paredit-forward-barf-sexp)
-  (define-key paredit-mode-map (kbd "M-<right>") #'paredit-forward-slurp-sexp))
+  (define-key paredit-mode-map (kbd "M-<right>") #'paredit-forward-slurp-sexp)
+  (add-to-list 'tk-looks/minor-mode-alist '(paredit-mode "Par")))
 
 (eval-after-load 'paredit #'tk-dev/paredit-mode-customizations)
 

@@ -129,9 +129,7 @@ Adapted from URL
     (eldoc-mode eldoc-minor-mode-string)
     (next-error-follow-minor-mode " Fol")
     (abbrev-mode " Abbrev")
-    (auto-fill-function " Fill")
-    (paredit-mode paredit-lighter)
-    (ggtags-mode (:eval (if ggtags-navigation-mode " GG[nav]" " GG"))))
+    (auto-fill-function " Fill"))
   "Alist of selected minor modes to be shown in mode line.")
 
 (put 'tk-looks/minor-mode-alist 'risky-local-variable t)
