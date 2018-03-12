@@ -1,3 +1,5 @@
+;; -*- lexical-binding: t; -*-
+
 (require 'tk-support)
 
 ;; Prefer UTF-8 encoding for input and output

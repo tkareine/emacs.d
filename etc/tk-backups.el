@@ -1,3 +1,5 @@
+;; -*- lexical-binding: t; -*-
+
 (require 'tk-support)
 
 ;; Enable backup files

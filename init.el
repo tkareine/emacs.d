@@ -1,3 +1,5 @@
+;; -*- lexical-binding: t; -*-
+
 ;; Provide other libraries than packages
 (add-to-list 'load-path (concat (expand-file-name user-emacs-directory) "lib"))
 

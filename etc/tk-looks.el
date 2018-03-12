@@ -1,3 +1,5 @@
+;; -*- lexical-binding: t; -*-
+
 ;; Hide tool bar
 (if (fboundp 'tool-bar-mode) (tool-bar-mode -1))
 

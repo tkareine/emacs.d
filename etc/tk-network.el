@@ -1,3 +1,5 @@
+;; -*- lexical-binding: t; -*-
+
 (defun tk-network/test-tls-security ()
   "Adapted from URL
 `https://glyph.twistedmatrix.com/2015/11/editor-malware.html'."

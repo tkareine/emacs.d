@@ -1,3 +1,5 @@
+;; -*- lexical-binding: t; -*-
+
 (defun tk-support/dotfile-path (&rest paths)
   "Expand file path components inside user emacs directory."
   (concat (expand-file-name user-emacs-directory)
