@@ -55,6 +55,8 @@
     zenburn-theme)
   "Minimum set of packages required for my configuration.")
 
+(put 'tk-packages/minimum-set 'risky-local-variable t)
+
 ;; We call `package-initialize' ourselves.
 (customize-set-variable 'package-enable-at-startup nil)
 
