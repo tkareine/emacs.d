@@ -305,12 +305,6 @@ configuration for GNU Global."
 
 (add-to-list 'auto-mode-alist '("\\.textile\\'" . textile-mode))
 
-;;; Visual Basic :D
-
-(autoload 'visual-basic-mode "visual-basic-mode" "Visual Basic mode." t)
-
-(add-to-list 'auto-mode-alist '("\\.aspx\\'" . visual-basic-mode))
-
 ;; Web
 
 (add-to-list 'auto-mode-alist '("\\.erb\\'" . web-mode))
