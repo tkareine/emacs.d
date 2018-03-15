@@ -201,7 +201,7 @@ configuration for GNU Global."
 (custom-set-faces '(cider-result-overlay-face ((t (:background "grey30")))))
 
 ;; Shorten mode line info
-(customize-set-variable 'cider-mode-line '(:eval (cider--modeline-info)))
+(customize-set-variable 'cider-mode-line '(:eval (concat " " (cider--modeline-info))))
 
 ;; Add related info to mode line
 (defun tk-dev/cider-mode-customizations ()
@@ -226,7 +226,7 @@ configuration for GNU Global."
   (define-key paredit-mode-map (kbd "C-<right>") nil)
   (define-key paredit-mode-map (kbd "M-<left>")  #'paredit-forward-barf-sexp)
   (define-key paredit-mode-map (kbd "M-<right>") #'paredit-forward-slurp-sexp)
-  (add-to-list 'tk-looks/minor-mode-alist '(paredit-mode "Par")))
+  (add-to-list 'tk-looks/minor-mode-alist '(paredit-mode " Par")))
 
 (eval-after-load 'paredit #'tk-dev/paredit-mode-customizations)
 
