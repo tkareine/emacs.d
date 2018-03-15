@@ -119,7 +119,7 @@ configuration for GNU Global."
 
 ;; Don't double-indent multiline statement
 (advice-add #'js--multi-line-declaration-indentation
-            :around
+            :override
             #'tk-support/mute-fun)
 
 (custom-set-faces '(js2-private-member ((t (:foreground "coral1")))))
