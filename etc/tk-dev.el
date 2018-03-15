@@ -122,6 +122,14 @@ configuration for GNU Global."
             :override
             #'tk-support/mute-fun)
 
+(defun tk-dev/js2-mode-trigger-strict-warning-p (msg-id &rest _args)
+  (not (member msg-id '("msg.no.side.effects"))))
+
+;; Filter out selected warnings
+(advice-add #'js2-add-strict-warning
+            :before-while
+            #'tk-dev/js2-mode-trigger-strict-warning-p)
+
 (custom-set-faces '(js2-private-member ((t (:foreground "coral1")))))
 
 (defun tk-dev/js2-mode-toggle-strict-missing-semi-warning ()
