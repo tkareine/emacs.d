@@ -93,6 +93,18 @@ configuration for GNU Global."
 (customize-set-variable 'company-dabbrev-ignore-case t)
 (customize-set-variable 'company-dabbrev-code-ignore-case t)
 
+;; Use relevant completion engines only. Especially, put `company-capf'
+;; and `company-dabbrev-code' into same group so that the latter adds
+;; candidates the former misses.
+(customize-set-variable 'company-backends '(company-nxml
+                                            company-css
+                                            company-semantic
+                                            company-clang
+                                            (company-capf company-dabbrev-code)
+                                            company-files
+                                            company-keywords
+                                            company-dabbrev))
+
 (global-company-mode)
 
 ;;; CSS
