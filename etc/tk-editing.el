@@ -266,6 +266,7 @@ probably not done."
 
 (customize-set-variable 'ivy-use-virtual-buffers t)
 (customize-set-variable 'ivy-count-format "(%d/%d) ")
+(customize-set-variable 'ivy-format-function #'ivy-format-function-arrow)
 (customize-set-variable 'ivy-height 20)
 (customize-set-variable 'counsel-find-file-at-point t)
 
