@@ -234,6 +234,7 @@ configuration for GNU Global."
 
 (defun tk-dev/cider-mode-hook ()
   (local-set-key (kbd "C-c B")   #'cider-connection-browser)
+  (local-set-key (kbd "C-c M-l") #'cider-inspect-last-result)
   (local-set-key (kbd "C-c M-R") #'cider-restart))
 
 (add-hook 'cider-mode-hook #'tk-dev/cider-mode-hook)
