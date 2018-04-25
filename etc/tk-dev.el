@@ -381,6 +381,6 @@ configuration for GNU Global."
 
 ;;; Dash
 
-(if (eq system-type 'darwin)
-    (dolist (m (list text-mode-map prog-mode-map))
-      (define-key m (kbd "C-c ?") #'dash-at-point)))
+(when (eq system-type 'darwin)
+  (dolist (m (list text-mode-map prog-mode-map))
+    (define-key m (kbd "C-c ?") #'dash-at-point)))

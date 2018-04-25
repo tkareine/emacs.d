@@ -50,8 +50,8 @@
 (defalias 'yes-or-no-p 'y-or-n-p)
 
 ;; macOS: Use `mdfind' for locate
-(if (eq system-type 'darwin)
-    (customize-set-variable 'locate-command "mdfind"))
+(when (eq system-type 'darwin)
+  (customize-set-variable 'locate-command "mdfind"))
 
 ;; Apropos commands perform more extensive searches than default
 (customize-set-variable 'apropos-do-all t)
