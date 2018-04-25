@@ -204,6 +204,13 @@ mode-line-process, and narrowing) and selected minor modes.")
 (global-set-key (kbd "C-'") #'text-scale-increase)
 (global-set-key (kbd "C-;") #'text-scale-decrease)
 
+;; macOS: remove changing text scaling or full screen mode with gestures
+(when (featurep 'mac-win)
+  (global-set-key [S-magnify-down] #'ignore)
+  (global-set-key [S-magnify-up]   #'ignore)
+  (global-set-key [magnify-down]   #'ignore)
+  (global-set-key [magnify-up]     #'ignore))
+
 ;;; GitGutter
 
 (customize-set-variable 'git-gutter:lighter " gg")
