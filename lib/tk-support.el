@@ -54,10 +54,4 @@
         (setq should-continue nil)))
     idx))
 
-(defun tk-support/mute-fun (&rest _args)
-  "Function that does nothing. For example, use as an advice
-around another function to suppress calling the adviced
-function."
-  nil)
-
 (provide 'tk-support)

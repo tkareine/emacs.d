@@ -132,7 +132,7 @@ configuration for GNU Global."
 ;; Don't double-indent multiline statement
 (advice-add #'js--multi-line-declaration-indentation
             :override
-            #'tk-support/mute-fun)
+            #'ignore)
 
 (defun tk-dev/js2-mode-trigger-strict-warning-p (msg-id &rest _args)
   (not (member msg-id '("msg.no.side.effects"))))
