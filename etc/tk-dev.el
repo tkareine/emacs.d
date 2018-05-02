@@ -240,26 +240,24 @@ configuration for GNU Global."
 (add-hook 'cider-mode-hook #'tk-dev/cider-mode-hook)
 (add-hook 'cider-repl-mode-hook #'tk-dev/cider-mode-hook)
 
-;;; Paredit
+;;; Smartparens
 
-(defun tk-dev/paredit-mode-customizations ()
-  (define-key paredit-mode-map (kbd "C-<left>")  nil)
-  (define-key paredit-mode-map (kbd "C-<right>") nil)
-  (define-key paredit-mode-map (kbd "M-<left>")  #'paredit-forward-barf-sexp)
-  (define-key paredit-mode-map (kbd "M-<right>") #'paredit-forward-slurp-sexp)
-  (add-to-list 'tk-looks/minor-mode-alist '(paredit-mode " Par")))
+(require 'smartparens-config)
 
-(eval-after-load 'paredit #'tk-dev/paredit-mode-customizations)
+(smartparens-global-mode)
+(show-smartparens-global-mode)
+(sp-use-paredit-bindings)
 
-(add-hook 'clojure-mode-hook                     #'paredit-mode)
-(add-hook 'emacs-lisp-mode-hook                  #'paredit-mode)
-(add-hook 'eval-expression-minibuffer-setup-hook #'paredit-mode)
-(add-hook 'ielm-mode-hook                        #'paredit-mode)
-(add-hook 'lisp-interaction-mode-hook            #'paredit-mode)
-(add-hook 'lisp-mode-hook                        #'paredit-mode)
-(add-hook 'scheme-mode-hook                      #'paredit-mode)
+(defun tk-dev/smartparens-mode-customizations ()
+  (define-key smartparens-mode-map (kbd "C-<left>")  nil)
+  (define-key smartparens-mode-map (kbd "C-<right>") nil)
+  (define-key smartparens-mode-map (kbd "C-M-k")     #'sp-kill-sexp)
+  (define-key smartparens-mode-map (kbd "M-<left>")  #'sp-forward-barf-sexp)
+  (define-key smartparens-mode-map (kbd "M-<right>") #'sp-forward-slurp-sexp)
 
-(define-key prog-mode-map (kbd "C-c (") #'paredit-mode)
+  (add-to-list 'tk-looks/minor-mode-alist '(smartparens-mode (" SP" (:eval (if smartparens-strict-mode "/s" ""))))))
+
+(eval-after-load 'smartparens #'tk-dev/smartparens-mode-customizations)
 
 ;;; CoffeeScript
 

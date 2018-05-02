@@ -40,10 +40,10 @@
     macrostep
     magit
     markdown-mode
-    paredit
     projectile
     rjsx-mode
     scss-mode
+    smartparens
     sql-indent
     swiper
     symbol-overlay
