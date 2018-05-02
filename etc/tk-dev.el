@@ -221,7 +221,7 @@ configuration for GNU Global."
 (custom-set-faces '(cider-result-overlay-face ((t (:background "grey30")))))
 
 ;; Shorten mode line info
-(customize-set-variable 'cider-mode-line '(:eval (concat " " (cider--modeline-info))))
+(customize-set-variable 'cider-mode-line '(" " (:eval (cider--modeline-info))))
 
 ;; Add related info to mode line
 (defun tk-dev/cider-mode-customizations ()
