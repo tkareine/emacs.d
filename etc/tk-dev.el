@@ -240,25 +240,6 @@ configuration for GNU Global."
 (add-hook 'cider-mode-hook #'tk-dev/cider-mode-hook)
 (add-hook 'cider-repl-mode-hook #'tk-dev/cider-mode-hook)
 
-;;; Smartparens
-
-(require 'smartparens-config)
-
-(smartparens-global-mode)
-(show-smartparens-global-mode)
-(sp-use-paredit-bindings)
-
-(defun tk-dev/smartparens-mode-customizations ()
-  (define-key smartparens-mode-map (kbd "C-<left>")  nil)
-  (define-key smartparens-mode-map (kbd "C-<right>") nil)
-  (define-key smartparens-mode-map (kbd "C-M-k")     #'sp-kill-sexp)
-  (define-key smartparens-mode-map (kbd "M-<left>")  #'sp-forward-barf-sexp)
-  (define-key smartparens-mode-map (kbd "M-<right>") #'sp-forward-slurp-sexp)
-
-  (add-to-list 'tk-looks/minor-mode-alist '(smartparens-mode (" SP" (:eval (if smartparens-strict-mode "/s" ""))))))
-
-(eval-after-load 'smartparens #'tk-dev/smartparens-mode-customizations)
-
 ;;; CoffeeScript
 
 (customize-set-variable 'coffee-tab-width 2)
