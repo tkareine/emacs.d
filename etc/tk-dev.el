@@ -162,7 +162,6 @@ configuration for GNU Global."
 
 (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
 (add-to-list 'auto-mode-alist '("\\.javascript\\'" . js2-mode))
-(add-to-list 'auto-mode-alist '("\\.json\\'" . js2-mode))
 (add-to-list 'auto-mode-alist '("\\.mjs\\'" . js2-mode))
 
 (add-to-list 'interpreter-mode-alist '("node\\(?:js\\)?" . js2-mode))
@@ -173,6 +172,10 @@ configuration for GNU Global."
   (setq mode-name "RJSX"))
 
 (add-hook 'rjsx-mode-hook #'tk-dev/rjsx-mode-hook)
+
+;;; JSON
+
+(add-to-list 'auto-mode-alist '("\\.json\\'" . json-mode))
 
 ;;; ELisp
 

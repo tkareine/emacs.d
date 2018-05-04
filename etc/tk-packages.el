@@ -37,6 +37,7 @@
     git-gutter
     ivy
     js2-mode
+    json-mode
     macrostep
     magit
     markdown-mode
