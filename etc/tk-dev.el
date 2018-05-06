@@ -60,7 +60,7 @@
     "A JSON syntax checker using jq."
     :command ("jq"
               "42"  ; A dummy value for output, since we don't care
-                    ; about pretty printed output.
+                    ; about pretty printing input to output.
               source
               null-device)
     :standard-input t
