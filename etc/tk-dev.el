@@ -11,6 +11,75 @@
 ;; another on the right
 (customize-set-variable 'ediff-split-window-function 'split-window-horizontally)
 
+;;; Interactive regexp builder
+
+(global-set-key (kbd "C-c R") #'re-builder)
+
+(customize-set-variable 'reb-re-syntax 'string)
+
+(defun tk-dev/re-builder-mode-customizations ()
+  (define-key reb-mode-map (kbd "M-n") #'reb-next-match)
+  (define-key reb-mode-map (kbd "M-p") #'reb-prev-match))
+
+(eval-after-load 're-builder #'tk-dev/re-builder-mode-customizations)
+
+;;; Compilation
+
+(define-key compilation-mode-map (kbd "M-N") #'compilation-next-file)
+(define-key compilation-mode-map (kbd "M-P") #'compilation-previous-file)
+
+;; Highlight color for next-error, used by `compilation-display-error'
+(custom-set-faces '(next-error ((t (:background "SkyBlue3" :foreground "#dcdccc")))))
+
+;;; Magit
+
+(global-set-key (kbd "C-x g") #'magit-status)
+
+(customize-set-variable 'magit-completing-read-function 'ivy-completing-read)
+
+(custom-set-faces '(magit-diff-context ((t (:background "grey25"))))
+                  '(magit-diff-context-highlight ((t (:background "grey32"))))
+                  '(magit-diff-hunk-heading ((t (:background "#3e5f76"))))
+                  '(magit-diff-hunk-heading-highlight ((t (:background "#619abf")))))
+
+;; Disable `magit-auto-revert-mode', because we're using
+;; global-auto-revert-mode
+(customize-set-variable 'magit-auto-revert-mode nil)
+
+;; Disable Emacs' Version Control interface
+;; (customize-set-variable 'vc-handled-backends '(RCS CVS SVN SCCS SRC Bzr Git Hg Mtn))
+(customize-set-variable 'vc-handled-backends nil)
+
+;;; Flycheck
+
+(customize-set-variable 'flycheck-disabled-checkers '(emacs-lisp-checkdoc
+                                                      json-python-json))
+
+(defun tk-dev/flycheck-mode-customizations ()
+  (flycheck-define-checker tk/json-jq
+    "A JSON syntax checker using jq."
+    :command ("jq"
+              "42"  ; A dummy value for output, since we don't care
+                    ; about pretty printed output.
+              source
+              null-device)
+    :standard-input t
+    :error-patterns
+    ((error line-start
+            "parse error: " (message) " at line " line ", column " column
+            line-end))
+    :modes json-mode))
+
+(eval-after-load 'flycheck #'tk-dev/flycheck-mode-customizations)
+
+(global-flycheck-mode)
+
+;;; Dash
+
+(when (eq system-type 'darwin)
+  (dolist (m (list text-mode-map prog-mode-map))
+    (define-key m (kbd "C-c ?") #'dash-at-point)))
+
 ;;; Ggtags
 
 (defun tk-dev/make-gtags (rootdir)
@@ -320,72 +389,3 @@ configuration for GNU Global."
 
 (add-to-list 'auto-mode-alist '("\\.erb\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.ftl\\'" . web-mode))
-
-;;; Interactive regexp builder
-
-(global-set-key (kbd "C-c R") #'re-builder)
-
-(customize-set-variable 'reb-re-syntax 'string)
-
-(defun tk-dev/re-builder-mode-customizations ()
-  (define-key reb-mode-map (kbd "M-n") #'reb-next-match)
-  (define-key reb-mode-map (kbd "M-p") #'reb-prev-match))
-
-(eval-after-load 're-builder #'tk-dev/re-builder-mode-customizations)
-
-;;; Compilation
-
-(define-key compilation-mode-map (kbd "M-N") #'compilation-next-file)
-(define-key compilation-mode-map (kbd "M-P") #'compilation-previous-file)
-
-;; Highlight color for next-error, used by `compilation-display-error'
-(custom-set-faces '(next-error ((t (:background "SkyBlue3" :foreground "#dcdccc")))))
-
-;;; Magit
-
-(global-set-key (kbd "C-x g") #'magit-status)
-
-(customize-set-variable 'magit-completing-read-function 'ivy-completing-read)
-
-(custom-set-faces '(magit-diff-context ((t (:background "grey25"))))
-                  '(magit-diff-context-highlight ((t (:background "grey32"))))
-                  '(magit-diff-hunk-heading ((t (:background "#3e5f76"))))
-                  '(magit-diff-hunk-heading-highlight ((t (:background "#619abf")))))
-
-;; Disable `magit-auto-revert-mode', because we're using
-;; global-auto-revert-mode
-(customize-set-variable 'magit-auto-revert-mode nil)
-
-;; Disable Emacs' Version Control interface
-;; (customize-set-variable 'vc-handled-backends '(RCS CVS SVN SCCS SRC Bzr Git Hg Mtn))
-(customize-set-variable 'vc-handled-backends nil)
-
-;;; Flycheck
-
-(customize-set-variable 'flycheck-disabled-checkers '(emacs-lisp-checkdoc
-                                                      json-python-json))
-
-(defun tk-dev/flycheck-mode-customizations ()
-  (flycheck-define-checker tk/json-jq
-    "A JSON syntax checker using jq."
-    :command ("jq"
-              "42"  ; A dummy value for output, since we don't care
-                    ; about pretty printed output.
-              source
-              null-device)
-    :standard-input t
-    :error-patterns
-    ((error line-start
-            "parse error: " (message) " at line " line ", column " column
-            line-end))
-    :modes json-mode))
-
-(eval-after-load 'flycheck #'tk-dev/flycheck-mode-customizations)
-
-(global-flycheck-mode)
-
-;;; Dash
-
-(when (eq system-type 'darwin)
-  (dolist (m (list text-mode-map prog-mode-map))
-    (define-key m (kbd "C-c ?") #'dash-at-point)))
