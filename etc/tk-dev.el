@@ -175,6 +175,11 @@ configuration for GNU Global."
 
 ;;; JSON
 
+(defun tk-dev/json-mode-hook ()
+  (flycheck-select-checker 'tk/json-jq))
+
+(add-hook 'json-mode-hook #'tk-dev/json-mode-hook)
+
 (add-to-list 'auto-mode-alist '("\\.json\\'" . json-mode))
 
 ;;; ELisp
@@ -357,7 +362,25 @@ configuration for GNU Global."
 
 ;;; Flycheck
 
-(customize-set-variable 'flycheck-disabled-checkers '(emacs-lisp-checkdoc))
+(customize-set-variable 'flycheck-disabled-checkers '(emacs-lisp-checkdoc
+                                                      json-python-json))
+
+(defun tk-dev/flycheck-mode-customizations ()
+  (flycheck-define-checker tk/json-jq
+    "A JSON syntax checker using jq."
+    :command ("jq"
+              "42"  ; A dummy value for output, since we don't care
+                    ; about pretty printed output.
+              source
+              null-device)
+    :standard-input t
+    :error-patterns
+    ((error line-start
+            "parse error: " (message) " at line " line ", column " column
+            line-end))
+    :modes json-mode))
+
+(eval-after-load 'flycheck #'tk-dev/flycheck-mode-customizations)
 
 (global-flycheck-mode)
 

@@ -35,6 +35,17 @@ brew install global --with-ctags --with-pygments
 I use configuration files for [Ctags][conf-ctags] and
 [Global][conf-globalrc].
 
+### jq
+
+Used by [Flycheck] in [json-mode], configured in
+[etc/tk-dev.el][etc-tk-dev.el].
+
+Installation, on macOS:
+
+``` bash
+brew install jq --devel
+```
+
 ### LibreSSL
 
 Used by TLS connections established by Emacs.
@@ -49,9 +60,12 @@ export PATH="$(brew --prefix libressl)/bin:$PATH"
 In [etc/tk-network.el][etc-tk-network.el], I customize variable
 `gnutls-trustfiles` to point to the cert store file of LibreSSL.
 
+[Flycheck]: http://www.flycheck.org/en/latest/
 [Homebrew]: https://brew.sh/
 [conf-ctags]: https://github.com/tkareine/dotfiles/blob/master/.ctags
 [conf-globalrc]: https://github.com/tkareine/dotfiles/blob/master/.globalrc
 [etc-tk-dev.el]: etc/tk-dev.el
 [etc-tk-network.el]: etc/tk-network.el
 [ggtags]: https://github.com/leoliu/ggtags
+[jq]: https://stedolan.github.io/jq/
+[json-mode]: https://github.com/joshwnj/json-mode
