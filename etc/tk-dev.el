@@ -365,7 +365,6 @@ configuration for GNU Global."
 
 (add-to-list 'auto-mode-alist '("/gemfile\\'" . enh-ruby-mode))
 (add-to-list 'auto-mode-alist '("/guardfile\\'" . enh-ruby-mode))
-(add-to-list 'auto-mode-alist '("/procfile\\'" . enh-ruby-mode))
 (add-to-list 'auto-mode-alist '("/rakefile\\'" . enh-ruby-mode))
 (add-to-list 'auto-mode-alist '("/vagrantfile\\'" . enh-ruby-mode))
 (add-to-list 'auto-mode-alist '("\\.rake\\'" . enh-ruby-mode))
