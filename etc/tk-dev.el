@@ -343,12 +343,6 @@ configuration for GNU Global."
 
 (add-hook 'haskell-mode-hook #'tk-dev/haskell-mode-hook)
 
-;;; Sass
-
-(customize-set-variable 'scss-compile-at-save nil)
-
-(add-to-list 'auto-mode-alist '("\\.sass\\'" . scss-mode))
-
 ;;; Markdown
 
 (customize-set-variable 'markdown-command "marked --gfm --tables")

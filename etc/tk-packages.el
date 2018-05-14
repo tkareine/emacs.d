@@ -43,7 +43,6 @@
     markdown-mode
     projectile
     rjsx-mode
-    scss-mode
     smartparens
     sql-indent
     swiper
