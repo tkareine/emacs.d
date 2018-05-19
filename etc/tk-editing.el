@@ -367,3 +367,36 @@ probably not done."
 ;; Projectile determines project root
 (customize-set-variable 'ag-project-root-function
                         (lambda (_dir) (projectile-project-root)))
+
+;;; Symbol-overlay
+
+(let ((symbol-overlay-faces
+       (cl-loop for (face . color) in '((symbol-overlay-face-1 . "orange3")
+                                        (symbol-overlay-face-2 . "DeepPink3")
+                                        (symbol-overlay-face-3 . "cyan4")
+                                        (symbol-overlay-face-4 . "MediumPurple3")
+                                        (symbol-overlay-face-5 . "SpringGreen4")
+                                        (symbol-overlay-face-6 . "DarkOrange3")
+                                        (symbol-overlay-face-7 . "HotPink3")
+                                        (symbol-overlay-face-8 . "RoyalBlue1"))
+                collect `(,face ((t (:background ,color)))))))
+  (apply 'custom-set-faces symbol-overlay-faces))
+
+(defun tk-editing/symbol-overlay-customizations ()
+  (let ((map (make-sparse-keymap)))
+    (define-key map (kbd "M-N") #'symbol-overlay-switch-forward)
+    (define-key map (kbd "M-P") #'symbol-overlay-switch-backward)
+    (define-key map (kbd "M-e") #'symbol-overlay-echo-mark)
+    (define-key map (kbd "M-n") #'symbol-overlay-jump-next)
+    (define-key map (kbd "M-p") #'symbol-overlay-jump-prev)
+    (define-key map (kbd "M-q") #'symbol-overlay-query-replace)
+    (define-key map (kbd "M-r") #'symbol-overlay-rename)
+    (define-key map (kbd "M-s") #'symbol-overlay-isearch-literally)
+    (define-key map (kbd "M-t") #'symbol-overlay-toggle-in-scope)
+    (define-key map (kbd "M-w") #'symbol-overlay-save-symbol)
+    (setq symbol-overlay-map map)))
+
+(eval-after-load 'symbol-overlay #'tk-editing/symbol-overlay-customizations)
+
+(global-set-key (kbd "s-O") #'symbol-overlay-remove-all)
+(global-set-key (kbd "s-o") #'symbol-overlay-put)
