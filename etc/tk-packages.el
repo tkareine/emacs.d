@@ -23,6 +23,15 @@
       (message "Installing missing packages: %s" missing-packages)
       (tk-packages/install missing-packages))))
 
+(defun tk-packages/upgrade-packages ()
+  (let ((package-menu-async nil))
+    (message ";;; Updating package list…\n")
+    (list-packages)
+
+    (message "\n;;; Upgrading packages (if any)…\n")
+    (package-menu-mark-upgrades)
+    (ignore-errors (package-menu-execute t))))
+
 (defvar tk-packages/minimum-set
   '(ag
     company

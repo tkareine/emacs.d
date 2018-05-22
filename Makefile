@@ -12,6 +12,10 @@ help:
 test:
 	$(EMACS) -Q --batch -L lib -l ert $(foreach test,$(TEST_FILES),-l $(test)) -f ert-run-tests-batch-and-exit
 
+.PHONY: upgrade-packages
+upgrade-packages:
+	$(EMACS) --batch -L lib -l etc/tk-packages.el -f tk-packages/upgrade-packages
+
 define newline
 
 
