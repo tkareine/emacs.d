@@ -235,6 +235,8 @@ configuration for GNU Global."
 
 (add-to-list 'interpreter-mode-alist '("node\\(?:js\\)?" . js2-mode))
 
+(put 'js2-include-node-externs 'safe-local-variable 'booleanp)
+
 ;;; RJSX: js2-mode with jsx
 
 (defun tk-dev/rjsx-mode-hook ()
