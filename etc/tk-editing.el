@@ -361,6 +361,9 @@ probably not done."
 (global-set-key (kbd "C-c a")   #'ag-project-regexp)
 (global-set-key (kbd "C-c C-a") #'ag-regexp)
 
+;; Include hidden files to default arguments
+(customize-set-variable 'ag-arguments '("--smart-case" "--stats" "--hidden"))
+
 ;; Highlight matches in compilation buffer
 (customize-set-variable 'ag-highlight-search t)
 
