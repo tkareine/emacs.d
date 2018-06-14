@@ -154,6 +154,9 @@ configuration for GNU Global."
 
 (require 'company)
 
+;; Align annotations to the right tooltip border
+(customize-set-variable 'company-tooltip-align-annotations t)
+
 ;; Don't lowercase completion candidates (dabbrev backend)
 (customize-set-variable 'company-dabbrev-downcase nil)
 
