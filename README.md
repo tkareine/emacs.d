@@ -20,7 +20,9 @@ brew install emacs-mac --with-official-icon
 
 ### GNU Global
 
-Used by [ggtags], configured in [etc/tk-dev.el][etc-tk-dev.el].
+Used by [ggtags], configured in [etc/tk-dev.el][etc-tk-dev.el]. `ggtags`
+mode gets enabled in selected major modes, such as for `.scss` and `.rb`
+sources, automatically.
 
 Configure Global to use Exuberant Ctags for finding symbol definitions
 and Pygments for symbol references.
@@ -60,8 +62,16 @@ export PATH="$(brew --prefix libressl)/bin:$PATH"
 In [etc/tk-network.el][etc-tk-network.el], I customize variable
 `gnutls-trustfiles` to point to the cert store file of LibreSSL.
 
+### TypeScript
+
+I use `tsserver` CLI tool of [TypeScript] via [Tide] minor mode,
+configured in [etc/tk-dev.el][etc-tk-dev.el]. Tide gets enabled for
+`.js` and `.jsx` sources automatically.
+
 [Flycheck]: http://www.flycheck.org/en/latest/
 [Homebrew]: https://brew.sh/
+[Tide]: https://github.com/ananthakumaran/tide
+[TypeScript]: https://github.com/Microsoft/TypeScript
 [conf-ctags]: https://github.com/tkareine/dotfiles/blob/master/.ctags
 [conf-globalrc]: https://github.com/tkareine/dotfiles/blob/master/.globalrc
 [etc-tk-dev.el]: etc/tk-dev.el

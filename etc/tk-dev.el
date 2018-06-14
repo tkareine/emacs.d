@@ -139,7 +139,6 @@ configuration for GNU Global."
 (global-set-key (kbd "C-c t") #'ggtags-find-tag-dwim)
 
 (add-hook 'enh-ruby-mode-hook #'ggtags-mode)
-(add-hook 'js2-mode-hook      #'ggtags-mode)
 (add-hook 'less-css-mode-hook #'ggtags-mode)
 (add-hook 'scss-mode-hook     #'ggtags-mode)
 (add-hook 'sh-mode-hook       #'ggtags-mode)
@@ -246,6 +245,26 @@ configuration for GNU Global."
   (setq mode-name "RJSX"))
 
 (add-hook 'rjsx-mode-hook #'tk-dev/rjsx-mode-hook)
+
+;;; TypeScript
+
+(defun tk-dev/tide-setup ()
+  (interactive)
+  (tide-setup)
+  (flycheck-mode)
+  (setq flycheck-check-syntax-automatically '(save mode-enabled))
+  (flycheck-add-next-checker 'javascript-eslint 'javascript-tide 'append)
+  (eldoc-mode)
+  (tide-hl-identifier-mode)
+  (company-mode))
+
+(add-hook 'js2-mode-hook #'tk-dev/tide-setup)
+
+(defun tk-dev/tide-jsx-setup ()
+  (interactive)
+  (flycheck-add-next-checker 'javascript-eslint 'jsx-tide 'append))
+
+(add-hook 'rjsx-mode-hook #'tk-dev/tide-jsx-setup)
 
 ;;; JSON
 
