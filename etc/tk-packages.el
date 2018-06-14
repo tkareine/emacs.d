@@ -58,6 +58,7 @@
     symbol-overlay
     textile-mode
     tide
+    typescript-mode
     undo-tree
     web-mode
     which-key

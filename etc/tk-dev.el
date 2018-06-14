@@ -248,6 +248,8 @@ configuration for GNU Global."
 
 ;;; TypeScript
 
+(customize-set-variable 'typescript-indent-level 2)
+
 (defun tk-dev/tide-setup ()
   (interactive)
   (tide-setup)
@@ -258,6 +260,7 @@ configuration for GNU Global."
   (tide-hl-identifier-mode)
   (company-mode))
 
+(add-hook 'typescript-mode-hook #'tk-dev/tide-setup)
 (add-hook 'js2-mode-hook #'tk-dev/tide-setup)
 
 (defun tk-dev/tide-jsx-setup ()
