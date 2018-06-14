@@ -57,6 +57,7 @@
     swiper
     symbol-overlay
     textile-mode
+    tide
     undo-tree
     web-mode
     which-key
