@@ -254,7 +254,6 @@ configuration for GNU Global."
   (interactive)
   (tide-setup)
   (flycheck-mode)
-  (setq flycheck-check-syntax-automatically '(save mode-enabled))
   (flycheck-add-next-checker 'javascript-eslint 'javascript-tide 'append)
   (eldoc-mode)
   (tide-hl-identifier-mode)
