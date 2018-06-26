@@ -7,8 +7,7 @@
   (let* ((bad-hosts (cl-loop for bad-url
                              in '("https://wrong.host.badssl.com/"
                                   "https://self-signed.badssl.com/")
-                             if (ignore-errors (url-retrieve bad-url
-                                                             (lambda (_retrieved) t)))
+                             if (ignore-errors (url-retrieve-synchronously bad-url nil t 10))
                              collect bad-url)))
     (if bad-hosts
         (error (format "TLS security test failed: should've failed retrieving %s"
