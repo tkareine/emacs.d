@@ -249,6 +249,7 @@ configuration for GNU Global."
 ;;; TypeScript
 
 (customize-set-variable 'typescript-indent-level 2)
+(customize-set-variable 'tide-tsserver-executable (tk-support/npm-global-path "typescript/lib/tsserver.js"))
 
 (defun tk-dev/tide-setup ()
   (interactive)

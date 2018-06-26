@@ -1,9 +1,21 @@
 ;; -*- lexical-binding: t; -*-
 
+(require 'subr-x)
+
 (defun tk-support/dotfile-path (&rest paths)
   "Expand file path components inside user emacs directory."
   (concat (expand-file-name user-emacs-directory)
           (mapconcat #'file-name-as-directory (butlast paths) "")
+          (car (last paths))))
+
+(defun tk-support/npm-global-path (&rest paths)
+  "Expand file path components inside current npm global
+installation directory."
+  (concat (mapconcat #'file-name-as-directory
+                     (append (list (string-trim (shell-command-to-string "nodenv prefix"))
+                                   "lib/node_modules")
+                             (butlast paths))
+                     "")
           (car (last paths))))
 
 (defun tk-support/active-region-or-line ()

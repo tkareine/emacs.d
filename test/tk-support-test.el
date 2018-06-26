@@ -9,6 +9,12 @@
   (should (equal (tk-support/dotfile-path "a/b") (concat (expand-file-name user-emacs-directory) "a/b")))
   (should (equal (tk-support/dotfile-path "a" "b") (concat (expand-file-name user-emacs-directory) "a/b"))))
 
+(ert-deftest tk-support/npm-global-path-test ()
+  (should (string-match-p "/\\.nodenv/versions/[[:digit:]]+\\.[[:digit:]]+\\.[[:digit:]]+/lib/node_modules/foo\\.js\\'" (tk-support/npm-global-path "foo.js")))
+  (should (string-match-p "/\\.nodenv/versions/[[:digit:]]+\\.[[:digit:]]+\\.[[:digit:]]+/lib/node_modules/foo/bar\\.js\\'" (tk-support/npm-global-path "foo/bar.js")))
+  (should (string-match-p "/\\.nodenv/versions/[[:digit:]]+\\.[[:digit:]]+\\.[[:digit:]]+/lib/node_modules/foo/bar\\.js\\'" (tk-support/npm-global-path "foo" "bar.js")))
+)
+
 (ert-deftest tk-support/string-prefix-length-with-char-test ()
   (should (equal (tk-support/string-prefix-length-with-char ?a "") 0))
   (should (equal (tk-support/string-prefix-length-with-char ?a "b") 0))
