@@ -3,7 +3,7 @@
 (require 'ert)
 (require 'tk-support)
 
-(ert-deftest tk-support/dotfiles-path-test ()
+(ert-deftest tk-support/dotfile-path-test ()
   (should (equal (tk-support/dotfile-path "") (concat (expand-file-name user-emacs-directory))))
   (should (equal (tk-support/dotfile-path "a") (concat (expand-file-name user-emacs-directory) "a")))
   (should (equal (tk-support/dotfile-path "a/b") (concat (expand-file-name user-emacs-directory) "a/b")))
