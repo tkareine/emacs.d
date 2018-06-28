@@ -269,6 +269,16 @@ configuration for GNU Global."
 
 (add-hook 'rjsx-mode-hook #'tk-dev/tide-jsx-setup)
 
+(defun tk-dev/tide-tsx-setup ()
+  (when (string-equal "tsx" (file-name-extension buffer-file-name))
+    (setup-tide-mode)))
+
+(add-hook 'web-mode-hook #'tk-dev/tide-tsx-setup)
+
+(flycheck-add-mode 'typescript-tslint 'web-mode)
+
+(add-to-list 'auto-mode-alist '("\\.tsx\\'" . web-mode))
+
 ;;; JSON
 
 (defun tk-dev/json-mode-hook ()
