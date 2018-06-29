@@ -68,7 +68,9 @@
     ((error line-start
             "parse error: " (message) " at line " line ", column " column
             line-end))
-    :modes json-mode))
+    :modes json-mode)
+
+  (add-to-list 'flycheck-checkers 'tk/json-jq))
 
 (eval-after-load 'flycheck #'tk-dev/flycheck-mode-customizations)
 
@@ -280,11 +282,6 @@ configuration for GNU Global."
 (add-to-list 'auto-mode-alist '("\\.tsx\\'" . web-mode))
 
 ;;; JSON
-
-(defun tk-dev/json-mode-hook ()
-  (flycheck-select-checker 'tk/json-jq))
-
-(add-hook 'json-mode-hook #'tk-dev/json-mode-hook)
 
 (add-to-list 'auto-mode-alist '("\\.json\\'" . json-mode))
 
