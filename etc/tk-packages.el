@@ -56,7 +56,6 @@
     sql-indent
     swiper
     symbol-overlay
-    textile-mode
     tide
     typescript-mode
     undo-tree

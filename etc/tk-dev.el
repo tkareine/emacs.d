@@ -411,10 +411,6 @@ configuration for GNU Global."
 
 (with-eval-after-load 'sql (load-library "sql-indent"))
 
-;;; Textile
-
-(add-to-list 'auto-mode-alist '("\\.textile\\'" . textile-mode))
-
 ;; Web
 
 (add-to-list 'auto-mode-alist '("\\.erb\\'" . web-mode))
