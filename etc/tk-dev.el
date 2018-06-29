@@ -288,7 +288,8 @@ configuration for GNU Global."
 ;;; ELisp
 
 (defun tk-dev/emacs-lisp-mode-hook ()
-  (setq mode-name "ELisp"))
+  (setq mode-name "ELisp")
+  (smartparens-strict-mode))
 
 (add-hook 'emacs-lisp-mode-hook #'tk-dev/emacs-lisp-mode-hook)
 
@@ -312,6 +313,11 @@ configuration for GNU Global."
     (it        1)))
 
 (eval-after-load 'clojure-mode #'tk-dev/clojure-mode-customizations)
+
+(defun tk-dev/clojure-mode-hook ()
+  (smartparens-strict-mode))
+
+(add-hook 'clojure-mode-hook #'tk-dev/clojure-mode-hook)
 
 ;;; CIDER
 
