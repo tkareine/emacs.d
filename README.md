@@ -1,11 +1,11 @@
 # My Emacs configuration
 
-It's here so that I can synchronize it across computers I work with.
+It's here so that I can synchronize it to computers I work with.
 
-I have copied or adapted the contents of some of the files from other
-people. For small chunks of code, I have embedded the source URL in a
-comment inside the file. When copying has been extensive, I have
-retained the original copyright in the file. Thank you all!
+I have copied or adapted some contents from others. For small chunks of
+code, I have embedded the source URL in a comment inside the file. When
+copying has been extensive, I have retained the original copyright in
+the file. Thank you all!
 
 ## Installation
 
@@ -49,6 +49,20 @@ brew install global --with-ctags --with-pygments
 
 I use configuration files for [Ctags][conf-ctags] and
 [Global][conf-globalrc].
+
+### Ag (The Silver Searcher)
+
+I use two frontends for [Ag], the search tool:
+
+1. [ag.el] for situations when I want to persist the search results, and
+2. [Ivy]'s `counsel-projectile-ag` when I want to discard search results
+   right away.
+
+Installation, on macOS:
+
+``` bash
+brew install the_silver_searcher
+```
 
 ### jq
 
@@ -97,14 +111,17 @@ Installation:
 npm install -g typescript
 ```
 
+[Ag]: https://github.com/ggreer/the_silver_searcher
 [Flycheck]: http://www.flycheck.org/en/latest/
 [GNU Global]: https://www.gnu.org/software/global/
 [Homebrew]: https://brew.sh/
+[Ivy]: https://github.com/abo-abo/swiper
 [LibreSSL]: https://www.libressl.org/
 [Marked]: https://github.com/markedjs/marked
 [Node.js]: https://nodejs.org/
 [Tide]: https://github.com/ananthakumaran/tide
 [TypeScript]: https://github.com/Microsoft/TypeScript
+[ag.el]: https://github.com/Wilfred/ag.el
 [conf-ctags]: https://github.com/tkareine/dotfiles/blob/master/.ctags
 [conf-globalrc]: https://github.com/tkareine/dotfiles/blob/master/.globalrc
 [etc/tk-dev.el]: etc/tk-dev.el
