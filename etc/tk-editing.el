@@ -357,6 +357,8 @@ probably not done."
 
 (require 'projectile)
 
+(define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
+
 (global-set-key (kbd "C-c D") #'projectile-dired)
 (global-set-key (kbd "C-c F") #'projectile-find-file-dwim)
 (global-set-key (kbd "C-c d") #'counsel-projectile-find-dir)
