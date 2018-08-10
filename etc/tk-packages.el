@@ -51,6 +51,7 @@
     magit
     markdown-mode
     projectile
+    restclient
     rjsx-mode
     smartparens
     sql-indent
