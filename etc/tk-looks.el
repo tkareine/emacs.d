@@ -46,9 +46,6 @@
 ;; Highlight long lines when whitespace-mode is enabled
 (customize-set-variable 'whitespace-line-column 140)
 
-;; Highlight trailing whitespaces in lines
-(customize-set-variable 'show-trailing-whitespace t)
-
 ;; Color theme
 (require 'zenburn-theme)
 (load-theme 'zenburn t)
@@ -116,7 +113,6 @@ Adapted from URL
     (server-buffer-clients " Server")
     (overwrite-mode overwrite-mode)
     (global-whitespace-newline-mode " NL")
-    (global-whitespace-mode " WS")
     (whitespace-newline-mode " nl")
     (whitespace-mode " ws")
     (visible-mode " Vis")

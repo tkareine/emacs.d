@@ -59,14 +59,7 @@
 ;; Enable narrowing to a region (hiding warning text).
 (put 'narrow-to-region 'disabled nil)
 
-;;; Navigation, editing, and some helpers in text-mode and prog-mode
-
-(defun tk-editing/join-line ()
-  (interactive)
-  (join-line -1))
-
-(global-set-key (kbd "M-J") #'join-line)
-(global-set-key (kbd "M-j") #'tk-editing/join-line)
+;;; Navigation by moving in steps of 5
 
 (defun tk-editing/next-line-5 ()
   (interactive)
@@ -92,22 +85,24 @@
 
 (global-set-key (kbd "C-b") #'tk-editing/backward-char-5)
 
+;;; Editing
+
+(defun tk-editing/join-line ()
+  (interactive)
+  (join-line -1))
+
+(global-set-key (kbd "M-J") #'join-line)
+(global-set-key (kbd "M-j") #'tk-editing/join-line)
+
 (defun tk-editing/eol-newline-and-indent ()
   (interactive)
   (end-of-line)
   (newline-and-indent))
 
-(global-set-key (kbd "S-<return>") #'tk-editing/eol-newline-and-indent)
-
-(defun tk-editing/toggle-show-trailing-whitespace ()
-  (interactive)
-  (customize-set-variable 'show-trailing-whitespace (eq show-trailing-whitespace nil)))
-
-(global-set-key (kbd "C-x W")         #'tk-editing/toggle-show-trailing-whitespace)
-(global-set-key (kbd "C-x t")         #'delete-trailing-whitespace)
-(global-set-key (kbd "C-x w")         #'whitespace-mode)
-(global-set-key (kbd "M-S-SPC")       #'cycle-spacing)
+(global-set-key (kbd "S-<return>")    #'tk-editing/eol-newline-and-indent)
 (global-set-key (kbd "s-<backspace>") #'delete-char)
+
+;;; Commenting
 
 (defun tk-editing/comment-or-uncomment-region-or-line ()
   (interactive)
@@ -119,6 +114,38 @@
 
 (global-set-key (kbd "C-c C") #'comment-dwim)
 (global-set-key (kbd "M-/")   #'tk-editing/comment-or-uncomment-region-or-line)
+
+;;; Showing and handling whitespace
+
+;; Visually indicate empty lines in buffer in the left fringe
+(customize-set-variable 'indicate-empty-lines t)
+
+;; Highlight trailing whitespaces in lines. Let's use this instead of
+;; the similar feature in whitespace.el, because this marks trailing
+;; whitespace in lines already highlighted with `whitespace-line' face.
+(customize-set-variable 'show-trailing-whitespace t)
+
+(customize-set-variable 'whitespace-style '(face
+                                            tabs
+                                            lines
+                                            ;; don't include `trailing', see comment above
+                                            space-after-tab::tab
+                                            space-before-tab::tab
+                                            tab-mark))
+
+(custom-set-faces '(whitespace-tab ((t (:background "grey30"))))
+                  '(whitespace-line ((t (:background "#66494a" :foreground nil)))))
+
+(global-whitespace-mode)
+
+(defun tk-editing/toggle-show-trailing-whitespace ()
+  (interactive)
+  (customize-set-variable 'show-trailing-whitespace (eq show-trailing-whitespace nil)))
+
+(global-set-key (kbd "C-x W")         #'tk-editing/toggle-show-trailing-whitespace)
+(global-set-key (kbd "C-x t")         #'delete-trailing-whitespace)
+(global-set-key (kbd "C-x w")         #'whitespace-mode)
+(global-set-key (kbd "M-S-SPC")       #'cycle-spacing)
 
 ;;; Global navigation and window management
 
