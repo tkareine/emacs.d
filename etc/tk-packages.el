@@ -75,5 +75,4 @@
                                             ("melpa"        . "https://melpa.org/packages/")
                                             ("melpa-stable" . "https://stable.melpa.org/packages/")))
 
-(customize-set-variable 'package-pinned-packages '((cider     . "melpa-stable")
-						   (rjsx-mode . "melpa-stable")))
+(customize-set-variable 'package-pinned-packages '((cider . "melpa-stable")))
