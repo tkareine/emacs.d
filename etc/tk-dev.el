@@ -250,36 +250,41 @@ configuration for GNU Global."
 
 ;;; TypeScript
 
-(customize-set-variable 'typescript-indent-level 2)
-(customize-set-variable 'tide-tsserver-executable (tk-support/npm-global-path "typescript/lib/tsserver.js"))
+(require 'tide)
 
-(defun tk-dev/tide-setup ()
+(customize-set-variable 'typescript-indent-level 2)
+
+(defun tk-dev/tide-common-setup ()
   (interactive)
   (tide-setup)
   (flycheck-mode)
-  (flycheck-add-next-checker 'javascript-eslint 'javascript-tide 'append)
   (eldoc-mode)
   (tide-hl-identifier-mode)
   (company-mode))
 
-(add-hook 'typescript-mode-hook #'tk-dev/tide-setup)
-(add-hook 'js2-mode-hook #'tk-dev/tide-setup)
+;;; TypeScript: .ts sources
 
-(defun tk-dev/tide-jsx-setup ()
-  (interactive)
-  (flycheck-add-next-checker 'javascript-eslint 'jsx-tide 'append))
+(add-hook 'typescript-mode-hook #'tk-dev/tide-common-setup)
 
-(add-hook 'rjsx-mode-hook #'tk-dev/tide-jsx-setup)
+;;; TypeScript: .js sources
+
+(add-hook 'js2-mode-hook #'tk-dev/tide-common-setup)
+
+;;; TypeScript: .tsx sources
 
 (defun tk-dev/tide-tsx-setup ()
   (when (string-equal "tsx" (file-name-extension buffer-file-name))
-    (setup-tide-mode)))
+    (tk-dev/tide-common-setup)))
 
 (add-hook 'web-mode-hook #'tk-dev/tide-tsx-setup)
 
+(add-to-list 'auto-mode-alist '("\\.tsx\\'" . web-mode))
+
 (flycheck-add-mode 'typescript-tslint 'web-mode)
 
-(add-to-list 'auto-mode-alist '("\\.tsx\\'" . web-mode))
+;;; TypeScript: .jsx sources
+
+(flycheck-add-next-checker 'javascript-eslint 'jsx-tide 'append)
 
 ;;; JSON
 
