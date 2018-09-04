@@ -223,6 +223,7 @@
   (define-key smartparens-mode-map (kbd "C-<left>")  nil)
   (define-key smartparens-mode-map (kbd "C-<right>") nil)
   (define-key smartparens-mode-map (kbd "C-M-k")     #'sp-kill-sexp)
+  (define-key smartparens-mode-map (kbd "C-c )")     #'smartparens-strict-mode)
   (define-key smartparens-mode-map (kbd "M-<left>")  #'sp-forward-barf-sexp)
   (define-key smartparens-mode-map (kbd "M-<right>") #'sp-forward-slurp-sexp)
 
