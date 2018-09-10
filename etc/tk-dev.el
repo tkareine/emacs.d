@@ -142,6 +142,7 @@ configuration for GNU Global."
 
 (add-hook 'enh-ruby-mode-hook #'ggtags-mode)
 (add-hook 'less-css-mode-hook #'ggtags-mode)
+(add-hook 'python-mode-hook   #'ggtags-mode)
 (add-hook 'scss-mode-hook     #'ggtags-mode)
 (add-hook 'sh-mode-hook       #'ggtags-mode)
 (add-hook 'yaml-mode-hook     #'ggtags-mode)
