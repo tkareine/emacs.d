@@ -313,6 +313,7 @@ configuration for GNU Global."
     (PATCH     2)
     (POST      2)
     (PUT       2)
+    (api       'defun)
     (context   1)
     (defroutes 'defun)
     (describe  1)
