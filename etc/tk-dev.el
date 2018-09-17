@@ -250,6 +250,14 @@ configuration for GNU Global."
 
 (add-hook 'rjsx-mode-hook #'tk-dev/rjsx-mode-hook)
 
+;;; Prettier-js: format buffer with prettier tool upon save
+;;; automatically
+
+(defun tk-dev/prettier-js-mode-customizations ()
+  (add-to-list 'tk-looks/minor-mode-alist '(prettier-js-mode (" Prettier")) t))
+
+(eval-after-load 'prettier-js #'tk-dev/prettier-js-mode-customizations)
+
 ;;; TypeScript
 
 (require 'tide)
