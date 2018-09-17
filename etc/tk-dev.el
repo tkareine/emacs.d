@@ -1,5 +1,6 @@
 ;; -*- lexical-binding: t; -*-
 
+(require 'subr-x)
 (require 'tk-support)
 
 ;;; Ediff
@@ -264,20 +265,15 @@ configuration for GNU Global."
 
 (defun tk-dev/tide-common-setup ()
   (interactive)
-  (tide-setup)
   (flycheck-mode)
   (eldoc-mode)
   (tide-hl-identifier-mode)
   (company-mode)
-  (when (locate-dominating-file default-directory
-                                (lambda (dir)
-                                  (cl-find-if (lambda (config-file)
-                                                (let* ((path   (expand-file-name config-file dir))
-                                                       (exists (file-exists-p path)))
-                                                  (when exists
-                                                    (message "Prettier config found: %s" path))))
-                                              tk-dev/prettier-config-files)))
-    (prettier-js-mode)))
+  (when-let ((prettier-config (tk-support/locate-any-dominating-file default-directory
+                                                                     tk-dev/prettier-config-files)))
+    (message "Prettier config found: %s" prettier-config)
+    (prettier-js-mode))
+  (tide-setup))
 
 ;;; TypeScript: .ts sources
 

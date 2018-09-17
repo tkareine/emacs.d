@@ -9,11 +9,15 @@
   (should (equal (tk-support/dotfile-path "a/b") (concat (expand-file-name user-emacs-directory) "a/b")))
   (should (equal (tk-support/dotfile-path "a" "b") (concat (expand-file-name user-emacs-directory) "a/b"))))
 
+(ert-deftest tk-support/locate-any-dominating-file-test ()
+  (should-not (tk-support/locate-any-dominating-file (concat user-emacs-directory "test") '("no-such-name")))
+  (should (equal (tk-support/locate-any-dominating-file (concat user-emacs-directory "test") '("no-such-name" "init.el"))
+                 (concat (expand-file-name user-emacs-directory) "init.el"))))
+
 (ert-deftest tk-support/npm-global-path-test ()
   (should (string-match-p "/\\.nodenv/versions/[[:digit:]]+\\.[[:digit:]]+\\.[[:digit:]]+/lib/node_modules/foo\\.js\\'" (tk-support/npm-global-path "foo.js")))
   (should (string-match-p "/\\.nodenv/versions/[[:digit:]]+\\.[[:digit:]]+\\.[[:digit:]]+/lib/node_modules/foo/bar\\.js\\'" (tk-support/npm-global-path "foo/bar.js")))
-  (should (string-match-p "/\\.nodenv/versions/[[:digit:]]+\\.[[:digit:]]+\\.[[:digit:]]+/lib/node_modules/foo/bar\\.js\\'" (tk-support/npm-global-path "foo" "bar.js")))
-)
+  (should (string-match-p "/\\.nodenv/versions/[[:digit:]]+\\.[[:digit:]]+\\.[[:digit:]]+/lib/node_modules/foo/bar\\.js\\'" (tk-support/npm-global-path "foo" "bar.js"))))
 
 (ert-deftest tk-support/string-prefix-length-with-char-test ()
   (should (equal (tk-support/string-prefix-length-with-char ?a "") 0))

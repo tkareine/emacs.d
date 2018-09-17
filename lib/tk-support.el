@@ -1,5 +1,6 @@
 ;; -*- lexical-binding: t; -*-
 
+(require 'cl-seq)
 (require 'subr-x)
 
 (defun tk-support/dotfile-path (&rest paths)
@@ -7,6 +8,23 @@
   (concat (expand-file-name user-emacs-directory)
           (mapconcat #'file-name-as-directory (butlast paths) "")
           (car (last paths))))
+
+(defun tk-support/locate-any-dominating-file (file names)
+  "Starting at FILE, look up file path for directory containing
+any of NAMES. Stop at the first parent directory containing the
+file, and return the expanded file name of the file path. Return
+nil if not found."
+  (let ((found))
+    (locate-dominating-file file
+                            (lambda (dir)
+                              (cl-find-if (lambda (name)
+                                            (let* ((path   (expand-file-name name dir))
+                                                   (exists (file-exists-p path)))
+                                              (when exists
+                                                (setq found path))
+                                              exists))
+                                          names)))
+    found))
 
 (defun tk-support/npm-global-path (&rest paths)
   "Expand file path components inside current npm global
