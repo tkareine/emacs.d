@@ -50,7 +50,7 @@
     macrostep
     magit
     markdown-mode
-    prettier-js-mode
+    prettier-js
     projectile
     restclient
     rjsx-mode
