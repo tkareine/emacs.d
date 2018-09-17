@@ -255,13 +255,29 @@ configuration for GNU Global."
 
 (customize-set-variable 'typescript-indent-level 2)
 
+(defvar tk-dev/prettier-config-files
+  '("prettier.config.js"
+    ".prettierrc"
+    ".prettierrc.js")
+  "Prettier configuration files, used by
+`tk-dev/tide-common-setup'.")
+
 (defun tk-dev/tide-common-setup ()
   (interactive)
   (tide-setup)
   (flycheck-mode)
   (eldoc-mode)
   (tide-hl-identifier-mode)
-  (company-mode))
+  (company-mode)
+  (when (locate-dominating-file default-directory
+                                (lambda (dir)
+                                  (cl-find-if (lambda (config-file)
+                                                (let* ((path   (expand-file-name config-file dir))
+                                                       (exists (file-exists-p path)))
+                                                  (when exists
+                                                    (message "Prettier config found: %s" path))))
+                                              tk-dev/prettier-config-files)))
+    (prettier-js-mode)))
 
 ;;; TypeScript: .ts sources
 
