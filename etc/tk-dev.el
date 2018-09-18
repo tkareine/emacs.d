@@ -273,6 +273,7 @@ configuration for GNU Global."
 
 (defun tk-dev/tide-common-setup ()
   (interactive)
+  (tide-setup)
   (flycheck-mode)
   (eldoc-mode)
   (tide-hl-identifier-mode)
@@ -280,8 +281,7 @@ configuration for GNU Global."
   (when-let ((prettier-config (tk-support/locate-any-dominating-file default-directory
                                                                      tk-dev/prettier-config-files)))
     (message "Prettier config found: %s" prettier-config)
-    (prettier-js-mode))
-  (tide-setup))
+    (prettier-js-mode)))
 
 ;;; TypeScript: .ts sources
 
