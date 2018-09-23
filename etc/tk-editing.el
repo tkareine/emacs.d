@@ -315,6 +315,9 @@ probably not done."
 (customize-set-variable 'ivy-count-format "(%d/%d) ")
 (customize-set-variable 'ivy-format-function #'ivy-format-function-arrow)
 (customize-set-variable 'ivy-height 20)
+;; Don't cd to existing directory when appending "/", allowing creating
+;; new buffer in new directory
+(customize-set-variable 'ivy-magic-slash-non-match-action nil)
 (customize-set-variable 'counsel-find-file-at-point t)
 
 (custom-set-faces '(ivy-current-match   ((t (:weight bold
