@@ -17,15 +17,18 @@ brew install emacs-mac --with-official-icon
 ```
 
 You'll need [Node.js] and [npm] for some 3rd party tools (listed
-below). For installing Node.js, I recommend using [nodenv]:
+below). For managing Node.js versions, I recommend using [chnode]
+together with [node-build]:
 
 ``` bash
-brew install nodenv
+curl 'https://raw.githubusercontent.com/tkareine/chnode/master/chnode.sh' > chnode.sh
+brew install node-build
+mkdir -p ~/.nodes
+node-build 10.11.0 ~/.nodes/node-10.11.0
 
-# setup nodenv, probably with `eval "$(nodenv init -)"`
-
-nodenv install $nodejs_version_you_want
-nodenv global $nodejs_version_you_want
+# put these into shell init script:
+source chnode.sh
+chnode node-10
 ```
 
 ## 3rd party tools in use
@@ -102,8 +105,8 @@ npm install -g marked
 ### TypeScript
 
 I use [`tsserver`][tsserver] CLI tool of [TypeScript] via [Tide] minor
-mode, configured in [etc/tk-dev.el]. Tide gets enabled
-for `.js` and `.jsx` sources automatically.
+mode, configured in [etc/tk-dev.el]. Tide gets enabled for `.ts`,
+`.tsx`, `.js`, and `.jsx` sources automatically.
 
 Installation:
 
@@ -122,6 +125,7 @@ npm install -g typescript
 [Tide]: https://github.com/ananthakumaran/tide
 [TypeScript]: https://github.com/Microsoft/TypeScript
 [ag.el]: https://github.com/Wilfred/ag.el
+[chnode]: https://github.com/tkareine/chnode
 [conf-ctags]: https://github.com/tkareine/dotfiles/blob/master/.ctags
 [conf-globalrc]: https://github.com/tkareine/dotfiles/blob/master/.globalrc
 [etc/tk-dev.el]: etc/tk-dev.el
@@ -130,6 +134,6 @@ npm install -g typescript
 [jq]: https://stedolan.github.io/jq/
 [json-mode]: https://github.com/joshwnj/json-mode
 [markdown-mode]: https://jblevins.org/projects/markdown-mode/
-[nodenv]: https://github.com/nodenv/nodenv
+[node-build]: https://github.com/nodenv/node-build
 [npm]: https://www.npmjs.com/
 [tsserver]: https://github.com/Microsoft/TypeScript/wiki/Standalone-Server-%28tsserver%29
