@@ -1,12 +1,10 @@
-SHELL := bash  # required for `help` target
-
 EMACS ?= emacs
 
 TEST_FILES ?= $(wildcard test/*-test.el)
 
 .PHONY: help
 help:
-	@echo -e '$(subst $(newline),\n,$(help_text))'
+	@bash -c 'echo -e "$(subst $(newline),\n,$(help_text))"'
 
 .PHONY: upgrade-packages
 upgrade-packages:
