@@ -30,7 +30,7 @@ nil if not found."
   "Expand file path components inside current npm global
 installation directory."
   (concat (mapconcat #'file-name-as-directory
-                     (append (list (string-trim (shell-command-to-string "nodenv prefix"))
+                     (append (list (getenv "CHNODE_ROOT")
                                    "lib/node_modules")
                              (butlast paths))
                      "")
