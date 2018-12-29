@@ -311,6 +311,10 @@ configuration for GNU Global."
 
 (add-to-list 'auto-mode-alist '("\\.json\\'" . json-mode))
 
+;;; YAML
+
+(add-to-list 'auto-mode-alist '("/\\.gemrc\\'" . yaml-mode))
+
 ;;; ELisp
 
 (defun tk-dev/emacs-lisp-mode-hook ()
