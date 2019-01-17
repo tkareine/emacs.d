@@ -8,7 +8,7 @@ help:
 
 .PHONY: upgrade-packages
 upgrade-packages:
-	$(EMACS) --batch -l etc/tk-packages.el -f tk-packages/upgrade-packages
+	$(EMACS) --batch -l etc/tk-network.el -l etc/tk-packages.el -f tk-packages/upgrade-packages
 
 .PHONY: test
 test:
