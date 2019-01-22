@@ -31,10 +31,10 @@
 ;; macOS: allow entering special chars via Option key
 (customize-set-variable 'mac-option-modifier nil)
 
-;; macOS: use Cmd as Meta modifier
+;; macOS: use Cmd key as Meta modifier
 (customize-set-variable 'mac-command-modifier 'meta)
 
-;; Bind Ns key to Super modifer
+;; macOS: use fn key as Super modifier
 (customize-set-variable 'mac-function-modifier 'super)
 
 ;; Typing text replaces active selection
