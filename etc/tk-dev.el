@@ -441,6 +441,12 @@ configuration for GNU Global."
 
 (add-to-list 'auto-mode-alist '("\\.bashrc\\.[a-z0-9-.]+\\'" . sh-mode))
 
+;;; Configuration files
+
+(add-to-list 'auto-mode-alist '("/.aws/config\\'" . conf-unix-mode))
+(add-to-list 'auto-mode-alist '("/.aws/credentials\\'" . conf-unix-mode))
+(add-to-list 'auto-mode-alist '("/.s3cfg\\'" . conf-unix-mode))
+
 ;;; SQL
 
 (with-eval-after-load 'sql (load-library "sql-indent"))
