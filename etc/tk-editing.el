@@ -255,6 +255,8 @@
 
 ;;; Dired
 
+(customize-set-variable 'dired-listing-switches "-alh")
+
 ;; Allow opening file, replacing current buffer
 (put 'dired-find-alternate-file 'disabled nil)
 
