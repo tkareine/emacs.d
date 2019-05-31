@@ -1,6 +1,7 @@
 ;; -*- lexical-binding: t; -*-
 
 (require 'tk-support)
+(require 'subr-x)
 
 ;; Prefer UTF-8 encoding for input and output
 (set-language-environment "UTF-8")
@@ -105,12 +106,21 @@
 ;;; Commenting
 
 (defun tk-editing/comment-or-uncomment-region-or-line ()
+  "Comments or uncomments either the current line (if no region
+active) or region, moving position if point is at the beginning
+of region."
   (interactive)
-  (let ((region (tk-support/active-region-or-line)))
-    (when region
-      (let ((rbegin (car region))
-            (rend (cadr region)))
-        (comment-or-uncomment-region rbegin rend)))))
+  (when-let ((region (tk-support/active-region-or-line)))
+    (let* ((region-begin-pos (car region))
+           (region-end-pos (cadr region))
+           (current-pos (point))
+           (current-line-begin-pos (line-beginning-position))
+           (next-line-begin-pos (line-beginning-position 2)))
+      (comment-or-uncomment-region region-begin-pos region-end-pos)
+      (when (and (= current-line-begin-pos region-begin-pos)
+                 (= current-pos region-begin-pos)
+                 (>= next-line-begin-pos region-end-pos))
+        (beginning-of-line 2)))))
 
 (global-set-key (kbd "C-c C") #'comment-dwim)
 (global-set-key (kbd "M-/")   #'tk-editing/comment-or-uncomment-region-or-line)
