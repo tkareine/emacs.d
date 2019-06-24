@@ -29,4 +29,4 @@
 (customize-set-variable 'gnutls-verify-error t)
 
 ;; tls via builtin gnutls and external tool: the cert files used
-(customize-set-variable 'gnutls-trustfiles '("/usr/local/etc/libressl/cert.pem"))
+(customize-set-variable 'gnutls-trustfiles (list (expand-file-name "~/brew/etc/libressl/cert.pem")))
