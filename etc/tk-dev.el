@@ -414,6 +414,11 @@ configuration for GNU Global."
 
 (add-hook 'haskell-mode-hook #'tk-dev/haskell-mode-hook)
 
+;;; Rust
+
+(with-eval-after-load 'rust-mode
+  (add-hook 'flycheck-mode-hook #'flycheck-rust-setup))
+
 ;;; Markdown
 
 (customize-set-variable 'markdown-command "marked --gfm --tables")
