@@ -206,19 +206,21 @@ of region."
 
 ;;; Kill ring
 
-(defun tk-editing/kill-ring-save-advice (adviced &rest arguments)
-  "When called interactively with no active region, copy current line instead."
+(defun tk-editing/kill-ring-save (beg end)
+  "Like `kill-ring-save', but when called interactively with no
+active region, copy the current line instead."
   (interactive (tk-support/active-region-or-line))
-  (apply adviced arguments))
+  (kill-ring-save beg end))
 
-(advice-add #'kill-ring-save :around #'tk-editing/kill-ring-save-advice)
+(global-set-key [remap kill-ring-save] #'tk-editing/kill-ring-save)
 
-(defun tk-editing/kill-region-advice (adviced &rest arguments)
-  "When called interactively with no active region, kill current line instead."
+(defun tk-editing/kill-region (beg end)
+  "Like `kill-region', but when called interactively with no
+active region, kill the current line instead."
   (interactive (tk-support/active-region-or-line))
-  (apply adviced arguments))
+  (kill-region beg end))
 
-(advice-add #'kill-region :around #'tk-editing/kill-region-advice)
+(global-set-key [remap kill-region] #'tk-editing/kill-region)
 
 (defun tk-editing/file-path-to-clipboard ()
   "Copy the current file name to the clipboard."
