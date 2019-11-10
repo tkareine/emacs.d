@@ -1,22 +1,87 @@
-# My Emacs configuration
+# My Emacs setup
 
-It's here so that I can synchronize it to computers I work with.
+My public Emacs configuration, in order to synchronize them to computers
+I work with. The configuration for selected command line tools is in [my
+dotfiles] repository.
 
 I have copied or adapted some contents from others. For small chunks of
 code, I have embedded the source URL in a comment inside the file. When
 copying has been extensive, I have retained the original copyright in
 the file. Thank you all!
 
+## Setup highlights
+
+A screenshot, featuring [magit] (the right buffer) and [Ivy]'s
+`counsel-projectile-ag` (the bottom buffer), in [Zenburn] theme:
+
+<img src="https://github.com/tkareine/emacs.d/raw/master/images/setup-showcase.png" title="Setup showcase" alt="Setup showcase" width="864">
+
+The font in use is [Input][Input font] (font
+[settings](https://input.fontbureau.com/download/index.html?size=14&language=python&theme=solarized-dark&family=InputMono&width=300&weight=400&line-height=1.1&a=ss&g=ss&i=serifs_round&l=serifs_round&zero=0&asterisk=height&braces=straight&preset=consolas&customize=please)).
+
+### Automatic package install for the minimum set
+
+Var `tk-packages/minimum-set` defines the minimum set of packages I've
+dediced that I will always need to have. Upon launch, Emacs will
+download any packages missing from the minimum set automatically. See
+[etc/tk-packages.el].
+
+### TLS support with LibreSSL
+
+I prefer to use [LibreSSL] to establish TLS connections in Emacs,
+because I want to use a nonobscure TLS implementation. There's an Elisp
+function, `tk-network/test-tls-security`, to verify the functionality of
+the setup. See [etc/tk-network.el].
+
+### Show relevant information in mode-line
+
+I've tuned the mode-line to show only information that I think is
+relevant. For instance, only a selection of enabled minor modes is
+shown. See [etc/tk-looks.el], grep for `mode-line-format`.
+
+### JavaScript, TypeScript, and React file editing
+
+I have customized [js2-mode], [rjsx-mode], and [Tide] to work together
+with [company-mode], [Flycheck], and [Prettier]. For instance, when I save a
+`.tsx` buffer, Flycheck validates the file and Prettier reformats
+it. See [etc/tk-dev.el].
+
+### Small editing improvements
+
+There are a bunch of small improvements to editing in
+[etc/tk-editing.el], such as:
+
+* Key binding `C-a`
+  (`tk-editing/back-to-indentation-or-move-beginning-of-line`) switches
+  the point between the starting point of line content or the beginning
+  of the line .
+* Key binding `M-/` (`tk-editing/comment-or-uncomment-region-or-line`)
+  comments or uncomments region (if region is active) or the whole line
+  the point is on (if no region is active). If the point was on the
+  beginning of the line, move point to the next line automatically.
+* By default, clearly highlight trailing whitespace and show tabs with
+  low-key color (easy to see, but not to disturb you). Toggle showing
+  trailing whitespace with `C-x W`
+  (`tk-editing/toggle-show-trailing-whitespace`).
+* Copy the path of the current buffer to the OS clipboard with `C-c P`
+  (`tk-editing/file-path-to-clipboard`), allowing passing the path to
+  other programs quickly.
+* Use [Smartparens] globally, so that it's easy to copy strings within
+  quotes, for example.
+* Save the history of recent files periodically, in order to avoid
+  losing the information if Emacs crashes.
+
 ## Installation
 
-Installing Emacs itself, using [Homebrew] on macOS:
+Installing Mitsuharu Yamamoto's [Emacs macOS port], using [Homebrew] on
+macOS:
 
 ``` bash
 brew tap railwaycat/emacsmacport
 brew install emacs-mac --with-official-icon
 ```
 
-You'll need [Node.js] and [npm] for some 3rd party tools (listed
+You'll need [Node.js] and [npm] for some 3rd party tools (see
 below). For managing Node.js versions, I recommend using [chnode]
 together with [node-build]:
 
@@ -43,7 +108,7 @@ automatically.
 Configure Global to use Exuberant Ctags for finding symbol definitions
 and Pygments for symbol references.
 
-Installation, on macOS:
+Installation, with Homebrew on macOS:
 
 ``` bash
 brew install ctags
@@ -57,11 +122,12 @@ I use configuration files for [Ctags][conf-ctags] and
 
 I use two frontends for [Ag], the search tool:
 
-1. [ag.el] for situations when I want to persist the search results, and
-2. [Ivy]'s `counsel-projectile-ag` when I want to discard search results
-   right away.
+1. [ag.el] for situations when I want to persist the search results
+   (`C-c a` for `ag-project-regexp`), and
+2. [Ivy]'s `counsel-projectile-ag` (`C-c s`) when I want to discard
+   search results right away.
 
-Installation, on macOS:
+Installation with Homebrew:
 
 ``` bash
 brew install the_silver_searcher
@@ -72,7 +138,7 @@ brew install the_silver_searcher
 [jq] is used by [Flycheck] in [json-mode] to check json syntax. It's
 configured in [etc/tk-dev.el].
 
-Installation, on macOS:
+Installation with Homebrew:
 
 ``` bash
 brew install jq --devel
@@ -80,10 +146,7 @@ brew install jq --devel
 
 ### LibreSSL
 
-I use [LibreSSL] to establish TLS connections in Emacs, because I want
-to use a nonobscure TLS implementation.
-
-Installation, on macOS:
+Installation with Homebrew:
 
 ``` bash
 brew install libressl
@@ -104,8 +167,8 @@ npm install -g marked
 
 ### TypeScript
 
-I use [`tsserver`][tsserver] CLI tool of [TypeScript] via [Tide] minor
-mode, configured in [etc/tk-dev.el]. Tide gets enabled for `.ts`,
+I use the [`tsserver`][tsserver] CLI tool of [TypeScript] via [Tide]
+minor mode, configured in [etc/tk-dev.el]. Tide gets enabled for `.ts`,
 `.tsx`, `.js`, and `.jsx` sources automatically.
 
 Installation:
@@ -115,25 +178,37 @@ npm install -g typescript
 ```
 
 [Ag]: https://github.com/ggreer/the_silver_searcher
-[Flycheck]: http://www.flycheck.org/en/latest/
+[Emacs macOS port]: https://bitbucket.org/mituharu/emacs-mac/src/master/
+[Flycheck]: https://www.flycheck.org/
 [GNU Global]: https://www.gnu.org/software/global/
 [Homebrew]: https://brew.sh/
+[Input font]: http://input.fontbureau.com/
 [Ivy]: https://github.com/abo-abo/swiper
 [LibreSSL]: https://www.libressl.org/
 [Marked]: https://github.com/markedjs/marked
 [Node.js]: https://nodejs.org/
+[Prettier]: https://prettier.io/
+[Smartparens]: https://github.com/Fuco1/smartparens
 [Tide]: https://github.com/ananthakumaran/tide
 [TypeScript]: https://github.com/Microsoft/TypeScript
+[Zenburn]: https://github.com/bbatsov/zenburn-emacs
 [ag.el]: https://github.com/Wilfred/ag.el
 [chnode]: https://github.com/tkareine/chnode
+[company-mode]: https://company-mode.github.io/
 [conf-ctags]: https://github.com/tkareine/dotfiles/blob/master/.ctags
 [conf-globalrc]: https://github.com/tkareine/dotfiles/blob/master/.globalrc
 [etc/tk-dev.el]: etc/tk-dev.el
+[etc/tk-looks.el]: etc/tk-looks.el
 [etc/tk-network.el]: etc/tk-network.el
+[etc/tk-packages.el]: etc/tk-packages.el
 [ggtags]: https://github.com/leoliu/ggtags
 [jq]: https://stedolan.github.io/jq/
+[js2-mode]: https://github.com/mooz/js2-mode
 [json-mode]: https://github.com/joshwnj/json-mode
+[magit]: https://magit.vc/
 [markdown-mode]: https://jblevins.org/projects/markdown-mode/
+[my dotfiles]: https://github.com/tkareine/dotfiles/
 [node-build]: https://github.com/nodenv/node-build
 [npm]: https://www.npmjs.com/
+[rjsx-mode]: https://github.com/felipeochoa/rjsx-mode
 [tsserver]: https://github.com/Microsoft/TypeScript/wiki/Standalone-Server-%28tsserver%29
