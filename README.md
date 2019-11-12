@@ -53,18 +53,18 @@ There are a bunch of small improvements to editing in
 
 * Key binding `C-a`
   (`tk-editing/back-to-indentation-or-move-beginning-of-line`) switches
-  the point between the starting point of line content or the beginning
-  of the line .
+  the point between the start of line content or the beginning of the
+  line.
 * Key binding `M-/` (`tk-editing/comment-or-uncomment-region-or-line`)
-  comments or uncomments region (if region is active) or the whole line
-  the point is on (if no region is active). If the point was on the
-  beginning of the line, move point to the next line automatically.
-* By default, clearly highlight trailing whitespace and show tabs with
-  low-key color (easy to see, but not to disturb you). Toggle showing
-  trailing whitespace with `C-x W`
+  comments or uncomments either the current line the point is on (if no
+  region is active) or active region. And if the point was on the
+  beginning of the line, automatically move point to the next line.
+* By default, highlight trailing whitespace with high-key color and show
+  tabs with low-key color (easy to see, but not to disturb you). Toggle
+  showing trailing whitespace with `C-x W`
   (`tk-editing/toggle-show-trailing-whitespace`).
 * Copy the path of the current buffer to the OS clipboard with `C-c P`
-  (`tk-editing/file-path-to-clipboard`), allowing passing the path to
+  (`tk-editing/file-path-to-clipboard`), helping you to pass the path to
   other programs quickly.
 * Use [Smartparens] globally, so that it's easy to copy strings within
   quotes, for example.
@@ -198,6 +198,7 @@ npm install -g typescript
 [conf-ctags]: https://github.com/tkareine/dotfiles/blob/master/.ctags
 [conf-globalrc]: https://github.com/tkareine/dotfiles/blob/master/.globalrc
 [etc/tk-dev.el]: etc/tk-dev.el
+[etc/tk-editing.el]: etc/tk-editing.el
 [etc/tk-looks.el]: etc/tk-looks.el
 [etc/tk-network.el]: etc/tk-network.el
 [etc/tk-packages.el]: etc/tk-packages.el
