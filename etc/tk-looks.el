@@ -169,7 +169,7 @@ mode-line-process, and narrowing) and selected minor modes.")
 
 (zenburn-with-color-variables
   (custom-set-faces `(mode-line ((t (:box (:line-width 1
-                                           :color ,zenburn-green-2)))))
+                                           :color ,zenburn-yellow-2)))))
                     `(mode-line-inactive ((t (:box (:line-width 1
                                                     :color ,zenburn-bg-2)))))))
 
