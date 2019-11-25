@@ -230,8 +230,12 @@ configuration for GNU Global."
 
 (eval-after-load 'js2-mode #'tk-dev/js2-mode-customizations)
 
+(defun tk-dev/js2-mode-reparse-current-buffer ()
+  (js2-mode-idle-reparse (current-buffer)))
+
 (defun tk-dev/js2-mode-hook ()
-  (setq mode-name "JS2"))
+  (setq mode-name "JS2")
+  (add-hook 'after-revert-hook #'tk-dev/js2-mode-reparse-current-buffer nil t))
 
 (add-hook 'js2-mode-hook #'tk-dev/js2-mode-hook)
 
@@ -246,7 +250,8 @@ configuration for GNU Global."
 ;;; RJSX: js2-mode with jsx
 
 (defun tk-dev/rjsx-mode-hook ()
-  (setq mode-name "RJSX"))
+  (setq mode-name "RJSX")
+  (add-hook 'after-revert-hook #'tk-dev/js2-mode-reparse-current-buffer nil t))
 
 (add-hook 'rjsx-mode-hook #'tk-dev/rjsx-mode-hook)
 
