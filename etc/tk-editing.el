@@ -404,7 +404,14 @@ probably not done."
 
 (define-key minibuffer-local-map (kbd "C-r") #'counsel-minibuffer-history)
 
-(ivy-add-actions 'counsel-find-file '(("D" dired-delete-file "delete")))
+(defun tk-editing/dired-open-directory-of-file (file)
+  (dired (file-name-directory (directory-file-name file))))
+
+(defun tk-editing/dired-open-directory-of-project-file (file)
+  (tk-editing/dired-open-directory-of-file (concat (projectile-project-root) file)))
+
+(ivy-add-actions 'counsel-find-file '(("D" tk-editing/dired-open-directory-of-file "open file's directory")))
+(ivy-add-actions 'counsel-projectile-find-file '(("D" tk-editing/dired-open-directory-of-project-file "open file's directory")))
 
 (ivy-mode)
 
