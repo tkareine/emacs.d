@@ -79,8 +79,14 @@ Adapted from URL
 
 (require 'projectile)
 
+(defun tk-looks/buffer-for-ssh? (buffer)
+  "Return t if `buffer' uses Tramp's ssh connection, nil otherwise."
+  (when (string-match-p "^/ssh:[^:]*:" (buffer-file-name buffer))
+    t))
+
 (defvar tk-looks/mode-line-projectile-project
-  '(:eval (when (ignore-errors (projectile-project-root))
+  '(:eval (when (and (not (tk-looks/buffer-for-ssh? (current-buffer))) ;; calling `projectile-project-root' is slow with Tramp's ssh
+                     (ignore-errors (projectile-project-root)))
             (let ((project-name (projectile-project-name)))
               (put-text-property 0
                                  (length project-name)
