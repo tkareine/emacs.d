@@ -421,6 +421,9 @@ configuration for GNU Global."
 
 ;;; Rust
 
+(customize-set-variable 'rust-format-on-save t)
+(customize-set-variable 'rust-rustfmt-switches '())
+
 (with-eval-after-load 'rust-mode
   (add-hook 'flycheck-mode-hook #'flycheck-rust-setup))
 
