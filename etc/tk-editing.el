@@ -389,7 +389,6 @@ probably not done."
 (global-set-key (kbd "C-c j")   #'counsel-git-grep)
 (global-set-key (kbd "C-c l")   #'counsel-locate)
 (global-set-key (kbd "C-c m")   #'counsel-bookmark)
-(global-set-key (kbd "C-c s")   #'counsel-ag)
 (global-set-key (kbd "C-h b")   #'counsel-descbinds)
 (global-set-key (kbd "C-h f")   #'counsel-describe-function)
 (global-set-key (kbd "C-h i")   #'counsel-info-lookup-symbol)
@@ -427,7 +426,7 @@ probably not done."
 (global-set-key (kbd "C-c f") #'counsel-projectile-find-file)
 (global-set-key (kbd "C-c i") #'projectile-toggle-between-implementation-and-test)
 (global-set-key (kbd "C-c o") #'projectile-find-other-file)
-(global-set-key (kbd "C-c s") #'counsel-projectile-ag)
+(global-set-key (kbd "C-c s") #'counsel-projectile-rg)
 
 (customize-set-variable 'projectile-completion-system 'ivy)
 
@@ -446,11 +445,9 @@ probably not done."
 
 (counsel-projectile-mode)
 
-;;; Ag
+;;; Deadgrep interface for ripgrep
 
-(global-set-key (kbd "C-c A")   #'ag)
-(global-set-key (kbd "C-c a")   #'ag-project-regexp)
-(global-set-key (kbd "C-c C-a") #'ag-regexp)
+(global-set-key (kbd "C-c a") #'deadgrep)
 
 ;; Include hidden files to default arguments
 (customize-set-variable 'ag-arguments '("--smart-case" "--stats" "--hidden"))

@@ -33,11 +33,11 @@
     (ignore-errors (package-menu-execute t))))
 
 (defvar tk-packages/minimum-set
-  '(ag
-    company
+  '(company
     counsel
     counsel-projectile
     dash-at-point
+    deadgrep
     edit-indirect
     enh-ruby-mode
     expand-region

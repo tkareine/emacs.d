@@ -118,19 +118,19 @@ brew install global --with-ctags --with-pygments
 I use configuration files for [Ctags][conf-ctags] and
 [Global][conf-globalrc].
 
-### Ag (The Silver Searcher)
+### ripgrep (rg)
 
-I use two frontends for [Ag], the search tool:
+I use two frontends for [ripgrep], the fast search tool:
 
-1. [ag.el] for situations when I want to persist the search results
-   (`C-c a` for `ag-project-regexp`), and
-2. [Ivy]'s `counsel-projectile-ag` (`C-c s`) when I want to discard
+1. [deadgrep] for situations when I want to persist the search results
+   (`C-c a` for `deadgrep`), and
+2. [Ivy]'s `counsel-projectile-rg` (`C-c s`) when I want to discard
    search results right away.
 
 Installation with Homebrew:
 
 ``` bash
-brew install the_silver_searcher
+brew install ripgrep
 ```
 
 ### jq
@@ -177,7 +177,6 @@ Installation:
 npm install -g typescript
 ```
 
-[Ag]: https://github.com/ggreer/the_silver_searcher
 [Emacs macOS port]: https://bitbucket.org/mituharu/emacs-mac/src/master/
 [Flycheck]: https://www.flycheck.org/
 [GNU Global]: https://www.gnu.org/software/global/
@@ -192,11 +191,11 @@ npm install -g typescript
 [Tide]: https://github.com/ananthakumaran/tide
 [TypeScript]: https://github.com/Microsoft/TypeScript
 [Zenburn]: https://github.com/bbatsov/zenburn-emacs
-[ag.el]: https://github.com/Wilfred/ag.el
 [chnode]: https://github.com/tkareine/chnode
 [company-mode]: https://company-mode.github.io/
 [conf-ctags]: https://github.com/tkareine/dotfiles/blob/master/.ctags
 [conf-globalrc]: https://github.com/tkareine/dotfiles/blob/master/.globalrc
+[deadgrep]: https://github.com/Wilfred/deadgrep
 [etc/tk-dev.el]: etc/tk-dev.el
 [etc/tk-editing.el]: etc/tk-editing.el
 [etc/tk-looks.el]: etc/tk-looks.el
@@ -211,5 +210,6 @@ npm install -g typescript
 [my dotfiles]: https://github.com/tkareine/dotfiles/
 [node-build]: https://github.com/nodenv/node-build
 [npm]: https://www.npmjs.com/
+[ripgrep]: https://github.com/BurntSushi/ripgrep
 [rjsx-mode]: https://github.com/felipeochoa/rjsx-mode
 [tsserver]: https://github.com/Microsoft/TypeScript/wiki/Standalone-Server-%28tsserver%29
