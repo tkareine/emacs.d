@@ -17,7 +17,7 @@
     (message "TLS security test passed")))
 
 ;; Network Security Manager
-(customize-set-variable 'network-security-level 'high)
+(customize-set-variable 'network-security-level 'medium)
 
 ;; tls via external tool: check certificates
 (customize-set-variable 'tls-checktrust t)
