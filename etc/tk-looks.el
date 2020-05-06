@@ -173,10 +173,11 @@ mode-line-process, and narrowing) and selected minor modes.")
                           mode-line-end-spaces))
 
 (zenburn-with-color-variables
-  (custom-set-faces `(mode-line ((t (:box (:line-width 1
-                                           :color ,zenburn-yellow-2)))))
-                    `(mode-line-inactive ((t (:box (:line-width 1
-                                                    :color ,zenburn-bg-2)))))))
+  (custom-set-faces `(region ((,class (:background ,zenburn-bg-2))))
+                    `(mode-line ((,class (:box (:line-width 1
+                                                :color ,zenburn-yellow-2)))))
+                    `(mode-line-inactive ((,class (:box (:line-width 1
+                                                         :color ,zenburn-bg-2)))))))
 
 ;;; Frames
 
