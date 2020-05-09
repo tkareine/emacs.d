@@ -429,7 +429,7 @@ configuration for GNU Global."
 
 ;;; Markdown
 
-(customize-set-variable 'markdown-command "marked")
+(customize-set-variable 'markdown-command "marked --gfm")
 (customize-set-variable 'markdown-hide-urls nil)
 (customize-set-variable 'markdown-asymmetric-header t)
 (customize-set-variable 'markdown-live-preview-delete-export 'delete-on-export)
