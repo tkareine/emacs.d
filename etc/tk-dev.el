@@ -157,6 +157,9 @@ configuration for GNU Global."
 
 (require 'company)
 
+;; The minimum prefix length before showing idle completion
+(customize-set-variable 'company-minimum-prefix-length 2)
+
 ;; Align annotations to the right tooltip border
 (customize-set-variable 'company-tooltip-align-annotations t)
 
@@ -181,6 +184,8 @@ configuration for GNU Global."
                                             company-dabbrev))
 
 (global-company-mode)
+
+(global-set-key [C-tab] #'company-complete)
 
 ;;; CSS
 
