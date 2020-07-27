@@ -16,7 +16,7 @@
 (setq custom-file (tk-support/dotfile-path "custom.el"))
 (load custom-file t)
 
-(dolist (l '("tk-network.el" "tk-packages.el"))
+(dolist (l '("tk-internals.el" "tk-network.el" "tk-packages.el"))
   (load-file (tk-support/dotfile-path "etc" l)))
 
 ;; Start package system, make installed packages available
