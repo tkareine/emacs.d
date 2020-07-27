@@ -449,15 +449,8 @@ probably not done."
 
 (global-set-key (kbd "C-c a") #'deadgrep)
 
-;; Include hidden files to default arguments
-(customize-set-variable 'ag-arguments '("--smart-case" "--stats" "--hidden"))
-
-;; Highlight matches in compilation buffer
-(customize-set-variable 'ag-highlight-search t)
-
 ;; Projectile determines project root
-(customize-set-variable 'ag-project-root-function
-                        (lambda (_dir) (projectile-project-root)))
+(setq deadgrep-project-root-function #'projectile-project-root)
 
 ;;; Symbol-overlay
 
