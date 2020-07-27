@@ -72,8 +72,8 @@
     (size-indication-mode ("/" (-4 "%I"))))
   "Mode line construct for point position in the buffer. Example: `71:0 23%/7.7k'.
 
-Adapted from URL
-`http://www.lunaryorn.com/posts/make-your-emacs-mode-line-more-useful.html'.")
+Adapted from
+`https://web.archive.org/web/20170129214645/http://www.lunaryorn.com/posts/make-your-emacs-mode-line-more-useful.html'.")
 
 (put 'tk-looks/mode-line-position 'risky-local-variable t)
 

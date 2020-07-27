@@ -72,7 +72,7 @@ If ARG is not nil or 1, move forward ARG - 1 lines first.  If
 point reaches the beginning or end of the buffer, stop there.
 
 Adapted from
-https://emacsredux.com/blog/2013/05/22/smarter-navigation-to-the-beginning-of-a-line/"
+`https://emacsredux.com/blog/2013/05/22/smarter-navigation-to-the-beginning-of-a-line/'"
   (interactive "^p")
   (setq arg (or arg 1))
 
