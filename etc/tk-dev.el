@@ -187,6 +187,13 @@ configuration for GNU Global."
 
 (global-set-key [C-tab] #'company-complete)
 
+;;; LSP
+
+;; Number of seconds before showing documentation popup
+(customize-set-variable 'lsp-ui-doc-delay 1.0)
+
+(customize-set-variable 'lsp-ui-doc-position 'top)
+
 ;;; CSS
 
 (customize-set-variable 'css-indent-offset 2)
