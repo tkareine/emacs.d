@@ -249,36 +249,43 @@ active region, kill the current line instead."
 
 ;;; Expand-reqion
 
-(global-set-key (kbd "C-=") #'er/expand-region)
+(use-package expand-region
+  :ensure t
+
+  :bind
+  (("C-=" . er/expand-region)))
 
 ;;; Smartparens
 
-(require 'smartparens-config)
+(use-package smartparens
+  :ensure t
 
-(smartparens-global-mode)
-(show-smartparens-global-mode)
-(sp-use-paredit-bindings)
+  :demand
 
-(defun tk-dev/smartparens-mode-customizations ()
-  (define-key smartparens-mode-map (kbd "C-<left>")   nil)
-  (define-key smartparens-mode-map (kbd "C-<right>")  nil)
-  (define-key smartparens-mode-map (kbd "C-M-<down>") #'sp-down-sexp)
-  (define-key smartparens-mode-map (kbd "C-M-<up>")   #'sp-up-sexp)
-  (define-key smartparens-mode-map (kbd "C-M-a")      #'sp-beginning-of-sexp)
-  (define-key smartparens-mode-map (kbd "C-M-e")      #'sp-end-of-sexp)
-  (define-key smartparens-mode-map (kbd "C-M-k")      #'sp-kill-sexp)
-  (define-key smartparens-mode-map (kbd "C-M-n")      #'sp-next-sexp)
-  (define-key smartparens-mode-map (kbd "C-M-p")      #'sp-backward-sexp)
-  (define-key smartparens-mode-map (kbd "C-M-t")      #'sp-transpose-sexp)
-  (define-key smartparens-mode-map (kbd "C-S-<down>") #'sp-backward-down-sexp)
-  (define-key smartparens-mode-map (kbd "C-S-<up>")   #'sp-backward-up-sexp)
-  (define-key smartparens-mode-map (kbd "C-c )")      #'smartparens-strict-mode)
-  (define-key smartparens-mode-map (kbd "M-<left>")   #'sp-forward-barf-sexp)
-  (define-key smartparens-mode-map (kbd "M-<right>")  #'sp-forward-slurp-sexp)
+  :config
+  (smartparens-global-mode)
+  (show-smartparens-global-mode)
+  (sp-use-paredit-bindings)
+  (add-to-list 'tk-looks/minor-mode-alist
+               '(smartparens-mode (" SP" (:eval (if smartparens-strict-mode "/s" "")))))
 
-  (add-to-list 'tk-looks/minor-mode-alist '(smartparens-mode (" SP" (:eval (if smartparens-strict-mode "/s" ""))))))
-
-(eval-after-load 'smartparens #'tk-dev/smartparens-mode-customizations)
+  :bind
+  (:map smartparens-mode-map
+        ("C-<left>" .   nil)
+        ("C-<right>"  . nil)
+        ("C-M-<down>" . sp-down-sexp)
+        ("C-M-<up>"   . sp-up-sexp)
+        ("C-M-a"      . sp-beginning-of-sexp)
+        ("C-M-e"      . sp-end-of-sexp)
+        ("C-M-k"      . sp-kill-sexp)
+        ("C-M-n"      . sp-next-sexp)
+        ("C-M-p"      . sp-backward-sexp)
+        ("C-M-t"      . sp-transpose-sexp)
+        ("C-S-<down>" . sp-backward-down-sexp)
+        ("C-S-<up>"   . sp-backward-up-sexp)
+        ("C-c )"      . smartparens-strict-mode)
+        ("M-<left>"   . sp-forward-barf-sexp)
+        ("M-<right>"  . sp-forward-slurp-sexp)))
 
 ;;; Registers
 
@@ -355,118 +362,178 @@ probably not done."
 
 ;;; UndoTree
 
-(global-undo-tree-mode)
+(use-package undo-tree
+  :ensure t
 
-;;; Ivy, Counsel, and Swiper
+  :config
+  (global-undo-tree-mode)
 
-(require 'ivy)
-(require 'counsel)
-
-(customize-set-variable 'ivy-use-virtual-buffers t)
-(customize-set-variable 'ivy-count-format "(%d/%d) ")
-(customize-set-variable 'ivy-format-function #'ivy-format-function-arrow)
-(customize-set-variable 'ivy-height 20)
-;; Don't cd to existing directory when appending "/", allowing creating
-;; new buffer in new directory
-(customize-set-variable 'ivy-magic-slash-non-match-action nil)
-(customize-set-variable 'counsel-find-file-at-point t)
-
-(custom-set-faces '(ivy-current-match   ((t (:weight bold
-                                             :underline nil
-                                             :foreground "#f0dfaf"
-                                             :background "grey10"))))
-                  '(ivy-action          ((t (:weight bold
-                                             :foreground "#f0dfaf"))))
-                  '(ivy-subdir          ((t (:weight bold
-                                             :foreground "#ffffef"))))
-                  '(ivy-virtual         ((t (:foreground "grey70"))))
-                  '(ivy-remote          ((t (:foreground "#cc9393"))))
-                  '(ivy-modified-buffer ((t (:weight bold
-                                             :foreground "#bfebbf")))))
-
-(global-set-key (kbd "C-c b")   #'ivy-resume)
-(global-set-key (kbd "C-c g")   #'counsel-git)
-(global-set-key (kbd "C-c j")   #'counsel-git-grep)
-(global-set-key (kbd "C-c l")   #'counsel-locate)
-(global-set-key (kbd "C-c m")   #'counsel-bookmark)
-(global-set-key (kbd "C-h b")   #'counsel-descbinds)
-(global-set-key (kbd "C-h f")   #'counsel-describe-function)
-(global-set-key (kbd "C-h i")   #'counsel-info-lookup-symbol)
-(global-set-key (kbd "C-h l")   #'counsel-find-library)
-(global-set-key (kbd "C-h u")   #'counsel-unicode-char)
-(global-set-key (kbd "C-h v")   #'counsel-describe-variable)
-(global-set-key (kbd "C-S-s")   #'swiper)
-(global-set-key (kbd "C-x C-f") #'counsel-find-file)
-(global-set-key (kbd "M-x")     #'counsel-M-x)
-(global-set-key (kbd "M-y")     #'counsel-yank-pop)
-(global-set-key (kbd "s-.")     #'counsel-semantic-or-imenu)
-
-(define-key minibuffer-local-map (kbd "C-r") #'counsel-minibuffer-history)
-
-(defun tk-editing/dired-open-directory-of-file (file)
-  (dired (file-name-directory (directory-file-name file))))
-
-(defun tk-editing/dired-open-directory-of-project-file (file)
-  (tk-editing/dired-open-directory-of-file (concat (projectile-project-root) file)))
-
-(ivy-add-actions 'counsel-find-file '(("D" tk-editing/dired-open-directory-of-file "open file's directory")))
-(ivy-add-actions 'counsel-projectile-find-file '(("D" tk-editing/dired-open-directory-of-project-file "open file's directory")))
-
-(ivy-mode)
+  :bind
+  (("C-x u" . undo-tree-visualize)))
 
 ;;; Projectile
 
-(require 'projectile)
+(use-package projectile
+  :ensure t
 
-(define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
+  :demand
 
-(global-set-key (kbd "C-c D") #'projectile-dired)
-(global-set-key (kbd "C-c F") #'projectile-find-file-dwim)
-(global-set-key (kbd "C-c d") #'counsel-projectile-find-dir)
-(global-set-key (kbd "C-c f") #'counsel-projectile-find-file)
-(global-set-key (kbd "C-c i") #'projectile-toggle-between-implementation-and-test)
-(global-set-key (kbd "C-c o") #'projectile-find-other-file)
-(global-set-key (kbd "C-c s") #'counsel-projectile-rg)
+  :config
+  (dolist (l '(("js" "scss" "less" "css" "html")
+               ("jsx" "scss" "less" "css" "html")
+               ("scss" "jsx" "js" "html")
+               ("less" "jsx" "js" "html")
+               ("css" "jsx" "js" "html")))
+    (add-to-list 'projectile-other-file-alist l))
 
-(customize-set-variable 'projectile-completion-system 'ivy)
+  (projectile-register-project-type 'npm
+                                    '("package.json")
+                                    :compile "npm install"
+                                    :test "npm test"
+                                    :test-suffix ".test")
 
-(dolist (l '(("js" "scss" "less" "css" "html")
-             ("jsx" "scss" "less" "css" "html")
-             ("scss" "jsx" "js" "html")
-             ("less" "jsx" "js" "html")
-             ("css" "jsx" "js" "html")))
-  (add-to-list 'projectile-other-file-alist l))
+  :bind-keymap
+  ("C-c p" . projectile-command-map)
 
-(projectile-register-project-type 'npm
-                                  '("package.json")
-                                  :compile "npm install"
-                                  :test "npm test"
-                                  :test-suffix ".test")
+  :bind
+  (("C-c D" . projectile-dired)
+   ("C-c F" . projectile-find-file-dwim)
+   ("C-c i" . projectile-toggle-between-implementation-and-test)
+   ("C-c o" . projectile-find-other-file))
 
-(counsel-projectile-mode)
+  :custom
+  (projectile-completion-system 'ivy))
+
+;;; Ivy, Counsel, and Swiper
+
+(use-package ivy
+  :ensure t
+
+  :demand
+
+  :config
+  (ivy-mode)
+
+  :custom
+  (ivy-use-virtual-buffers t)
+  (ivy-count-format "(%d/%d) ")
+  (ivy-format-function #'ivy-format-function-arrow)
+  (ivy-height 20)
+  (ivy-magic-slash-non-match-action nil "Don't cd to existing directory when appending \"/\", allowing creating new buffer in new directory")
+
+  :custom-face
+  (ivy-current-match   ((t (:weight bold
+                            :underline nil
+                            :foreground "#f0dfaf"
+                            :background "grey10"))))
+  (ivy-action          ((t (:weight bold
+                            :foreground "#f0dfaf"))))
+  (ivy-subdir          ((t (:weight bold
+                            :foreground "#ffffef"))))
+  (ivy-virtual         ((t (:foreground "grey70"))))
+  (ivy-remote          ((t (:foreground "#cc9393"))))
+  (ivy-modified-buffer ((t (:weight bold
+                            :foreground "#bfebbf"))))
+
+  :bind
+  (("C-c b" . ivy-resume)))
+
+(use-package swiper
+  :ensure t
+
+  :bind
+  (("C-S-s" . swiper)))
+
+(use-package counsel
+  :ensure t
+
+  :demand
+
+  :config
+  (define-key minibuffer-local-map (kbd "C-r") #'counsel-minibuffer-history)
+
+  (defun tk-editing/dired-open-directory-of-file (file)
+    (dired (file-name-directory (directory-file-name file))))
+
+  (ivy-add-actions #'counsel-find-file
+                   '(("D"
+                      tk-editing/dired-open-directory-of-file
+                      "open file's directory")))
+
+  :custom
+  (counsel-find-file-at-point t)
+
+  :bind
+  (("C-c g"   . counsel-git)
+   ("C-c j"   . counsel-git-grep)
+   ("C-c l"   . counsel-locate)
+   ("C-c m"   . counsel-bookmark)
+   ("C-h b"   . counsel-descbinds)
+   ("C-h f"   . counsel-describe-function)
+   ("C-h i"   . counsel-info-lookup-symbol)
+   ("C-h l"   . counsel-find-library)
+   ("C-h u"   . counsel-unicode-char)
+   ("C-h v"   . counsel-describe-variable)
+   ("C-x C-f" . counsel-find-file)
+   ("M-x"     . counsel-M-x)
+   ("M-y"     . counsel-yank-pop)
+   ("s-."     . counsel-semantic-or-imenu)))
+
+(use-package counsel-projectile
+  :ensure t
+
+  :config
+  (defun tk-editing/dired-open-directory-of-project-file (file)
+    (tk-editing/dired-open-directory-of-file (concat (projectile-project-root) file)))
+
+  (ivy-add-actions #'counsel-projectile-find-file
+                   '(("D"
+                      tk-editing/dired-open-directory-of-project-file
+                      "open file's directory")))
+
+  (counsel-projectile-mode)
+
+  :bind
+  (("C-c d" . counsel-projectile-find-dir)
+   ("C-c f" . counsel-projectile-find-file)
+   ("C-c s" . counsel-projectile-rg))
+
+  :after
+  (counsel projectile))
 
 ;;; Deadgrep interface for ripgrep
 
-(global-set-key (kbd "C-c a") #'deadgrep)
+(use-package deadgrep
+  :ensure t
 
-;; Projectile determines project root
-(setq deadgrep-project-root-function #'projectile-project-root)
+  :config
+  ;; Projectile determines project root
+  (setq deadgrep-project-root-function #'projectile-project-root)
+
+  :bind
+  (("C-c a" . deadgrep))
+
+  :after
+  (projectile))
 
 ;;; Symbol-overlay
 
-(let ((symbol-overlay-faces
-       (cl-loop for (face . color) in '((symbol-overlay-face-1 . "orange3")
-                                        (symbol-overlay-face-2 . "DeepPink3")
-                                        (symbol-overlay-face-3 . "cyan4")
-                                        (symbol-overlay-face-4 . "MediumPurple3")
-                                        (symbol-overlay-face-5 . "SpringGreen4")
-                                        (symbol-overlay-face-6 . "DarkOrange3")
-                                        (symbol-overlay-face-7 . "HotPink3")
-                                        (symbol-overlay-face-8 . "RoyalBlue1"))
-                collect `(,face ((t (:background ,color)))))))
-  (apply 'custom-set-faces symbol-overlay-faces))
+(use-package symbol-overlay
+  :ensure t
 
-(defun tk-editing/symbol-overlay-customizations ()
+  :config
+  (let ((symbol-overlay-faces
+         (cl-loop for (face . color) in '((symbol-overlay-face-1 . "orange3")
+                                          (symbol-overlay-face-2 . "DeepPink3")
+                                          (symbol-overlay-face-3 . "cyan4")
+                                          (symbol-overlay-face-4 . "MediumPurple3")
+                                          (symbol-overlay-face-5 . "SpringGreen4")
+                                          (symbol-overlay-face-6 . "DarkOrange3")
+                                          (symbol-overlay-face-7 . "HotPink3")
+                                          (symbol-overlay-face-8 . "RoyalBlue1"))
+                  collect `(,face ((t (:background ,color)))))))
+    (apply 'custom-set-faces symbol-overlay-faces))
+
   (let ((map (make-sparse-keymap)))
     (define-key map (kbd "M-N") #'symbol-overlay-switch-forward)
     (define-key map (kbd "M-P") #'symbol-overlay-switch-backward)
@@ -478,9 +545,8 @@ probably not done."
     (define-key map (kbd "M-s") #'symbol-overlay-isearch-literally)
     (define-key map (kbd "M-t") #'symbol-overlay-toggle-in-scope)
     (define-key map (kbd "M-w") #'symbol-overlay-save-symbol)
-    (setq symbol-overlay-map map)))
+    (setq symbol-overlay-map map))
 
-(eval-after-load 'symbol-overlay #'tk-editing/symbol-overlay-customizations)
-
-(global-set-key (kbd "s-O") #'symbol-overlay-remove-all)
-(global-set-key (kbd "s-o") #'symbol-overlay-put)
+  :bind
+  (("s-O" . symbol-overlay-remove-all)
+   ("s-o" . symbol-overlay-put)))

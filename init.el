@@ -5,26 +5,16 @@
 
 (require 'tk-support)
 
-;; Shell command to setup external files as required by Emacs
-;; configuration.
-(shell-command (mapconcat #'identity
-                          `("touch ~/.cider_history"
-                            "chmod 600 ~/.cider_history")
-                          " && ")
-               t)
-
 (setq custom-file (tk-support/dotfile-path "custom.el"))
 (load custom-file t)
 
-(dolist (l '("tk-internals.el" "tk-network.el" "tk-packages.el"))
-  (load-file (tk-support/dotfile-path "etc" l)))
-
-;; Start package system, make installed packages available
-(package-initialize)
-(tk-packages/push-selected tk-packages/minimum-set)
-(tk-packages/install-missing tk-packages/minimum-set)
-
-(dolist (l '("tk-looks.el" "tk-dev.el" "tk-backups.el" "tk-editing.el"))
+(dolist (l '("tk-internals.el"
+             "tk-network.el"
+             "tk-packages.el"
+             "tk-looks.el"
+             "tk-dev.el"
+             "tk-backups.el"
+             "tk-editing.el"))
   (load-file (tk-support/dotfile-path "etc" l)))
 
 ;; Server mode

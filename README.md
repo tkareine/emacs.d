@@ -19,13 +19,6 @@ A screenshot, featuring [magit] (the right buffer) and [Ivy]'s
 The font in use is [Input][Input font]
 ([customization](https://input.fontbureau.com/download/index.html?size=14&language=python&theme=solarized-dark&family=InputMono&width=300&weight=400&line-height=1.1&a=ss&g=ss&i=serifs_round&l=serifs_round&zero=0&asterisk=height&braces=straight&preset=consolas&customize=please)).
 
-### Automatic package install for the minimum set
-
-Var `tk-packages/minimum-set` defines the minimum set of packages I've
-dediced that I will always need to have. Upon launch, Emacs will
-download any packages missing from the minimum set automatically. See
-[etc/tk-packages.el].
-
 ### TLS support with LibreSSL
 
 I prefer to use [LibreSSL] to establish TLS connections in Emacs,

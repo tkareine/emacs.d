@@ -26,6 +26,7 @@
 
 ;;; Compilation
 
+(require 'compile)
 (define-key compilation-mode-map (kbd "M-N") #'compilation-next-file)
 (define-key compilation-mode-map (kbd "M-P") #'compilation-previous-file)
 
@@ -34,29 +35,325 @@
 
 ;;; Magit
 
-(global-set-key (kbd "C-x g") #'magit-status)
+(use-package magit
+  :ensure t
 
-(customize-set-variable 'magit-completing-read-function 'ivy-completing-read)
+  :custom
+  (magit-completing-read-function #'ivy-completing-read)
+  (magit-auto-revert-mode nil "Disable `magit-auto-revert-mode', because we're using global-auto-revert-mode")
 
-(custom-set-faces '(magit-diff-context ((t (:background "grey25"))))
-                  '(magit-diff-context-highlight ((t (:background "grey32"))))
-                  '(magit-diff-hunk-heading ((t (:background "#3e5f76"))))
-                  '(magit-diff-hunk-heading-highlight ((t (:background "#619abf")))))
+  :custom-face
+  (magit-diff-context ((t (:background "grey25"))))
+  (magit-diff-context-highlight ((t (:background "grey32"))))
+  (magit-diff-hunk-heading ((t (:background "#3e5f76"))))
+  (magit-diff-hunk-heading-highlight ((t (:background "#619abf"))))
 
-;; Disable `magit-auto-revert-mode', because we're using
-;; global-auto-revert-mode
-(customize-set-variable 'magit-auto-revert-mode nil)
+  :bind
+  (("C-x g" . magit-status)))
 
 ;; Disable Emacs' Version Control interface
 ;; (customize-set-variable 'vc-handled-backends '(RCS CVS SVN SCCS SRC Bzr Git Hg Mtn))
 (customize-set-variable 'vc-handled-backends nil)
 
+;;; Ggtags
+
+(use-package ggtags
+  :ensure t
+
+  :config
+  (defun tk-dev/make-gtags (rootdir)
+    "Make gtags files to the current project.
+
+If called with a prefix, specify the directory to make gtags files for."
+    (interactive (cl-flet ((read-dir ()
+                                     (read-directory-name "Make GTAGS to: " nil nil t)))
+                   (let ((dir (if current-prefix-arg
+                                  (read-dir)
+                                (if-let ((proj-dir (projectile-project-root)))
+                                    proj-dir
+                                  (read-dir)))))
+                     (list dir))))
+    (let ((current-prefix-arg nil)) ; reset as it might affect future commands
+      (ggtags-create-tags rootdir)))
+
+  (defun tk-dev/ggtags-adjust-tag-bounds-for-scss-mode (org-bounds)
+    "Adjusts tag bounds so that `$var' gets converted to `var'. The
+dollar sign does not belong to SCSS variable symbol in our
+configuration for GNU Global."
+    (pcase org-bounds
+      (`(,org-beg . ,org-end)
+       (let* ((tag-str (buffer-substring org-beg org-end))
+              (dollar-prefix-length (tk-support/string-prefix-length-with-char ?$ tag-str))
+              (new-beg (+ org-beg dollar-prefix-length))
+              (new-bounds (if (< new-beg org-end)
+                              (cons new-beg org-end)
+                            org-bounds)))
+         new-bounds))))
+
+  (defun tk-dev/ggtags-bounds-of-tag ()
+    (let ((bounds (bounds-of-thing-at-point 'symbol)))
+      (pcase major-mode
+        ('scss-mode (tk-dev/ggtags-adjust-tag-bounds-for-scss-mode bounds))
+        (- bounds))))
+
+  ;; don't change `mode-line-buffer-identification', because we
+  ;; show project root dir in the mode line with projectile
+  (setq ggtags-mode-line-project-name nil)
+
+  (add-to-list 'tk-looks/minor-mode-alist
+               '(ggtags-mode (:eval (if ggtags-navigation-mode " GG[nav]" " GG"))))
+
+  :custom
+  (ggtags-bounds-of-tag-function #'tk-dev/ggtags-bounds-of-tag)
+  (ggtags-process-environment '("GTAGSLABEL=default"))
+
+  :bind
+  (("C-c T" . tk-dev/make-gtags)
+   ("C-c r" . ggtags-find-reference)
+   ("C-c t" . ggtags-find-tag-dwim)
+   :map ggtags-mode-map
+   ("M-]"   . nil)
+   ("C-M-/" . ggtags-find-reference))
+
+  :hook
+  ((enh-ruby-mode . ggtags-mode)
+   (less-css-mode . ggtags-mode)
+   (python-mode   . ggtags-mode)
+   (scss-mode     . ggtags-mode)
+   (sh-mode       . ggtags-mode)
+   (yaml-mode     . ggtags-mode)))
+
+;;; Xref
+
+;; Add additional keybinding, as macOS interprets M-? to show menu bar
+(global-set-key (kbd "C-M-/") #'xref-find-references)
+
+;;; Company
+
+(use-package company
+  :ensure t
+
+  :demand
+
+  :config
+  (global-company-mode)
+
+  :custom
+  (company-minimum-prefix-length 2 "The minimum prefix length before showing idle completion")
+  (company-tooltip-align-annotations t "Align annotations to the right tooltip border")
+  (company-dabbrev-downcase nil "Don't lowercase completion candidates (dabbrev backend)")
+  (company-dabbrev-ignore-case t "Ignore case when collecting completion candidates and copy candidate verbatim")
+  (company-dabbrev-code-ignore-case t "Ignore case when collecting completion candidates and copy candidate verbatim")
+  (company-backends '(company-nxml
+                      company-css
+                      company-semantic
+                      company-clang
+                      (company-capf company-dabbrev-code)
+                      company-files
+                      company-keywords
+                      company-dabbrev)
+                    "Use relevant completion engines only. Especially, put `company-capf' and `company-dabbrev-code' into same group so that the latter adds candidates the former misses.")
+
+  :bind
+  (("C-<tab>" . company-complete)))
+
 ;;; Flycheck
 
-(customize-set-variable 'flycheck-disabled-checkers '(emacs-lisp-checkdoc
-                                                      json-python-json))
+(use-package flycheck
+  :ensure t
 
-(defun tk-dev/flycheck-mode-customizations ()
+  :demand
+
+  :config
+  (global-flycheck-mode)
+
+  :custom
+  (flycheck-disabled-checkers '(emacs-lisp-checkdoc json-python-json)))
+
+;;; LSP
+
+(use-package lsp
+  :commands
+  (lsp)
+
+  :config
+  (use-package lsp-ui
+    :custom
+    (lsp-ui-doc-delay 1.0 "Number of seconds before showing documentation popup")
+    (lsp-ui-doc-position 'top)))
+
+;;; CSS
+
+(customize-set-variable 'css-indent-offset 2)
+
+;;; C family
+
+(customize-set-variable 'c-basic-offset 4)
+
+(customize-set-variable 'c-default-style '((awk-mode  . "awk")
+                                           (java-mode . "java")
+                                           (other     . "linux")))
+
+;;; Prettier-js: format buffer with prettier tool upon save
+;;; automatically
+
+(use-package prettier-js
+  :ensure t
+
+  :defer t
+
+  :config
+  (add-to-list 'tk-looks/minor-mode-alist '(prettier-js-mode (" Prettier")) t))
+
+;;; Tide, which provides tsserver
+
+(use-package tide
+  :ensure t
+
+  :defer t
+
+  :config
+  (flycheck-add-next-checker 'javascript-eslint 'jsx-tide 'append))
+
+(defvar tk-dev/prettier-config-files
+  '("prettier.config.js"
+    ".prettierrc"
+    ".prettierrc.js")
+  "Prettier configuration files, used by
+`tk-dev/tide-common-setup'.")
+
+(defun tk-dev/tide-common-setup ()
+  (interactive)
+  (require 'company)
+  (require 'flycheck)
+  (require 'tide)
+  (require 'prettier-js)
+  (tide-setup)
+  (flycheck-mode)
+  (eldoc-mode)
+  (tide-hl-identifier-mode)
+  (company-mode)
+  (when-let ((prettier-config (tk-support/locate-any-dominating-file default-directory
+                                                                     tk-dev/prettier-config-files)))
+    (message "Prettier config found: %s" prettier-config)
+    (prettier-js-mode)))
+
+;;; JavaScript
+
+(customize-set-variable 'js-indent-level 2)
+
+(use-package js2-mode
+  :ensure t
+
+  :config
+  ;; Don't double-indent multiline statement
+  (advice-add #'js--multi-line-declaration-indentation
+              :override
+              #'ignore)
+
+  (defun tk-dev/js2-mode-trigger-strict-warning-p (msg-id &rest _args)
+    (not (member msg-id '("msg.no.side.effects"))))
+
+  ;; Filter out selected warnings
+  (advice-add #'js2-add-strict-warning
+              :before-while
+              #'tk-dev/js2-mode-trigger-strict-warning-p)
+
+  (defun tk-dev/js2-mode-toggle-strict-missing-semi-warning ()
+    (interactive)
+    (setq js2-strict-missing-semi-warning (eq js2-strict-missing-semi-warning nil))
+    (js2-mode))
+
+  (put 'js2-include-node-externs 'safe-local-variable 'booleanp)
+
+  (defun tk-dev/js2-mode-reparse-current-buffer ()
+    (js2-mode-idle-reparse (current-buffer)))
+
+  (defun tk-dev/js2-mode-hook ()
+    (setq mode-name "JS2")
+    (add-hook 'after-revert-hook #'tk-dev/js2-mode-reparse-current-buffer nil t))
+
+  (add-hook 'js2-mode-hook #'tk-dev/js2-mode-hook)
+  (add-hook 'js2-mode-hook #'tk-dev/tide-common-setup)
+
+  :custom
+  (js2-basic-offset 2)
+  (js2-bounce-indent-p t)
+  (js2-concat-multiline-strings nil)
+  (js2-highlight-level 3)
+  (js2-missing-semi-one-line-override t)
+  (js2-strict-missing-semi-warning nil)
+
+  :custom-face
+  (js2-private-member ((t (:foreground "coral1"))))
+
+  :bind
+  (:map js2-mode-map
+        ("M-." . nil)
+        ("C-c j" . tk-dev/js2-mode-toggle-strict-missing-semi-warning))
+
+  :mode
+  ("\\.m?js\\'"
+   "\\.javascript\\'")
+
+  :interpreter
+  ("node\\(?:js\\)?"))
+
+;;; RJSX: js2-mode with jsx
+
+(use-package rjsx-mode
+  :ensure t
+
+  :config
+  (defun tk-dev/rjsx-mode-hook ()
+    (setq mode-name "RJSX")
+    (add-hook 'after-revert-hook #'tk-dev/js2-mode-reparse-current-buffer nil t))
+
+  (add-hook 'rjsx-mode-hook #'tk-dev/rjsx-mode-hook)
+
+  :mode
+  ("\\.jsx\\'"))
+
+;;; TypeScript
+
+(use-package typescript-mode
+  :ensure t
+
+  :config
+  (add-hook 'typescript-mode-hook #'tk-dev/tide-common-setup)
+
+  :custom
+  (typescript-indent-level 2)
+
+  :mode
+  ("\\.ts\\'"))
+
+;;; web-mode for .tsx sources
+
+(use-package web-mode
+  :config
+  (flycheck-add-mode 'typescript-tslint 'web-mode)
+
+  (defun tk-dev/tide-tsx-setup ()
+    (when (string-equal "tsx" (file-name-extension buffer-file-name))
+      (tk-dev/tide-common-setup)))
+
+  (add-hook 'web-mode-hook #'tk-dev/tide-tsx-setup)
+
+  :mode
+  ("\\.tsx\\'"
+   "\\.erb\\'"
+   "\\.ftl\\'")
+
+  :after
+  (flycheck))
+
+;;; JSON
+
+(use-package json-mode
+  :ensure t
+
+  :config
   (flycheck-define-checker tk/json-jq
     "A JSON syntax checker using jq."
     :command ("jq"
@@ -71,266 +368,21 @@
             line-end))
     :modes json-mode)
 
-  (add-to-list 'flycheck-checkers 'tk/json-jq))
+  (add-to-list 'flycheck-checkers 'tk/json-jq)
 
-(eval-after-load 'flycheck #'tk-dev/flycheck-mode-customizations)
+  :mode
+  ("\\.json\\'")
 
-(global-flycheck-mode)
-
-;;; Dash
-
-(when (eq system-type 'darwin)
-  (dolist (m (list text-mode-map prog-mode-map))
-    (define-key m (kbd "C-c ?") #'dash-at-point)))
-
-;;; Ggtags
-
-(defun tk-dev/make-gtags (rootdir)
-  "Make gtags files to the current project.
-
-If called with a prefix, specify the directory to make gtags files for."
-  (interactive (cl-flet ((read-dir ()
-                                   (read-directory-name "Make GTAGS to: " nil nil t)))
-                 (let ((dir (if current-prefix-arg
-                                (read-dir)
-                              (if-let ((proj-dir (projectile-project-root)))
-                                  proj-dir
-                                (read-dir)))))
-                    (list dir))))
-  (let ((current-prefix-arg nil)) ; reset as it might affect future commands
-    (require 'ggtags)
-    (ggtags-create-tags rootdir)))
-
-(defun tk-dev/ggtags-adjust-tag-bounds-for-scss-mode (org-bounds)
-  "Adjusts tag bounds so that `$var' gets converted to `var'. The
-dollar sign does not belong to SCSS variable symbol in our
-configuration for GNU Global."
-  (pcase org-bounds
-    (`(,org-beg . ,org-end)
-     (let* ((tag-str (buffer-substring org-beg org-end))
-            (dollar-prefix-length (tk-support/string-prefix-length-with-char ?$ tag-str))
-            (new-beg (+ org-beg dollar-prefix-length))
-            (new-bounds (if (< new-beg org-end)
-                            (cons new-beg org-end)
-                          org-bounds)))
-       new-bounds))))
-
-(defun tk-dev/ggtags-bounds-of-tag ()
-  (let ((bounds (bounds-of-thing-at-point 'symbol)))
-    (pcase major-mode
-      ('scss-mode (tk-dev/ggtags-adjust-tag-bounds-for-scss-mode bounds))
-      (- bounds))))
-
-(customize-set-variable 'ggtags-bounds-of-tag-function #'tk-dev/ggtags-bounds-of-tag)
-
-(customize-set-variable 'ggtags-process-environment '("GTAGSLABEL=default"))
-
-(defun tk-dev/ggtags-mode-customizations ()
-  (define-key ggtags-mode-map (kbd "M-]") nil)
-  (define-key ggtags-mode-map (kbd "C-M-/") #'ggtags-find-reference)
-
-  ;; don't change `mode-line-buffer-identification', because we
-  ;; show project root dir in the mode line with projectile
-  (setq ggtags-mode-line-project-name nil)
-
-  (add-to-list 'tk-looks/minor-mode-alist '(ggtags-mode (:eval (if ggtags-navigation-mode " GG[nav]" " GG")))))
-
-(eval-after-load 'ggtags #'tk-dev/ggtags-mode-customizations)
-
-(global-set-key (kbd "C-c T") #'tk-dev/make-gtags)
-(global-set-key (kbd "C-c r") #'ggtags-find-reference)
-(global-set-key (kbd "C-c t") #'ggtags-find-tag-dwim)
-
-(add-hook 'enh-ruby-mode-hook #'ggtags-mode)
-(add-hook 'less-css-mode-hook #'ggtags-mode)
-(add-hook 'python-mode-hook   #'ggtags-mode)
-(add-hook 'scss-mode-hook     #'ggtags-mode)
-(add-hook 'sh-mode-hook       #'ggtags-mode)
-(add-hook 'yaml-mode-hook     #'ggtags-mode)
-
-;;; Xref
-
-;; Add additional keybinding, as macOS interprets M-? to show menu bar
-(global-set-key (kbd "C-M-/") #'xref-find-references)
-
-;;; Company
-
-(require 'company)
-
-;; The minimum prefix length before showing idle completion
-(customize-set-variable 'company-minimum-prefix-length 2)
-
-;; Align annotations to the right tooltip border
-(customize-set-variable 'company-tooltip-align-annotations t)
-
-;; Don't lowercase completion candidates (dabbrev backend)
-(customize-set-variable 'company-dabbrev-downcase nil)
-
-;; Ignore case when collecting completion candidates and copy candidate
-;; verbatim (dabbrev and dabbrev-code backends)
-(customize-set-variable 'company-dabbrev-ignore-case t)
-(customize-set-variable 'company-dabbrev-code-ignore-case t)
-
-;; Use relevant completion engines only. Especially, put `company-capf'
-;; and `company-dabbrev-code' into same group so that the latter adds
-;; candidates the former misses.
-(customize-set-variable 'company-backends '(company-nxml
-                                            company-css
-                                            company-semantic
-                                            company-clang
-                                            (company-capf company-dabbrev-code)
-                                            company-files
-                                            company-keywords
-                                            company-dabbrev))
-
-(global-company-mode)
-
-(global-set-key [C-tab] #'company-complete)
-
-;;; LSP
-
-;; Number of seconds before showing documentation popup
-(customize-set-variable 'lsp-ui-doc-delay 1.0)
-
-(customize-set-variable 'lsp-ui-doc-position 'top)
-
-;;; CSS
-
-(customize-set-variable 'css-indent-offset 2)
-
-;;; C family
-
-(customize-set-variable 'c-basic-offset 4)
-
-(customize-set-variable 'c-default-style '((awk-mode  . "awk")
-                                           (java-mode . "java")
-                                           (other     . "linux")))
-
-;;; JavaScript
-
-(customize-set-variable 'js-indent-level 2)
-(customize-set-variable 'js2-basic-offset 2)
-(customize-set-variable 'js2-bounce-indent-p t)
-(customize-set-variable 'js2-concat-multiline-strings nil)
-(customize-set-variable 'js2-highlight-level 3)
-(customize-set-variable 'js2-missing-semi-one-line-override t)
-(customize-set-variable 'js2-strict-missing-semi-warning nil)
-
-;; Don't double-indent multiline statement
-(advice-add #'js--multi-line-declaration-indentation
-            :override
-            #'ignore)
-
-(defun tk-dev/js2-mode-trigger-strict-warning-p (msg-id &rest _args)
-  (not (member msg-id '("msg.no.side.effects"))))
-
-;; Filter out selected warnings
-(advice-add #'js2-add-strict-warning
-            :before-while
-            #'tk-dev/js2-mode-trigger-strict-warning-p)
-
-(custom-set-faces '(js2-private-member ((t (:foreground "coral1")))))
-
-(defun tk-dev/js2-mode-toggle-strict-missing-semi-warning ()
-  (interactive)
-  (setq js2-strict-missing-semi-warning (eq js2-strict-missing-semi-warning nil))
-  (js2-mode))
-
-(defun tk-dev/js2-mode-customizations ()
-  (define-key js2-mode-map (kbd "M-.")   nil)
-  (define-key js2-mode-map (kbd "C-c j") #'tk-dev/js2-mode-toggle-strict-missing-semi-warning))
-
-(eval-after-load 'js2-mode #'tk-dev/js2-mode-customizations)
-
-(defun tk-dev/js2-mode-reparse-current-buffer ()
-  (js2-mode-idle-reparse (current-buffer)))
-
-(defun tk-dev/js2-mode-hook ()
-  (setq mode-name "JS2")
-  (add-hook 'after-revert-hook #'tk-dev/js2-mode-reparse-current-buffer nil t))
-
-(add-hook 'js2-mode-hook #'tk-dev/js2-mode-hook)
-
-(add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
-(add-to-list 'auto-mode-alist '("\\.javascript\\'" . js2-mode))
-(add-to-list 'auto-mode-alist '("\\.mjs\\'" . js2-mode))
-
-(add-to-list 'interpreter-mode-alist '("node\\(?:js\\)?" . js2-mode))
-
-(put 'js2-include-node-externs 'safe-local-variable 'booleanp)
-
-;;; RJSX: js2-mode with jsx
-
-(defun tk-dev/rjsx-mode-hook ()
-  (setq mode-name "RJSX")
-  (add-hook 'after-revert-hook #'tk-dev/js2-mode-reparse-current-buffer nil t))
-
-(add-hook 'rjsx-mode-hook #'tk-dev/rjsx-mode-hook)
-
-;;; Prettier-js: format buffer with prettier tool upon save
-;;; automatically
-
-(defun tk-dev/prettier-js-mode-customizations ()
-  (add-to-list 'tk-looks/minor-mode-alist '(prettier-js-mode (" Prettier")) t))
-
-(eval-after-load 'prettier-js #'tk-dev/prettier-js-mode-customizations)
-
-;;; TypeScript
-
-(require 'tide)
-
-(customize-set-variable 'typescript-indent-level 2)
-
-(defvar tk-dev/prettier-config-files
-  '("prettier.config.js"
-    ".prettierrc"
-    ".prettierrc.js")
-  "Prettier configuration files, used by
-`tk-dev/tide-common-setup'.")
-
-(defun tk-dev/tide-common-setup ()
-  (interactive)
-  (tide-setup)
-  (flycheck-mode)
-  (eldoc-mode)
-  (tide-hl-identifier-mode)
-  (company-mode)
-  (when-let ((prettier-config (tk-support/locate-any-dominating-file default-directory
-                                                                     tk-dev/prettier-config-files)))
-    (message "Prettier config found: %s" prettier-config)
-    (prettier-js-mode)))
-
-;;; TypeScript: .ts sources
-
-(add-hook 'typescript-mode-hook #'tk-dev/tide-common-setup)
-
-;;; TypeScript: .js sources
-
-(add-hook 'js2-mode-hook #'tk-dev/tide-common-setup)
-
-;;; TypeScript: .tsx sources
-
-(defun tk-dev/tide-tsx-setup ()
-  (when (string-equal "tsx" (file-name-extension buffer-file-name))
-    (tk-dev/tide-common-setup)))
-
-(add-hook 'web-mode-hook #'tk-dev/tide-tsx-setup)
-
-(add-to-list 'auto-mode-alist '("\\.tsx\\'" . web-mode))
-
-(flycheck-add-mode 'typescript-tslint 'web-mode)
-
-;;; TypeScript: .jsx sources
-
-(flycheck-add-next-checker 'javascript-eslint 'jsx-tide 'append)
-
-;;; JSON
-
-(add-to-list 'auto-mode-alist '("\\.json\\'" . json-mode))
+  :after
+  (flycheck))
 
 ;;; YAML
 
-(add-to-list 'auto-mode-alist '("/\\.gemrc\\'" . yaml-mode))
+(use-package yaml-mode
+  :ensure t
+
+  :mode
+  ("/\\.ya?ml\\'" "/\\.gemrc\\'"))
 
 ;;; ELisp
 
@@ -344,7 +396,8 @@ configuration for GNU Global."
 
 ;;; Clojure
 
-(defun tk-dev/clojure-mode-customizations ()
+(use-package clojure-mode
+  :config
   (define-clojure-indent
     (ANY       2)
     (DELETE    2)
@@ -358,109 +411,134 @@ configuration for GNU Global."
     (context   1)
     (defroutes 'defun)
     (describe  1)
-    (it        1)))
+    (it        1))
 
-(eval-after-load 'clojure-mode #'tk-dev/clojure-mode-customizations)
+  (defun tk-dev/clojure-mode-hook ()
+    (smartparens-strict-mode))
 
-(defun tk-dev/clojure-mode-hook ()
-  (smartparens-strict-mode))
+  (add-hook 'clojure-mode-hook #'tk-dev/clojure-mode-hook)
 
-(add-hook 'clojure-mode-hook #'tk-dev/clojure-mode-hook)
+  :mode
+  ("/\\.clj\\'"
+   "/\\.edn\\'")
+
+  :after
+  (smartparens))
 
 ;;; CIDER
 
-(customize-set-variable 'cider-eval-result-prefix ";; => ")
-(customize-set-variable 'cider-repl-result-prefix ";; => ")
-(customize-set-variable 'cider-repl-history-file "~/.cider_history")
+(use-package cider
+  :pin
+  melpa-stable
 
-;; Attempt to use the symbol at point as input for `cider-find-var', and
-;; only prompt if that throws an error
-(customize-set-variable 'cider-prompt-for-symbol nil)
+  :init
+  (shell-command (mapconcat #'identity
+                            `("touch ~/.cider_history"
+                              "chmod 600 ~/.cider_history")
+                            " && ")
+                 t)
 
-;; I want to inject dependencies manually via
-;; `~/.lein/profiles.clj'. Otherwise Leiningen's `:pedantic? :abort'
-;; setting causes `lein repl' to abort due to overriding version of
-;; `org.clojure/tools.nrepl'.
-(customize-set-variable 'cider-inject-dependencies-at-jack-in nil)
-
-(custom-set-faces '(cider-result-overlay-face ((t (:background "grey30")))))
-
-;; Shorten mode line info
-(customize-set-variable 'cider-mode-line '(" " (:eval (cider--modeline-info))))
-
-;; Add related info to mode line
-(defun tk-dev/cider-mode-customizations ()
+  :config
   (add-to-list 'tk-looks/minor-mode-alist '(cider-popup-buffer-mode (" cider-tmp")))
   (add-to-list 'tk-looks/minor-mode-alist '(cider-auto-test-mode (cider-mode " Test")))
   (add-to-list 'tk-looks/minor-mode-alist '(cider--debug-mode " DEBUG"))
-  (add-to-list 'tk-looks/minor-mode-alist '(cider-mode cider-mode-line)))
+  (add-to-list 'tk-looks/minor-mode-alist '(cider-mode cider-mode-line))
 
-(eval-after-load 'cider-mode #'tk-dev/cider-mode-customizations)
+  (defun tk-dev/cider-mode-hook ()
+    (local-set-key (kbd "C-c B")   #'cider-connection-browser)
+    (local-set-key (kbd "C-c M-l") #'cider-inspect-last-result)
+    (local-set-key (kbd "C-c M-R") #'cider-restart))
 
-(defun tk-dev/cider-mode-hook ()
-  (local-set-key (kbd "C-c B")   #'cider-connection-browser)
-  (local-set-key (kbd "C-c M-l") #'cider-inspect-last-result)
-  (local-set-key (kbd "C-c M-R") #'cider-restart))
+  (add-hook 'cider-mode-hook #'tk-dev/cider-mode-hook)
+  (add-hook 'cider-repl-mode-hook #'tk-dev/cider-mode-hook)
 
-(add-hook 'cider-mode-hook #'tk-dev/cider-mode-hook)
-(add-hook 'cider-repl-mode-hook #'tk-dev/cider-mode-hook)
+  :custom
+  (cider-eval-result-prefix ";; => ")
+  (cider-repl-result-prefix ";; => ")
+  (cider-repl-history-file "~/.cider_history")
+  (cider-prompt-for-symbol nil "Attempt to use the symbol at point as input for `cider-find-var', and only prompt if that throws an error")
+  (cider-inject-dependencies-at-jack-in nil "I want to inject dependencies manually via `~/.lein/profiles.clj'. Otherwise Leiningen's `:pedantic? :abort' setting causes `lein repl' to abort due to overriding version of `org.clojure/tools.nrepl'.")
+  (cider-mode-line '(" " (:eval (cider--modeline-info))) "Shorten mode line info")
 
-;;; CoffeeScript
+  :custom-face
+  (cider-result-overlay-face ((t (:background "grey30"))))
 
-(customize-set-variable 'coffee-tab-width 2)
+  :after
+  (clojure-mode))
 
 ;;; Haskell
 
-(customize-set-variable 'haskell-process-suggest-remove-import-lines t)
-(customize-set-variable 'haskell-process-auto-import-loaded-modules t)
-(customize-set-variable 'haskell-process-log t)
-(customize-set-variable 'haskell-process-type 'cabal-repl)
+(use-package haskell-mode
+  :config
+  (defun tk-dev/haskell-mode-hook ()
+    (turn-on-haskell-indentation)
+    (turn-on-haskell-decl-scan)
+    (interactive-haskell-mode))
 
-(defun tk-dev/haskell-mode-customizations ()
-  (define-key haskell-mode-map (kbd "<f8>")  #'haskell-navigate-imports)
-  (define-key haskell-mode-map (kbd "C-`")   #'haskell-interactive-bring)
-  (define-key haskell-mode-map (kbd "C-c c") #'haskell-process-cabal)
-  (define-key haskell-mode-map (kbd "C-c o") #'haskell-hoogle))
+  (add-hook 'haskell-mode-hook #'tk-dev/haskell-mode-hook)
 
-(eval-after-load 'haskell-mode #'tk-dev/haskell-mode-customizations)
+  :custom
+  (haskell-process-suggest-remove-import-lines t)
+  (haskell-process-auto-import-loaded-modules t)
+  (haskell-process-log t)
+  (haskell-process-type 'cabal-repl)
 
-(defun tk-dev/haskell-mode-hook ()
-  (turn-on-haskell-indentation)
-  (turn-on-haskell-decl-scan)
-  (interactive-haskell-mode))
+  :bind
+  (:map haskell-mode-map
+        ("<f8>"  . haskell-navigate-imports)
+        ("C-`"   . haskell-interactive-bring)
+        ("C-c c" . haskell-process-cabal)
+        ("C-c o" . haskell-hoogle))
 
-(add-hook 'haskell-mode-hook #'tk-dev/haskell-mode-hook)
+  :mode
+  ("/\\.hs\\'"))
 
 ;;; Rust
 
-(customize-set-variable 'rust-format-on-save t)
-(customize-set-variable 'rust-rustfmt-switches '())
+(use-package rust-mode
+  :config
+  (use-package flycheck-rust
+    :config
+    (add-hook 'flycheck-mode-hook #'flycheck-rust-setup))
 
-(with-eval-after-load 'rust-mode
-  (add-hook 'flycheck-mode-hook #'flycheck-rust-setup))
+  :custom
+  (rust-format-on-save t)
+  (rust-rustfmt-switches '())
+
+  :mode
+  ("/\\.rs\\'"))
 
 ;;; Markdown
 
-(customize-set-variable 'markdown-command "marked --gfm")
-(customize-set-variable 'markdown-hide-urls nil)
-(customize-set-variable 'markdown-asymmetric-header t)
-(customize-set-variable 'markdown-live-preview-delete-export 'delete-on-export)
+(use-package markdown-mode
+  :ensure t
 
-(custom-set-faces '(markdown-code-face ((t (:background "#4b4b4b")))))
+  :custom
+  (markdown-command "marked --gfm")
+  (markdown-hide-urls nil)
+  (markdown-asymmetric-header t)
+  (markdown-live-preview-delete-export 'delete-on-export)
 
-(add-to-list 'auto-mode-alist '("\\.markdown\\'" . gfm-mode))
-(add-to-list 'auto-mode-alist '("\\.md\\'" . gfm-mode))
+  :custom-face
+  (markdown-code-face ((t (:background "#4b4b4b"))))
+
+  :mode
+  (("\\.markdown\\'" . gfm-mode)
+   ("\\.md\\'"       . gfm-mode)))
 
 ;;; Ruby
 
-(add-to-list 'auto-mode-alist '("/gemfile\\'" . enh-ruby-mode))
-(add-to-list 'auto-mode-alist '("/guardfile\\'" . enh-ruby-mode))
-(add-to-list 'auto-mode-alist '("/rakefile\\'" . enh-ruby-mode))
-(add-to-list 'auto-mode-alist '("/vagrantfile\\'" . enh-ruby-mode))
-(add-to-list 'auto-mode-alist '("\\.rake\\'" . enh-ruby-mode))
-(add-to-list 'auto-mode-alist '("\\.rb\\'" . enh-ruby-mode))
+(use-package enh-ruby-mode
+  :mode
+  (("/gemfile\\'"     . enh-ruby-mode)
+   ("/guardfile\\'"   . enh-ruby-mode)
+   ("/rakefile\\'"    . enh-ruby-mode)
+   ("/vagrantfile\\'" . enh-ruby-mode)
+   ("\\.rake\\'"      . enh-ruby-mode)
+   ("\\.rb\\'"        . enh-ruby-mode))
 
-(add-to-list 'interpreter-mode-alist '("j?ruby\\(?:1.8\\|1.9\\)?" . enh-ruby-mode))
+  :interpreter
+  ("j?ruby\\(?:1.8\\|1.9\\)?" . enh-ruby-mode))
 
 ;;; Shell script
 
@@ -475,9 +553,15 @@ configuration for GNU Global."
 
 ;;; SQL
 
-(with-eval-after-load 'sql (load-library "sql-indent"))
+(use-package sql-indent
+  :pin gnu
 
-;; Web
+  :hook
+  (sql-mode . sqlind-minor-mode))
 
-(add-to-list 'auto-mode-alist '("\\.erb\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.ftl\\'" . web-mode))
+;;; restclient
+
+(use-package restclient
+  :ensure t
+
+  :defer t)

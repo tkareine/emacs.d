@@ -47,8 +47,20 @@
 (customize-set-variable 'whitespace-line-column 140)
 
 ;; Color theme
-(require 'zenburn-theme)
-(load-theme 'zenburn t)
+(use-package zenburn-theme
+  :ensure t
+
+  :demand
+
+  :config
+  (load-theme 'zenburn t)
+
+  (zenburn-with-color-variables
+    (custom-set-faces `(region ((,class (:background ,zenburn-bg-2))))
+                      `(mode-line ((,class (:box (:line-width 1
+                                                  :color ,zenburn-yellow-2)))))
+                      `(mode-line-inactive ((,class (:box (:line-width 1
+                                                           :color ,zenburn-bg-2))))))))
 
 ;;; Mode line
 
@@ -76,8 +88,6 @@ Adapted from
 `https://web.archive.org/web/20170129214645/http://www.lunaryorn.com/posts/make-your-emacs-mode-line-more-useful.html'.")
 
 (put 'tk-looks/mode-line-position 'risky-local-variable t)
-
-(require 'projectile)
 
 (defvar tk-looks/mode-line-projectile-project
   '(:eval (when (and
@@ -172,13 +182,6 @@ mode-line-process, and narrowing) and selected minor modes.")
                           tk-looks/mode-line-modes
                           mode-line-end-spaces))
 
-(zenburn-with-color-variables
-  (custom-set-faces `(region ((,class (:background ,zenburn-bg-2))))
-                    `(mode-line ((,class (:box (:line-width 1
-                                                :color ,zenburn-yellow-2)))))
-                    `(mode-line-inactive ((,class (:box (:line-width 1
-                                                         :color ,zenburn-bg-2)))))))
-
 ;;; Frames
 
 ;; Frame title: show
@@ -217,10 +220,22 @@ mode-line-process, and narrowing) and selected minor modes.")
 
 ;;; GitGutter
 
-(customize-set-variable 'git-gutter:lighter " gg")
+(use-package git-gutter
+  :ensure t
 
-(global-git-gutter-mode)
+  :demand
+
+  :config
+  (global-git-gutter-mode)
+
+  :custom
+  (git-gutter:lighter " gg"))
 
 ;;; Which-key: show available key bindings
 
-(which-key-mode)
+(use-package which-key
+  :ensure t
+
+  :demand
+
+  :config (which-key-mode))
