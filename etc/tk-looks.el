@@ -238,4 +238,5 @@ mode-line-process, and narrowing) and selected minor modes.")
 
   :demand
 
-  :config (which-key-mode))
+  :config
+  (which-key-mode))

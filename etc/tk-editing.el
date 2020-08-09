@@ -496,10 +496,7 @@ probably not done."
   :bind
   (("C-c d" . counsel-projectile-find-dir)
    ("C-c f" . counsel-projectile-find-file)
-   ("C-c s" . counsel-projectile-rg))
-
-  :after
-  (counsel projectile))
+   ("C-c s" . counsel-projectile-rg)))
 
 ;;; Deadgrep interface for ripgrep
 
@@ -511,10 +508,7 @@ probably not done."
   (setq deadgrep-project-root-function #'projectile-project-root)
 
   :bind
-  (("C-c a" . deadgrep))
-
-  :after
-  (projectile))
+  (("C-c a" . deadgrep)))
 
 ;;; Symbol-overlay
 

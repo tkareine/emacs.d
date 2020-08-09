@@ -33,6 +33,48 @@
 ;; Highlight color for next-error, used by `compilation-display-error'
 (custom-set-faces '(next-error ((t (:background "SkyBlue3" :foreground "#dcdccc")))))
 
+;;; Company
+
+(use-package company
+  :ensure t
+
+  :demand
+
+  :config
+  (global-company-mode)
+
+  :custom
+  (company-minimum-prefix-length 2 "The minimum prefix length before showing idle completion")
+  (company-tooltip-align-annotations t "Align annotations to the right tooltip border")
+  (company-dabbrev-downcase nil "Don't lowercase completion candidates (dabbrev backend)")
+  (company-dabbrev-ignore-case t "Ignore case when collecting completion candidates and copy candidate verbatim")
+  (company-dabbrev-code-ignore-case t "Ignore case when collecting completion candidates and copy candidate verbatim")
+  (company-backends '(company-nxml
+                      company-css
+                      company-semantic
+                      company-clang
+                      (company-capf company-dabbrev-code)
+                      company-files
+                      company-keywords
+                      company-dabbrev)
+                    "Use relevant completion engines only. Especially, put `company-capf' and `company-dabbrev-code' into same group so that the latter adds candidates the former misses.")
+
+  :bind
+  (("C-<tab>" . company-complete)))
+
+;;; Flycheck
+
+(use-package flycheck
+  :ensure t
+
+  :demand
+
+  :config
+  (global-flycheck-mode)
+
+  :custom
+  (flycheck-disabled-checkers '(emacs-lisp-checkdoc json-python-json)))
+
 ;;; Magit
 
 (use-package magit
@@ -55,7 +97,12 @@
 ;; (customize-set-variable 'vc-handled-backends '(RCS CVS SVN SCCS SRC Bzr Git Hg Mtn))
 (customize-set-variable 'vc-handled-backends nil)
 
-;;; Ggtags
+;;; Xref
+
+;; Add additional keybinding, as macOS interprets M-? to show menu bar
+(global-set-key (kbd "C-M-/") #'xref-find-references)
+
+;;; ggtags frontend for GNU global
 
 (use-package ggtags
   :ensure t
@@ -123,64 +170,26 @@ configuration for GNU Global."
    (sh-mode       . ggtags-mode)
    (yaml-mode     . ggtags-mode)))
 
-;;; Xref
-
-;; Add additional keybinding, as macOS interprets M-? to show menu bar
-(global-set-key (kbd "C-M-/") #'xref-find-references)
-
-;;; Company
-
-(use-package company
-  :ensure t
-
-  :demand
-
-  :config
-  (global-company-mode)
-
-  :custom
-  (company-minimum-prefix-length 2 "The minimum prefix length before showing idle completion")
-  (company-tooltip-align-annotations t "Align annotations to the right tooltip border")
-  (company-dabbrev-downcase nil "Don't lowercase completion candidates (dabbrev backend)")
-  (company-dabbrev-ignore-case t "Ignore case when collecting completion candidates and copy candidate verbatim")
-  (company-dabbrev-code-ignore-case t "Ignore case when collecting completion candidates and copy candidate verbatim")
-  (company-backends '(company-nxml
-                      company-css
-                      company-semantic
-                      company-clang
-                      (company-capf company-dabbrev-code)
-                      company-files
-                      company-keywords
-                      company-dabbrev)
-                    "Use relevant completion engines only. Especially, put `company-capf' and `company-dabbrev-code' into same group so that the latter adds candidates the former misses.")
-
-  :bind
-  (("C-<tab>" . company-complete)))
-
-;;; Flycheck
-
-(use-package flycheck
-  :ensure t
-
-  :demand
-
-  :config
-  (global-flycheck-mode)
-
-  :custom
-  (flycheck-disabled-checkers '(emacs-lisp-checkdoc json-python-json)))
-
 ;;; LSP
 
-(use-package lsp
+(use-package lsp-mode
   :commands
   (lsp)
 
-  :config
-  (use-package lsp-ui
-    :custom
-    (lsp-ui-doc-delay 1.0 "Number of seconds before showing documentation popup")
-    (lsp-ui-doc-position 'top)))
+  :custom
+  (lsp-enable-snippet nil)
+
+  :hook
+  ((lsp-mode  . lsp-enable-which-key-integration)
+   (rust-mode . lsp)))
+
+(use-package lsp-ui
+  :commands
+  (lsp-ui-mode)
+
+  :custom
+  (lsp-ui-doc-delay 1.0 "Number of seconds before showing documentation popup")
+  (lsp-ui-doc-position 'top))
 
 ;;; CSS
 
@@ -197,48 +206,67 @@ configuration for GNU Global."
 ;;; Prettier-js: format buffer with prettier tool upon save
 ;;; automatically
 
-(use-package prettier-js
-  :ensure t
-
-  :defer t
-
-  :config
-  (add-to-list 'tk-looks/minor-mode-alist '(prettier-js-mode (" Prettier")) t))
-
-;;; Tide, which provides tsserver
-
-(use-package tide
-  :ensure t
-
-  :defer t
-
-  :config
-  (flycheck-add-next-checker 'javascript-eslint 'jsx-tide 'append))
-
 (defvar tk-dev/prettier-config-files
   '("prettier.config.js"
     ".prettierrc"
     ".prettierrc.js")
   "Prettier configuration files, used by
-`tk-dev/tide-common-setup'.")
+`tk-dev/prettier-common-setup'.")
 
-(defun tk-dev/tide-common-setup ()
+(defun tk-dev/prettier-common-setup ()
   (interactive)
-  (require 'company)
-  (require 'flycheck)
-  (require 'tide)
-  (require 'prettier-js)
-  (tide-setup)
-  (flycheck-mode)
-  (eldoc-mode)
-  (tide-hl-identifier-mode)
-  (company-mode)
   (when-let ((prettier-config (tk-support/locate-any-dominating-file default-directory
                                                                      tk-dev/prettier-config-files)))
     (message "Prettier config found: %s" prettier-config)
     (prettier-js-mode)))
 
-;;; JavaScript
+(defun tk-dev/prettier-tsx-setup ()
+  (when (string-equal "tsx" (file-name-extension buffer-file-name))
+    (tk-dev/prettier-common-setup)))
+
+(use-package prettier-js
+  :ensure t
+
+  :commands
+  (prettier-js-mode)
+
+  :config
+  (add-to-list 'tk-looks/minor-mode-alist '(prettier-js-mode (" Prettier")) t)
+
+  :hook
+  ((js2-mode        . tk-dev/prettier-common-setup)
+   ;; don't add hook to rjsx-mode-hook, because rjsx-mode derives from js2-mode
+   (typescript-mode . tk-dev/prettier-common-setup)
+   (web-mode        . tk-dev/prettier-tsx-setup)))
+
+;;; Tide, which provides tsserver
+
+(defun tk-dev/tide-common-setup ()
+  (interactive)
+  (tide-setup)
+  (eldoc-mode)
+  (tide-hl-identifier-mode))
+
+(defun tk-dev/tide-tsx-setup ()
+  (when (string-equal "tsx" (file-name-extension buffer-file-name))
+    (tk-dev/tide-common-setup)))
+
+(use-package tide
+  :ensure t
+
+  :commands
+  (tide-setup)
+
+  :config
+  (flycheck-add-next-checker 'javascript-eslint 'jsx-tide 'append)
+
+  :hook
+  ((js2-mode        . tk-dev/tide-common-setup)
+   ;; don't add hook to rjsx-mode-hook, because rjsx-mode derives from js2-mode
+   (typescript-mode . tk-dev/tide-common-setup)
+   (web-mode        . tk-dev/tide-tsx-setup)))
+
+;;; js2-mode for `.js' sources
 
 (customize-set-variable 'js-indent-level 2)
 
@@ -274,7 +302,6 @@ configuration for GNU Global."
     (add-hook 'after-revert-hook #'tk-dev/js2-mode-reparse-current-buffer nil t))
 
   (add-hook 'js2-mode-hook #'tk-dev/js2-mode-hook)
-  (add-hook 'js2-mode-hook #'tk-dev/tide-common-setup)
 
   :custom
   (js2-basic-offset 2)
@@ -299,7 +326,7 @@ configuration for GNU Global."
   :interpreter
   ("node\\(?:js\\)?"))
 
-;;; RJSX: js2-mode with jsx
+;;; RJSX: js2-mode for `.jsx' sources
 
 (use-package rjsx-mode
   :ensure t
@@ -314,13 +341,10 @@ configuration for GNU Global."
   :mode
   ("\\.jsx\\'"))
 
-;;; TypeScript
+;;; TypeScript for `.ts' sources
 
 (use-package typescript-mode
   :ensure t
-
-  :config
-  (add-hook 'typescript-mode-hook #'tk-dev/tide-common-setup)
 
   :custom
   (typescript-indent-level 2)
@@ -328,25 +352,16 @@ configuration for GNU Global."
   :mode
   ("\\.ts\\'"))
 
-;;; web-mode for .tsx sources
+;;; web-mode for `.tsx' sources
 
 (use-package web-mode
   :config
   (flycheck-add-mode 'typescript-tslint 'web-mode)
 
-  (defun tk-dev/tide-tsx-setup ()
-    (when (string-equal "tsx" (file-name-extension buffer-file-name))
-      (tk-dev/tide-common-setup)))
-
-  (add-hook 'web-mode-hook #'tk-dev/tide-tsx-setup)
-
   :mode
   ("\\.tsx\\'"
    "\\.erb\\'"
-   "\\.ftl\\'")
-
-  :after
-  (flycheck))
+   "\\.ftl\\'"))
 
 ;;; JSON
 
@@ -371,10 +386,7 @@ configuration for GNU Global."
   (add-to-list 'flycheck-checkers 'tk/json-jq)
 
   :mode
-  ("\\.json\\'")
-
-  :after
-  (flycheck))
+  ("\\.json\\'"))
 
 ;;; YAML
 
@@ -382,7 +394,8 @@ configuration for GNU Global."
   :ensure t
 
   :mode
-  ("/\\.ya?ml\\'" "/\\.gemrc\\'"))
+  ("/\\.ya?ml\\'"
+   "/\\.gemrc\\'"))
 
 ;;; ELisp
 
@@ -420,16 +433,12 @@ configuration for GNU Global."
 
   :mode
   ("/\\.clj\\'"
-   "/\\.edn\\'")
-
-  :after
-  (smartparens))
+   "/\\.edn\\'"))
 
 ;;; CIDER
 
 (use-package cider
-  :pin
-  melpa-stable
+  :pin melpa-stable
 
   :init
   (shell-command (mapconcat #'identity
@@ -496,17 +505,19 @@ configuration for GNU Global."
 ;;; Rust
 
 (use-package rust-mode
-  :config
-  (use-package flycheck-rust
-    :config
-    (add-hook 'flycheck-mode-hook #'flycheck-rust-setup))
-
   :custom
   (rust-format-on-save t)
   (rust-rustfmt-switches '())
 
   :mode
   ("/\\.rs\\'"))
+
+(use-package flycheck-rust
+  :config
+  (add-hook 'flycheck-mode-hook #'flycheck-rust-setup)
+
+  :after
+  (rust-mode))
 
 ;;; Markdown
 
@@ -530,15 +541,15 @@ configuration for GNU Global."
 
 (use-package enh-ruby-mode
   :mode
-  (("/gemfile\\'"     . enh-ruby-mode)
-   ("/guardfile\\'"   . enh-ruby-mode)
-   ("/rakefile\\'"    . enh-ruby-mode)
-   ("/vagrantfile\\'" . enh-ruby-mode)
-   ("\\.rake\\'"      . enh-ruby-mode)
-   ("\\.rb\\'"        . enh-ruby-mode))
+  ("/gemfile\\'"
+   "/guardfile\\'"
+   "/rakefile\\'"
+   "/vagrantfile\\'"
+   "\\.rake\\'"
+   "\\.rb\\'")
 
   :interpreter
-  ("j?ruby\\(?:1.8\\|1.9\\)?" . enh-ruby-mode))
+  ("j?ruby\\(?:1.8\\|1.9\\)?"))
 
 ;;; Shell script
 

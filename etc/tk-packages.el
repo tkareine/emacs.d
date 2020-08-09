@@ -11,6 +11,7 @@
     (package-menu-mark-upgrades)
     (ignore-errors (package-menu-execute t))))
 
+;; We call `package-initialize' ourselves.
 (customize-set-variable 'package-enable-at-startup nil)
 
 (customize-set-variable 'package-archives '(("gnu"          . "https://elpa.gnu.org/packages/")
