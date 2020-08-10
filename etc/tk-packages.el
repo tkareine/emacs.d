@@ -1,7 +1,5 @@
 ;; -*- lexical-binding: t; -*-
 
-(require 'package)
-
 (defun tk-packages/upgrade-packages ()
   (let ((package-menu-async nil))
     (message ";;; Updating package list…\n")
@@ -18,8 +16,23 @@
                                             ("melpa"        . "https://melpa.org/packages/")
                                             ("melpa-stable" . "https://stable.melpa.org/packages/")))
 
-;; Start package system, make installed packages available
+;; Start package system, make installed packages available (activation)
 (package-initialize)
 
 (eval-when-compile
+  (unless (package-installed-p 'use-package)
+    (package-refresh-contents)
+    (package-install 'use-package))
+
   (require 'use-package))
+
+(use-package tk-support
+  :commands
+  (tk-support/active-region-or-line
+   tk-support/locate-any-dominating-file
+   tk-support/npm-global-path
+   tk-support/pretty-print-xml
+   tk-support/string-prefix-length-with-char)
+
+  :load-path
+  "site-lisp/tk-support")

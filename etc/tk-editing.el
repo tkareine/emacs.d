@@ -1,8 +1,5 @@
 ;; -*- lexical-binding: t; -*-
 
-(require 'tk-support)
-(require 'subr-x)
-
 ;; Prefer UTF-8 encoding for input and output
 (set-language-environment "UTF-8")
 (prefer-coding-system 'utf-8)
@@ -138,6 +135,7 @@ Adapted from
 active) or region, moving position if point is at the beginning
 of region."
   (interactive)
+  (require 'subr-x)
   (when-let ((region (tk-support/active-region-or-line)))
     (let* ((region-begin-pos (car region))
            (region-end-pos (cadr region))
@@ -317,7 +315,7 @@ active region, kill the current line instead."
 (put 'dired-find-alternate-file 'disabled nil)
 
 ;; DiredX: for Dired Jump
-(require 'dired-x)
+(with-eval-after-load 'dired (require 'dired-x))
 
 ;;; Uniquify: append dir name to buffers with similar filenames
 
@@ -327,8 +325,8 @@ active region, kill the current line instead."
 
 ;;; Saveplace: save point location in the buffer when revisiting the buffer
 
-(customize-set-variable 'save-place-file (tk-support/dotfile-path "saveplace"))
-(customize-set-variable 'savehist-file (tk-support/dotfile-path "savehist"))
+(customize-set-variable 'save-place-file (tk-init/user-emacs-path "saveplace"))
+(customize-set-variable 'savehist-file (tk-init/user-emacs-path "savehist"))
 
 (save-place-mode)
 (savehist-mode)
@@ -337,13 +335,13 @@ active region, kill the current line instead."
 
 (require 'recentf)
 
-(customize-set-variable 'recentf-save-file (tk-support/dotfile-path "recentf"))
+(customize-set-variable 'recentf-save-file (tk-init/user-emacs-path "recentf"))
 
 ;; Exclude recentf save file and Emacs ELPA autoloads
 (customize-set-variable 'recentf-exclude
                         (list
-                         (concat "\\`" (tk-support/dotfile-path "recentf") "\\'")
-                         (concat "\\`" (tk-support/dotfile-path "elpa") "/.*-autoloads.elc?\\'")))
+                         (concat "\\`" (tk-init/user-emacs-path "recentf") "\\'")
+                         (concat "\\`" (tk-init/user-emacs-path "elpa") "/.*-autoloads.elc?\\'")))
 
 (defun tk-editing/recentf-save-list-silent ()
   "Save the list of recent files periodically. Normally, recentf saves

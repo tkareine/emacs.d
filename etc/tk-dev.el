@@ -1,8 +1,5 @@
 ;; -*- lexical-binding: t; -*-
 
-(require 'subr-x)
-(require 'tk-support)
-
 ;;; Ediff
 
 ;; Use current frame for control panel
@@ -26,9 +23,11 @@
 
 ;;; Compilation
 
-(require 'compile)
-(define-key compilation-mode-map (kbd "M-N") #'compilation-next-file)
-(define-key compilation-mode-map (kbd "M-P") #'compilation-previous-file)
+(defun tk-dev/compilation-mode-customizations ()
+  (define-key compilation-mode-map (kbd "M-N") #'compilation-next-file)
+  (define-key compilation-mode-map (kbd "M-P") #'compilation-previous-file))
+
+(eval-after-load 'compile #'tk-dev/compilation-mode-customizations)
 
 ;; Highlight color for next-error, used by `compilation-display-error'
 (custom-set-faces '(next-error ((t (:background "SkyBlue3" :foreground "#dcdccc")))))
@@ -61,6 +60,17 @@
 
   :bind
   (("C-<tab>" . company-complete)))
+
+;;; Snippets
+
+(use-package yasnippet
+  :ensure t
+
+  :commands
+  (yas-expand-snippet)
+
+  :hook
+  (lsp-mode . yas-minor-mode-on))
 
 ;;; Flycheck
 
@@ -176,9 +186,6 @@ configuration for GNU Global."
   :commands
   (lsp)
 
-  :custom
-  (lsp-enable-snippet nil)
-
   :hook
   ((lsp-mode  . lsp-enable-which-key-integration)
    (rust-mode . lsp)))
@@ -215,6 +222,7 @@ configuration for GNU Global."
 
 (defun tk-dev/prettier-common-setup ()
   (interactive)
+  (require 'subr-x)
   (when-let ((prettier-config (tk-support/locate-any-dominating-file default-directory
                                                                      tk-dev/prettier-config-files)))
     (message "Prettier config found: %s" prettier-config)
@@ -405,7 +413,12 @@ configuration for GNU Global."
 
 (add-hook 'emacs-lisp-mode-hook #'tk-dev/emacs-lisp-mode-hook)
 
-(define-key emacs-lisp-mode-map (kbd "C-c e") #'macrostep-expand)
+(use-package macrostep
+  :ensure t
+
+  :bind
+  (:map emacs-lisp-mode-map
+        ("C-c e" . macrostep-expand)))
 
 ;;; Clojure
 

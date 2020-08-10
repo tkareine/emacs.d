@@ -1,13 +1,6 @@
 ;; -*- lexical-binding: t -*-
 
-(require 'ert)
 (require 'tk-support)
-
-(ert-deftest tk-support/dotfile-path-test ()
-  (should (equal (tk-support/dotfile-path "") (concat (expand-file-name user-emacs-directory))))
-  (should (equal (tk-support/dotfile-path "a") (concat (expand-file-name user-emacs-directory) "a")))
-  (should (equal (tk-support/dotfile-path "a/b") (concat (expand-file-name user-emacs-directory) "a/b")))
-  (should (equal (tk-support/dotfile-path "a" "b") (concat (expand-file-name user-emacs-directory) "a/b"))))
 
 (ert-deftest tk-support/locate-any-dominating-file-test ()
   (should-not (tk-support/locate-any-dominating-file (concat user-emacs-directory "test") '("no-such-name")))

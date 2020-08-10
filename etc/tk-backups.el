@@ -1,6 +1,6 @@
 ;; -*- lexical-binding: t; -*-
 
-(require 'tk-support)
+(require 'tk-init)
 
 ;; Enable backup files
 (customize-set-variable 'make-backup-files t)
@@ -24,7 +24,7 @@
 (customize-set-variable 'delete-old-versions t)
 
 ;; Save all backup files to this directory
-(customize-set-variable 'backup-directory-alist `(("." . ,(tk-support/dotfile-path "backups"))))
+(customize-set-variable 'backup-directory-alist `(("." . ,(tk-init/user-emacs-path "backups"))))
 
 ;; Save all autosaves to this directory
 (customize-set-variable 'auto-save-file-name-transforms `((".*" ,temporary-file-directory t)))

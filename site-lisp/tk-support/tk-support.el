@@ -1,13 +1,10 @@
 ;; -*- lexical-binding: t; -*-
 
-(require 'cl-seq)
-(require 'subr-x)
-
-(defun tk-support/dotfile-path (&rest paths)
-  "Expand file path components inside user emacs directory."
-  (concat (expand-file-name user-emacs-directory)
-          (mapconcat #'file-name-as-directory (butlast paths) "")
-          (car (last paths))))
+(defun tk-support/active-region-or-line ()
+  (if (use-region-p)
+      (list (region-beginning) (region-end))
+    (list (line-beginning-position)
+          (line-beginning-position 2))))
 
 (defun tk-support/locate-any-dominating-file (file names)
   "Starting at FILE, look up file path for directory containing
@@ -35,12 +32,6 @@ installation directory."
                              (butlast paths))
                      "")
           (car (last paths))))
-
-(defun tk-support/active-region-or-line ()
-  (if (use-region-p)
-      (list (region-beginning) (region-end))
-    (list (line-beginning-position)
-          (line-beginning-position 2))))
 
 (defun tk-support/pretty-print-xml (begin end)
   "Pretty format XML markup in region with nxml-mode."
