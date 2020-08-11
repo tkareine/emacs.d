@@ -60,7 +60,10 @@
                       `(mode-line ((,class (:box (:line-width 1
                                                   :color ,zenburn-yellow-2)))))
                       `(mode-line-inactive ((,class (:box (:line-width 1
-                                                           :color ,zenburn-bg-2))))))))
+                                                           :color ,zenburn-bg-2)))))
+                      `(next-error ((t (:background ,zenburn-red-2))))  ; used by `compilation-display-error'
+                      `(highlight ((t (:background ,zenburn-blue-2))))  ; used by deadgrep
+                      )))
 
 ;;; Mode line
 

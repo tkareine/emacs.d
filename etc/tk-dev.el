@@ -29,9 +29,6 @@
 
 (eval-after-load 'compile #'tk-dev/compilation-mode-customizations)
 
-;; Highlight color for next-error, used by `compilation-display-error'
-(custom-set-faces '(next-error ((t (:background "SkyBlue3" :foreground "#dcdccc")))))
-
 ;;; Company
 
 (use-package company
