@@ -36,9 +36,9 @@ shown. See [etc/tk-looks.el], grep for `mode-line-format`.
 
 I have customized [js2-mode] (for `.js` sources), [rjsx-mode] (`.jsx`),
 [typescript-mode] (`.ts`), and [web-mode] (`.tsx`) major modes to work
-together with [Tide], [Prettier], [company-mode], and [Flycheck]. For
-instance, when I save a `.tsx` buffer, Flycheck validates the file and
-Prettier reformats it. See [etc/tk-dev.el].
+together with [Tide], [Prettier] (via [prettier-js]), [company-mode],
+and [Flycheck]. For instance, when I save a `.tsx` buffer, Flycheck
+validates the file and Prettier reformats it. See [etc/tk-dev.el].
 
 ### Small editing improvements
 
@@ -72,7 +72,7 @@ macOS:
 
 ``` bash
 brew tap railwaycat/emacsmacport
-brew install emacs-mac --with-official-icon
+brew install emacs-mac
 ```
 
 You'll need [Node.js] and [npm] for some 3rd party tools (see
@@ -105,8 +105,7 @@ and Pygments for symbol references.
 Installation, with Homebrew on macOS:
 
 ``` bash
-brew install ctags
-brew install global --with-ctags --with-pygments
+brew install global
 ```
 
 I use configuration files for [Ctags][conf-ctags] and
@@ -135,7 +134,7 @@ configured in [etc/tk-dev.el].
 Installation with Homebrew:
 
 ``` bash
-brew install jq --devel
+brew install jq --HEAD
 ```
 
 ### LibreSSL
@@ -204,6 +203,7 @@ npm install -g typescript
 [my dotfiles]: https://github.com/tkareine/dotfiles/
 [node-build]: https://github.com/nodenv/node-build
 [npm]: https://www.npmjs.com/
+[prettier-js]: https://github.com/prettier/prettier-emacs
 [ripgrep]: https://github.com/BurntSushi/ripgrep
 [rjsx-mode]: https://github.com/felipeochoa/rjsx-mode
 [tsserver]: https://github.com/Microsoft/TypeScript/wiki/Standalone-Server-%28tsserver%29
