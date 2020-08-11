@@ -505,8 +505,20 @@ probably not done."
   ;; Projectile determines project root
   (setq deadgrep-project-root-function #'projectile-project-root)
 
+  (defun tk-editing/deadgrep-show-result-other-window ()
+    "Show the result in another window at point, keeping the
+current search result window."
+    (interactive)
+    (let ((buf (car-safe (deadgrep--buffers))))
+      (deadgrep-visit-result-other-window)
+      (when buf
+        (pop-to-buffer buf))))
+
   :bind
-  (("C-c a" . deadgrep)))
+  (("C-c a" . deadgrep)
+   :map deadgrep-mode-map
+   ("O"       . tk-editing/deadgrep-show-result-other-window)
+   ("C-c C-f" . next-error-follow-minor-mode)))
 
 ;;; Symbol-overlay
 
