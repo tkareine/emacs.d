@@ -38,9 +38,6 @@
 ;; Typing text replaces active selection
 (delete-selection-mode)
 
-;; Enable auto pairing of brackets and quotation marks
-(electric-pair-mode)
-
 ;; Revert file buffer if changed externally
 (global-auto-revert-mode)
 
