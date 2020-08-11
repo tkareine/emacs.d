@@ -258,11 +258,15 @@ active region, kill the current line instead."
   :demand
 
   :config
+  (require 'smartparens-config)
   (smartparens-global-mode)
   (show-smartparens-global-mode)
   (sp-use-paredit-bindings)
   (add-to-list 'tk-looks/minor-mode-alist
                '(smartparens-mode (" SP" (:eval (if smartparens-strict-mode "/s" "")))))
+
+  :custom
+  (blink-matching-paren nil)
 
   :bind
   (:map smartparens-mode-map
