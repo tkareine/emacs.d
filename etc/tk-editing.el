@@ -248,7 +248,8 @@ active region, kill the current line instead."
   :ensure t
 
   :bind
-  (("C-=" . er/expand-region)))
+  (("M-[" . er/contract-region)
+   ("M-]" . er/expand-region)))
 
 ;;; Smartparens
 
@@ -285,11 +286,6 @@ active region, kill the current line instead."
         ("C-c )"      . smartparens-strict-mode)
         ("M-<left>"   . sp-forward-barf-sexp)
         ("M-<right>"  . sp-forward-slurp-sexp)))
-
-;;; Registers
-
-(global-set-key (kbd "M-[") #'point-to-register)
-(global-set-key (kbd "M-]") #'jump-to-register)
 
 ;;; Other key bindings
 
