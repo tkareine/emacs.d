@@ -26,6 +26,8 @@
 
   (require 'use-package))
 
+(use-package bind-key)
+
 (use-package tk-support
   :commands
   (tk-support/active-region-or-line

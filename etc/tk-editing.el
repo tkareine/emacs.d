@@ -79,8 +79,8 @@ Adapted from
     (when (= orig-point (point))
       (move-beginning-of-line 1))))
 
-(global-set-key [remap move-beginning-of-line]
-                #'tk-editing/back-to-indentation-or-move-beginning-of-line)
+(bind-key [remap move-beginning-of-line]
+          #'tk-editing/back-to-indentation-or-move-beginning-of-line)
 
 ;;; Navigation by moving in steps of 5
 
@@ -88,25 +88,22 @@ Adapted from
   (interactive)
   (ignore-errors (forward-line 5)))
 
-(global-set-key (kbd "C-n") #'tk-editing/next-line-5)
-
 (defun tk-editing/previous-line-5 ()
   (interactive)
   (ignore-errors (forward-line -5)))
-
-(global-set-key (kbd "C-p") #'tk-editing/previous-line-5)
 
 (defun tk-editing/forward-char-5 ()
   (interactive)
   (ignore-errors (forward-char 5)))
 
-(global-set-key (kbd "C-f") #'tk-editing/forward-char-5)
-
 (defun tk-editing/backward-char-5 ()
   (interactive)
   (ignore-errors (backward-char 5)))
 
-(global-set-key (kbd "C-b") #'tk-editing/backward-char-5)
+(bind-keys ("C-n" . tk-editing/next-line-5)
+           ("C-p" . tk-editing/previous-line-5)
+           ("C-f" . tk-editing/forward-char-5)
+           ("C-b" . tk-editing/backward-char-5))
 
 ;;; Editing
 
@@ -114,16 +111,15 @@ Adapted from
   (interactive)
   (join-line -1))
 
-(global-set-key (kbd "M-J") #'join-line)
-(global-set-key (kbd "M-j") #'tk-editing/join-line)
+(bind-key "M-J" #'tk-editing/join-line)
 
 (defun tk-editing/eol-newline-and-indent ()
   (interactive)
   (end-of-line)
   (newline-and-indent))
 
-(global-set-key (kbd "S-<return>")    #'tk-editing/eol-newline-and-indent)
-(global-set-key (kbd "s-<backspace>") #'delete-char)
+(bind-keys ("S-<return>"    . tk-editing/eol-newline-and-indent)
+           ("s-<backspace>" . delete-char))
 
 ;;; Commenting
 
@@ -145,8 +141,8 @@ of region."
                  (>= next-line-begin-pos region-end-pos))
         (beginning-of-line 2)))))
 
-(global-set-key (kbd "C-c C") #'comment-dwim)
-(global-set-key (kbd "M-/")   #'tk-editing/comment-or-uncomment-region-or-line)
+(bind-keys ("C-c C" . comment-dwim)
+           ("M-/"   . tk-editing/comment-or-uncomment-region-or-line))
 
 ;;; Showing and handling whitespace
 
@@ -175,29 +171,29 @@ of region."
   (interactive)
   (customize-set-variable 'show-trailing-whitespace (eq show-trailing-whitespace nil)))
 
-(global-set-key (kbd "C-x W")         #'tk-editing/toggle-show-trailing-whitespace)
-(global-set-key (kbd "C-x t")         #'delete-trailing-whitespace)
-(global-set-key (kbd "C-x w")         #'whitespace-mode)
-(global-set-key (kbd "M-S-SPC")       #'cycle-spacing)
+(bind-keys ("C-x W"   . tk-editing/toggle-show-trailing-whitespace)
+           ("C-x t"   . delete-trailing-whitespace)
+           ("C-x w"   . whitespace-mode)
+           ("M-S-SPC" . cycle-spacing))
 
 ;;; Global navigation and window management
 
-(global-set-key (kbd "S-<down>")  #'windmove-down)
-(global-set-key (kbd "S-<left>")  #'windmove-left)
-(global-set-key (kbd "S-<right>") #'windmove-right)
-(global-set-key (kbd "S-<up>")    #'windmove-up)
-(global-set-key (kbd "s-0")       #'delete-frame)
-(global-set-key (kbd "s-1")       #'delete-other-frames)
-(global-set-key (kbd "s-2")       #'make-frame-command)
-(global-set-key (kbd "s-<down>")  #'scroll-up)
-(global-set-key (kbd "s-<left>")  #'beginning-of-buffer)
-(global-set-key (kbd "s-<right>") #'end-of-buffer)
-(global-set-key (kbd "s-<up>")    #'scroll-down)
+(bind-keys ("S-<down>"  . windmove-down)
+           ("S-<left>"  . windmove-left)
+           ("S-<right>" . windmove-right)
+           ("S-<up>"    . windmove-up)
+           ("s-0"       . delete-frame)
+           ("s-1"       . delete-other-frames)
+           ("s-2"       . make-frame-command)
+           ("s-<down>"  . scroll-up)
+           ("s-<left>"  . beginning-of-buffer)
+           ("s-<right>" . end-of-buffer)
+           ("s-<up>"    . scroll-down))
 
 ;; Force your learning to avoid using M-<left|right> for movement
 ;; between words
-(global-unset-key (kbd "M-<left>"))
-(global-unset-key (kbd "M-<right>"))
+(bind-keys ("M-<left>"  . nil)
+           ("M-<right>" . nil))
 
 ;;; Kill ring
 
@@ -207,15 +203,11 @@ active region, copy the current line instead."
   (interactive (tk-support/active-region-or-line))
   (kill-ring-save beg end))
 
-(global-set-key [remap kill-ring-save] #'tk-editing/kill-ring-save)
-
 (defun tk-editing/kill-region (beg end)
   "Like `kill-region', but when called interactively with no
 active region, kill the current line instead."
   (interactive (tk-support/active-region-or-line))
   (kill-region beg end))
-
-(global-set-key [remap kill-region] #'tk-editing/kill-region)
 
 (defun tk-editing/file-path-to-clipboard ()
   "Copy the current file name to the clipboard."
@@ -226,8 +218,10 @@ active region, kill the current line instead."
       (kill-new path)
       (message path))))
 
-(global-set-key (kbd "C-c P")         #'tk-editing/file-path-to-clipboard)
-(global-set-key (kbd "M-<kp-delete>") #'kill-word)
+(bind-keys ([remap kill-ring-save] . tk-editing/kill-ring-save)
+           ([remap kill-region]    . tk-editing/kill-region)
+           ("C-c P"                . tk-editing/file-path-to-clipboard)
+           ("M-<kp-delete>"        . kill-word))
 
 ;; Save clipboard strings into kill ring before replacing them
 (customize-set-variable 'save-interprogram-paste-before-kill t)
@@ -289,9 +283,9 @@ active region, kill the current line instead."
 
 ;;; Other key bindings
 
-(global-set-key (kbd "C-c C-c M-x") #'execute-extended-command)
-(global-set-key (kbd "C-x C-b")     #'ibuffer)
-(global-set-key (kbd "C-c U")       #'browse-url-at-point)
+(bind-keys ("C-c C-c M-x" . execute-extended-command)
+           ("C-x C-b"     . ibuffer)
+           ("C-c U"       . browse-url-at-point))
 
 ;;; Minibuffer
 
@@ -353,7 +347,7 @@ probably not done."
 
 ;;; Hippie-expand
 
-(global-set-key (kbd "s-SPC") #'hippie-expand)
+(bind-key "s-SPC" #'hippie-expand)
 
 ;;; UndoTree
 
@@ -445,7 +439,7 @@ probably not done."
   :demand
 
   :config
-  (define-key minibuffer-local-map (kbd "C-r") #'counsel-minibuffer-history)
+  (bind-key "C-r" #'counsel-minibuffer-history minibuffer-local-map)
 
   (defun tk-editing/dired-open-directory-of-file (file)
     (dired (file-name-directory (directory-file-name file))))
@@ -511,11 +505,12 @@ current search result window."
       (when buf
         (pop-to-buffer buf))))
 
+  (bind-keys :map deadgrep-mode-map
+             ("O"       . tk-editing/deadgrep-show-result-other-window)
+             ("C-c C-f" . next-error-follow-minor-mode))
+
   :bind
-  (("C-c a" . deadgrep)
-   :map deadgrep-mode-map
-   ("O"       . tk-editing/deadgrep-show-result-other-window)
-   ("C-c C-f" . next-error-follow-minor-mode)))
+  (("C-c a" . deadgrep)))
 
 ;;; Symbol-overlay
 
@@ -536,16 +531,17 @@ current search result window."
     (apply 'custom-set-faces symbol-overlay-faces))
 
   (let ((map (make-sparse-keymap)))
-    (define-key map (kbd "M-N") #'symbol-overlay-switch-forward)
-    (define-key map (kbd "M-P") #'symbol-overlay-switch-backward)
-    (define-key map (kbd "M-e") #'symbol-overlay-echo-mark)
-    (define-key map (kbd "M-n") #'symbol-overlay-jump-next)
-    (define-key map (kbd "M-p") #'symbol-overlay-jump-prev)
-    (define-key map (kbd "M-q") #'symbol-overlay-query-replace)
-    (define-key map (kbd "M-r") #'symbol-overlay-rename)
-    (define-key map (kbd "M-s") #'symbol-overlay-isearch-literally)
-    (define-key map (kbd "M-t") #'symbol-overlay-toggle-in-scope)
-    (define-key map (kbd "M-w") #'symbol-overlay-save-symbol)
+    (bind-keys :map map
+               ("M-N" . symbol-overlay-switch-forward)
+               ("M-P" . symbol-overlay-switch-backward)
+               ("M-e" . symbol-overlay-echo-mark)
+               ("M-n" . symbol-overlay-jump-next)
+               ("M-p" . symbol-overlay-jump-prev)
+               ("M-q" . symbol-overlay-query-replace)
+               ("M-r" . symbol-overlay-rename)
+               ("M-s" . symbol-overlay-isearch-literally)
+               ("M-t" . symbol-overlay-toggle-in-scope)
+               ("M-w" . symbol-overlay-save-symbol))
     (setq symbol-overlay-map map))
 
   :bind

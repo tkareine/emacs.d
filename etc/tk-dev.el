@@ -11,23 +11,22 @@
 
 ;;; Interactive regexp builder
 
-(global-set-key (kbd "C-c R") #'re-builder)
+(bind-key "C-c R" #'re-builder)
 
 (customize-set-variable 'reb-re-syntax 'string)
 
-(defun tk-dev/re-builder-mode-customizations ()
-  (define-key reb-mode-map (kbd "M-n") #'reb-next-match)
-  (define-key reb-mode-map (kbd "M-p") #'reb-prev-match))
-
-(eval-after-load 're-builder #'tk-dev/re-builder-mode-customizations)
+(with-eval-after-load 're-builder
+  (bind-keys :map reb-mode-map
+             ("C-c C-k" . reb-quit)
+             ("M-n"     . reb-next-match)
+             ("M-p"     . reb-prev-match)))
 
 ;;; Compilation
 
-(defun tk-dev/compilation-mode-customizations ()
-  (define-key compilation-mode-map (kbd "M-N") #'compilation-next-file)
-  (define-key compilation-mode-map (kbd "M-P") #'compilation-previous-file))
-
-(eval-after-load 'compile #'tk-dev/compilation-mode-customizations)
+(with-eval-after-load 'compile
+  (bind-keys :map compilation-mode-map
+             ("M-N" . compilation-next-file)
+             ("M-P" . compilation-previous-file)))
 
 ;;; Company
 
@@ -107,7 +106,7 @@
 ;;; Xref
 
 ;; Add additional keybinding, as macOS interprets M-? to show menu bar
-(global-set-key (kbd "C-M-/") #'xref-find-references)
+(bind-key "C-M-/" #'xref-find-references)
 
 ;;; ggtags frontend for GNU global
 
@@ -157,6 +156,10 @@ configuration for GNU Global."
   (add-to-list 'tk-looks/minor-mode-alist
                '(ggtags-mode (:eval (if ggtags-navigation-mode " GG[nav]" " GG"))))
 
+  (bind-keys :map ggtags-mode-map
+             ("M-]"   . nil)
+             ("C-M-/" . ggtags-find-reference))
+
   :custom
   (ggtags-bounds-of-tag-function #'tk-dev/ggtags-bounds-of-tag)
   (ggtags-process-environment '("GTAGSLABEL=default"))
@@ -164,10 +167,7 @@ configuration for GNU Global."
   :bind
   (("C-c T" . tk-dev/make-gtags)
    ("C-c r" . ggtags-find-reference)
-   ("C-c t" . ggtags-find-tag-dwim)
-   :map ggtags-mode-map
-   ("M-]"   . nil)
-   ("C-M-/" . ggtags-find-reference))
+   ("C-c t" . ggtags-find-tag-dwim))
 
   :hook
   ((enh-ruby-mode . ggtags-mode)
@@ -210,25 +210,6 @@ configuration for GNU Global."
 ;;; Prettier-js: format buffer with prettier tool upon save
 ;;; automatically
 
-(defvar tk-dev/prettier-config-files
-  '("prettier.config.js"
-    ".prettierrc"
-    ".prettierrc.js")
-  "Prettier configuration files, used by
-`tk-dev/prettier-common-setup'.")
-
-(defun tk-dev/prettier-common-setup ()
-  (interactive)
-  (require 'subr-x)
-  (when-let ((prettier-config (tk-support/locate-any-dominating-file default-directory
-                                                                     tk-dev/prettier-config-files)))
-    (message "Prettier config found: %s" prettier-config)
-    (prettier-js-mode)))
-
-(defun tk-dev/prettier-tsx-setup ()
-  (when (string-equal "tsx" (file-name-extension buffer-file-name))
-    (tk-dev/prettier-common-setup)))
-
 (use-package prettier-js
   :ensure t
 
@@ -236,6 +217,24 @@ configuration for GNU Global."
   (prettier-js-mode)
 
   :config
+  (defvar tk-dev/prettier-config-files
+    '("prettier.config.js"
+      ".prettierrc"
+      ".prettierrc.js")
+    "Prettier configuration files, used by
+`tk-dev/prettier-common-setup'.")
+
+  (defun tk-dev/prettier-common-setup ()
+    (interactive)
+    (require 'subr-x)
+    (when-let ((prettier-config (tk-support/locate-any-dominating-file default-directory
+                                                                       tk-dev/prettier-config-files)))
+      (prettier-js-mode)))
+
+  (defun tk-dev/prettier-tsx-setup ()
+    (when (string-equal "tsx" (file-name-extension buffer-file-name))
+      (tk-dev/prettier-common-setup)))
+
   (add-to-list 'tk-looks/minor-mode-alist '(prettier-js-mode (" Prettier")) t)
 
   :hook
@@ -246,16 +245,6 @@ configuration for GNU Global."
 
 ;;; Tide, which provides tsserver
 
-(defun tk-dev/tide-common-setup ()
-  (interactive)
-  (tide-setup)
-  (eldoc-mode)
-  (tide-hl-identifier-mode))
-
-(defun tk-dev/tide-tsx-setup ()
-  (when (string-equal "tsx" (file-name-extension buffer-file-name))
-    (tk-dev/tide-common-setup)))
-
 (use-package tide
   :ensure t
 
@@ -263,6 +252,16 @@ configuration for GNU Global."
   (tide-setup)
 
   :config
+  (defun tk-dev/tide-common-setup ()
+    (interactive)
+    (tide-setup)
+    (eldoc-mode)
+    (tide-hl-identifier-mode))
+
+  (defun tk-dev/tide-tsx-setup ()
+    (when (string-equal "tsx" (file-name-extension buffer-file-name))
+      (tk-dev/tide-common-setup)))
+
   (flycheck-add-next-checker 'javascript-eslint 'jsx-tide 'append)
 
   :hook
@@ -308,6 +307,10 @@ configuration for GNU Global."
 
   (add-hook 'js2-mode-hook #'tk-dev/js2-mode-hook)
 
+  (bind-keys :map js2-mode-map
+             ("M-." . nil)
+             ("C-c j" . tk-dev/js2-mode-toggle-strict-missing-semi-warning))
+
   :custom
   (js2-basic-offset 2)
   (js2-bounce-indent-p t)
@@ -318,11 +321,6 @@ configuration for GNU Global."
 
   :custom-face
   (js2-private-member ((t (:foreground "coral1"))))
-
-  :bind
-  (:map js2-mode-map
-        ("M-." . nil)
-        ("C-c j" . tk-dev/js2-mode-toggle-strict-missing-semi-warning))
 
   :mode
   ("\\.m?js\\'"
@@ -490,24 +488,23 @@ configuration for GNU Global."
 (use-package haskell-mode
   :config
   (defun tk-dev/haskell-mode-hook ()
-    (turn-on-haskell-indentation)
-    (turn-on-haskell-decl-scan)
+    (haskell-indentation-mode)
+    (haskell-decl-scan-mode)
     (interactive-haskell-mode))
 
   (add-hook 'haskell-mode-hook #'tk-dev/haskell-mode-hook)
+
+  (bind-keys :map haskell-mode-map
+             ("<f8>"  . haskell-navigate-imports)
+             ("C-`"   . haskell-interactive-bring)
+             ("C-c c" . haskell-process-cabal)
+             ("C-c o" . haskell-hoogle))
 
   :custom
   (haskell-process-suggest-remove-import-lines t)
   (haskell-process-auto-import-loaded-modules t)
   (haskell-process-log t)
   (haskell-process-type 'cabal-repl)
-
-  :bind
-  (:map haskell-mode-map
-        ("<f8>"  . haskell-navigate-imports)
-        ("C-`"   . haskell-interactive-bring)
-        ("C-c c" . haskell-process-cabal)
-        ("C-c o" . haskell-hoogle))
 
   :mode
   ("/\\.hs\\'"))

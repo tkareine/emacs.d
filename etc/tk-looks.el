@@ -209,17 +209,18 @@ mode-line-process, and narrowing) and selected minor modes.")
 
 (customize-set-variable 'line-spacing 2)
 
-(global-set-key (kbd "C-'") #'text-scale-increase)
-(global-set-key (kbd "C-;") #'text-scale-decrease)
+(bind-keys ("C-:"  . text-scale-decrease)
+           ("C-\"" . text-scale-increase))
 
 (when (featurep 'mac-win)
-  ;; macOS: remove changing text scaling or full screen mode with gestures
-  (global-unset-key [S-magnify-down])
-  (global-unset-key [S-magnify-up])
-  (global-unset-key [magnify-down])
-  (global-unset-key [magnify-up])
-  ;; macOS: don't toggle showing tab bar
-  (global-unset-key [C-tab]))
+  (bind-keys
+   ;; macOS: remove changing text scaling or full screen mode with gestures
+   ([S-magnify-down] . nil)
+   ([S-magnify-up]   . nil)
+   ([magnify-down]   . nil)
+   ([magnify-up]     . nil)
+   ;; macOS: don't toggle showing tab bar
+   ([C-tab] . nil)))
 
 ;;; GitGutter
 
