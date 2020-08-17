@@ -72,7 +72,7 @@ macOS:
 
 ``` bash
 brew tap railwaycat/emacsmacport
-brew install emacs-mac
+brew install emacs-mac  --with-modern-icon
 ```
 
 You'll need [Node.js] and [npm] for some 3rd party tools (see
