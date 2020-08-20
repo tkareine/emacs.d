@@ -371,23 +371,6 @@ configuration for GNU Global."
 (use-package json-mode
   :ensure t
 
-  :config
-  (flycheck-define-checker tk/json-jq
-    "A JSON syntax checker using jq."
-    :command ("jq"
-              "42"  ; A dummy value for output, since we don't care
-                    ; about pretty printing input to output.
-              source
-              null-device)
-    :standard-input t
-    :error-patterns
-    ((error line-start
-            "parse error: " (message) " at line " line ", column " column
-            line-end))
-    :modes json-mode)
-
-  (add-to-list 'flycheck-checkers 'tk/json-jq)
-
   :mode
   ("\\.json\\'"))
 
