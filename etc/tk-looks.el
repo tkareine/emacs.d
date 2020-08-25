@@ -62,7 +62,7 @@
                       `(mode-line-inactive ((,class (:box (:line-width 1
                                                            :color ,zenburn-bg-2)))))
                       `(next-error ((t (:background ,zenburn-red-2))))  ; used by `compilation-display-error'
-                      `(highlight ((t (:background ,zenburn-blue-2))))  ; used by deadgrep
+                      `(highlight ((t (:background ,zenburn-blue-3))))  ; used by Ivy and deadgrep
                       )))
 
 ;;; Mode line
