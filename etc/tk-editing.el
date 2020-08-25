@@ -219,6 +219,7 @@ active region, kill the current line instead."
       (message path))))
 
 (bind-keys ([remap kill-ring-save] . tk-editing/kill-ring-save)
+           ("M-c"                  . tk-editing/kill-ring-save)
            ([remap kill-region]    . tk-editing/kill-region)
            ("C-c P"                . tk-editing/file-path-to-clipboard)
            ("M-<kp-delete>"        . kill-word))
