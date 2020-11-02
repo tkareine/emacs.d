@@ -5,7 +5,7 @@
 
 (load (expand-file-name "site-lisp/tk-init" user-emacs-directory))
 
-(setq custom-file (tk-init/user-emacs-path "custom.el"))
+(setq custom-file "/dev/null")
 (load custom-file t)
 
 (dolist (l '("tk-internals"
