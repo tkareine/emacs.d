@@ -36,7 +36,7 @@ shown. See [etc/tk-looks.el], grep for `mode-line-format`.
 
 I have customized [js2-mode] (for `.js` sources), [rjsx-mode] (`.jsx`),
 [typescript-mode] (`.ts`), and [web-mode] (`.tsx`) major modes to work
-together with [Tide], [Prettier] (via [prettier-js]), [company-mode],
+together with [lsp-mode], [Prettier] (via [prettier-js]), [company-mode],
 and [Flycheck]. For instance, when I save a `.tsx` buffer, Flycheck
 validates the file and Prettier reformats it. See [etc/tk-dev.el].
 
@@ -160,14 +160,15 @@ npm install -g marked
 
 ### TypeScript
 
-I use the [`tsserver`][tsserver] CLI tool of [TypeScript] via [Tide]
-minor mode, configured in [etc/tk-dev.el]. Tide gets enabled for `.ts`,
-`.tsx`, `.js`, and `.jsx` sources automatically.
+I use the [`tsserver`][tsserver] CLI tool of of [TypeScript] and
+[typescript-language-server] as the server for [lsp-mode], configured in
+[etc/tk-dev.el]. [lsp-mode] gets enabled for `.ts`, `.tsx`, `.js`, and
+`.jsx` sources automatically.
 
 Installation:
 
 ``` bash
-npm install -g typescript
+npm install -g typescript typescript-language-server
 ```
 
 [Emacs macOS port]: https://bitbucket.org/mituharu/emacs-mac/src/master/
@@ -181,7 +182,6 @@ npm install -g typescript
 [Node.js]: https://nodejs.org/
 [Prettier]: https://prettier.io/
 [Smartparens]: https://github.com/Fuco1/smartparens
-[Tide]: https://github.com/ananthakumaran/tide
 [TypeScript]: https://github.com/Microsoft/TypeScript
 [Zenburn]: https://github.com/bbatsov/zenburn-emacs
 [chnode]: https://github.com/tkareine/chnode
@@ -198,6 +198,7 @@ npm install -g typescript
 [jq]: https://stedolan.github.io/jq/
 [js2-mode]: https://github.com/mooz/js2-mode
 [json-mode]: https://github.com/joshwnj/json-mode
+[lsp-mode]: https://emacs-lsp.github.io/lsp-mode/
 [magit]: https://magit.vc/
 [markdown-mode]: https://jblevins.org/projects/markdown-mode/
 [my dotfiles]: https://github.com/tkareine/dotfiles/
@@ -207,5 +208,6 @@ npm install -g typescript
 [ripgrep]: https://github.com/BurntSushi/ripgrep
 [rjsx-mode]: https://github.com/felipeochoa/rjsx-mode
 [tsserver]: https://github.com/Microsoft/TypeScript/wiki/Standalone-Server-%28tsserver%29
+[typescript-language-server]: https://github.com/theia-ide/typescript-language-server
 [typescript-mode]: https://github.com/emacs-typescript/typescript.el
 [web-mode]: http://web-mode.org/

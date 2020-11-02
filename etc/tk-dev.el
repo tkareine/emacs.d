@@ -182,20 +182,41 @@ configuration for GNU Global."
 ;;; LSP
 
 (use-package lsp-mode
+  :ensure t
+
   :commands
   (lsp)
 
+  :config
+  (defun tk-dev/lsp-tsx-setup ()
+    (when (string-equal "tsx" (file-name-extension buffer-file-name))
+      (lsp)))
+
+  (add-to-list 'tk-looks/minor-mode-alist '(lsp-mode (" LSP")) t)
+
   :hook
-  ((lsp-mode  . lsp-enable-which-key-integration)
-   (rust-mode . lsp)))
+  ((lsp-mode        . lsp-enable-which-key-integration)
+   (rust-mode       . lsp)
+   ;; don't add hook to rjsx-mode-hook, because rjsx-mode derives from js2-mode
+   (js2-mode        . lsp)
+   (typescript-mode . lsp)
+   (web-mode        . tk-dev/lsp-tsx-setup))
+
+  :bind
+  (("C-c L" . lsp)))
 
 (use-package lsp-ui
+  :ensure t
+
   :commands
   (lsp-ui-mode)
 
   :custom
   (lsp-ui-doc-delay 1.0 "Number of seconds before showing documentation popup")
-  (lsp-ui-doc-position 'top))
+  (lsp-ui-doc-position 'top)
+
+  :hook
+  (lsp-mode . lsp-ui-mode))
 
 ;;; CSS
 
@@ -244,33 +265,6 @@ configuration for GNU Global."
    ;; don't add hook to rjsx-mode-hook, because rjsx-mode derives from js2-mode
    (typescript-mode . tk-dev/prettier-common-setup)
    (web-mode        . tk-dev/prettier-tsx-setup)))
-
-;;; Tide, which provides tsserver
-
-(use-package tide
-  :ensure t
-
-  :commands
-  (tide-setup)
-
-  :config
-  (defun tk-dev/tide-common-setup ()
-    (interactive)
-    (tide-setup)
-    (eldoc-mode)
-    (tide-hl-identifier-mode))
-
-  (defun tk-dev/tide-tsx-setup ()
-    (when (string-equal "tsx" (file-name-extension buffer-file-name))
-      (tk-dev/tide-common-setup)))
-
-  (flycheck-add-next-checker 'javascript-eslint 'jsx-tide 'append)
-
-  :hook
-  ((js2-mode        . tk-dev/tide-common-setup)
-   ;; don't add hook to rjsx-mode-hook, because rjsx-mode derives from js2-mode
-   (typescript-mode . tk-dev/tide-common-setup)
-   (web-mode        . tk-dev/tide-tsx-setup)))
 
 ;;; js2-mode for `.js' sources
 
