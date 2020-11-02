@@ -79,7 +79,8 @@
   (global-flycheck-mode)
 
   :custom
-  (flycheck-disabled-checkers '(emacs-lisp-checkdoc json-python-json)))
+  (flycheck-disabled-checkers '(emacs-lisp-checkdoc json-python-json))
+  (flycheck-temp-prefix ".~flycheck"))
 
 ;;; Magit
 
