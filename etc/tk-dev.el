@@ -261,7 +261,8 @@ configuration for GNU Global."
   (add-to-list 'tk-looks/minor-mode-alist '(prettier-js-mode (" Prettier")) t)
 
   :hook
-  ((js2-mode        . tk-dev/prettier-common-setup)
+  ((json-mode       . tk-dev/prettier-common-setup)
+   (js2-mode        . tk-dev/prettier-common-setup)
    ;; don't add hook to rjsx-mode-hook, because rjsx-mode derives from js2-mode
    (typescript-mode . tk-dev/prettier-common-setup)
    (web-mode        . tk-dev/prettier-tsx-setup)))
