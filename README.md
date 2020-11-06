@@ -35,10 +35,10 @@ shown. See [etc/tk-looks.el], grep for `mode-line-format`.
 ### JavaScript, TypeScript, and React file editing
 
 I have customized [js2-mode] (for `.js` sources), [rjsx-mode] (`.jsx`),
-[typescript-mode] (`.ts`), and [web-mode] (`.tsx`) major modes to work
-together with [lsp-mode], [Prettier] (via [prettier-js]), [company-mode],
-and [Flycheck]. For instance, when I save a `.tsx` buffer, Flycheck
-validates the file and Prettier reformats it. See [etc/tk-dev.el].
+and [typescript-mode] (`.ts`, `.tsx`) major modes to work together with
+[lsp-mode], [Prettier] (via [prettier-js]), [company-mode], and
+[Flycheck]. For instance, when I save a `.ts` buffer, Flycheck validates
+the file and Prettier reformats it. See [etc/tk-dev.el].
 
 ### Small editing improvements
 
@@ -210,4 +210,3 @@ npm install -g typescript typescript-language-server
 [tsserver]: https://github.com/Microsoft/TypeScript/wiki/Standalone-Server-%28tsserver%29
 [typescript-language-server]: https://github.com/theia-ide/typescript-language-server
 [typescript-mode]: https://github.com/emacs-typescript/typescript.el
-[web-mode]: http://web-mode.org/

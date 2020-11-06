@@ -188,10 +188,6 @@ configuration for GNU Global."
   (lsp)
 
   :config
-  (defun tk-dev/lsp-tsx-setup ()
-    (when (string-equal "tsx" (file-name-extension buffer-file-name))
-      (lsp)))
-
   (add-to-list 'tk-looks/minor-mode-alist '(lsp-mode (" LSP")) t)
 
   :hook
@@ -199,8 +195,7 @@ configuration for GNU Global."
    (rust-mode       . lsp)
    ;; don't add hook to rjsx-mode-hook, because rjsx-mode derives from js2-mode
    (js2-mode        . lsp)
-   (typescript-mode . lsp)
-   (web-mode        . tk-dev/lsp-tsx-setup))
+   (typescript-mode . lsp))
 
   :bind
   (("C-c L" . lsp)))
@@ -254,18 +249,13 @@ configuration for GNU Global."
                                                                        tk-dev/prettier-config-files)))
       (prettier-js-mode)))
 
-  (defun tk-dev/prettier-tsx-setup ()
-    (when (string-equal "tsx" (file-name-extension buffer-file-name))
-      (tk-dev/prettier-common-setup)))
-
   (add-to-list 'tk-looks/minor-mode-alist '(prettier-js-mode (" Prettier")) t)
 
   :hook
   ((json-mode       . tk-dev/prettier-common-setup)
    (js2-mode        . tk-dev/prettier-common-setup)
    ;; don't add hook to rjsx-mode-hook, because rjsx-mode derives from js2-mode
-   (typescript-mode . tk-dev/prettier-common-setup)
-   (web-mode        . tk-dev/prettier-tsx-setup)))
+   (typescript-mode . tk-dev/prettier-common-setup)))
 
 ;;; js2-mode for `.js' sources
 
@@ -341,7 +331,7 @@ configuration for GNU Global."
   :mode
   ("\\.jsx\\'"))
 
-;;; TypeScript for `.ts' sources
+;;; TypeScript for `.ts' and `.tsx' sources
 
 (use-package typescript-mode
   :ensure t
@@ -350,18 +340,7 @@ configuration for GNU Global."
   (typescript-indent-level 2)
 
   :mode
-  ("\\.ts\\'"))
-
-;;; web-mode for `.tsx' sources
-
-(use-package web-mode
-  :config
-  (flycheck-add-mode 'typescript-tslint 'web-mode)
-
-  :mode
-  ("\\.tsx\\'"
-   "\\.erb\\'"
-   "\\.ftl\\'"))
+  ("\\.tsx?\\'"))
 
 ;;; JSON
 
