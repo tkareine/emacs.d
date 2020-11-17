@@ -29,16 +29,16 @@
 (customize-set-variable 'ring-bell-function #'tk-looks/visible-bell)
 
 ;; Syntax higlighting where applicable
-(global-font-lock-mode)
+(global-font-lock-mode +1)
 
 ;; Highlight current line
-(global-hl-line-mode)
+(global-hl-line-mode +1)
 
 ;; Selection-highlighting behavior like in other editors
-(transient-mark-mode)
+(transient-mark-mode +1)
 
 ;; See matching pairs of parentheses and other characters
-(show-paren-mode)
+(show-paren-mode +1)
 
 ;; No blinking cursor
 (blink-cursor-mode -1)
@@ -78,7 +78,7 @@
 (customize-set-variable 'line-number-display-limit (* 1024 1024 64))
 
 ;; Show current function in mode line
-(which-function-mode)
+(which-function-mode +1)
 
 (defvar tk-looks/mode-line-position
   '((line-number-mode ("%l" (column-number-mode ":%c")))
@@ -230,7 +230,7 @@ mode-line-process, and narrowing) and selected minor modes.")
   :demand
 
   :config
-  (global-git-gutter-mode)
+  (global-git-gutter-mode +1)
 
   :custom
   (git-gutter:lighter " gg"))
@@ -243,4 +243,4 @@ mode-line-process, and narrowing) and selected minor modes.")
   :demand
 
   :config
-  (which-key-mode))
+  (which-key-mode +1))

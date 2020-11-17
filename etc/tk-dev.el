@@ -36,7 +36,7 @@
   :demand
 
   :config
-  (global-company-mode)
+  (global-company-mode +1)
 
   :custom
   (company-minimum-prefix-length 2 "The minimum prefix length before showing idle completion")

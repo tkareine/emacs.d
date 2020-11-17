@@ -356,7 +356,7 @@ probably not done."
   :ensure t
 
   :config
-  (global-undo-tree-mode)
+  (global-undo-tree-mode +1)
 
   :bind
   (("C-x u" . undo-tree-visualize)))
@@ -402,7 +402,7 @@ probably not done."
   :demand
 
   :config
-  (ivy-mode)
+  (ivy-mode +1)
 
   :custom
   (ivy-use-virtual-buffers t)
@@ -481,12 +481,12 @@ probably not done."
                       tk-editing/dired-open-directory-of-project-file
                       "open file's directory")))
 
-  (counsel-projectile-mode)
+  (counsel-projectile-mode +1)
 
   :bind
-  (("C-c d" . counsel-projectile-find-dir)
-   ("C-c f" . counsel-projectile-find-file)
-   ("C-c s" . counsel-projectile-rg)))
+  (("C-c d"   . counsel-projectile-find-dir)
+   ("C-c f"   . counsel-projectile-find-file)
+   ("C-c s"   . counsel-projectile-rg)))
 
 ;;; Deadgrep interface for ripgrep
 
