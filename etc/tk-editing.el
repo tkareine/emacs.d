@@ -472,6 +472,8 @@ probably not done."
 (use-package counsel-projectile
   :ensure t
 
+  :demand
+
   :config
   (defun tk-editing/dired-open-directory-of-project-file (file)
     (tk-editing/dired-open-directory-of-file (concat (projectile-project-root) file)))
