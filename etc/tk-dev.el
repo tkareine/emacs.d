@@ -190,6 +190,8 @@ configuration for GNU Global."
   :config
   (add-to-list 'tk-looks/minor-mode-alist '(lsp-mode (" LSP")) t)
 
+  (bind-keys :map lsp-mode-map
+             ("C-M->" . lsp-find-type-definition))
   :hook
   ((lsp-mode        . lsp-enable-which-key-integration)
    (rust-mode       . lsp)
