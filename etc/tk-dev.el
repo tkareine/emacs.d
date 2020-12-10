@@ -188,7 +188,8 @@ configuration for GNU Global."
   (lsp)
 
   :config
-  (add-to-list 'tk-looks/minor-mode-alist '(lsp-mode (" LSP")) t)
+  (add-to-list 'tk-looks/minor-mode-alist
+               (assq 'lsp-mode minor-mode-alist))
 
   (bind-keys :map lsp-mode-map
              ("C-M->" . lsp-find-type-definition))
