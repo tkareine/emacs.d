@@ -32,7 +32,7 @@ I've tuned the mode-line to show only information that I think is
 relevant. For instance, only a selection of enabled minor modes is
 shown. See [etc/tk-looks.el], grep for `mode-line-format`.
 
-### JavaScript, TypeScript, and React file editing
+### JavaScript, TypeScript, and JSX source file editing
 
 I have customized [js2-mode] (for `.js` sources), [rjsx-mode] (`.jsx`),
 and [typescript-mode] (`.ts`, `.tsx`) major modes to work together with
