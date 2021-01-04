@@ -258,7 +258,8 @@ configuration for GNU Global."
   ((json-mode       . tk-dev/prettier-common-setup)
    (js2-mode        . tk-dev/prettier-common-setup)
    ;; don't add hook to rjsx-mode-hook, because rjsx-mode derives from js2-mode
-   (typescript-mode . tk-dev/prettier-common-setup)))
+   (typescript-mode . tk-dev/prettier-common-setup)
+   (yaml-mode       . tk-dev/prettier-common-setup)))
 
 ;;; js2-mode for `.js' sources
 
