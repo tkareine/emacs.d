@@ -239,8 +239,10 @@ configuration for GNU Global."
 
   :config
   (defvar tk-dev/prettier-config-files
-    '("prettier.config.js"
+    '("prettier.config.cjs"
+      "prettier.config.js"
       ".prettierrc"
+      ".prettierrc.cjs"
       ".prettierrc.js")
     "Prettier configuration files, used by
 `tk-dev/prettier-common-setup'.")
