@@ -496,6 +496,13 @@ configuration for GNU Global."
 (use-package markdown-mode
   :ensure t
 
+  :config
+  ;; don't include xhtml dtd for generated html, as it affects CSS
+  ;; styles
+  (advice-add #'markdown-output-standalone-p
+              :override
+              (lambda () t))
+
   :custom
   (markdown-command "marked --gfm")
   (markdown-hide-urls nil)
