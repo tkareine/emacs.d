@@ -316,7 +316,7 @@ configuration for GNU Global."
   (js2-private-member ((t (:foreground "coral1"))))
 
   :mode
-  ("\\.m?js\\'"
+  ("\\.[cm]?js\\'"
    "\\.javascript\\'")
 
   :interpreter
