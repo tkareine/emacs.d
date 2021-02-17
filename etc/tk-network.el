@@ -4,14 +4,14 @@
   "Adapted from URL
 `https://glyph.twistedmatrix.com/2015/11/editor-malware.html'."
   (interactive)
-  (let* ((bad-hosts (cl-loop for bad-url
+  (let* ((bad-urls (cl-loop for bad-url
                              in '("https://wrong.host.badssl.com/"
                                   "https://self-signed.badssl.com/")
                              if (ignore-errors (url-retrieve-synchronously bad-url nil t 10))
                              collect bad-url)))
-    (if bad-hosts
+    (if bad-urls
         (error (format "TLS security test failed: should've failed retrieving %s"
-                       bad-hosts))
+                       bad-urls))
       (url-retrieve "https://melpa.org"
                     (lambda (_retrieved) t)))
     (message "TLS security test passed")))
@@ -23,7 +23,7 @@
 (customize-set-variable 'tls-checktrust t)
 
 ;; tls via external tool: use openssl/libressl
-(customize-set-variable 'tls-program '("openssl s_client -connect %h:%p -CAfile %t -no_ssl2 -no_ssl3 -ign_eof -verify 9"))
+(customize-set-variable 'tls-program '("openssl s_client -connect %h:%p -CAfile %t -no_ssl2 -no_ssl3 -no_tls1 -no_tls1_1 -ign_eof -verify 9"))
 
 ;; tls via builtin gnutls: check certificates
 (customize-set-variable 'gnutls-verify-error t)
