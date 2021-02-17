@@ -8,8 +8,7 @@
 (setq custom-file "/dev/null")
 (load custom-file t)
 
-(dolist (l '("tk-internals"
-             "tk-network"
+(dolist (l '("tk-network"
              "tk-packages"
              "tk-looks"
              "tk-dev"
