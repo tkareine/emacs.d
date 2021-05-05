@@ -6,6 +6,8 @@
     (list (line-beginning-position)
           (line-beginning-position 2))))
 
+(declare-function cl-find-if "cl-seq")
+
 (defun tk-support/locate-any-dominating-file (file names)
   "Starting at FILE, look up file path for directory containing
 any of NAMES. Stop at the first parent directory containing the
