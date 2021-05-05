@@ -530,10 +530,6 @@ configuration for GNU Global."
   :interpreter
   ("j?ruby\\(?:1.8\\|1.9\\)?"))
 
-;;; Shell script
-
-(add-to-list 'auto-mode-alist '("\\.bashrc\\.[a-z0-9-.]+\\'" . sh-mode))
-
 ;;; Configuration files
 
 (add-to-list 'auto-mode-alist '("/.aws/config\\'" . conf-unix-mode))
