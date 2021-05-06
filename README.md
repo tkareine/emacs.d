@@ -19,13 +19,6 @@ A screenshot, featuring [magit] (the right buffer) and [Ivy]'s
 The font in use is [Input][Input font]
 ([customization](https://input.fontbureau.com/download/index.html?size=14&language=python&theme=solarized-dark&family=InputMono&width=300&weight=400&line-height=1.1&a=ss&g=ss&i=serifs_round&l=serifs_round&zero=0&asterisk=height&braces=straight&preset=consolas&customize=please)).
 
-### TLS support with LibreSSL
-
-I prefer to use [LibreSSL] to establish TLS connections in Emacs,
-because I want to use a nonobscure TLS implementation. There's an Elisp
-function, `tk-network/test-tls-security`, to verify the functionality of
-the setup. See [etc/tk-network.el].
-
 ### Show relevant information in mode-line
 
 I've tuned the mode-line to show only information that I think is
@@ -137,18 +130,6 @@ Installation with Homebrew:
 brew install jq --HEAD
 ```
 
-### LibreSSL
-
-Installation with Homebrew:
-
-``` bash
-brew install libressl
-export PATH="$(brew --prefix libressl)/bin:$PATH"
-```
-
-In [etc/tk-network.el], I customize variable `gnutls-trustfiles` to
-point to the cert store file of LibreSSL.
-
 ### Marked
 
 [Marked] generates the html output from Markdown sources, used by
@@ -177,7 +158,6 @@ npm install -g typescript typescript-language-server
 [Homebrew]: https://brew.sh/
 [Input font]: http://input.fontbureau.com/
 [Ivy]: https://github.com/abo-abo/swiper
-[LibreSSL]: https://www.libressl.org/
 [Marked]: https://github.com/markedjs/marked
 [Node.js]: https://nodejs.org/
 [Prettier]: https://prettier.io/
@@ -192,7 +172,6 @@ npm install -g typescript typescript-language-server
 [etc/tk-dev.el]: etc/tk-dev.el
 [etc/tk-editing.el]: etc/tk-editing.el
 [etc/tk-looks.el]: etc/tk-looks.el
-[etc/tk-network.el]: etc/tk-network.el
 [etc/tk-packages.el]: etc/tk-packages.el
 [ggtags]: https://github.com/leoliu/ggtags
 [jq]: https://stedolan.github.io/jq/
