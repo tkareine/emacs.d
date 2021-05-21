@@ -39,6 +39,7 @@
   (global-company-mode +1)
 
   :custom
+  (company-idle-delay 0.5)
   (company-minimum-prefix-length 2 "The minimum prefix length before showing idle completion")
   (company-tooltip-align-annotations t "Align annotations to the right tooltip border")
   (company-dabbrev-downcase nil "Don't lowercase completion candidates (dabbrev backend)")
