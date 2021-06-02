@@ -299,6 +299,11 @@ active region, kill the current line instead."
 
 (customize-set-variable 'tramp-default-method "ssh")
 
+;;; ffap: find file (or url) at point
+
+;; Disallow pinging a host for a symbol that looks like a host
+(customize-set-variable 'ffap-machine-p-known 'reject)
+
 ;;; Dired
 
 (customize-set-variable 'dired-listing-switches "-alh")
