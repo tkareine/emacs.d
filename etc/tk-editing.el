@@ -495,6 +495,15 @@ probably not done."
    ("C-c f"   . counsel-projectile-find-file)
    ("C-c s"   . counsel-projectile-rg)))
 
+(use-package docker-tramp
+  :ensure t)
+
+(use-package counsel-tramp
+  :ensure t
+
+  :bind
+  (("s-f" . counsel-tramp)))
+
 ;;; Deadgrep interface for ripgrep
 
 (use-package deadgrep
