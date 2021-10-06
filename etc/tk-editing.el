@@ -387,12 +387,15 @@ probably not done."
                                     :test "npm test"
                                     :test-suffix ".test")
 
+  (projectile-mode +1)
+
   :bind-keymap
   ("C-c p" . projectile-command-map)
 
   :bind
   (("C-c D" . projectile-dired)
-   ("C-c F" . projectile-find-file-dwim)
+   ("C-c d" . projectile-find-dir)
+   ("C-c f" . projectile-find-file-dwim)
    ("C-c i" . projectile-toggle-between-implementation-and-test)
    ("C-c o" . projectile-find-other-file))
 
@@ -477,23 +480,8 @@ probably not done."
 (use-package counsel-projectile
   :ensure t
 
-  :demand
-
-  :config
-  (defun tk-editing/dired-open-directory-of-project-file (file)
-    (tk-editing/dired-open-directory-of-file (concat (projectile-project-root) file)))
-
-  (ivy-add-actions #'counsel-projectile-find-file
-                   '(("D"
-                      tk-editing/dired-open-directory-of-project-file
-                      "open file's directory")))
-
-  (counsel-projectile-mode +1)
-
   :bind
-  (("C-c d"   . counsel-projectile-find-dir)
-   ("C-c f"   . counsel-projectile-find-file)
-   ("C-c s"   . counsel-projectile-rg)))
+  (("C-c s" . counsel-projectile-rg)))
 
 (use-package docker-tramp
   :ensure t)
