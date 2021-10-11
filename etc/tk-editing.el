@@ -394,10 +394,10 @@ probably not done."
 
   :bind
   (("C-c D" . projectile-dired)
+   ("C-c O" . projectile-find-other-file)
    ("C-c d" . projectile-find-dir)
    ("C-c f" . projectile-find-file-dwim)
-   ("C-c i" . projectile-toggle-between-implementation-and-test)
-   ("C-c o" . projectile-find-other-file))
+   ("C-c o" . projectile-toggle-between-implementation-and-test))
 
   :custom
   (projectile-completion-system 'ivy))
@@ -463,6 +463,7 @@ probably not done."
 
   :bind
   (("C-c g"   . counsel-git)
+   ("C-c i"   . counsel-register)
    ("C-c j"   . counsel-git-grep)
    ("C-c l"   . counsel-locate)
    ("C-c m"   . counsel-bookmark)
