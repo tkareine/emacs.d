@@ -18,7 +18,7 @@
 (customize-set-variable 'kept-new-versions 2)
 
 ;; Number of oldest backup versions to keep when making new backup
-(customize-set-variable 'kept-old-versions 2)
+(customize-set-variable 'kept-old-versions 0)
 
 ;; Silently delete old backup files
 (customize-set-variable 'delete-old-versions t)
