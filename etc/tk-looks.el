@@ -74,6 +74,10 @@
 ;; Show buffer size in mode line
 (size-indication-mode)
 
+;; Show buffer boundaries with angle bitmaps and scrolling with arrow
+;; bitmaps in the left fringe
+(customize-set-variable 'indicate-buffer-boundaries 'left)
+
 ;; Don't show line number if buffer is too big; value in bytes
 (customize-set-variable 'line-number-display-limit (* 1024 1024 64))
 

@@ -7,8 +7,16 @@
 ;; Hard wrapping at column number
 (customize-set-variable 'fill-column 72)
 
+;; Do not insert tabs in place of multiple spaces when formatting a
+;; region
+(customize-set-variable 'indent-tabs-mode nil)
+
 ;; Default indentation
 (customize-set-variable 'standard-indent 2)
+
+;; Disable double space indicating the end of a sentence. Affects
+;; commands such as `fill-paragraph' and `forward-sentence'.
+(customize-set-variable 'sentence-end-double-space nil)
 
 ;; Add missing newline to file automatically when saving
 (customize-set-variable 'require-final-newline t)
@@ -18,9 +26,6 @@
 
 ;; Default major-mode
 (customize-set-variable 'major-mode 'text-mode)
-
-;; Do not insert tabs in place of multiple spaces when formatting a region
-(customize-set-variable 'indent-tabs-mode nil)
 
 ;; Allow downcase-region (C-x C-l), upcase-region (C-x C-u)
 (put 'downcase-region 'disabled nil)

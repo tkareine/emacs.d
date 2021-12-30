@@ -8,7 +8,7 @@
 ;; Make backups of files, even when they're in version control
 (customize-set-variable 'vc-make-backup-files t)
 
-;; Safer backup for symlinks
+;; Safer backups by copying files; preserves hard file links
 (customize-set-variable 'backup-by-copying t)
 
 ;; Enable version control for backups
@@ -28,3 +28,9 @@
 
 ;; Save all autosaves to this directory
 (customize-set-variable 'auto-save-file-name-transforms `((".*" ,temporary-file-directory t)))
+
+;; Disable lockfiles, used to avoid editing collisions; these get placed
+;; in the same directory as the original file, and there's no
+;; configuration in Emacs to change the location. Lockfiles can be
+;; harmful to tools monitoring a directory and detecting changes.
+(customize-set-variable 'create-lockfiles nil)
