@@ -32,16 +32,16 @@
 (customize-set-variable 'ring-bell-function #'tk-looks/visible-bell)
 
 ;; Syntax higlighting where applicable
-(global-font-lock-mode +1)
+(global-font-lock-mode 1)
 
 ;; Highlight current line
-(global-hl-line-mode +1)
+(global-hl-line-mode 1)
 
 ;; Selection-highlighting behavior like in other editors
-(transient-mark-mode +1)
+(transient-mark-mode 1)
 
 ;; See matching pairs of parentheses and other characters
-(show-paren-mode +1)
+(show-paren-mode 1)
 
 ;; No blinking cursor
 (blink-cursor-mode -1)
@@ -91,11 +91,11 @@
 ;;; Mode line
 
 ;; Show current line and column in mode line
-(line-number-mode)
-(column-number-mode)
+(line-number-mode 1)
+(column-number-mode 1)
 
 ;; Show buffer size in mode line
-(size-indication-mode)
+(size-indication-mode 1)
 
 ;; Show buffer boundaries with angle bitmaps and scrolling with arrow
 ;; bitmaps in the left fringe
@@ -108,7 +108,7 @@
 (customize-set-variable 'line-number-display-limit (* 1024 1024 64))
 
 ;; Show current function in mode line
-(which-function-mode +1)
+(which-function-mode 1)
 
 (defvar tk-looks/mode-line-position
   '((line-number-mode ("%l" (column-number-mode ":%c")))
@@ -260,7 +260,7 @@ mode-line-process, and narrowing) and selected minor modes.")
   :demand
 
   :config
-  (global-git-gutter-mode +1)
+  (global-git-gutter-mode 1)
 
   :custom
   (git-gutter:lighter " gg"))
@@ -281,4 +281,4 @@ mode-line-process, and narrowing) and selected minor modes.")
   :demand
 
   :config
-  (which-key-mode +1))
+  (which-key-mode 1))

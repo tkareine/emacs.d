@@ -36,7 +36,7 @@
   :demand
 
   :config
-  (global-company-mode +1)
+  (global-company-mode 1)
 
   :custom
   (company-idle-delay 0.5)
@@ -77,7 +77,7 @@
   :demand
 
   :config
-  (global-flycheck-mode)
+  (global-flycheck-mode 1)
 
   :custom
   (flycheck-disabled-checkers '(emacs-lisp-checkdoc json-python-json))
@@ -253,7 +253,7 @@ configuration for GNU Global."
     (require 'subr-x)
     (when-let ((prettier-config (tk-support/locate-any-dominating-file default-directory
                                                                        tk-dev/prettier-config-files)))
-      (prettier-js-mode)))
+      (prettier-js-mode 1)))
 
   (add-to-list 'tk-looks/minor-mode-alist '(prettier-js-mode (" Prettier")) t)
 
@@ -289,7 +289,7 @@ configuration for GNU Global."
   (defun tk-dev/js2-mode-toggle-strict-missing-semi-warning ()
     (interactive)
     (setq js2-strict-missing-semi-warning (eq js2-strict-missing-semi-warning nil))
-    (js2-mode))
+    (js2-mode 1))
 
   (put 'js2-include-node-externs 'safe-local-variable 'booleanp)
 
@@ -371,7 +371,7 @@ configuration for GNU Global."
 
 (defun tk-dev/emacs-lisp-mode-hook ()
   (setq mode-name "ELisp")
-  (smartparens-strict-mode))
+  (smartparens-strict-mode 1))
 
 (add-hook 'emacs-lisp-mode-hook #'tk-dev/emacs-lisp-mode-hook)
 
@@ -402,7 +402,7 @@ configuration for GNU Global."
     (it        1))
 
   (defun tk-dev/clojure-mode-hook ()
-    (smartparens-strict-mode))
+    (smartparens-strict-mode 1))
 
   (add-hook 'clojure-mode-hook #'tk-dev/clojure-mode-hook)
 

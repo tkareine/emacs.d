@@ -41,10 +41,10 @@
 (customize-set-variable 'mac-function-modifier 'super)
 
 ;; Typing text replaces active selection
-(delete-selection-mode)
+(delete-selection-mode 1)
 
 ;; Revert file buffer if changed externally
-(global-auto-revert-mode)
+(global-auto-revert-mode 1)
 
 ;; Save typing chars when answering yes-or-no-p questions
 (defalias 'yes-or-no-p 'y-or-n-p)
@@ -239,8 +239,8 @@ active region, kill the current line instead."
 
   :config
   (require 'smartparens-config)
-  (smartparens-global-mode)
-  (show-smartparens-global-mode)
+  (smartparens-global-mode 1)
+  (show-smartparens-global-mode 1)
   (sp-use-paredit-bindings)
   (add-to-list 'tk-looks/minor-mode-alist
                '(smartparens-mode (" SP" (:eval (if smartparens-strict-mode "/s" "")))))
@@ -309,8 +309,8 @@ active region, kill the current line instead."
 (customize-set-variable 'save-place-file (tk-init/user-emacs-path "saveplace"))
 (customize-set-variable 'savehist-file (tk-init/user-emacs-path "savehist"))
 
-(save-place-mode)
-(savehist-mode)
+(save-place-mode 1)
+(savehist-mode 1)
 
 ;;; Recentf: shows list of recently opened files
 
@@ -333,7 +333,7 @@ probably not done."
 
 (run-at-time (* 5 60) (* 5 60) #'tk-editing/recentf-save-list-silent)
 
-(recentf-mode)
+(recentf-mode 1)
 
 ;;; Hippie-expand
 
@@ -345,7 +345,7 @@ probably not done."
   :ensure t
 
   :config
-  (global-undo-tree-mode +1)
+  (global-undo-tree-mode 1)
 
   :bind
   (("C-x u" . undo-tree-visualize)))
@@ -371,7 +371,7 @@ probably not done."
                                     :test "npm test"
                                     :test-suffix ".test")
 
-  (projectile-mode +1)
+  (projectile-mode 1)
 
   :bind-keymap
   ("C-c p" . projectile-command-map)
@@ -394,7 +394,7 @@ probably not done."
   :demand
 
   :config
-  (ivy-mode +1)
+  (ivy-mode 1)
 
   :custom
   (ivy-use-virtual-buffers t)
