@@ -149,28 +149,7 @@ of region."
 (bind-keys ("C-c C" . comment-dwim)
            ("M-/"   . tk-editing/comment-or-uncomment-region-or-line))
 
-;;; Showing and handling whitespace
-
-;; Visually indicate empty lines in buffer in the left fringe
-(customize-set-variable 'indicate-empty-lines t)
-
-;; Highlight trailing whitespaces in lines. Let's use this instead of
-;; the similar feature in whitespace.el, because this marks trailing
-;; whitespace in lines already highlighted with `whitespace-line' face.
-(customize-set-variable 'show-trailing-whitespace t)
-
-(customize-set-variable 'whitespace-style '(face
-                                            tabs
-                                            lines
-                                            ;; don't include `trailing', see comment above
-                                            space-after-tab::tab
-                                            space-before-tab::tab
-                                            tab-mark))
-
-(custom-set-faces '(whitespace-tab ((t (:background "grey30"))))
-                  '(whitespace-line ((t (:background "#66494a" :foreground nil)))))
-
-(global-whitespace-mode)
+;;; Whitespace control
 
 (defun tk-editing/toggle-show-trailing-whitespace ()
   (interactive)

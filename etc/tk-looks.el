@@ -47,7 +47,27 @@
 (blink-cursor-mode -1)
 
 ;; Highlight long lines when whitespace-mode is enabled
-(customize-set-variable 'whitespace-line-column 140)
+(customize-set-variable 'whitespace-line-column 120)
+
+;; Highlight trailing whitespaces with the `trailing-whitespace' face;
+;; use this instead of including `trailing' in the `whitespace-style'
+;; list configuration of whitespace.el. That way, we see trailing
+;; whitespace irrespective of whitespace.el.
+(customize-set-variable 'show-trailing-whitespace t)
+
+(customize-set-variable 'whitespace-style '(face
+                                            tabs
+                                            lines
+                                            ;; don't include `trailing', see comment above
+                                            space-after-tab::tab
+                                            space-before-tab::tab
+                                            tab-mark))
+
+(custom-set-faces '(whitespace-tab ((t (:background "grey30"))))
+                  '(whitespace-line ((t (:background "#66494a" :foreground nil)))))
+
+;; Enable global whitespace mode
+(global-whitespace-mode 1)
 
 ;; Color theme
 (use-package zenburn-theme
@@ -80,6 +100,9 @@
 ;; Show buffer boundaries with angle bitmaps and scrolling with arrow
 ;; bitmaps in the left fringe
 (customize-set-variable 'indicate-buffer-boundaries 'left)
+
+;; Visually indicate empty lines in buffer in the left fringe
+(customize-set-variable 'indicate-empty-lines t)
 
 ;; Don't show line number if buffer is too big; value in bytes
 (customize-set-variable 'line-number-display-limit (* 1024 1024 64))
