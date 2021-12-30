@@ -239,6 +239,14 @@ mode-line-process, and narrowing) and selected minor modes.")
   :custom
   (git-gutter:lighter " gg"))
 
+;;; rainbow-delimiters
+
+(use-package rainbow-delimiters
+  :ensure t
+
+  :config
+  (add-hook 'prog-mode-hook #'rainbow-delimiters-mode))
+
 ;;; Which-key: show available key bindings
 
 (use-package which-key
