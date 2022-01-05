@@ -1,16 +1,15 @@
-SHELL := bash
+EMACS := emacs
 
-EMACS ?= emacs
+EMACS_BATCH := $(EMACS) --batch
 
-EMACS_BATCH ?= $(EMACS) --batch
+EL_FILES := $(shell find site-lisp -type f -name '*.el')
 
-EL_FILES ?= $(shell find site-lisp -type f -name '*.el')
+ELC_FILES := $(patsubst %.el,%.elc, $(EL_FILES))
 
-ELC_FILES ?= $(patsubst %.el,%.elc, $(EL_FILES))
-
-TEST_FILES ?= $(wildcard test/*-test.el)
+TEST_FILES := $(wildcard test/*-test.el)
 
 .PHONY: help
+help: SHELL := bash
 help:
 	@echo -e "$(subst $(newline),\n,$(help_text))"
 
@@ -47,9 +46,9 @@ endef
 define help_text
 Targets:
 
-  help              Show this guide.
-  compile           Compile selected .el sources to .elc.
-  upgrade-packages  Upgrade installed packages.
-  test              Run tests.
-  clean             Delete compiled files.
+  help              Show this guide
+  compile           Compile site-lisp/**/*.el to .elc
+  upgrade-packages  Upgrade installed packages
+  test              Run tests
+  clean             Delete compiled files
 endef
