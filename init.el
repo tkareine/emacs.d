@@ -19,4 +19,6 @@
 ;; Server mode
 (server-start)
 
-(message "Started in %s" (emacs-init-time))
+(message "Started in %.2fs, %d gcs"
+         (float-time (time-subtract after-init-time before-init-time))
+         gcs-done)
