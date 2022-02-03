@@ -164,8 +164,6 @@ configuration for GNU Global."
 
   :custom
   (ggtags-bounds-of-tag-function #'tk-dev/ggtags-bounds-of-tag)
-  (ggtags-process-environment '("GTAGSLABEL=default"))
-  (ggtags-extra-args '("--accept-dotfiles"))
 
   :bind
   (("C-c T" . tk-dev/make-gtags)
