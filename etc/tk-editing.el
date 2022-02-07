@@ -537,3 +537,17 @@ current search result window."
   :bind
   (("s-O" . symbol-overlay-remove-all)
    ("s-o" . symbol-overlay-put)))
+
+(use-package olivetti
+  :ensure t
+
+  :config
+  (add-to-list 'tk-looks/minor-mode-alist
+               '(olivetti-mode " Olv"))
+
+  :custom
+  ;; use margins to balance text
+  (olivetti-style nil)
+
+  :bind
+  (("C-c V" . olivetti-mode)))
