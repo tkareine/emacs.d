@@ -347,6 +347,9 @@ probably not done."
   :config
   (global-undo-tree-mode 1)
 
+  :custom
+  (undo-tree-auto-save-history nil)
+
   :bind
   (("C-x u" . undo-tree-visualize)))
 
