@@ -12,10 +12,12 @@
   (scroll-bar-mode -1))
 
 ;; Do not show splash screen
-(customize-set-variable 'inhibit-startup-message t)
+(customize-set-variable 'inhibit-startup-screen t)
 
-;; Do not show startup message
-(customize-set-variable 'inhibit-startup-echo-area-message (user-login-name))
+;; Do not show startup message. See
+;; `https://lists.gnu.org/archive/html/bug-gnu-emacs/2012-12/msg00954.html'.
+(put 'inhibit-startup-echo-area-message 'saved-value t)
+(setq inhibit-startup-echo-area-message (user-login-name))
 
 ;; Set no content in *scratch* buffer
 (customize-set-variable 'initial-scratch-message "")
