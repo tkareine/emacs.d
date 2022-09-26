@@ -450,6 +450,7 @@ probably not done."
 
   :bind
   (("C-c g"   . counsel-git)
+   ("C-c h"   . counsel-command-history)
    ("C-c i"   . counsel-register)
    ("C-c j"   . counsel-git-grep)
    ("C-c l"   . counsel-locate)
