@@ -5,8 +5,7 @@
 
 (load (expand-file-name "site-lisp/tk-init" user-emacs-directory))
 
-(setq custom-file "/dev/null")
-(load custom-file t)
+(setq-default custom-file null-device)
 
 (dolist (l '("tk-network"
              "tk-packages"

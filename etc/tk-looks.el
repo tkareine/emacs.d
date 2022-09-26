@@ -12,18 +12,18 @@
   (scroll-bar-mode -1))
 
 ;; Do not show splash screen
-(customize-set-variable 'inhibit-startup-screen t)
+(setq-default inhibit-startup-screen t)
 
 ;; Do not show startup message. See
 ;; `https://lists.gnu.org/archive/html/bug-gnu-emacs/2012-12/msg00954.html'.
 (put 'inhibit-startup-echo-area-message 'saved-value t)
-(setq inhibit-startup-echo-area-message (user-login-name))
+(setq-default inhibit-startup-echo-area-message (user-login-name))
 
 ;; Set no content in *scratch* buffer
-(customize-set-variable 'initial-scratch-message "")
+(setq-default initial-scratch-message "")
 
 ;; Disable visible bell, is broken on OS X El Capitan
-(customize-set-variable 'visible-bell nil)
+(setq-default visible-bell nil)
 
 (defun tk-looks/visible-bell ()
   "Replace ring-bell. Adapted from URL
@@ -31,7 +31,7 @@
   (invert-face 'mode-line)
   (run-with-timer 0.1 nil 'invert-face 'mode-line))
 
-(customize-set-variable 'ring-bell-function #'tk-looks/visible-bell)
+(setq-default ring-bell-function #'tk-looks/visible-bell)
 
 ;; Syntax higlighting where applicable
 (global-font-lock-mode 1)
@@ -49,21 +49,21 @@
 (blink-cursor-mode -1)
 
 ;; Highlight long lines when whitespace-mode is enabled
-(customize-set-variable 'whitespace-line-column 120)
+(setq-default whitespace-line-column 120)
 
 ;; Highlight trailing whitespaces with the `trailing-whitespace' face;
 ;; use this instead of including `trailing' in the `whitespace-style'
 ;; list configuration of whitespace.el. That way, we see trailing
 ;; whitespace irrespective of whitespace.el.
-(customize-set-variable 'show-trailing-whitespace t)
+(setq-default show-trailing-whitespace t)
 
-(customize-set-variable 'whitespace-style '(face
-                                            tabs
-                                            lines
-                                            ;; don't include `trailing', see comment above
-                                            space-after-tab::tab
-                                            space-before-tab::tab
-                                            tab-mark))
+(setq-default whitespace-style '(face
+                                 tabs
+                                 lines
+                                 ;; don't include `trailing', see comment above
+                                 space-after-tab::tab
+                                 space-before-tab::tab
+                                 tab-mark))
 
 (custom-set-faces '(whitespace-tab ((t (:background "grey30"))))
                   '(whitespace-line ((t (:background "#66494a" :foreground nil)))))
@@ -101,13 +101,13 @@
 
 ;; Show buffer boundaries with angle bitmaps and scrolling with arrow
 ;; bitmaps in the left fringe
-(customize-set-variable 'indicate-buffer-boundaries 'left)
+(setq-default indicate-buffer-boundaries 'left)
 
 ;; Visually indicate empty lines in buffer in the left fringe
-(customize-set-variable 'indicate-empty-lines t)
+(setq-default indicate-empty-lines t)
 
 ;; Don't show line number if buffer is too big; value in bytes
-(customize-set-variable 'line-number-display-limit (* 1024 1024 64))
+(setq-default line-number-display-limit (* 1024 1024 64))
 
 ;; Show current function in mode line
 (which-function-mode 1)
@@ -197,25 +197,25 @@ mode-line-process, and narrowing) and selected minor modes.")
 
 (put 'tk-looks/mode-line-modes 'risky-local-variable t)
 
-(customize-set-variable 'mode-line-format
-                        '("%e"
-                          mode-line-front-space
-                          mode-line-mule-info
-                          mode-line-client
-                          mode-line-modified
-                          mode-line-remote
-                          mode-line-frame-identification
-                          mode-line-buffer-identification
-                          "  "
-                          tk-looks/mode-line-position
-                          tk-looks/mode-line-projectile-project
-                          tk-looks/mode-line-vc
-                          tk-looks/mode-line-flycheck
-                          " "
-                          mode-line-misc-info
-                          " "
-                          tk-looks/mode-line-modes
-                          mode-line-end-spaces))
+(setq-default mode-line-format
+              '("%e"
+                mode-line-front-space
+                mode-line-mule-info
+                mode-line-client
+                mode-line-modified
+                mode-line-remote
+                mode-line-frame-identification
+                mode-line-buffer-identification
+                "  "
+                tk-looks/mode-line-position
+                tk-looks/mode-line-projectile-project
+                tk-looks/mode-line-vc
+                tk-looks/mode-line-flycheck
+                " "
+                mode-line-misc-info
+                " "
+                tk-looks/mode-line-modes
+                mode-line-end-spaces))
 
 ;;; Frames
 
@@ -224,22 +224,22 @@ mode-line-process, and narrowing) and selected minor modes.")
 ;; 2. buffer file name, dired directory, or buffer name
 ;; 3. buffer modification marker
 ;; 4. number of frames
-(customize-set-variable 'frame-title-format
-                        `(,(system-name)
-                          ": "
-                          (buffer-file-name "%f" (dired-directory dired-directory "%b"))
-                          " %*"
-                          (multiple-frames (:eval (concat " [" (number-to-string (length (frame-list))) "]")))))
+(setq-default frame-title-format
+              `(,(system-name)
+                ": "
+                (buffer-file-name "%f" (dired-directory dired-directory "%b"))
+                " %*"
+                (multiple-frames (:eval (concat " [" (number-to-string (length (frame-list))) "]")))))
 
 ;; Maximize initial frame
-(customize-set-variable 'default-frame-alist
-                        '((fullscreen . maximized)))
+(setq-default default-frame-alist
+              '((fullscreen . maximized)))
 
 ;;; Font
 
 (set-face-font 'default "Input-14")
 
-(customize-set-variable 'line-spacing 2)
+(setq-default line-spacing 2)
 
 (bind-keys ("C-:"  . text-scale-decrease)
            ("C-\"" . text-scale-increase))

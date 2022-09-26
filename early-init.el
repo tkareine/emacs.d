@@ -4,7 +4,7 @@
 ;; from the original value to avoid frequent GC pauses with
 ;; lsp-mode. From
 ;; `https://emacs-lsp.github.io/lsp-mode/page/performance/'.
-(customize-set-variable 'gc-cons-threshold (* 10 1000 1000))
+(setq-default gc-cons-threshold (* 10 1000 1000))
 
 ;; Maximum number of bytes to read from subprocess in a single chunk.
-(setq read-process-output-max (* 1024 1024))
+(setq-default read-process-output-max (* 1024 1024))

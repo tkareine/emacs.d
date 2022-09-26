@@ -5,40 +5,40 @@
 (prefer-coding-system 'utf-8)
 
 ;; Hard wrapping at column number
-(customize-set-variable 'fill-column 72)
+(setq-default fill-column 72)
 
 ;; Do not insert tabs in place of multiple spaces when formatting a
 ;; region
-(customize-set-variable 'indent-tabs-mode nil)
+(setq-default indent-tabs-mode nil)
 
 ;; Default indentation
-(customize-set-variable 'standard-indent 2)
+(setq-default standard-indent 2)
 
 ;; Disable double space indicating the end of a sentence. Affects
 ;; commands such as `fill-paragraph' and `forward-sentence'.
-(customize-set-variable 'sentence-end-double-space nil)
+(setq-default sentence-end-double-space nil)
 
 ;; Add missing newline to file automatically when saving
-(customize-set-variable 'require-final-newline t)
+(setq-default require-final-newline t)
 
 ;; Use text-mode for *scratch* buffer
-(customize-set-variable 'initial-major-mode 'text-mode)
+(setq-default initial-major-mode 'text-mode)
 
 ;; Default major-mode
-(customize-set-variable 'major-mode 'text-mode)
+(setq-default major-mode 'text-mode)
 
 ;; Allow downcase-region (C-x C-l), upcase-region (C-x C-u)
 (put 'downcase-region 'disabled nil)
 (put 'upcase-region 'disabled nil)
 
 ;; macOS: allow entering special chars via Option key
-(customize-set-variable 'mac-option-modifier nil)
+(setq-default mac-option-modifier nil)
 
 ;; macOS: use Cmd key as Meta modifier
-(customize-set-variable 'mac-command-modifier 'meta)
+(setq-default mac-command-modifier 'meta)
 
 ;; macOS: use fn key as Super modifier
-(customize-set-variable 'mac-function-modifier 'super)
+(setq-default mac-function-modifier 'super)
 
 ;; Typing text replaces active selection
 (delete-selection-mode 1)
@@ -51,10 +51,10 @@
 
 ;; macOS: Use `mdfind' for locate
 (when (eq system-type 'darwin)
-  (customize-set-variable 'locate-command "mdfind"))
+  (setq-default locate-command "mdfind"))
 
 ;; Apropos commands perform more extensive searches than default
-(customize-set-variable 'apropos-do-all t)
+(setq-default apropos-do-all t)
 
 ;; Enable narrowing to a region (hiding warning text).
 (put 'narrow-to-region 'disabled nil)
@@ -153,7 +153,7 @@ of region."
 
 (defun tk-editing/toggle-show-trailing-whitespace ()
   (interactive)
-  (customize-set-variable 'show-trailing-whitespace (eq show-trailing-whitespace nil)))
+  (setq-default show-trailing-whitespace (eq show-trailing-whitespace nil)))
 
 (bind-keys ("C-x W"   . tk-editing/toggle-show-trailing-whitespace)
            ("C-x t"   . delete-trailing-whitespace)
@@ -209,10 +209,10 @@ active region, kill the current line instead."
            ("M-<kp-delete>"        . kill-word))
 
 ;; Save clipboard strings into kill ring before replacing them
-(customize-set-variable 'save-interprogram-paste-before-kill t)
+(setq-default save-interprogram-paste-before-kill t)
 
 ;; Mouse yanking inserts at the point instead of the location of the click
-(customize-set-variable 'mouse-yank-at-point t)
+(setq-default mouse-yank-at-point t)
 
 ;; When killing, stop at subwords inside a CamelCase word
 (add-hook 'prog-mode-hook #'subword-mode)
@@ -274,23 +274,23 @@ active region, kill the current line instead."
 
 ;;; Minibuffer
 
-(customize-set-variable 'enable-recursive-minibuffers t)
+(setq-default enable-recursive-minibuffers t)
 
 ;; Remove duplicate elements from history lists
-(customize-set-variable 'history-delete-duplicates t)
+(setq-default history-delete-duplicates t)
 
 ;;; Tramp
 
-(customize-set-variable 'tramp-default-method "ssh")
+(setq-default tramp-default-method "ssh")
 
 ;;; ffap: find file (or url) at point
 
 ;; Disallow pinging a host for a symbol that looks like a host
-(customize-set-variable 'ffap-machine-p-known 'reject)
+(setq-default ffap-machine-p-known 'reject)
 
 ;;; Dired
 
-(customize-set-variable 'dired-listing-switches "-alh")
+(setq-default dired-listing-switches "-alh")
 
 ;; Allow opening file, replacing current buffer
 (put 'dired-find-alternate-file 'disabled nil)
@@ -302,12 +302,12 @@ active region, kill the current line instead."
 
 (require 'uniquify)
 
-(customize-set-variable 'uniquify-buffer-name-style 'forward)
+(setq-default uniquify-buffer-name-style 'forward)
 
 ;;; Saveplace: save point location in the buffer when revisiting the buffer
 
-(customize-set-variable 'save-place-file (tk-init/user-emacs-path "saveplace"))
-(customize-set-variable 'savehist-file (tk-init/user-emacs-path "savehist"))
+(setq-default save-place-file (tk-init/user-emacs-path "saveplace"))
+(setq-default savehist-file (tk-init/user-emacs-path "savehist"))
 
 (save-place-mode 1)
 (savehist-mode 1)
@@ -316,13 +316,13 @@ active region, kill the current line instead."
 
 (require 'recentf)
 
-(customize-set-variable 'recentf-save-file (tk-init/user-emacs-path "recentf"))
+(setq-default recentf-save-file (tk-init/user-emacs-path "recentf"))
 
 ;; Exclude recentf save file and Emacs ELPA autoloads
-(customize-set-variable 'recentf-exclude
-                        (list
-                         (concat "\\`" (tk-init/user-emacs-path "recentf") "\\'")
-                         (concat "\\`" (tk-init/user-emacs-path "elpa") "/.*-autoloads.elc?\\'")))
+(setq-default recentf-exclude
+              (list
+               (concat "\\`" (tk-init/user-emacs-path "recentf") "\\'")
+               (concat "\\`" (tk-init/user-emacs-path "elpa") "/.*-autoloads.elc?\\'")))
 
 (defun tk-editing/recentf-save-list-silent ()
   "Save the list of recent files periodically. Normally, recentf saves

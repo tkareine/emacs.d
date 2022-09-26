@@ -3,17 +3,17 @@
 ;;; Ediff
 
 ;; Use current frame for control panel
-(customize-set-variable 'ediff-window-setup-function 'ediff-setup-windows-plain)
+(setq-default ediff-window-setup-function 'ediff-setup-windows-plain)
 
 ;; I find it easier to read a diff by having one buffer on the left and
 ;; another on the right
-(customize-set-variable 'ediff-split-window-function 'split-window-horizontally)
+(setq-default ediff-split-window-function 'split-window-horizontally)
 
 ;;; Interactive regexp builder
 
 (bind-key "C-c R" #'re-builder)
 
-(customize-set-variable 'reb-re-syntax 'string)
+(setq-default reb-re-syntax 'string)
 
 (with-eval-after-load 're-builder
   (bind-keys :map reb-mode-map
@@ -102,8 +102,8 @@
   (("C-x g" . magit-status)))
 
 ;; Disable Emacs' Version Control interface
-;; (customize-set-variable 'vc-handled-backends '(RCS CVS SVN SCCS SRC Bzr Git Hg Mtn))
-(customize-set-variable 'vc-handled-backends nil)
+;; (setq-default vc-handled-backends '(RCS CVS SVN SCCS SRC Bzr Git Hg Mtn))
+(setq-default vc-handled-backends nil)
 
 ;;; Xref
 
@@ -217,15 +217,15 @@ configuration for GNU Global."
 
 ;;; CSS
 
-(customize-set-variable 'css-indent-offset 2)
+(setq-default css-indent-offset 2)
 
 ;;; C family
 
-(customize-set-variable 'c-basic-offset 4)
+(setq-default c-basic-offset 4)
 
-(customize-set-variable 'c-default-style '((awk-mode  . "awk")
-                                           (java-mode . "java")
-                                           (other     . "linux")))
+(setq-default c-default-style '((awk-mode  . "awk")
+                                (java-mode . "java")
+                                (other     . "linux")))
 
 ;;; Prettier-js: format buffer with prettier tool upon save
 ;;; automatically
@@ -265,7 +265,7 @@ configuration for GNU Global."
 
 ;;; js2-mode for `.js' sources
 
-(customize-set-variable 'js-indent-level 2)
+(setq-default js-indent-level 2)
 
 (use-package js2-mode
   :ensure t
