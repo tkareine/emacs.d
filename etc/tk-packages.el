@@ -32,7 +32,6 @@
   :commands
   (tk-support/active-region-or-line
    tk-support/locate-any-dominating-file
-   tk-support/npm-global-path
    tk-support/pretty-print-xml
    tk-support/string-prefix-length-with-char)
 

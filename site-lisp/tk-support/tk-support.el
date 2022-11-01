@@ -25,16 +25,6 @@ nil if not found."
                                           names)))
     found))
 
-(defun tk-support/npm-global-path (&rest paths)
-  "Expand file path components inside current npm global
-installation directory."
-  (concat (mapconcat #'file-name-as-directory
-                     (append (list (getenv "CHNODE_ROOT")
-                                   "lib/node_modules")
-                             (butlast paths))
-                     "")
-          (car (last paths))))
-
 (defun tk-support/pretty-print-xml (begin end)
   "Pretty format XML markup in region with nxml-mode."
   (interactive (progn
