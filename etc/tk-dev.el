@@ -171,12 +171,12 @@ configuration for GNU Global."
    ("C-c t" . ggtags-find-tag-dwim))
 
   :hook
-  ((enh-ruby-mode . ggtags-mode)
-   (less-css-mode . ggtags-mode)
-   (python-mode   . ggtags-mode)
-   (scss-mode     . ggtags-mode)
-   (sh-mode       . ggtags-mode)
-   (yaml-mode     . ggtags-mode)))
+  (enh-ruby-mode
+   less-css-mode
+   python-mode
+   scss-mode
+   sh-mode
+   yaml-mode))
 
 ;;; LSP
 
