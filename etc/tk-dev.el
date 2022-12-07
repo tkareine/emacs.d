@@ -227,41 +227,24 @@ configuration for GNU Global."
                                 (java-mode . "java")
                                 (other     . "linux")))
 
-;;; Prettier-js: format buffer with prettier tool upon save
-;;; automatically
+;;; Prettier: format buffer with `prettier' upon save automatically
 
-(use-package prettier-js
+(use-package prettier
   :ensure t
 
   :commands
-  (prettier-js-mode)
+  (prettier-mode)
 
   :config
-  (defvar tk-dev/prettier-config-files
-    '("prettier.config.cjs"
-      "prettier.config.js"
-      ".prettierrc"
-      ".prettierrc.cjs"
-      ".prettierrc.js")
-    "Prettier configuration files, used by
-`tk-dev/prettier-common-setup'.")
-
-  (defun tk-dev/prettier-common-setup ()
-    (interactive)
-    (require 'subr-x)
-    (when-let ((prettier-config (tk-support/locate-any-dominating-file default-directory
-                                                                       tk-dev/prettier-config-files)))
-      (prettier-js-mode 1)))
-
-  (add-to-list 'tk-looks/minor-mode-alist '(prettier-js-mode (" Prettier")) t)
+  (add-to-list 'tk-looks/minor-mode-alist '(prettier-mode (" Prettier")) t)
 
   :hook
-  ((html-mode       . tk-dev/prettier-common-setup)
-   (json-mode       . tk-dev/prettier-common-setup)
-   (js2-mode        . tk-dev/prettier-common-setup)
+  (html-mode
+   json-mode
+   js2-mode
    ;; don't add hook to rjsx-mode-hook, because rjsx-mode derives from js2-mode
-   (typescript-mode . tk-dev/prettier-common-setup)
-   (yaml-mode       . tk-dev/prettier-common-setup)))
+   typescript-mode
+   yaml-mode))
 
 ;;; js2-mode for `.js' sources
 
