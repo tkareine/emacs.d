@@ -215,6 +215,11 @@ configuration for GNU Global."
   :hook
   (lsp-mode . lsp-ui-mode))
 
+(use-package lsp-ivy
+
+  :commands
+  (lsp-ivy-workspace-symbol))
+
 ;;; CSS
 
 (setq-default css-indent-offset 2)
@@ -463,6 +468,10 @@ configuration for GNU Global."
   :custom
   (rust-format-on-save t)
   (rust-rustfmt-switches '())
+
+  :bind
+  (:map rust-mode-map
+        ("C-c e" . lsp-rust-analyzer-expand-macro))
 
   :mode
   ("/\\.rs\\'"))
