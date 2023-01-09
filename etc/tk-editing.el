@@ -449,11 +449,11 @@ probably not done."
   (counsel-find-file-at-point t)
 
   :bind
-  (("C-c g"   . counsel-git)
-   ("C-c h"   . counsel-command-history)
+  (("C-c G"   . counsel-git-grep)
+   ("C-c H"   . counsel-command-history)
+   ("C-c L"   . counsel-locate)
+   ("C-c g"   . counsel-git)
    ("C-c i"   . counsel-register)
-   ("C-c j"   . counsel-git-grep)
-   ("C-c l"   . counsel-locate)
    ("C-c m"   . counsel-bookmark)
    ("C-h b"   . counsel-descbinds)
    ("C-h f"   . counsel-describe-function)

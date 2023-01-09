@@ -184,14 +184,12 @@ configuration for GNU Global."
   :ensure t
 
   :commands
-  (lsp)
+  (lsp lsp-deferred)
 
   :config
   (add-to-list 'tk-looks/minor-mode-alist
                (assq 'lsp-mode minor-mode-alist))
 
-  (bind-keys :map lsp-mode-map
-             ("C-M->" . lsp-find-type-definition))
   :hook
   ((lsp-mode        . lsp-enable-which-key-integration)
    (rust-mode       . lsp)
@@ -200,7 +198,9 @@ configuration for GNU Global."
    (typescript-mode . lsp))
 
   :bind
-  (("C-c L" . lsp)))
+  (("C-c l" . lsp)
+   ("C-c h" . lsp-describe-thing-at-point)
+   ("C-M->" . lsp-find-type-definition)))
 
 (use-package lsp-ui
   :ensure t
@@ -210,13 +210,9 @@ configuration for GNU Global."
 
   :custom
   (lsp-ui-doc-delay 1.0 "Number of seconds before showing documentation popup")
-  (lsp-ui-doc-position 'top)
-
-  :hook
-  (lsp-mode . lsp-ui-mode))
+  (lsp-ui-doc-position 'top))
 
 (use-package lsp-ivy
-
   :commands
   (lsp-ivy-workspace-symbol))
 
@@ -470,8 +466,7 @@ configuration for GNU Global."
   (rust-rustfmt-switches '())
 
   :bind
-  (:map rust-mode-map
-        ("C-c e" . lsp-rust-analyzer-expand-macro))
+  ("C-c e" . lsp-rust-analyzer-expand-macro)
 
   :mode
   ("/\\.rs\\'"))
