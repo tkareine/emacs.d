@@ -199,7 +199,7 @@ configuration for GNU Global."
 
   :bind
   (("C-c l" . lsp)
-   ("C-c h" . lsp-describe-thing-at-point)
+   ("C-c H" . lsp-describe-thing-at-point)
    ("C-M->" . lsp-find-type-definition)))
 
 (use-package lsp-ui
@@ -209,8 +209,11 @@ configuration for GNU Global."
   (lsp-ui-mode)
 
   :custom
-  (lsp-ui-doc-delay 1.0 "Number of seconds before showing documentation popup")
-  (lsp-ui-doc-position 'top))
+  (lsp-ui-doc-delay 0.5 "Number of seconds before showing documentation popup")
+  (lsp-ui-doc-position 'top)
+
+  :bind
+  (("C-c h" . lsp-ui-doc-glance)))
 
 (use-package lsp-ivy
   :commands
