@@ -167,7 +167,7 @@ configuration for GNU Global."
 
   :bind
   (("C-c T" . tk-dev/make-gtags)
-   ("C-c r" . ggtags-find-reference)
+   :map ggtags-mode-map
    ("C-c t" . ggtags-find-tag-dwim))
 
   :hook
@@ -199,7 +199,9 @@ configuration for GNU Global."
 
   :bind
   (("C-c l" . lsp)
+   :map lsp-mode-map
    ("C-c H" . lsp-describe-thing-at-point)
+   ("C-M-/" . lsp-find-references)
    ("C-M->" . lsp-find-type-definition)))
 
 (use-package lsp-ui
@@ -213,7 +215,8 @@ configuration for GNU Global."
   (lsp-ui-doc-position 'top)
 
   :bind
-  (("C-c h" . lsp-ui-doc-glance)))
+  (:map lsp-ui-mode-map
+   ("C-c h" . lsp-ui-doc-glance)))
 
 (use-package lsp-ivy
   :commands
@@ -469,7 +472,8 @@ configuration for GNU Global."
   (rust-rustfmt-switches '())
 
   :bind
-  ("C-c e" . lsp-rust-analyzer-expand-macro)
+  (:map rust-mode-map
+        ("C-c e" . lsp-rust-analyzer-expand-macro))
 
   :mode
   ("/\\.rs\\'"))
