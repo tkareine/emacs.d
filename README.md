@@ -29,7 +29,7 @@ shown. See [etc/tk-looks.el], grep for `mode-line-format`.
 
 I have customized [js2-mode] (for `.js` sources), [rjsx-mode] (`.jsx`),
 and [typescript-mode] (`.ts`, `.tsx`) major modes to work together with
-[lsp-mode], [Prettier] (via [prettier-js]), [company-mode], and
+[lsp-mode], [Prettier] (via [prettier.el]), [company-mode], and
 [Flycheck]. For instance, when I save a `.ts` buffer, Flycheck validates
 the file and Prettier reformats it. See [etc/tk-dev.el].
 
@@ -60,37 +60,42 @@ There are a bunch of small improvements to editing in
 
 ## Installation
 
-Installing Mitsuharu Yamamoto's [Emacs macOS port], using [Homebrew] on
+Installing Mitsuharu Yamamoto's [Emacs Mac port], using [Homebrew] on
 macOS:
 
 ``` bash
 brew tap railwaycat/emacsmacport
-brew install emacs-mac --with-modern-icon
+brew install railwaycat/emacsmacport/emacs-mac --with-modern-icon
 ```
 
-You'll need [Node.js] and [npm] for some 3rd party tools (see
+You'll need [Node.js] and [npm] for some of the 3rd party tools (see
 below). For managing Node.js versions, I recommend using [chnode]
-together with [node-build]:
+together with the latest LTS version of Node.js:
 
 ``` bash
-curl 'https://raw.githubusercontent.com/tkareine/chnode/master/chnode.sh' > chnode.sh
-brew install node-build
+brew tap tkareine/chnode
+brew install tkareine/chnode/chnode
+brew install node@18
 mkdir -p ~/.nodes
-node-build 10.11.0 ~/.nodes/node-10.11.0
+ln -s /usr/local/opt/node@18 ~/.nodes/node-18
+```
 
-# put these into shell init script:
+Then, put the following into your shell's (Bash or Zsh) init script:
+
+``` bash
 source chnode.sh
-chnode node-10
+chnode node-18
 ```
 
 ## 3rd party tools in use
 
 ### GNU Global
 
-[GNU Global] is used by [ggtags] minor mode to generate and find source
-code symbols. It's configured in [etc/tk-dev.el]. `ggtags` mode gets
-enabled in selected major modes, such as for `.scss` and `.rb` sources,
-automatically.
+[GNU Global] is used by the [ggtags] minor mode to generate and find
+source code symbols. It's configured in [etc/tk-dev.el]. Ggtags mode
+gets enabled in selected major modes, such as [enhanced-ruby-mode],
+`scss-mode`, and [yaml-mode], automatically. It's especially useful for
+navigating vars in Ansible playbooks.
 
 Configure Global to use Exuberant Ctags for finding symbol definitions
 and Pygments for symbol references.
@@ -121,38 +126,53 @@ brew install ripgrep
 
 ### jq
 
-[jq] is used by [Flycheck] in [json-mode] to check json syntax. It's
+[jq] is used by [Flycheck] in [json-mode] to check JSON syntax. It's
 configured in [etc/tk-dev.el].
 
 Installation with Homebrew:
 
 ``` bash
-brew install jq --HEAD
+brew install jq
 ```
 
 ### Marked
 
-[Marked] generates the html output from Markdown sources, used by
+[Marked] generates the HTML output from Markdown sources, used by
 [markdown-mode]. It's configured in [etc/tk-dev.el].
+
+Installation with npm:
 
 ``` bash
 npm install -g marked
+```
+
+### Prettier
+
+[Prettier] is a popular code formatter, used by [prettier.el] to
+reformat the buffer upon save. It's configured in [etc/tk-dev.el] and
+enabled for [js2-mode], [typescript-mode], `html-mode`, [json-mode], and
+[yaml-mode] automatically.
+
+Installation with npm:
+
+``` bash
+npm install -g prettier
 ```
 
 ### TypeScript
 
 I use the [`tsserver`][tsserver] CLI tool of of [TypeScript] and
 [typescript-language-server] as the server for [lsp-mode], configured in
-[etc/tk-dev.el]. [lsp-mode] gets enabled for `.ts`, `.tsx`, `.js`, and
-`.jsx` sources automatically.
+[etc/tk-dev.el]. [lsp-mode] gets enabled for [js2-mode] and
+[typescript-mode] automatically.
 
-Installation:
+Installation with npm:
 
 ``` bash
 npm install -g typescript typescript-language-server
 ```
 
-[Emacs macOS port]: https://bitbucket.org/mituharu/emacs-mac/src/master/
+[Emacs Mac port]: https://bitbucket.org/mituharu/emacs-mac/src/master/
 [Flycheck]: https://www.flycheck.org/
 [GNU Global]: https://www.gnu.org/software/global/
 [Homebrew]: https://brew.sh/
@@ -169,6 +189,7 @@ npm install -g typescript typescript-language-server
 [conf-ctags]: https://github.com/tkareine/dotfiles/blob/master/.ctags
 [conf-globalrc]: https://github.com/tkareine/dotfiles/blob/master/.globalrc
 [deadgrep]: https://github.com/Wilfred/deadgrep
+[enhanced-ruby-mode]: https://github.com/zenspider/enhanced-ruby-mode
 [etc/tk-dev.el]: etc/tk-dev.el
 [etc/tk-editing.el]: etc/tk-editing.el
 [etc/tk-looks.el]: etc/tk-looks.el
@@ -183,9 +204,10 @@ npm install -g typescript typescript-language-server
 [my dotfiles]: https://github.com/tkareine/dotfiles/
 [node-build]: https://github.com/nodenv/node-build
 [npm]: https://www.npmjs.com/
-[prettier-js]: https://github.com/prettier/prettier-emacs
+[prettier.el]: https://github.com/jscheid/prettier.el
 [ripgrep]: https://github.com/BurntSushi/ripgrep
 [rjsx-mode]: https://github.com/felipeochoa/rjsx-mode
 [tsserver]: https://github.com/Microsoft/TypeScript/wiki/Standalone-Server-%28tsserver%29
 [typescript-language-server]: https://github.com/theia-ide/typescript-language-server
 [typescript-mode]: https://github.com/emacs-typescript/typescript.el
+[yaml-mode]: https://github.com/yoshiki/yaml-mode
