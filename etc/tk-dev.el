@@ -473,7 +473,8 @@ configuration for GNU Global."
 
   :bind
   (:map rust-mode-map
-        ("C-c e" . lsp-rust-analyzer-expand-macro))
+        ("C-c e"   . lsp-rust-analyzer-expand-macro)
+        ("C-x C-e" . lsp-rust-analyzer-run))
 
   :mode
   ("/\\.rs\\'"))
