@@ -532,14 +532,6 @@ configuration for GNU Global."
 (add-to-list 'auto-mode-alist '("/\\.s3cfg\\'" . conf-unix-mode))
 (add-to-list 'auto-mode-alist '("/Cargo\\.lock\\'" . conf-toml-mode))
 
-;;; SQL
-
-(use-package sql-indent
-  :pin gnu
-
-  :hook
-  (sql-mode . sqlind-minor-mode))
-
 ;;; restclient
 
 (use-package restclient
