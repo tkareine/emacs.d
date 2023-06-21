@@ -17,7 +17,7 @@ A screenshot, featuring [magit] (the right buffer) and [Ivy]'s
 <img src="https://github.com/tkareine/emacs.d/raw/master/images/setup-showcase.png" title="Setup showcase" alt="Setup showcase" width="864">
 
 The font in use is [Input][Input font]
-([customization](https://input.fontbureau.com/download/index.html?size=14&language=python&theme=solarized-dark&family=InputMono&width=300&weight=400&line-height=1.1&a=ss&g=ss&i=serifs_round&l=serifs_round&zero=0&asterisk=height&braces=straight&preset=consolas&customize=please)).
+([customization](https://input.djr.com/download/?customize&fontSelection=fourStyleFamily&regular=InputMonoNarrow-Regular&italic=InputMonoNarrow-Italic&bold=InputMonoNarrow-Bold&boldItalic=InputMonoNarrow-BoldItalic&a=ss&g=ss&i=serifs_round&l=serifs_round&zero=0&asterisk=height&braces=straight&preset=default&line-height=1.1)).
 
 ### Show relevant information in mode-line
 
@@ -176,7 +176,7 @@ npm install -g typescript typescript-language-server
 [Flycheck]: https://www.flycheck.org/
 [GNU Global]: https://www.gnu.org/software/global/
 [Homebrew]: https://brew.sh/
-[Input font]: http://input.fontbureau.com/
+[Input font]: https://input.djr.com/
 [Ivy]: https://github.com/abo-abo/swiper
 [Marked]: https://github.com/markedjs/marked
 [Node.js]: https://nodejs.org/
