@@ -83,6 +83,22 @@
   (flycheck-disabled-checkers '(emacs-lisp-checkdoc json-python-json))
   (flycheck-temp-prefix ".~flycheck"))
 
+;;; Tree-sitter for Emacs before v29
+;;;
+;;; Docs: https://emacs-tree-sitter.github.io/
+
+(use-package tree-sitter
+  :ensure t
+
+  :config
+  (global-tree-sitter-mode 1)
+  (add-hook 'tree-sitter-after-on-hook #'tree-sitter-hl-mode))
+
+(use-package tree-sitter-langs
+  :ensure t
+
+  :after tree-sitter)
+
 ;;; Magit
 
 (use-package magit
