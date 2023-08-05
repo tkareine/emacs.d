@@ -211,10 +211,10 @@ configuration for GNU Global."
 
   :hook
   ((lsp-mode        . lsp-enable-which-key-integration)
-   (rust-mode       . lsp)
+   (rust-mode       . lsp-deferred)
    ;; don't add hook to rjsx-mode-hook, because rjsx-mode derives from js2-mode
-   (js2-mode        . lsp)
-   (typescript-mode . lsp))
+   (js2-mode        . lsp-deferred)
+   (typescript-mode . lsp-deferred))
 
   :bind
   (("C-c l" . lsp)
