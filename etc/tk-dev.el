@@ -206,6 +206,9 @@ configuration for GNU Global."
   (add-to-list 'tk-looks/minor-mode-alist
                (assq 'lsp-mode minor-mode-alist))
 
+  :custom
+  (lsp-rust-analyzer-cargo-watch-command "clippy")
+
   :hook
   ((lsp-mode        . lsp-enable-which-key-integration)
    (rust-mode       . lsp)
