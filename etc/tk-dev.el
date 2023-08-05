@@ -229,10 +229,13 @@ configuration for GNU Global."
   :custom
   (lsp-ui-doc-delay 0.5 "Number of seconds before showing documentation popup")
   (lsp-ui-doc-position 'top)
+  (lsp-ui-doc-max-width 180)
+  (lsp-ui-doc-max-height 40)
 
   :bind
   (:map lsp-ui-mode-map
-   ("C-c h" . lsp-ui-doc-glance)))
+   ("C-c h" . lsp-ui-doc-toggle)
+   ("s->" . lsp-ui-imenu)))
 
 (use-package lsp-ivy
   :commands
