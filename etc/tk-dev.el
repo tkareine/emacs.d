@@ -447,13 +447,6 @@ configuration for GNU Global."
   :mode
   ("/\\.rs\\'"))
 
-(use-package flycheck-rust
-  :config
-  (add-hook 'flycheck-mode-hook #'flycheck-rust-setup)
-
-  :after
-  (rust-mode))
-
 ;;; Markdown
 
 (use-package markdown-mode
