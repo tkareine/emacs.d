@@ -472,20 +472,6 @@ configuration for GNU Global."
   (("\\.markdown\\'" . gfm-mode)
    ("\\.md\\'"       . gfm-mode)))
 
-;;; Ruby
-
-(use-package enh-ruby-mode
-  :mode
-  ("/gemfile\\'"
-   "/guardfile\\'"
-   "/rakefile\\'"
-   "/vagrantfile\\'"
-   "\\.rake\\'"
-   "\\.rb\\'")
-
-  :interpreter
-  ("j?ruby\\(?:1.8\\|1.9\\)?"))
-
 ;;; Configuration files
 
 (add-to-list 'auto-mode-alist '("/\\.aws/config\\'" . conf-unix-mode))
