@@ -470,13 +470,19 @@ probably not done."
   :ensure t
 
   :bind
-  (("C-c s" . counsel-projectile-rg)))
+  (("C-c s" . counsel-projectile-rg))
+
+  :after
+  (counsel projectile))
 
 (use-package counsel-tramp
   :ensure t
 
   :bind
-  (("s-f" . counsel-tramp)))
+  (("s-f" . counsel-tramp))
+
+  :after
+  (counsel))
 
 ;;; Deadgrep interface for ripgrep
 

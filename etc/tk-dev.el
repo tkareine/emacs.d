@@ -102,7 +102,8 @@
   (use-package tree-sitter-langs
     :ensure t
 
-    :after tree-sitter))
+    :after
+    (tree-sitter)))
 
 ;;; Magit
 
@@ -241,11 +242,17 @@ configuration for GNU Global."
   :bind
   (:map lsp-ui-mode-map
    ("C-c h" . lsp-ui-doc-toggle)
-   ("s->" . lsp-ui-imenu)))
+   ("s->" . lsp-ui-imenu))
+
+  :after
+  (lsp-mode))
 
 (use-package lsp-ivy
   :commands
-  (lsp-ivy-workspace-symbol))
+  (lsp-ivy-workspace-symbol)
+
+  :after
+  (ivy lsp-mode))
 
 ;;; CSS
 
@@ -332,7 +339,10 @@ configuration for GNU Global."
 
 (use-package elisp-mode
   :config
-  (add-hook 'emacs-lisp-mode-hook #'smartparens-strict-mode))
+  (add-hook 'emacs-lisp-mode-hook #'smartparens-strict-mode)
+
+  :after
+  (smartparens))
 
 (use-package macrostep
   :ensure t
@@ -367,7 +377,10 @@ configuration for GNU Global."
 
   :mode
   ("/\\.clj\\'"
-   "/\\.edn\\'"))
+   "/\\.edn\\'")
+
+  :after
+  (smartparens))
 
 ;;; CIDER
 
