@@ -10,9 +10,9 @@
 (dolist (l '("tk-network"
              "tk-packages"
              "tk-looks"
+             "tk-editing"
              "tk-dev"
-             "tk-backups"
-             "tk-editing"))
+             "tk-backups"))
   (load (tk-init/user-emacs-path "etc" l)))
 
 ;; Server mode
