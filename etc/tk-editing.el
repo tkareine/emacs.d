@@ -496,12 +496,11 @@ current search result window."
       (when buf
         (pop-to-buffer buf))))
 
-  (bind-keys :map deadgrep-mode-map
-             ("O"       . tk-editing/deadgrep-show-result-other-window)
-             ("C-c C-f" . next-error-follow-minor-mode))
-
   :bind
-  (("C-c a" . deadgrep)))
+  (("C-c a" . deadgrep)
+   :map deadgrep-mode-map
+   ("O"       . tk-editing/deadgrep-show-result-other-window)
+   ("C-c C-f" . next-error-follow-minor-mode)))
 
 ;;; Symbol-overlay
 

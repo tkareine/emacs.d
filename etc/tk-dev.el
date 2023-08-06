@@ -420,17 +420,18 @@ configuration for GNU Global."
 
   (add-hook 'haskell-mode-hook #'tk-dev/haskell-mode-hook)
 
-  (bind-keys :map haskell-mode-map
-             ("<f8>"  . haskell-navigate-imports)
-             ("C-`"   . haskell-interactive-bring)
-             ("C-c c" . haskell-process-cabal)
-             ("C-c o" . haskell-hoogle))
-
   :custom
   (haskell-process-suggest-remove-import-lines t)
   (haskell-process-auto-import-loaded-modules t)
   (haskell-process-log t)
   (haskell-process-type 'cabal-repl)
+
+  :bind
+  (:map haskell-mode-map
+        ("<f8>"  . haskell-navigate-imports)
+        ("C-`"   . haskell-interactive-bring)
+        ("C-c c" . haskell-process-cabal)
+        ("C-c o" . haskell-hoogle))
 
   :mode
   ("/\\.hs\\'"))
