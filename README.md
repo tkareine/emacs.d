@@ -93,9 +93,9 @@ chnode node-18
 
 [GNU Global] is used by the [ggtags] minor mode to generate and find
 source code symbols. It's configured in [etc/tk-dev.el]. Ggtags mode
-gets enabled in selected major modes, such as [enhanced-ruby-mode],
-`scss-mode`, and [yaml-mode], automatically. It's especially useful for
-navigating vars in Ansible playbooks.
+gets enabled in selected major modes, such as `sh-mode`, `scss-mode`,
+and [yaml-mode], automatically. It's especially useful for navigating
+vars in Ansible playbooks.
 
 Configure Global to use Exuberant Ctags for finding symbol definitions
 and Pygments for symbol references.
@@ -188,7 +188,6 @@ npm install -g typescript typescript-language-server
 [conf-ctags]: https://github.com/tkareine/dotfiles/blob/master/.ctags
 [conf-globalrc]: https://github.com/tkareine/dotfiles/blob/master/.globalrc
 [deadgrep]: https://github.com/Wilfred/deadgrep
-[enhanced-ruby-mode]: https://github.com/zenspider/enhanced-ruby-mode
 [etc/tk-dev.el]: etc/tk-dev.el
 [etc/tk-editing.el]: etc/tk-editing.el
 [etc/tk-looks.el]: etc/tk-looks.el

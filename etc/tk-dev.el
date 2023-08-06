@@ -188,9 +188,9 @@ configuration for GNU Global."
    ("C-c t" . ggtags-find-tag-dwim))
 
   :hook
-  (enh-ruby-mode
-   less-css-mode
+  (less-css-mode
    python-mode
+   ruby-mode
    scss-mode
    sh-mode
    yaml-mode))
