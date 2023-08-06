@@ -269,12 +269,12 @@ configuration for GNU Global."
   (add-to-list 'tk-looks/minor-mode-alist '(prettier-mode (" Prettier")) t)
 
   :hook
-  (html-mode
-   json-mode
-   js2-mode
+  ((html-mode       . prettier-mode)
+   (json-mode       . prettier-mode)
+   (js2-mode        . prettier-mode)
    ;; don't add hook to rjsx-mode-hook, because rjsx-mode derives from js2-mode
-   typescript-mode
-   yaml-mode))
+   (typescript-mode . prettier-mode)
+   (yaml-mode       . prettier-mode)))
 
 ;;; js2-mode for `.js' sources
 
