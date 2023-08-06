@@ -2,31 +2,35 @@
 
 ;;; Ediff
 
-;; Use current frame for control panel
-(setq-default ediff-window-setup-function 'ediff-setup-windows-plain)
+(use-package ediff-wind
+  :custom
+  ;; Use current frame for control panel
+  (ediff-window-setup-function 'ediff-setup-windows-plain)
 
-;; I find it easier to read a diff by having one buffer on the left and
-;; another on the right
-(setq-default ediff-split-window-function 'split-window-horizontally)
+  ;; I find it easier to read a diff by having one buffer on the left and
+  ;; another on the right
+  (ediff-split-window-function 'split-window-horizontally))
 
 ;;; Interactive regexp builder
 
-(bind-key "C-c R" #'re-builder)
+(use-package re-builder
+  :custom
+  (reb-re-syntax 'string)
 
-(setq-default reb-re-syntax 'string)
-
-(with-eval-after-load 're-builder
-  (bind-keys :map reb-mode-map
-             ("C-c C-k" . reb-quit)
-             ("M-n"     . reb-next-match)
-             ("M-p"     . reb-prev-match)))
+  :bind
+  ("C-c R" . re-builder)
+  (:map reb-mode-map
+        ("C-c C-k" . reb-quit)
+        ("M-n"     . reb-next-match)
+        ("M-p"     . reb-prev-match)))
 
 ;;; Compilation
 
-(with-eval-after-load 'compile
-  (bind-keys :map compilation-mode-map
-             ("M-N" . compilation-next-file)
-             ("M-P" . compilation-previous-file)))
+(use-package compile
+  :bind
+  (:map compilation-mode-map
+        ("M-N" . compilation-next-file)
+        ("M-P" . compilation-previous-file)))
 
 ;;; Company
 
@@ -246,7 +250,9 @@ configuration for GNU Global."
 
 ;;; CSS
 
-(setq-default css-indent-offset 2)
+(use-package css-mode
+  :custom
+  (css-indent-offset 2))
 
 ;;; C family
 
