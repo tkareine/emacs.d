@@ -9,6 +9,10 @@
     (package-menu-mark-upgrades)
     (ignore-errors (package-menu-execute t))))
 
+(defun tk-packages/recompile-packages ()
+  (interactive)
+  (byte-recompile-directory package-user-dir 0 'force))
+
 ;; We call `package-initialize' ourselves.
 (setq-default package-enable-at-startup nil)
 

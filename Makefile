@@ -27,6 +27,13 @@ upgrade-packages:
 	  -l etc/tk-packages.el \
 	  -f tk-packages/upgrade-packages
 
+.PHONY: recompile-packages
+recompile-packages:
+	$(EMACS_BATCH) \
+	  -l etc/tk-network.el \
+	  -l etc/tk-packages.el \
+	  -f tk-packages/recompile-packages
+
 .PHONY: test
 test:
 	$(EMACS_BATCH) -Q -L site-lisp -L site-lisp/tk-support \
@@ -46,9 +53,10 @@ endef
 define help_text
 Targets:
 
-  help              Show this guide
-  compile           Compile site-lisp/**/*.el to .elc
-  upgrade-packages  Upgrade installed packages
-  test              Run tests
-  clean             Delete compiled files
+  help                Show this guide
+  compile             Compile site-lisp/**/*.el to .elc
+  upgrade-packages    Upgrade installed packages
+  recompile-packages  Recompile installed packages
+  test                Run tests
+  clean               Delete compiled files
 endef
