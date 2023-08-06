@@ -472,9 +472,6 @@ probably not done."
   :bind
   (("C-c s" . counsel-projectile-rg)))
 
-(use-package docker-tramp
-  :ensure t)
-
 (use-package counsel-tramp
   :ensure t
 
