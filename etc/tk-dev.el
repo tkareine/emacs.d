@@ -179,17 +179,16 @@ configuration for GNU Global."
   (add-to-list 'tk-looks/minor-mode-alist
                '(ggtags-mode (:eval (if ggtags-navigation-mode " GG[nav]" " GG"))))
 
-  (bind-keys :map ggtags-mode-map
-             ("M-]"   . nil)
-             ("C-M-/" . ggtags-find-reference))
+  (unbind-key "M-]" ggtags-mode-map)
 
   :custom
   (ggtags-bounds-of-tag-function #'tk-dev/ggtags-bounds-of-tag)
 
   :bind
-  (("C-c T" . tk-dev/make-gtags)
+  (("C-c t" . ggtags-mode)
+   ("C-c T" . tk-dev/make-gtags)
    :map ggtags-mode-map
-   ("C-c t" . ggtags-find-tag-dwim))
+   ("C-M-/" . ggtags-find-reference))
 
   :hook
   (less-css-mode
