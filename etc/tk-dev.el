@@ -87,7 +87,7 @@
 ;;;
 ;;; Docs: https://emacs-tree-sitter.github.io/
 
-(when (version< emacs-version "29")
+(when (< emacs-major-version 29)
   (use-package tree-sitter
     :ensure t
 
