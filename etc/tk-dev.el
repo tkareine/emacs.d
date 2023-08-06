@@ -330,11 +330,9 @@ configuration for GNU Global."
 
 ;;; ELisp
 
-(defun tk-dev/emacs-lisp-mode-hook ()
-  (setq mode-name "ELisp")
-  (smartparens-strict-mode 1))
-
-(add-hook 'emacs-lisp-mode-hook #'tk-dev/emacs-lisp-mode-hook)
+(use-package elisp-mode
+  :config
+  (add-hook 'emacs-lisp-mode-hook #'smartparens-strict-mode))
 
 (use-package macrostep
   :ensure t
