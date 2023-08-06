@@ -27,8 +27,8 @@ shown. See [etc/tk-looks.el], grep for `mode-line-format`.
 
 ### JavaScript, TypeScript, and JSX source file editing
 
-I have customized [js2-mode] (for `.js` sources), [rjsx-mode] (`.jsx`),
-and [typescript-mode] (`.ts`, `.tsx`) major modes to work together with
+I have customized `js-mode` (for `.js` and `.jsx` sources) and
+[typescript-mode] (`.ts`, `.tsx`) major modes to work together with
 [lsp-mode], [Prettier] (via [prettier.el]), [company-mode], and
 [Flycheck]. For instance, when I save a `.ts` buffer, Flycheck validates
 the file and Prettier reformats it. See [etc/tk-dev.el].
@@ -150,7 +150,7 @@ npm install -g marked
 
 [Prettier] is a popular code formatter, used by [prettier.el] to
 reformat the buffer upon save. It's configured in [etc/tk-dev.el] and
-enabled for [js2-mode], [typescript-mode], `html-mode`, [json-mode], and
+enabled for `js-mode`, [typescript-mode], `html-mode`, [json-mode], and
 [yaml-mode] automatically.
 
 Installation with npm:
@@ -163,8 +163,7 @@ npm install -g prettier
 
 I use the [`tsserver`][tsserver] CLI tool of of [TypeScript] and
 [typescript-language-server] as the server for [lsp-mode], configured in
-[etc/tk-dev.el]. [lsp-mode] gets enabled for [js2-mode] and
-[typescript-mode] automatically.
+[etc/tk-dev.el].
 
 Installation with npm:
 
@@ -196,7 +195,6 @@ npm install -g typescript typescript-language-server
 [etc/tk-packages.el]: etc/tk-packages.el
 [ggtags]: https://github.com/leoliu/ggtags
 [jq]: https://stedolan.github.io/jq/
-[js2-mode]: https://github.com/mooz/js2-mode
 [json-mode]: https://github.com/joshwnj/json-mode
 [lsp-mode]: https://emacs-lsp.github.io/lsp-mode/
 [magit]: https://magit.vc/
@@ -206,7 +204,6 @@ npm install -g typescript typescript-language-server
 [npm]: https://www.npmjs.com/
 [prettier.el]: https://github.com/jscheid/prettier.el
 [ripgrep]: https://github.com/BurntSushi/ripgrep
-[rjsx-mode]: https://github.com/felipeochoa/rjsx-mode
 [tsserver]: https://github.com/Microsoft/TypeScript/wiki/Standalone-Server-%28tsserver%29
 [typescript-language-server]: https://github.com/theia-ide/typescript-language-server
 [typescript-mode]: https://github.com/emacs-typescript/typescript.el

@@ -213,8 +213,7 @@ configuration for GNU Global."
   :hook
   ((lsp-mode        . lsp-enable-which-key-integration)
    (rust-mode       . lsp-deferred)
-   ;; don't add hook to rjsx-mode-hook, because rjsx-mode derives from js2-mode
-   (js2-mode        . lsp-deferred)
+   (js-mode         . lsp-deferred)
    (typescript-mode . lsp-deferred))
 
   :bind
@@ -271,84 +270,30 @@ configuration for GNU Global."
   :hook
   ((html-mode       . prettier-mode)
    (json-mode       . prettier-mode)
-   (js2-mode        . prettier-mode)
-   ;; don't add hook to rjsx-mode-hook, because rjsx-mode derives from js2-mode
+   (js-mode         . prettier-mode)
    (typescript-mode . prettier-mode)
    (yaml-mode       . prettier-mode)))
 
-;;; js2-mode for `.js' sources
+;;; js-mode for `.js' and `.jsx' sources
 
-(setq-default js-indent-level 2)
-
-(use-package js2-mode
-  :ensure t
-
+(use-package js
   :config
-  ;; Don't double-indent multiline statement
-  (advice-add #'js--multi-line-declaration-indentation
-              :override
-              #'ignore)
+  (defun tk-dev/js-mode-hook ()
+    (setq mode-name "JS"))
 
-  (defun tk-dev/js2-mode-trigger-strict-warning-p (msg-id &rest _args)
-    (not (member msg-id '("msg.no.side.effects"))))
+  (add-hook 'js-mode-hook #'tk-dev/js-mode-hook)
 
-  ;; Filter out selected warnings
-  (advice-add #'js2-add-strict-warning
-              :before-while
-              #'tk-dev/js2-mode-trigger-strict-warning-p)
-
-  (defun tk-dev/js2-mode-toggle-strict-missing-semi-warning ()
-    (interactive)
-    (setq js2-strict-missing-semi-warning (eq js2-strict-missing-semi-warning nil))
-    (js2-mode 1))
-
-  (put 'js2-include-node-externs 'safe-local-variable 'booleanp)
-
-  (defun tk-dev/js2-mode-reparse-current-buffer ()
-    (js2-mode-idle-reparse (current-buffer)))
-
-  (defun tk-dev/js2-mode-hook ()
-    (setq mode-name "JS2")
-    (add-hook 'after-revert-hook #'tk-dev/js2-mode-reparse-current-buffer nil t))
-
-  (add-hook 'js2-mode-hook #'tk-dev/js2-mode-hook)
-
-  (bind-keys :map js2-mode-map
-             ("M-." . nil)
-             ("C-c j" . tk-dev/js2-mode-toggle-strict-missing-semi-warning))
+  (unbind-key "M-." js-mode-map)
 
   :custom
-  (js2-basic-offset 2)
-  (js2-bounce-indent-p t)
-  (js2-concat-multiline-strings nil)
-  (js2-highlight-level 3)
-  (js2-missing-semi-one-line-override t)
-  (js2-strict-missing-semi-warning nil)
-
-  :custom-face
-  (js2-private-member ((t (:foreground "coral1"))))
+  (js-indent-level 2)
 
   :mode
-  ("\\.[cm]?js\\'"
-   "\\.javascript\\'")
+  (("\\.[cm]?jsx?\\'"  . js-mode)
+   ("\\.javascript\\'" . js-mode))
 
   :interpreter
-  ("node\\(?:js\\)?"))
-
-;;; RJSX: js2-mode for `.jsx' sources
-
-(use-package rjsx-mode
-  :ensure t
-
-  :config
-  (defun tk-dev/rjsx-mode-hook ()
-    (setq mode-name "RJSX")
-    (add-hook 'after-revert-hook #'tk-dev/js2-mode-reparse-current-buffer nil t))
-
-  (add-hook 'rjsx-mode-hook #'tk-dev/rjsx-mode-hook)
-
-  :mode
-  ("\\.jsx\\'"))
+  ("node\\(?:js\\)?" . js-mode))
 
 ;;; TypeScript for `.ts' and `.tsx' sources
 
