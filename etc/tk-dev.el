@@ -370,10 +370,7 @@ configuration for GNU Global."
     (describe  1)
     (it        1))
 
-  (defun tk-dev/clojure-mode-hook ()
-    (smartparens-strict-mode 1))
-
-  (add-hook 'clojure-mode-hook #'tk-dev/clojure-mode-hook)
+  (add-hook 'clojure-mode-hook #'smartparens-strict-mode)
 
   :mode
   ("/\\.clj\\'"
