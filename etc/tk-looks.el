@@ -76,7 +76,7 @@
                                  tab-mark))
 
 (custom-set-faces '(whitespace-tab ((t (:background "grey30"))))
-                  '(whitespace-line ((t (:background "#66494a")))))
+                  '(whitespace-line ((t (:background "#66494a" :foreground unspecified)))))
 
 ;; Enable global whitespace mode
 (global-whitespace-mode 1)
