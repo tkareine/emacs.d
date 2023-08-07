@@ -307,6 +307,15 @@ configuration for GNU Global."
   :mode
   ("\\.tsx?\\'"))
 
+;; HTML
+
+(use-package mhtml-mode
+  :hook
+  ((mhtml-mode . prettier-mode))
+
+  :mode
+  ("/\\.x?html\\'"))
+
 ;;; JSON
 
 (use-package json-mode
