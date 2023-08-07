@@ -290,11 +290,6 @@ configuration for GNU Global."
 
 (use-package js
   :config
-  (defun tk-dev/js-mode-hook ()
-    (setq mode-name "JS"))
-
-  (add-hook 'js-mode-hook #'tk-dev/js-mode-hook)
-
   (unbind-key "M-." js-mode-map)
 
   :custom
