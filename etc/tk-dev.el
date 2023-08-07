@@ -188,15 +188,7 @@ configuration for GNU Global."
   (("C-c t" . ggtags-mode)
    ("C-c T" . tk-dev/make-gtags)
    :map ggtags-mode-map
-   ("C-M-/" . ggtags-find-reference))
-
-  :hook
-  (less-css-mode
-   python-mode
-   ruby-mode
-   scss-mode
-   sh-mode
-   yaml-mode))
+   ("C-M-/" . ggtags-find-reference)))
 
 ;;; LSP
 
@@ -210,14 +202,8 @@ configuration for GNU Global."
   (add-to-list 'tk-looks/minor-mode-alist
                (assq 'lsp-mode minor-mode-alist))
 
-  :custom
-  (lsp-rust-analyzer-cargo-watch-command "clippy")
-
   :hook
-  ((lsp-mode        . lsp-enable-which-key-integration)
-   (rust-mode       . lsp-deferred)
-   (js-mode         . lsp-deferred)
-   (typescript-mode . lsp-deferred))
+  ((lsp-mode . lsp-enable-which-key-integration))
 
   :bind
   (("C-c l" . lsp)
@@ -241,7 +227,7 @@ configuration for GNU Global."
   :bind
   (:map lsp-ui-mode-map
    ("C-c h" . lsp-ui-doc-toggle)
-   ("s->" . lsp-ui-imenu))
+   ("s->"   . lsp-ui-imenu))
 
   :after
   (lsp-mode))
@@ -253,20 +239,6 @@ configuration for GNU Global."
   :after
   (ivy lsp-mode))
 
-;;; CSS
-
-(use-package css-mode
-  :custom
-  (css-indent-offset 2))
-
-;;; C family
-
-(setq-default c-basic-offset 4)
-
-(setq-default c-default-style '((awk-mode  . "awk")
-                                (java-mode . "java")
-                                (other     . "linux")))
-
 ;;; Prettier: format buffer with `prettier' upon save automatically
 
 (use-package prettier
@@ -276,30 +248,49 @@ configuration for GNU Global."
   (prettier-mode)
 
   :config
-  (add-to-list 'tk-looks/minor-mode-alist '(prettier-mode (" Prettier")) t)
+  (add-to-list 'tk-looks/minor-mode-alist '(prettier-mode (" Prettier")) t))
+
+;;; CSS and SCSS
+
+(use-package css-mode
+  :custom
+  (css-indent-offset 2)
 
   :hook
-  ((html-mode       . prettier-mode)
-   (json-mode       . prettier-mode)
-   (js-mode         . prettier-mode)
-   (typescript-mode . prettier-mode)
-   (yaml-mode       . prettier-mode)))
+  ((scss-mode . ggtags-mode)))
+
+;;; C family
+
+(setq-default c-basic-offset 4)
+
+(setq-default c-default-style '((awk-mode  . "awk")
+                                (java-mode . "java")
+                                (other     . "linux")))
 
 ;;; js-mode for `.js' and `.jsx' sources
 
 (use-package js
   :config
+  (defun tk-dev/js-lsp-mode-hook ()
+    (when (not (member major-mode '(json-mode jsonc-mode)))
+      (lsp-deferred)))
+
+  (add-hook 'js-mode-hook #'tk-dev/js-lsp-mode-hook)
+
   (unbind-key "M-." js-mode-map)
 
   :custom
   (js-indent-level 2)
+
+  :hook
+  ((js-mode . prettier-mode))
 
   :mode
   (("\\.[cm]?jsx?\\'"  . js-mode)
    ("\\.javascript\\'" . js-mode))
 
   :interpreter
-  ("node\\(?:js\\)?" . js-mode))
+  (("node\\(?:js\\)?" . js-mode)))
 
 ;;; TypeScript for `.ts' and `.tsx' sources
 
@@ -309,6 +300,10 @@ configuration for GNU Global."
   :custom
   (typescript-indent-level 2)
 
+  :hook
+  ((typescript-mode . lsp-deferred)
+   (typescript-mode . prettier-mode))
+
   :mode
   ("\\.tsx?\\'"))
 
@@ -317,6 +312,8 @@ configuration for GNU Global."
 (use-package json-mode
   :ensure t
 
+  ;; Don't add prettier-mode hook, because json-mode derives from js-mode
+
   :mode
   ("\\.json\\'"))
 
@@ -324,6 +321,10 @@ configuration for GNU Global."
 
 (use-package yaml-mode
   :ensure t
+
+  :hook
+  ((yaml-mode . prettier-mode)
+   (yaml-mode . ggtags-mode))
 
   :mode
   ("/\\.ya?ml\\'"
@@ -440,17 +441,39 @@ configuration for GNU Global."
   :mode
   ("/\\.hs\\'"))
 
+;;; Python
+
+(use-package python
+  :hook
+  ((python-mode . ggtags-mode)))
+
+;; Shell scripts
+
+(use-package sh-script
+  :hook
+  ((sh-mode . ggtags-mode)))
+
+;;; Ruby
+
+(use-package ruby-mode
+  :hook
+  ((ruby-mode . ggtags-mode)))
+
 ;;; Rust
 
 (use-package rust-mode
   :custom
   (rust-format-on-save t)
   (rust-rustfmt-switches '())
+  (lsp-rust-analyzer-cargo-watch-command "clippy")
 
   :bind
   (:map rust-mode-map
         ("C-c e"   . lsp-rust-analyzer-expand-macro)
         ("C-x C-e" . lsp-rust-analyzer-run))
+
+  :hook
+  ((rust-mode . lsp-deferred))
 
   :mode
   ("/\\.rs\\'"))
