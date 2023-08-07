@@ -91,19 +91,18 @@
 ;;;
 ;;; Docs: https://emacs-tree-sitter.github.io/
 
-(when (< emacs-major-version 29)
-  (use-package tree-sitter
-    :ensure t
+(use-package tree-sitter
+  :ensure t
 
-    :config
-    (global-tree-sitter-mode 1)
-    (add-hook 'tree-sitter-after-on-hook #'tree-sitter-hl-mode))
+  :config
+  (global-tree-sitter-mode 1)
+  (add-hook 'tree-sitter-after-on-hook #'tree-sitter-hl-mode))
 
-  (use-package tree-sitter-langs
-    :ensure t
+(use-package tree-sitter-langs
+  :ensure t
 
-    :after
-    (tree-sitter)))
+  :after
+  (tree-sitter))
 
 ;;; Magit
 
