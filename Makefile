@@ -23,27 +23,42 @@ compile: $(ELC_FILES)
 .PHONY: upgrade-packages
 upgrade-packages:
 	$(EMACS_BATCH) \
-	  -l etc/tk-network.el \
-	  -l etc/tk-packages.el \
-	  -f tk-packages/upgrade-packages
+	  --load=etc/tk-network.el \
+	  --load=etc/tk-packages.el \
+	  --funcall=tk-packages/upgrade-packages
 
 .PHONY: recompile-packages
 recompile-packages:
 	$(EMACS_BATCH) \
-	  -l etc/tk-network.el \
-	  -l etc/tk-packages.el \
-	  -f tk-packages/recompile-packages
+	  --load=etc/tk-network.el \
+	  --load=etc/tk-packages.el \
+	  --funcall=tk-packages/recompile-packages
+
+.PHONY: reinstall-treesit-language-grammars
+reinstall-treesit-language-grammars:
+	$(EMACS_BATCH) \
+	  --load=etc/tk-network.el \
+	  --load=etc/tk-packages.el \
+	  --load=etc/tk-dev.el \
+	  --eval='(tk-dev/treesit-install-language-grammars t)'
 
 .PHONY: test
 test:
-	$(EMACS_BATCH) -Q -L site-lisp -L site-lisp/tk-support \
-	  $(foreach test,$(TEST_FILES),-l $(test)) \
-	  -f ert-run-tests-batch-and-exit
+	$(EMACS_BATCH) \
+	  --quick \
+	  --directory=site-lisp \
+	  --directory=site-lisp/tk-support \
+	  $(foreach test,$(TEST_FILES),--load=$(test)) \
+	  --funcall=ert-run-tests-batch-and-exit
 
 .PHONY: clean
 clean:
 	rm -f custom.el
 	find site-lisp -name '*.elc' -delete
+
+.PHONY: clobber
+clobber: clean
+	rm -rf elpa tree-sitter
 
 define newline
 
@@ -53,10 +68,12 @@ endef
 define help_text
 Targets:
 
-  help                Show this guide
-  compile             Compile site-lisp/**/*.el to .elc
-  upgrade-packages    Upgrade installed packages
-  recompile-packages  Recompile installed packages
-  test                Run tests
-  clean               Delete compiled files
+  help                                 Show this guide
+  compile                              Compile site-lisp/**/*.el to .elc
+  upgrade-packages                     Upgrade installed packages
+  recompile-packages                   Recompile installed packages
+  reinstall-treesit-language-grammars  Reinstall Tree-sitter language grammars
+  test                                 Run tests
+  clean                                Delete custom.el and compiled files
+  clobber                              Clean, then delete downloaded files
 endef

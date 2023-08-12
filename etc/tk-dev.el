@@ -87,22 +87,48 @@
   (flycheck-disabled-checkers '(emacs-lisp-checkdoc json-python-json))
   (flycheck-temp-prefix ".~flycheck"))
 
-;;; Tree-sitter for Emacs before v29
-;;;
-;;; Docs: https://emacs-tree-sitter.github.io/
+;;; Tree-sitter
 
-(use-package tree-sitter
-  :ensure t
+(use-package treesit
+  :preface
+  (defvar tk-dev/treesit-language-source-alist
+    '((bash       "https://github.com/tree-sitter/tree-sitter-bash")
+      (css        "https://github.com/tree-sitter/tree-sitter-css")
+      (javascript "https://github.com/tree-sitter/tree-sitter-javascript")
+      (json       "https://github.com/tree-sitter/tree-sitter-json")
+      (tsx        . ("https://github.com/tree-sitter/tree-sitter-typescript" "master" "tsx/src"))
+      (typescript . ("https://github.com/tree-sitter/tree-sitter-typescript" "master" "typescript/src"))
+      (yaml       "https://github.com/ikatyang/tree-sitter-yaml"))
+    "Tree-sitter language grammar configuration")
+
+  (defun tk-dev/treesit-install-language-grammars (force-install-all)
+    "Install Tree-sitter grammars for configured languages if grammars
+are missing. If FORCE-INSTALL-ALL is t, then install grammars for
+all configured languages regardless whether they are already
+installed. Use FORCE-INSTALL-ALL to update grammars."
+    (interactive
+     (list (y-or-n-p "Force install all configured Tree-sitter language grammars?")))
+    (dolist (lang tk-dev/treesit-language-source-alist)
+      (let* ((grammar (car lang)))
+        ;; Install `grammar' if forced or if we don't have it installed already
+        (when (or force-install-all
+                  (not (treesit-language-available-p grammar)))
+          (message "Installing Tree-sitter language grammar %s…" grammar)
+          (treesit-install-language-grammar grammar)))))
 
   :config
-  (global-tree-sitter-mode 1)
-  (add-hook 'tree-sitter-after-on-hook #'tree-sitter-hl-mode))
+  (dolist (lang tk-dev/treesit-language-source-alist)
+    (add-to-list 'treesit-language-source-alist lang))
 
-(use-package tree-sitter-langs
-  :ensure t
+  (tk-dev/treesit-install-language-grammars nil)
 
-  :after
-  (tree-sitter))
+  (dolist (mapping '((sh-mode         . bash-ts-mode)
+                     (css-mode        . css-ts-mode)
+                     (js-mode         . js-ts-mode)
+                     (json-mode       . json-ts-mode)
+                     (typescript-mode . tsx-ts-mode)
+                     (yaml-mode       . yaml-ts-mode)))
+    (add-to-list 'major-mode-remap-alist mapping)))
 
 ;;; Magit
 
@@ -278,6 +304,7 @@ configuration for GNU Global."
 
   :config
   (add-hook 'js-mode-hook #'tk-dev/js-lsp-mode-hook)
+  (add-hook 'js-ts-mode-hook #'tk-dev/js-lsp-mode-hook)
 
   (unbind-key "M-." js-mode-map)
 
@@ -285,7 +312,8 @@ configuration for GNU Global."
   (js-indent-level 2)
 
   :hook
-  ((js-mode . prettier-mode))
+  ((js-mode    . prettier-mode)
+   (js-ts-mode . prettier-mode))
 
   :mode
   (("\\.[cm]?jsx?\\'"  . js-mode)
@@ -303,8 +331,10 @@ configuration for GNU Global."
   (typescript-indent-level 2)
 
   :hook
-  ((typescript-mode . lsp-deferred)
-   (typescript-mode . prettier-mode))
+  ((typescript-mode    . lsp-deferred)
+   (tsx-ts-mode        . lsp-deferred)
+   (typescript-mode    . prettier-mode)
+   (tsx-ts-mode        . prettier-mode))
 
   :mode
   ("\\.tsx?\\'"))
@@ -334,8 +364,10 @@ configuration for GNU Global."
   :ensure t
 
   :hook
-  ((yaml-mode . prettier-mode)
-   (yaml-mode . ggtags-mode))
+  ((yaml-mode    . prettier-mode)
+   (yaml-ts-mode . prettier-mode)
+   (yaml-mode    . ggtags-mode)
+   (yaml-ts-mode . ggtags-mode))
 
   :mode
   ("/\\.ya?ml\\'"
@@ -464,7 +496,8 @@ configuration for GNU Global."
 
 (use-package sh-script
   :hook
-  ((sh-mode . ggtags-mode)))
+  ((sh-mode      . ggtags-mode)
+   (bash-ts-mode . ggtags-mode)))
 
 ;;; Ruby
 
