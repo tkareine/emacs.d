@@ -1,6 +1,7 @@
 ;; -*- lexical-binding: t; -*-
 
 (defun tk-packages/upgrade-packages ()
+  (interactive)
   (let ((package-menu-async nil))
     (message ";;; Updating package list…\n")
     (package-list-packages)
