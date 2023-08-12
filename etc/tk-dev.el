@@ -136,7 +136,7 @@
 (use-package ggtags
   :ensure t
 
-  :config
+  :preface
   (defun tk-dev/make-gtags (rootdir)
     "Make gtags files to the current project.
 
@@ -172,6 +172,7 @@ configuration for GNU Global."
         ('scss-mode (tk-dev/ggtags-adjust-tag-bounds-for-scss-mode bounds))
         (- bounds))))
 
+  :config
   ;; don't change `mode-line-buffer-identification', because we
   ;; show project root dir in the mode line with projectile
   (setq ggtags-mode-line-project-name nil)
@@ -270,11 +271,12 @@ configuration for GNU Global."
 ;;; js-mode for `.js' and `.jsx' sources
 
 (use-package js
-  :config
+  :preface
   (defun tk-dev/js-lsp-mode-hook ()
     (when (not (member major-mode '(json-mode jsonc-mode)))
       (lsp-deferred)))
 
+  :config
   (add-hook 'js-mode-hook #'tk-dev/js-lsp-mode-hook)
 
   (unbind-key "M-." js-mode-map)
@@ -395,16 +397,17 @@ configuration for GNU Global."
                             " && ")
                  t)
 
+  :preface
+  (defun tk-dev/cider-mode-hook ()
+    (local-set-key (kbd "C-c B")   #'cider-connection-browser)
+    (local-set-key (kbd "C-c M-l") #'cider-inspect-last-result)
+    (local-set-key (kbd "C-c M-R") #'cider-restart))
+
   :config
   (add-to-list 'tk-looks/minor-mode-alist '(cider-popup-buffer-mode (" cider-tmp")))
   (add-to-list 'tk-looks/minor-mode-alist '(cider-auto-test-mode (cider-mode " Test")))
   (add-to-list 'tk-looks/minor-mode-alist '(cider--debug-mode " DEBUG"))
   (add-to-list 'tk-looks/minor-mode-alist '(cider-mode cider-mode-line))
-
-  (defun tk-dev/cider-mode-hook ()
-    (local-set-key (kbd "C-c B")   #'cider-connection-browser)
-    (local-set-key (kbd "C-c M-l") #'cider-inspect-last-result)
-    (local-set-key (kbd "C-c M-R") #'cider-restart))
 
   (add-hook 'cider-mode-hook #'tk-dev/cider-mode-hook)
   (add-hook 'cider-repl-mode-hook #'tk-dev/cider-mode-hook)
@@ -426,12 +429,13 @@ configuration for GNU Global."
 ;;; Haskell
 
 (use-package haskell-mode
-  :config
+  :preface
   (defun tk-dev/haskell-mode-hook ()
     (haskell-indentation-mode)
     (haskell-decl-scan-mode)
     (interactive-haskell-mode))
 
+  :config
   (add-hook 'haskell-mode-hook #'tk-dev/haskell-mode-hook)
 
   :custom

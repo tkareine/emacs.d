@@ -434,12 +434,11 @@ probably not done."
 
   :demand
 
-  :config
-  (bind-key "C-r" #'counsel-minibuffer-history minibuffer-local-map)
-
+  :preface
   (defun tk-editing/dired-open-directory-of-file (file)
     (dired (file-name-directory (directory-file-name file))))
 
+  :config
   (ivy-add-actions #'counsel-find-file
                    '(("D"
                       tk-editing/dired-open-directory-of-file
@@ -450,9 +449,9 @@ probably not done."
 
   :bind
   (("C-c G"   . counsel-git-grep)
-   ("C-c H"   . counsel-command-history)
    ("C-c L"   . counsel-locate)
    ("C-c g"   . counsel-git)
+   ("C-c h"   . counsel-command-history)
    ("C-c i"   . counsel-register)
    ("C-c m"   . counsel-bookmark)
    ("C-h b"   . counsel-descbinds)
@@ -464,7 +463,12 @@ probably not done."
    ("C-x C-f" . counsel-find-file)
    ("M-x"     . counsel-M-x)
    ("M-y"     . counsel-yank-pop)
-   ("s-."     . counsel-semantic-or-imenu)))
+   ("s-."     . counsel-semantic-or-imenu)
+   ;; Minibuffer key map for ordinary input (no completion). For
+   ;; example, used in `M-:' (`eval-expression'). See:
+   ;; `https://www.gnu.org/software/emacs/manual/html_node/emacs/Minibuffer-Maps.html'
+   :map minibuffer-local-map
+   ("C-c h"   . counsel-minibuffer-history)))
 
 (use-package counsel-projectile
   :ensure t
@@ -489,10 +493,7 @@ probably not done."
 (use-package deadgrep
   :ensure t
 
-  :config
-  ;; Projectile determines project root
-  (setq deadgrep-project-root-function #'projectile-project-root)
-
+  :preface
   (defun tk-editing/deadgrep-show-result-other-window ()
     "Show the result in another window at point, keeping the
 current search result window."
@@ -501,6 +502,10 @@ current search result window."
       (deadgrep-visit-result-other-window)
       (when buf
         (pop-to-buffer buf))))
+
+  :custom
+  ;; Projectile determines project root
+  (deadgrep-project-root-function #'projectile-project-root)
 
   :bind
   (("C-c a" . deadgrep)
