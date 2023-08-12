@@ -15,7 +15,11 @@ help:
 
 %.elc: %.el
 	@echo Compile: $<
-	@$(EMACS_BATCH) -L site-lisp -Q -f batch-byte-compile $<
+	@$(EMACS_BATCH) \
+	  --quick \
+	  --directory=site-lisp \
+	  --funcall=batch-byte-compile \
+	  $<
 
 .PHONY: compile
 compile: $(ELC_FILES)
