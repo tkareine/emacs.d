@@ -331,13 +331,16 @@ configuration for GNU Global."
   (typescript-indent-level 2)
 
   :hook
-  ((typescript-mode    . lsp-deferred)
-   (tsx-ts-mode        . lsp-deferred)
-   (typescript-mode    . prettier-mode)
-   (tsx-ts-mode        . prettier-mode))
+  ((typescript-mode . lsp-deferred)
+   (typescript-mode . prettier-mode))
 
   :mode
   ("\\.tsx?\\'"))
+
+(use-package typescript-ts-mode
+  :hook
+  ((tsx-ts-mode . lsp-deferred)
+   (tsx-ts-mode . prettier-mode)))
 
 ;; HTML
 
@@ -358,20 +361,27 @@ configuration for GNU Global."
   :mode
   ("\\.json\\'"))
 
+(use-package json-ts-mode
+  :hook
+  ((json-ts-mode . prettier-mode)))
+
 ;;; YAML
 
 (use-package yaml-mode
   :ensure t
 
   :hook
-  ((yaml-mode    . prettier-mode)
-   (yaml-ts-mode . prettier-mode)
-   (yaml-mode    . ggtags-mode)
-   (yaml-ts-mode . ggtags-mode))
+  ((yaml-mode . prettier-mode)
+   (yaml-mode . ggtags-mode))
 
   :mode
   ("/\\.ya?ml\\'"
    "/\\.gemrc\\'"))
+
+(use-package yaml-ts-mode
+  :hook
+  ((yaml-ts-mode . prettier-mode)
+   (yaml-ts-mode . ggtags-mode)))
 
 ;;; ELisp
 
@@ -486,18 +496,18 @@ configuration for GNU Global."
   :mode
   ("/\\.hs\\'"))
 
-;;; Python
-
-(use-package python
-  :hook
-  ((python-mode . ggtags-mode)))
-
 ;; Shell scripts
 
 (use-package sh-script
   :hook
   ((sh-mode      . ggtags-mode)
    (bash-ts-mode . ggtags-mode)))
+
+;;; Python
+
+(use-package python
+  :hook
+  ((python-mode . ggtags-mode)))
 
 ;;; Ruby
 
