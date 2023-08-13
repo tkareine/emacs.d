@@ -58,28 +58,32 @@
 ;; No blinking cursor
 (blink-cursor-mode -1)
 
-;; Highlight long lines when whitespace-mode is enabled
-(setq-default whitespace-line-column 120)
+(use-package whitespace
+  :custom
+  ;; Highlight long lines when whitespace-mode is enabled
+  (whitespace-line-column 120)
 
-;; Highlight trailing whitespaces with the `trailing-whitespace' face;
-;; use this instead of including `trailing' in the `whitespace-style'
-;; list configuration of whitespace.el. That way, we see trailing
-;; whitespace irrespective of whitespace.el.
-(setq-default show-trailing-whitespace t)
+  ;; Highlight trailing whitespaces with the `trailing-whitespace' face;
+  ;; use this instead of including `trailing' in the `whitespace-style'
+  ;; list configuration of whitespace.el. That way, we see trailing
+  ;; whitespace irrespective of whitespace.el.
+  (show-trailing-whitespace t)
 
-(setq-default whitespace-style '(face
-                                 tabs
-                                 lines
-                                 ;; don't include `trailing', see comment above
-                                 space-after-tab::tab
-                                 space-before-tab::tab
-                                 tab-mark))
+  (whitespace-style '(face
+                      tabs
+                      lines
+                      ;; don't include `trailing', see comment above
+                      space-after-tab::tab
+                      space-before-tab::tab
+                      tab-mark))
 
-(custom-set-faces '(whitespace-tab ((t (:background "grey30"))))
-                  '(whitespace-line ((t (:background "#66494a" :foreground unspecified)))))
+  :custom-face
+  (whitespace-tab ((t (:background "grey30"))))
+  (whitespace-line ((t (:background "#66494a" :foreground unspecified))))
 
-;; Enable global whitespace mode
-(global-whitespace-mode 1)
+  :config
+  ;; Enable global whitespace mode
+  (global-whitespace-mode 1))
 
 ;; Color theme
 (use-package zenburn-theme
@@ -119,8 +123,10 @@
 ;; Don't show line number if buffer is too big; value in bytes
 (setq-default line-number-display-limit (* 1024 1024 64))
 
-;; Show current function in mode line
-(which-function-mode 1)
+(use-package which-func
+  :config
+  ;; Show current function in mode line
+  (which-function-mode 1))
 
 (defvar tk-looks/mode-line-position
   '((line-number-mode ("%l" (column-number-mode ":%c")))

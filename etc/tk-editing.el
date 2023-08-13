@@ -49,12 +49,15 @@
 ;; Save typing chars when answering yes-or-no-p questions
 (defalias 'yes-or-no-p 'y-or-n-p)
 
-;; macOS: Use `mdfind' for locate
-(when (eq system-type 'darwin)
-  (setq-default locate-command "mdfind"))
+(use-package locate
+  :config
+  ;; macOS: Use `mdfind' for locate
+  (when (eq system-type 'darwin)
+    (setq-default locate-command "mdfind")))
 
-;; Apropos commands perform more extensive searches than default
-(setq-default apropos-do-all t)
+(use-package apropos
+  :custom
+  (apropos-do-all t "Apropos commands perform more extensive searches than default"))
 
 ;; Enable narrowing to a region (hiding warning text).
 (put 'narrow-to-region 'disabled nil)
@@ -281,63 +284,79 @@ active region, kill the current line instead."
 
 ;;; Tramp
 
-(setq-default tramp-default-method "ssh")
+(use-package tramp
+  :custom
+  (tramp-default-method "ssh"))
 
 ;;; ffap: find file (or url) at point
 
-;; Disallow pinging a host for a symbol that looks like a host
-(setq-default ffap-machine-p-known 'reject)
+(use-package ffap
+  :custom
+  (ffap-machine-p-known 'reject "Disallow pinging a host for a symbol that looks like a host"))
 
 ;;; Dired
 
-(setq-default dired-listing-switches "-alh")
+(use-package dired
+  :custom
+  (dired-listing-switches "-alh")
 
-;; Allow opening file, replacing current buffer
-(put 'dired-find-alternate-file 'disabled nil)
-
-;; DiredX: for Dired Jump
-(with-eval-after-load 'dired (require 'dired-x))
+  :config
+  ;; Allow opening file, replacing current buffer
+  (put 'dired-find-alternate-file 'disabled nil))
 
 ;;; Uniquify: append dir name to buffers with similar filenames
 
-(require 'uniquify)
+(use-package uniquify
+  :demand
 
-(setq-default uniquify-buffer-name-style 'forward)
+  :custom
+  (uniquify-buffer-name-style 'forward))
 
 ;;; Saveplace: save point location in the buffer when revisiting the buffer
 
-(setq-default save-place-file (tk-init/user-emacs-path "saveplace"))
-(setq-default savehist-file (tk-init/user-emacs-path "savehist"))
+(use-package saveplace
+  :demand
 
-(save-place-mode 1)
-(savehist-mode 1)
+  :custom
+  (save-place-file (tk-init/user-emacs-path "saveplace"))
+  (savehist-file (tk-init/user-emacs-path "savehist"))
+
+  :config
+  (save-place-mode 1)
+  (savehist-mode 1))
 
 ;;; Recentf: shows list of recently opened files
 
-(require 'recentf)
+(use-package recentf
+  :demand
 
-(setq-default recentf-save-file (tk-init/user-emacs-path "recentf"))
-
-;; Exclude recentf save file and Emacs ELPA autoloads
-(setq-default recentf-exclude
-              (list
-               (concat "\\`" (tk-init/user-emacs-path "recentf") "\\'")
-               (concat "\\`" (tk-init/user-emacs-path "elpa") "/.*-autoloads.elc?\\'")))
-
-(defun tk-editing/recentf-save-list-silent ()
-  "Save the list of recent files periodically. Normally, recentf saves
+  :preface
+  (defun tk-editing/recentf-save-list-silent ()
+    "Save the list of recent files periodically. Normally, recentf saves
 the list when Emacs exits cleanly. If Emacs crashes, that save is
 probably not done."
-  (let ((inhibit-message t))
-    (recentf-save-list)))
+    (let ((inhibit-message t))
+      (recentf-save-list)))
 
-(run-at-time (* 5 60) (* 5 60) #'tk-editing/recentf-save-list-silent)
+  :custom
+  (recentf-save-file (tk-init/user-emacs-path "recentf"))
 
-(recentf-mode 1)
+  (recentf-exclude
+   (list
+    (concat "\\`" (tk-init/user-emacs-path "recentf") "\\'")
+    (concat "\\`" (tk-init/user-emacs-path "elpa") "/.*-autoloads.elc?\\'"))
+   "Exclude recentf save file and Emacs ELPA autoloads")
+
+  :config
+  (run-at-time (* 5 60) (* 5 60) #'tk-editing/recentf-save-list-silent)
+
+  (recentf-mode 1))
 
 ;;; Hippie-expand
 
-(bind-key "s-SPC" #'hippie-expand)
+(use-package hippie-exp
+  :bind
+  (("s-SPC" . hippie-expand)))
 
 ;;; UndoTree
 
@@ -557,8 +576,7 @@ current search result window."
                '(olivetti-mode " Olv"))
 
   :custom
-  ;; use margins to balance text
-  (olivetti-style nil)
+  (olivetti-style nil "Use margins to balance text")
 
   :bind
   (("C-c V" . olivetti-mode)))
