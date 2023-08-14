@@ -468,6 +468,7 @@ probably not done."
 
   :bind
   (("C-c G"   . counsel-git-grep)
+   ("C-h I"   . counsel-info-lookup-symbol)
    ("C-c L"   . counsel-locate)
    ("C-c g"   . counsel-git)
    ("C-c h"   . counsel-command-history)
@@ -475,7 +476,6 @@ probably not done."
    ("C-c m"   . counsel-bookmark)
    ("C-h b"   . counsel-descbinds)
    ("C-h f"   . counsel-describe-function)
-   ("C-h i"   . counsel-info-lookup-symbol)
    ("C-h l"   . counsel-find-library)
    ("C-h u"   . counsel-unicode-char)
    ("C-h v"   . counsel-describe-variable)
