@@ -240,6 +240,9 @@ active region, kill the current line instead."
 
   :demand
 
+  :custom
+  (blink-matching-paren nil)
+
   :config
   (require 'smartparens-config)
   (smartparens-global-mode 1)
@@ -247,9 +250,6 @@ active region, kill the current line instead."
   (sp-use-paredit-bindings)
   (add-to-list 'tk-looks/minor-mode-alist
                '(smartparens-mode (" SP" (:eval (if smartparens-strict-mode "/s" "")))))
-
-  :custom
-  (blink-matching-paren nil)
 
   :bind
   (:map smartparens-mode-map
@@ -363,11 +363,11 @@ probably not done."
 (use-package undo-tree
   :ensure t
 
-  :config
-  (global-undo-tree-mode 1)
-
   :custom
   (undo-tree-auto-save-history nil)
+
+  :config
+  (global-undo-tree-mode 1)
 
   :bind
   (("C-x u" . undo-tree-visualize)))
@@ -378,6 +378,9 @@ probably not done."
   :ensure t
 
   :demand
+
+  :custom
+  (projectile-completion-system 'ivy)
 
   :config
   (dolist (l '(("js" "scss" "less" "css" "html")
@@ -403,10 +406,7 @@ probably not done."
    ("C-c O" . projectile-find-other-file)
    ("C-c d" . projectile-find-dir)
    ("C-c f" . projectile-find-file-dwim)
-   ("C-c o" . projectile-toggle-between-implementation-and-test))
-
-  :custom
-  (projectile-completion-system 'ivy))
+   ("C-c o" . projectile-toggle-between-implementation-and-test)))
 
 ;;; Ivy, Counsel, and Swiper
 
@@ -414,9 +414,6 @@ probably not done."
   :ensure t
 
   :demand
-
-  :config
-  (ivy-mode 1)
 
   :custom
   (ivy-use-virtual-buffers t)
@@ -439,6 +436,9 @@ probably not done."
   (ivy-modified-buffer ((t (:weight bold
                             :foreground "#bfebbf"))))
 
+  :config
+  (ivy-mode 1)
+
   :bind
   (("C-c b" . ivy-resume)))
 
@@ -457,14 +457,14 @@ probably not done."
   (defun tk-editing/dired-open-directory-of-file (file)
     (dired (file-name-directory (directory-file-name file))))
 
+  :custom
+  (counsel-find-file-at-point t)
+
   :config
   (ivy-add-actions #'counsel-find-file
                    '(("D"
                       tk-editing/dired-open-directory-of-file
                       "open file's directory")))
-
-  :custom
-  (counsel-find-file-at-point t)
 
   :bind
   (("C-c G"   . counsel-git-grep)
@@ -571,12 +571,12 @@ current search result window."
 (use-package olivetti
   :ensure t
 
+  :custom
+  (olivetti-style nil "Use margins to balance text")
+
   :config
   (add-to-list 'tk-looks/minor-mode-alist
                '(olivetti-mode " Olv"))
-
-  :custom
-  (olivetti-style nil "Use margins to balance text")
 
   :bind
   (("C-c V" . olivetti-mode)))

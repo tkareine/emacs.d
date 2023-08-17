@@ -46,9 +46,6 @@
 
   :demand
 
-  :config
-  (global-company-mode 1)
-
   :custom
   (company-idle-delay 0.5)
   (company-minimum-prefix-length 2 "The minimum prefix length before showing idle completion")
@@ -66,6 +63,9 @@
                       company-dabbrev)
                     "Use relevant completion engines only. Especially, put `company-capf' and `company-dabbrev-code' into same group so that the latter adds candidates the former misses.")
 
+  :config
+  (global-company-mode 1)
+
   :bind
   (("C-<tab>" . company-complete)))
 
@@ -74,11 +74,11 @@
 (use-package yasnippet
   :ensure t
 
-  :commands
-  (yas-expand-snippet)
-
   :hook
-  (lsp-mode . yas-minor-mode-on))
+  (lsp-mode . yas-minor-mode-on)
+
+  :commands
+  (yas-expand-snippet))
 
 ;;; Flycheck
 
@@ -87,12 +87,12 @@
 
   :demand
 
-  :config
-  (global-flycheck-mode 1)
-
   :custom
   (flycheck-disabled-checkers '(emacs-lisp-checkdoc json-python-json))
-  (flycheck-temp-prefix ".~flycheck"))
+  (flycheck-temp-prefix ".~flycheck")
+
+  :config
+  (global-flycheck-mode 1))
 
 ;;; Tree-sitter
 
@@ -205,6 +205,9 @@ configuration for GNU Global."
         ('scss-mode (tk-dev/ggtags-adjust-tag-bounds-for-scss-mode bounds))
         (- bounds))))
 
+  :custom
+  (ggtags-bounds-of-tag-function #'tk-dev/ggtags-bounds-of-tag)
+
   :config
   ;; don't change `mode-line-buffer-identification', because we
   ;; show project root dir in the mode line with projectile
@@ -214,9 +217,6 @@ configuration for GNU Global."
                '(ggtags-mode (:eval (if ggtags-navigation-mode " GG[nav]" " GG"))))
 
   (unbind-key "M-]" ggtags-mode-map)
-
-  :custom
-  (ggtags-bounds-of-tag-function #'tk-dev/ggtags-bounds-of-tag)
 
   :bind
   (("C-c t" . ggtags-mode)
@@ -229,8 +229,6 @@ configuration for GNU Global."
 (use-package lsp-mode
   :ensure t
 
-  :commands
-  (lsp lsp-deferred)
   :custom
   (lsp-eldoc-render-all t)
 
@@ -240,6 +238,9 @@ configuration for GNU Global."
 
   :hook
   ((lsp-mode . lsp-enable-which-key-integration))
+
+  :commands
+  (lsp lsp-deferred)
 
   :bind
   (("C-c l" . lsp)
@@ -251,14 +252,14 @@ configuration for GNU Global."
 (use-package lsp-ui
   :ensure t
 
-  :commands
-  (lsp-ui-mode)
-
   :custom
   (lsp-ui-doc-delay 0.5 "Number of seconds before showing documentation popup")
   (lsp-ui-doc-position 'top)
   (lsp-ui-doc-max-width 180)
   (lsp-ui-doc-max-height 40)
+
+  :commands
+  (lsp-ui-mode)
 
   :bind
   (:map lsp-ui-mode-map
@@ -280,11 +281,11 @@ configuration for GNU Global."
 (use-package prettier
   :ensure t
 
-  :commands
-  (prettier-mode)
-
   :config
-  (add-to-list 'tk-looks/minor-mode-alist '(prettier-mode (" Prettier")) t))
+  (add-to-list 'tk-looks/minor-mode-alist '(prettier-mode (" Prettier")) t)
+
+  :commands
+  (prettier-mode))
 
 ;;; CSS and SCSS
 
@@ -311,14 +312,14 @@ configuration for GNU Global."
     (when (not (member major-mode '(json-mode jsonc-mode)))
       (lsp-deferred)))
 
+  :custom
+  (js-indent-level 2)
+
   :config
   (add-hook 'js-mode-hook #'tk-dev/js-lsp-mode-hook)
   (add-hook 'js-ts-mode-hook #'tk-dev/js-lsp-mode-hook)
 
   (unbind-key "M-." js-mode-map)
-
-  :custom
-  (js-indent-level 2)
 
   :hook
   ((js-mode    . prettier-mode)
@@ -454,6 +455,14 @@ configuration for GNU Global."
     (local-set-key (kbd "C-c M-l") #'cider-inspect-last-result)
     (local-set-key (kbd "C-c M-R") #'cider-restart))
 
+  :custom
+  (cider-eval-result-prefix ";; => ")
+  (cider-repl-result-prefix ";; => ")
+  (cider-repl-history-file "~/.cider_history")
+  (cider-prompt-for-symbol nil "Attempt to use the symbol at point as input for `cider-find-var', and only prompt if that throws an error")
+  (cider-inject-dependencies-at-jack-in nil "I want to inject dependencies manually via `~/.lein/profiles.clj'. Otherwise Leiningen's `:pedantic? :abort' setting causes `lein repl' to abort due to overriding version of `org.clojure/tools.nrepl'.")
+  (cider-mode-line '(" " (:eval (cider--modeline-info))) "Shorten mode line info")
+
   :config
   (add-to-list 'tk-looks/minor-mode-alist '(cider-popup-buffer-mode (" cider-tmp")))
   (add-to-list 'tk-looks/minor-mode-alist '(cider-auto-test-mode (cider-mode " Test")))
@@ -462,14 +471,6 @@ configuration for GNU Global."
 
   (add-hook 'cider-mode-hook #'tk-dev/cider-mode-hook)
   (add-hook 'cider-repl-mode-hook #'tk-dev/cider-mode-hook)
-
-  :custom
-  (cider-eval-result-prefix ";; => ")
-  (cider-repl-result-prefix ";; => ")
-  (cider-repl-history-file "~/.cider_history")
-  (cider-prompt-for-symbol nil "Attempt to use the symbol at point as input for `cider-find-var', and only prompt if that throws an error")
-  (cider-inject-dependencies-at-jack-in nil "I want to inject dependencies manually via `~/.lein/profiles.clj'. Otherwise Leiningen's `:pedantic? :abort' setting causes `lein repl' to abort due to overriding version of `org.clojure/tools.nrepl'.")
-  (cider-mode-line '(" " (:eval (cider--modeline-info))) "Shorten mode line info")
 
   :custom-face
   (cider-result-overlay-face ((t (:background "grey30"))))
@@ -486,14 +487,14 @@ configuration for GNU Global."
     (haskell-decl-scan-mode)
     (interactive-haskell-mode))
 
-  :config
-  (add-hook 'haskell-mode-hook #'tk-dev/haskell-mode-hook)
-
   :custom
   (haskell-process-suggest-remove-import-lines t)
   (haskell-process-auto-import-loaded-modules t)
   (haskell-process-log t)
   (haskell-process-type 'cabal-repl)
+
+  :config
+  (add-hook 'haskell-mode-hook #'tk-dev/haskell-mode-hook)
 
   :bind
   (:map haskell-mode-map

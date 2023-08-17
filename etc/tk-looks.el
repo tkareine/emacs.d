@@ -278,11 +278,11 @@ mode-line-process, and narrowing) and selected minor modes.")
 
   :demand
 
-  :config
-  (global-git-gutter-mode 1)
-
   :custom
-  (git-gutter:lighter " gg"))
+  (git-gutter:lighter " gg")
+
+  :config
+  (global-git-gutter-mode 1))
 
 ;;; rainbow-delimiters
 
