@@ -32,6 +32,13 @@
         ("M-N" . compilation-next-file)
         ("M-P" . compilation-previous-file)))
 
+;;; ElDoc
+
+(use-package eldoc
+  :custom
+  (eldoc-echo-area-prefer-doc-buffer nil)
+  (eldoc-documentation-strategy 'eldoc-documentation-compose-eagerly))
+
 ;;; Company
 
 (use-package company
@@ -224,6 +231,8 @@ configuration for GNU Global."
 
   :commands
   (lsp lsp-deferred)
+  :custom
+  (lsp-eldoc-render-all t)
 
   :config
   (add-to-list 'tk-looks/minor-mode-alist
