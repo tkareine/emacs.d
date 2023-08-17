@@ -37,6 +37,13 @@
 (use-package eldoc
   :custom
   (eldoc-echo-area-prefer-doc-buffer nil)
+
+  (eldoc-echo-area-use-multiline-p
+   (- max-mini-window-height 0.05)
+   "Subtract a bit from the max height in order to avoid vertical \
+content clipping (maybe the truncation algorithm has problems \
+with bitmaps)")
+
   (eldoc-documentation-strategy 'eldoc-documentation-compose-eagerly))
 
 ;;; Company

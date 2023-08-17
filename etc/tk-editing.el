@@ -277,6 +277,8 @@ active region, kill the current line instead."
 
 ;;; Minibuffer
 
+(setq-default max-mini-window-height 0.2)
+
 (setq-default enable-recursive-minibuffers t)
 
 ;; Remove duplicate elements from history lists
