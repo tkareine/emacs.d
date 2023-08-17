@@ -61,7 +61,9 @@
                       company-files
                       company-keywords
                       company-dabbrev)
-                    "Use relevant completion engines only. Especially, put `company-capf' and `company-dabbrev-code' into same group so that the latter adds candidates the former misses.")
+                    "Use relevant completion engines only. Especially, put \
+`company-capf' and `company-dabbrev-code' into same group so that \
+the latter adds candidates the former misses.")
 
   :config
   (global-company-mode 1)
@@ -212,7 +214,7 @@ configuration for GNU Global."
   (ggtags-bounds-of-tag-function #'tk-dev/ggtags-bounds-of-tag)
 
   :config
-  ;; don't change `mode-line-buffer-identification', because we
+  ;; Don't change `mode-line-buffer-identification', because we
   ;; show project root dir in the mode line with projectile
   (setq ggtags-mode-line-project-name nil)
 
@@ -553,7 +555,7 @@ configuration for GNU Global."
   :ensure t
 
   :config
-  ;; don't include xhtml dtd for generated html, as it affects CSS
+  ;; Don't include XHTML DTD for generated HTML, as it affects CSS
   ;; styles
   (advice-add #'markdown-output-standalone-p
               :override

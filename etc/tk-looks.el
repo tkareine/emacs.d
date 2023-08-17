@@ -29,7 +29,7 @@
 ;; (put 'inhibit-startup-echo-area-message 'saved-value t)
 ;; (setq inhibit-startup-echo-area-message (user-login-name))
 
-;; Set no content in *scratch* buffer
+;; Set no content in the `*scratch*' buffer
 (setq-default initial-scratch-message "")
 
 ;; Disable visible bell, is broken on OS X El Capitan
@@ -237,10 +237,11 @@ mode-line-process, and narrowing) and selected minor modes.")
 ;;; Frames
 
 ;; Frame title: show
-;; 1. hostname
-;; 2. buffer file name, dired directory, or buffer name
-;; 3. buffer modification marker
-;; 4. number of frames
+;;
+;; 1. Hostname
+;; 2. Buffer file name, dired directory, or buffer name
+;; 3. Buffer modification marker
+;; 4. Number of frames
 (setq-default frame-title-format
               `(,(system-name)
                 ": "

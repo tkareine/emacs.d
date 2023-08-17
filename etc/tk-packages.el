@@ -14,7 +14,7 @@
   (interactive)
   (byte-recompile-directory package-user-dir 0 'force))
 
-;; We call `package-initialize' ourselves.
+;; We call `package-initialize' ourselves
 (setq-default package-enable-at-startup nil)
 
 (setq-default package-archives '(("gnu"          . "https://elpa.gnu.org/packages/")

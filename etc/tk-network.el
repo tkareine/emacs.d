@@ -20,8 +20,8 @@
 ;; Network Security Manager
 (setq-default network-security-level 'medium)
 
-;; tls via external tool: check certificates
+;; TLS via external tool: check certificates
 (setq-default tls-checktrust t)
 
-;; tls via builtin gnutls: check certificates
+;; TLS via builtin GnuTLS: check certificates
 (setq-default gnutls-verify-error t)
