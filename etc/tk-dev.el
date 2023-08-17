@@ -123,6 +123,9 @@ installed. Use FORCE-INSTALL-ALL to update grammars."
           (message "Installing Tree-sitter language grammar %s…" grammar)
           (treesit-install-language-grammar grammar)))))
 
+  :custom
+  (treesit-max-buffer-size (let ((mb (* 1024 1024))) (* 100 mb)))
+
   :config
   (dolist (lang tk-dev/treesit-language-source-alist)
     (add-to-list 'treesit-language-source-alist lang))

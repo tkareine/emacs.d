@@ -121,7 +121,8 @@
 (setq-default indicate-empty-lines t)
 
 ;; Don't show line number if buffer is too big; value in bytes
-(setq-default line-number-display-limit (* 1024 1024 64))
+(setq-default line-number-display-limit
+              (let ((mb (* 1024 1024))) (* 100 mb)))
 
 (use-package which-func
   :config
