@@ -38,8 +38,8 @@
   :commands
   (tk-support/active-region-or-line
    tk-support/locate-any-dominating-file
-   tk-support/pretty-print-xml
-   tk-support/string-prefix-length-with-char)
+   tk-support/string-prefix-length-with-char
+   tk-support/xml-pretty-print)
 
   :load-path
   "site-lisp/tk-support")
