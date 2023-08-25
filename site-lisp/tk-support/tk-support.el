@@ -25,7 +25,7 @@ nil if not found."
                                           names)))
     found))
 
-(defun tk-support/pretty-print-xml (begin end)
+(defun tk-support/xml-pretty-print (begin end)
   "Pretty format XML markup in region with nxml-mode."
   (interactive (progn
                  (barf-if-buffer-read-only)
@@ -35,7 +35,7 @@ nil if not found."
   (let* ((begin (or begin (point-min)))
          (end (or end (point-max)))
          (last-buf (current-buffer))
-         (tmp-buf (generate-new-buffer (generate-new-buffer-name "*tkareine-pretty-print-xml-region*"))))
+         (tmp-buf (generate-new-buffer (generate-new-buffer-name "*tk-support-xml-pretty-print-region*"))))
     (unwind-protect
         (save-excursion
           (with-current-buffer tmp-buf
