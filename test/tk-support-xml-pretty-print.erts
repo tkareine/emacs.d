@@ -1,15 +1,17 @@
 Name: simple-xml
 
 =-=
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?><root xmlns="https://xml.example.com/root"><n1/><n2><l-n2-1>val1</l-n2-1><l-n2-2>val2</l-n2-2></n2><n3/></root>
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?><root xmlns="https://xml.example.com/root"><n0></n0><n1/><n2><l-n2-1>val1</l-n2-1><l-n2-2>val2</l-n2-2></n2><n3/><n3/></root>
 =-=
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <root xmlns="https://xml.example.com/root">
+  <n0></n0>
   <n1/>
   <n2>
     <l-n2-1>val1</l-n2-1>
     <l-n2-2>val2</l-n2-2>
   </n2>
+  <n3/>
   <n3/>
 </root>
 =-=-=

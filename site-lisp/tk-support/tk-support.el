@@ -25,6 +25,20 @@ nil if not found."
                                           names)))
     found))
 
+(defun tk-support/string-prefix-length-with-char (char str)
+  (let ((str-len (length str))
+        (idx 0)
+        (should-continue t))
+    (while (and should-continue (< idx str-len))
+      (if (char-equal (aref str idx) char)
+          (setq idx (1+ idx))
+        (setq should-continue nil)))
+    idx))
+
+;; For `cl-flet' in `tk-support/xml-pretty-print'
+(eval-when-compile
+  (require 'cl-macs))
+
 (defun tk-support/xml-pretty-print (begin end)
   "Pretty format XML markup in region with nxml-mode."
   (interactive (progn
@@ -36,35 +50,24 @@ nil if not found."
          (end (or end (point-max)))
          (last-buf (current-buffer))
          (tmp-buf (generate-new-buffer (generate-new-buffer-name "*tk-support-xml-pretty-print-region*"))))
-    (unwind-protect
-        (save-excursion
-          (with-current-buffer tmp-buf
-            (insert-buffer-substring-no-properties last-buf begin end)
-            (nxml-mode)
-            (goto-char (point-min))
-            ;; split `<foo><foo>' or `</foo><foo>', but not `<foo></foo>'
-            (while (search-forward-regexp ">[ \t]*<[^/]" end t)
-              (backward-char 2)
-              (insert "\n"))
-            ;; split `<foo/></foo>' and `</foo></foo>'
-            (goto-char (point-min))
-            (while (search-forward-regexp "<.*?/.*?>[ \t]*<" end t)
-              (backward-char)
-              (insert "\n"))
-            (indent-region (point-min) (point-max) nil)
-            (delete-trailing-whitespace (point-min) (point-max)))
-          (delete-region begin end)
-          (insert-buffer-substring tmp-buf))
-    (kill-buffer tmp-buf))))
-
-(defun tk-support/string-prefix-length-with-char (char str)
-  (let ((str-len (length str))
-        (idx 0)
-        (should-continue t))
-    (while (and should-continue (< idx str-len))
-      (if (char-equal (aref str idx) char)
-          (setq idx (1+ idx))
-        (setq should-continue nil)))
-    idx))
+    (cl-flet ((split-at-regex-all (regexp relative-split-point)
+                (goto-char (point-min))
+                (while (search-forward-regexp regexp nil t)
+                  (backward-char relative-split-point)
+                  (insert "\n"))))
+      (unwind-protect
+          (save-excursion
+            (with-current-buffer tmp-buf
+              (insert-buffer-substring-no-properties last-buf begin end)
+              (nxml-mode)
+              ;; split `<foo><foo>' or `</foo><foo>', but not `<foo></foo>'
+              (split-at-regex-all ">[ \t]*<[^/]" 2)
+              ;; split `<foo/></foo>' or `</foo></foo>'
+              (split-at-regex-all "<[^/>]*/[^/>]*>[ \t]*</" 2)
+              (indent-region (point-min) (point-max) nil)
+              (delete-trailing-whitespace (point-min) (point-max)))
+            (delete-region begin end)
+            (insert-buffer-substring tmp-buf))
+        (kill-buffer tmp-buf)))))
 
 (provide 'tk-support)
