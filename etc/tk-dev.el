@@ -112,6 +112,7 @@ the latter adds candidates the former misses.")
       (css        "https://github.com/tree-sitter/tree-sitter-css")
       (javascript "https://github.com/tree-sitter/tree-sitter-javascript")
       (json       "https://github.com/tree-sitter/tree-sitter-json")
+      (ruby       "https://github.com/tree-sitter/tree-sitter-ruby")
       (tsx        . ("https://github.com/tree-sitter/tree-sitter-typescript" "master" "tsx/src"))
       (typescript . ("https://github.com/tree-sitter/tree-sitter-typescript" "master" "typescript/src"))
       (yaml       "https://github.com/ikatyang/tree-sitter-yaml"))
@@ -145,6 +146,7 @@ installed. Use FORCE-INSTALL-ALL to update grammars."
                      (css-mode        . css-ts-mode)
                      (js-mode         . js-ts-mode)
                      (json-mode       . json-ts-mode)
+                     (ruby-mode       . ruby-ts-mode)
                      (typescript-mode . tsx-ts-mode)
                      (yaml-mode       . yaml-ts-mode)))
     (add-to-list 'major-mode-remap-alist mapping)))
@@ -535,7 +537,8 @@ configuration for GNU Global."
 
 (use-package ruby-mode
   :hook
-  ((ruby-mode . ggtags-mode))
+  ((ruby-mode    . ggtags-mode)
+   (ruby-ts-mode . ggtags-mode))
 
   :mode
   ("/Gemfile-[[:alnum:]]+\\'"))
