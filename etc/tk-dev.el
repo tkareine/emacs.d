@@ -535,7 +535,10 @@ configuration for GNU Global."
 
 (use-package ruby-mode
   :hook
-  ((ruby-mode . ggtags-mode)))
+  ((ruby-mode . ggtags-mode))
+
+  :mode
+  ("/Gemfile-[[:alnum:]]+\\'"))
 
 ;;; Rust
 
