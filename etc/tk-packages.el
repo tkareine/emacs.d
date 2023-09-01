@@ -7,8 +7,9 @@
     (package-list-packages)
 
     (message "\n;;; Upgrading packages (if any)…\n")
-    (package-menu-mark-upgrades)
-    (ignore-errors (package-menu-execute t))))
+    (let ((res-msg (package-menu-mark-upgrades)))
+      (if (string-prefix-p "Packages marked for upgrading: " res-msg)
+          (ignore-errors (package-menu-execute t))))))
 
 (defun tk-packages/recompile-packages ()
   (interactive)
