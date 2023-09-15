@@ -363,8 +363,10 @@ configuration for GNU Global."
 
 (use-package typescript-ts-mode
   :hook
-  ((tsx-ts-mode . lsp-deferred)
-   (tsx-ts-mode . prettier-mode)))
+  ;; `typescript-ts-base-mode' is the parent mode for both
+  ;; `typescript-ts-mode' and `typescript-ts-base-mode'
+  ((typescript-ts-base-mode . lsp-deferred)
+   (typescript-ts-base-mode . prettier-mode)))
 
 ;; HTML
 
