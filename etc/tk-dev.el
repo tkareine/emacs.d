@@ -323,6 +323,8 @@ configuration for GNU Global."
 (use-package js
   :preface
   (defun tk-dev/js-lsp-mode-hook ()
+    ;; Don't enable LSP in `json-mode' or `jsonc-mode' (which derive
+    ;; from `js-mode' via the `javascript-mode' alias)
     (when (not (member major-mode '(json-mode jsonc-mode)))
       (lsp-deferred)))
 
@@ -330,14 +332,14 @@ configuration for GNU Global."
   (js-indent-level 2)
 
   :config
-  (add-hook 'js-mode-hook #'tk-dev/js-lsp-mode-hook)
-  (add-hook 'js-ts-mode-hook #'tk-dev/js-lsp-mode-hook)
+  ;; `js-base-mode' is the parent mode of both `js-mode' and
+  ;; `js-ts-mode'
+  (add-hook 'js-base-mode-hook #'tk-dev/js-lsp-mode-hook)
 
   (unbind-key "M-." js-mode-map)
 
   :hook
-  ((js-mode    . prettier-mode)
-   (js-ts-mode . prettier-mode))
+  ((js-base-mode . prettier-mode))
 
   :mode
   (("\\.[cm]?jsx?\\'"  . js-mode)
