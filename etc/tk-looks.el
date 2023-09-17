@@ -32,6 +32,10 @@
 ;; Set no content in the `*scratch*' buffer
 (setq-default initial-scratch-message "")
 
+;; Window minimum size
+(setq-default window-min-width 80)
+(setq-default window-min-height 10)
+
 ;; Disable visible bell, is broken on OS X El Capitan
 (setq-default visible-bell nil)
 
