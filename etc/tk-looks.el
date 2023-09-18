@@ -63,6 +63,11 @@
 (blink-cursor-mode -1)
 
 (use-package whitespace
+  :preface
+  (defun tk-looks/toggle-show-trailing-whitespace ()
+    (interactive)
+    (setq-default show-trailing-whitespace (eq show-trailing-whitespace nil)))
+
   :custom
   ;; Highlight long lines when whitespace-mode is enabled
   (whitespace-line-column 120)
@@ -87,7 +92,14 @@
 
   :config
   ;; Enable global whitespace mode
-  (global-whitespace-mode 1))
+  (global-whitespace-mode 1)
+
+  :bind
+  (("C-x W" . tk-looks/toggle-show-trailing-whitespace)
+   ("C-x w" . whitespace-mode)))
+
+(bind-keys ("C-x t"   . delete-trailing-whitespace)
+           ("M-S-SPC" . cycle-spacing))
 
 ;; Color theme
 (use-package zenburn-theme

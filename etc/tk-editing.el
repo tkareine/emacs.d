@@ -152,17 +152,6 @@ of region."
 (bind-keys ("C-c C" . comment-dwim)
            ("M-/"   . tk-editing/comment-or-uncomment-region-or-line))
 
-;;; Whitespace control
-
-(defun tk-editing/toggle-show-trailing-whitespace ()
-  (interactive)
-  (setq-default show-trailing-whitespace (eq show-trailing-whitespace nil)))
-
-(bind-keys ("C-x W"   . tk-editing/toggle-show-trailing-whitespace)
-           ("C-x t"   . delete-trailing-whitespace)
-           ("C-x w"   . whitespace-mode)
-           ("M-S-SPC" . cycle-spacing))
-
 ;;; Global navigation and window management
 
 (bind-keys ("S-<down>"  . windmove-down)
