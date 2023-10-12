@@ -60,11 +60,9 @@ with bitmaps)")
   (company-dabbrev-downcase nil "Don't lowercase completion candidates (dabbrev backend)")
   (company-dabbrev-ignore-case t "Ignore case when collecting completion candidates and copy candidate verbatim")
   (company-dabbrev-code-ignore-case t "Ignore case when collecting completion candidates and copy candidate verbatim")
-  (company-backends '(company-nxml
-                      company-css
-                      company-semantic
+  (company-backends '(company-semantic
                       company-clang
-                      (company-capf company-dabbrev-code)
+                      (company-capf company-dabbrev-code company-gtags)
                       company-files
                       company-keywords
                       company-dabbrev)
