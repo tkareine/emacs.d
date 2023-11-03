@@ -520,8 +520,9 @@ current search result window."
   :bind
   (("C-c a" . deadgrep)
    :map deadgrep-mode-map
-   ("O"       . tk-editing/deadgrep-show-result-other-window)
-   ("C-c C-f" . next-error-follow-minor-mode)))
+   ("C-c C-f" . next-error-follow-minor-mode)
+   ("C-o"     . tk-editing/deadgrep-show-result-other-window)  ; Same as `compilation-display-error'
+   ))
 
 ;;; Symbol-overlay
 
