@@ -414,18 +414,7 @@ probably not done."
   (ivy-magic-slash-non-match-action nil "Don't cd to existing directory when appending \"/\", allowing creating new buffer in new directory")
 
   :custom-face
-  (ivy-current-match   ((t (:weight bold
-                            :underline nil
-                            :foreground "#f0dfaf"
-                            :background "grey10"))))
-  (ivy-action          ((t (:weight bold
-                            :foreground "#f0dfaf"))))
-  (ivy-subdir          ((t (:weight bold
-                            :foreground "#ffffef"))))
-  (ivy-virtual         ((t (:foreground "grey70"))))
-  (ivy-remote          ((t (:foreground "#cc9393"))))
-  (ivy-modified-buffer ((t (:weight bold
-                            :foreground "#bfebbf"))))
+  (ivy-remote ((t (:foreground "#cc9393"))))
 
   :config
   (ivy-mode 1)

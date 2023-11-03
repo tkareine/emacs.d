@@ -101,23 +101,30 @@
 (bind-keys ("C-x t"   . delete-trailing-whitespace)
            ("M-S-SPC" . cycle-spacing))
 
-;; Color theme
-(use-package zenburn-theme
+(use-package base16-theme
   :ensure t
 
   :demand
 
   :config
-  (load-theme 'zenburn t)
+  (load-theme 'base16-gruvbox-dark-pale t)
 
-  (zenburn-with-color-variables
-    (custom-set-faces `(region ((,class (:background ,zenburn-bg-2))))
-                      `(mode-line ((,class (:box (:line-width 1
-                                                  :color ,zenburn-yellow-2)))))
-                      `(mode-line-inactive ((,class (:box (:line-width 1
-                                                           :color ,zenburn-bg-2)))))
-                      `(next-error ((t (:background ,zenburn-red-2))))  ; used by `compilation-display-error'
-                      `(highlight ((t (:background ,zenburn-blue-3))))  ; used by Ivy and deadgrep
+  (let* ((colors base16-gruvbox-dark-pale-theme-colors)
+         (base01 (plist-get colors :base01))
+         (base03 (plist-get colors :base03))
+         (base09 (plist-get colors :base09))
+         (base0D (plist-get colors :base0D))
+         (base0F (plist-get colors :base0F)))
+    (custom-set-faces `(mode-line ((t (:box (:line-width 1 :color ,base0D) :background ,base01))))
+                      `(mode-line-inactive ((t (:box (:line-width 1 :color ,base01)))))
+                      `(next-error ((t (:background ,base03))))  ; used by `compilation-display-error' to highlight matches
+                      `(highlight ((t (:background ,base03))))   ; used by Swiper and deadgrep to highlight matches
+                      `(ivy-current-match ((t (:weight bold :foreground ,base09 :background unspecified))))
+                      `(ivy-virtual ((t (:foreground ,base03))))
+                      `(ivy-modified-buffer ((t (:weight bold))))
+                      `(markdown-pre-face ((t (:background ,base01))))
+                      `(magit-diff-hunk-heading ((t (:box (:line-width 1 :color ,base01)))))
+                      `(magit-diff-hunk-heading-highlight ((t (:box (:line-width 1 :color ,base0F)))))
                       )))
 
 ;;; Mode line

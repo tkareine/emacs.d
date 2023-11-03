@@ -158,12 +158,6 @@ installed. Use FORCE-INSTALL-ALL to update grammars."
   (magit-completing-read-function #'ivy-completing-read)
   (magit-auto-revert-mode nil "Disable `magit-auto-revert-mode', because we're using global-auto-revert-mode")
 
-  :custom-face
-  (magit-diff-context ((t (:background "grey25"))))
-  (magit-diff-context-highlight ((t (:background "grey32"))))
-  (magit-diff-hunk-heading ((t (:background "#3e5f76"))))
-  (magit-diff-hunk-heading-highlight ((t (:background "#619abf"))))
-
   :bind
   (("C-x g" . magit-status)))
 
@@ -581,9 +575,6 @@ configuration for GNU Global."
   (markdown-hide-urls nil)
   (markdown-asymmetric-header t)
   (markdown-live-preview-delete-export 'delete-on-export)
-
-  :custom-face
-  (markdown-code-face ((t (:background "#4b4b4b"))))
 
   :mode
   (("\\.markdown\\'" . gfm-mode)
