@@ -101,6 +101,7 @@
 (bind-keys ("C-x t"   . delete-trailing-whitespace)
            ("M-S-SPC" . cycle-spacing))
 
+;; Color theme
 (use-package base16-theme
   :ensure t
 
@@ -112,14 +113,14 @@
   (let* ((colors base16-gruvbox-dark-pale-theme-colors)
          (base01 (plist-get colors :base01))
          (base03 (plist-get colors :base03))
-         (base09 (plist-get colors :base09))
+         (base0A (plist-get colors :base0A))
          (base0D (plist-get colors :base0D))
          (base0F (plist-get colors :base0F)))
-    (custom-set-faces `(mode-line ((t (:box (:line-width 1 :color ,base0D) :background ,base01))))
+    (custom-set-faces `(mode-line ((t (:box (:line-width 1 :color ,base0D) :background unspecified))))
                       `(mode-line-inactive ((t (:box (:line-width 1 :color ,base01)))))
                       `(next-error ((t (:background ,base03))))  ; used by `compilation-display-error' to highlight matches
                       `(highlight ((t (:background ,base03))))   ; used by Swiper and deadgrep to highlight matches
-                      `(ivy-current-match ((t (:weight bold :foreground ,base09 :background unspecified))))
+                      `(ivy-current-match ((t (:weight bold :foreground ,base0A :background unspecified))))
                       `(ivy-virtual ((t (:foreground ,base03))))
                       `(ivy-modified-buffer ((t (:weight bold))))
                       `(markdown-pre-face ((t (:background ,base01))))
