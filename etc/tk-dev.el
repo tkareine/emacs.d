@@ -237,6 +237,7 @@ configuration for GNU Global."
 
   :custom
   (lsp-eldoc-render-all t)
+  (lsp-progress-prefix " … " "Less obtrusive progress status")
 
   :config
   (add-to-list 'tk-looks/minor-mode-alist
@@ -254,6 +255,10 @@ configuration for GNU Global."
    ("C-c H" . lsp-describe-thing-at-point)
    ("C-M-/" . lsp-find-references)
    ("C-M->" . lsp-find-type-definition)))
+
+(use-package lsp-modeline
+  :custom
+  (lsp-modeline-code-action-fallback-icon "?" "Less obtrusive code action icon"))
 
 (use-package lsp-ui
   :ensure t
