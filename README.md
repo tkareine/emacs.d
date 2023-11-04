@@ -11,10 +11,12 @@ the file. Thank you all!
 
 ## Setup highlights
 
-A screenshot, featuring [magit] (the right buffer) and [Ivy]'s
-`counsel-projectile-ag` (the bottom buffer), in [Zenburn] theme:
+A screenshot, featuring syntax coloring of a shell script file (the left
+buffer), [magit] (the right buffer), and [Ivy]'s `counsel-projectile-rg`
+(the bottom buffer), in the `base16-gruvbox-dark-pale` color theme of
+[base16-theme]:
 
-<img src="https://github.com/tkareine/emacs.d/raw/master/images/setup-showcase.png" title="Setup showcase" alt="Setup showcase" width="864">
+<img src="https://github.com/tkareine/emacs.d/raw/master/images/setup-showcase-v2.png" title="Setup showcase" alt="Setup showcase" width="912">
 
 The font in use is [Input][Input font]
 ([customization](https://input.djr.com/download/?customize&fontSelection=fourStyleFamily&regular=InputMonoNarrow-Regular&italic=InputMonoNarrow-Italic&bold=InputMonoNarrow-Bold&boldItalic=InputMonoNarrow-BoldItalic&a=ss&g=ss&i=serifs_round&l=serifs_round&zero=0&asterisk=height&braces=straight&preset=default&line-height=1.1)).
@@ -75,16 +77,16 @@ together with the latest LTS version of Node.js:
 ``` bash
 brew tap tkareine/chnode
 brew install tkareine/chnode/chnode
-brew install node@18
+brew install node@20
 mkdir -p ~/.nodes
-ln -s /usr/local/opt/node@18 ~/.nodes/node-18
+ln -s /usr/local/opt/node@20 ~/.nodes/node-20
 ```
 
 Then, put the following into your shell's (Bash or Zsh) init script:
 
 ``` bash
 source chnode.sh
-chnode node-18
+chnode node-20
 ```
 
 ## 3rd party tools in use
@@ -182,7 +184,7 @@ npm install -g typescript typescript-language-server
 [Prettier]: https://prettier.io/
 [Smartparens]: https://github.com/Fuco1/smartparens
 [TypeScript]: https://github.com/Microsoft/TypeScript
-[Zenburn]: https://github.com/bbatsov/zenburn-emacs
+[base16-theme]: https://github.com/tinted-theming/base16-emacs
 [chnode]: https://github.com/tkareine/chnode
 [company-mode]: https://company-mode.github.io/
 [conf-ctags]: https://github.com/tkareine/dotfiles/blob/master/.ctags
