@@ -290,8 +290,8 @@ mode-line-process, and narrowing) and selected minor modes.")
 
 (setq-default line-spacing 2)
 
-(bind-keys ("C-:"  . text-scale-decrease)
-           ("C-\"" . text-scale-increase))
+(bind-keys ("C-_" . text-scale-decrease)
+           ("C-+" . text-scale-increase))
 
 (when (featurep 'mac-win)
   (bind-keys
