@@ -288,7 +288,7 @@ mode-line-process, and narrowing) and selected minor modes.")
   (set-face-attribute 'default nil :font selected-font)
   (set-face-attribute 'fixed-pitch nil :font selected-font))
 
-(setq-default line-spacing 2)
+(setq-default line-spacing 1)
 
 (bind-keys ("C-_" . text-scale-decrease)
            ("C-+" . text-scale-increase))

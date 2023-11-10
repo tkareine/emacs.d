@@ -19,7 +19,7 @@ buffer), [magit] (the right buffer), and [Ivy]'s `counsel-projectile-rg`
 <img src="https://github.com/tkareine/emacs.d/raw/master/images/setup-showcase-v2.png" title="Setup showcase" alt="Setup showcase" width="912">
 
 The font in use is [Input][Input font]
-([customization](https://input.djr.com/download/?customize&fontSelection=fourStyleFamily&regular=InputMonoNarrow-Regular&italic=InputMonoNarrow-Italic&bold=InputMonoNarrow-Bold&boldItalic=InputMonoNarrow-BoldItalic&a=ss&g=ss&i=serifs_round&l=serifs_round&zero=0&asterisk=height&braces=straight&preset=default&line-height=1.1)).
+([customization](https://input.djr.com/download/?customize&fontSelection=fourStyleFamily&regular=InputMonoNarrow-Regular&italic=InputMonoNarrow-Italic&bold=InputMonoNarrow-Bold&boldItalic=InputMonoNarrow-BoldItalic&a=ss&g=ss&i=serifs_round&l=serifs_round&zero=0&asterisk=height&braces=straight&preset=default&line-height=1.2)).
 
 ### Show relevant information in mode-line
 
