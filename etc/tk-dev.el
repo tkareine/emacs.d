@@ -108,6 +108,7 @@ the latter adds candidates the former misses.")
   (defvar tk-dev/treesit-language-source-alist
     '((bash       "https://github.com/tree-sitter/tree-sitter-bash")
       (css        "https://github.com/tree-sitter/tree-sitter-css")
+      (dockerfile "https://github.com/camdencheek/tree-sitter-dockerfile")
       (javascript "https://github.com/tree-sitter/tree-sitter-javascript")
       (json       "https://github.com/tree-sitter/tree-sitter-json")
       (ruby       "https://github.com/tree-sitter/tree-sitter-ruby")
@@ -584,6 +585,12 @@ configuration for GNU Global."
   :mode
   (("\\.markdown\\'" . gfm-mode)
    ("\\.md\\'"       . gfm-mode)))
+
+;;; Dockerfile
+
+(use-package dockerfile-ts-mode
+  :mode
+  (("/Dockerfile\\'" . dockerfile-ts-mode)))
 
 ;;; Configuration files
 
