@@ -277,7 +277,11 @@ active region, kill the current line instead."
 
 (use-package tramp
   :custom
-  (tramp-default-method "ssh"))
+  (tramp-default-method "ssh")
+
+  ;; Don't prompt confirmation on writing backup, auto-save, or lock
+  ;; file for a `root'-owned remote file
+  (tramp-allow-unsafe-temporary-files t))
 
 ;;; ffap: find file (or url) at point
 
