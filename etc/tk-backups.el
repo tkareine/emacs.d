@@ -23,6 +23,16 @@
 ;; Silently delete old backup files
 (setq-default delete-old-versions t)
 
+;; Backup a file that satisfies both the following conditions:
+;;
+;; 1. The file satisfies the normal (default) predicate of Emacs
+;; 2. The file is not a remote file
+(defun tk-backups/backup-file-enable-p (name)
+  (and (not (file-remote-p name 'method))
+       (normal-backup-enable-predicate name)))
+
+(setq-default backup-enable-predicate #'tk-backups/backup-file-enable-p)
+
 ;; Save all backup files to this directory
 (setq-default backup-directory-alist `(("." . ,(tk-init/user-emacs-path "backups"))))
 
