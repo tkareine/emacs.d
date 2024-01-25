@@ -293,7 +293,13 @@ configuration for GNU Global."
 (use-package prettier
   :ensure t
 
+  :preface
+  (defun tk-dev/prettier-mode-advice-not-on-file-remote-p (&rest _r)
+    (not (ignore-errors (file-remote-p (buffer-file-name (current-buffer))
+                                       'method))))
+
   :config
+  (advice-add #'prettier-mode :before-while #'tk-dev/prettier-mode-advice-not-on-file-remote-p)
   (add-to-list 'tk-looks/minor-mode-alist '(prettier-mode (" Prettier")) t)
 
   :commands
