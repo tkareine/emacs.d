@@ -173,10 +173,10 @@ Adapted from
 
 (defvar tk-looks/mode-line-projectile-project
   '(:eval (when (and
-                 ;; Calling `projectile-project-root' is slow with Tramp
-                 ;; buffer. Check if the current buffer is associated
-                 ;; with Tramp (but avoid loading Tramp).
-                 (not (ignore-errors (tramp-tramp-file-p (buffer-file-name (current-buffer)))))
+                 ;; Calling `projectile-project-root' is slow with
+                 ;; remote connections, such as a buffer opened with
+                 ;; Tramp.
+                 (not (ignore-errors (file-remote-p (buffer-file-name (current-buffer)))))
                  (ignore-errors (projectile-project-root)))
             (let ((project-name (projectile-project-name)))
               (put-text-property 0
