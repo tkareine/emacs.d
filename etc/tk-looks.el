@@ -176,7 +176,7 @@ Adapted from
                  ;; Calling `projectile-project-root' is slow with
                  ;; remote connections, such as a buffer opened with
                  ;; Tramp.
-                 (not (ignore-errors (file-remote-p (buffer-file-name (current-buffer)))))
+                 (not (ignore-errors (file-remote-p (buffer-file-name (current-buffer)) 'method)))
                  (ignore-errors (projectile-project-root)))
             (let ((project-name (projectile-project-name)))
               (put-text-property 0
