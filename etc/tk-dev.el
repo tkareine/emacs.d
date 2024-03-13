@@ -156,7 +156,6 @@ installed. Use FORCE-INSTALL-ALL to update grammars."
   :ensure t
 
   :custom
-  (magit-completing-read-function #'ivy-completing-read)
   (magit-auto-revert-mode nil "Disable `magit-auto-revert-mode', because we're using global-auto-revert-mode")
 
   :bind
@@ -280,13 +279,6 @@ configuration for GNU Global."
 
   :after
   (lsp-mode))
-
-(use-package lsp-ivy
-  :commands
-  (lsp-ivy-workspace-symbol)
-
-  :after
-  (ivy lsp-mode))
 
 ;;; Prettier: format buffer with `prettier' upon save automatically
 

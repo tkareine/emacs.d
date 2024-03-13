@@ -393,7 +393,7 @@ probably not done."
   :demand
 
   :custom
-  (projectile-completion-system 'ivy)
+  (projectile-completion-system 'default)
 
   :config
   (dolist (l '(("js" "scss" "less" "css" "html")
@@ -421,93 +421,101 @@ probably not done."
    ("C-c f" . projectile-find-file-dwim)
    ("C-c o" . projectile-toggle-between-implementation-and-test)))
 
-;;; Ivy, Counsel, and Swiper
+;;; Orderless: completion style that enables space-separated input
+;;; components
+;;;
+;;; See https://github.com/oantolin/orderless
 
-(use-package ivy
+(use-package orderless
   :ensure t
 
   :demand
 
   :custom
-  (ivy-use-virtual-buffers t)
-  (ivy-count-format "(%d/%d) ")
-  (ivy-format-function #'ivy-format-function-arrow)
-  (ivy-height 20)
-  (ivy-magic-slash-non-match-action nil "Don't cd to existing directory when appending \"/\", allowing creating new buffer in new directory")
+  ;; Set the `basic' completion style as fallback in order to ensure
+  ;; that completion commands which rely on dynamic completion tables,
+  ;; such as `completion-table-dynamic' or `completion-table-in-turn',
+  ;; work correctly
+  (completion-styles '(orderless basic))
 
-  :custom-face
-  (ivy-remote ((t (:foreground "#cc9393"))))
+  ;; Try the `basic' completion style first in order to make completion
+  ;; work with Tramp
+  (completion-category-overrides '((file (styles basic partial-completion)))))
 
-  :config
-  (ivy-mode 1)
+;;; Vertico: minibuffer completion
+;;;
+;;; See https://github.com/minad/vertico
 
-  :bind
-  (("C-c b" . ivy-resume)))
-
-(use-package swiper
-  :ensure t
-
-  :bind
-  (("C-S-s" . swiper)))
-
-(use-package counsel
+(use-package vertico
   :ensure t
 
   :demand
 
-  :preface
-  (defun tk-editing/dired-open-directory-of-file (file)
-    (dired (file-name-directory (directory-file-name file))))
-
-  :custom
-  (counsel-find-file-at-point t)
-
   :config
-  (ivy-add-actions #'counsel-find-file
-                   '(("D"
-                      tk-editing/dired-open-directory-of-file
-                      "open file's directory")))
+  (vertico-mode 1)
+
+  :after
+  (orderless))
+
+;;; Consult: search and navigation commands
+;;;
+;;; See https://github.com/minad/consult
+
+(use-package consult
+  :ensure t
 
   :bind
-  (("C-c G"   . counsel-git-grep)
-   ("C-h I"   . counsel-info-lookup-symbol)
-   ("C-c L"   . counsel-locate)
-   ("C-c g"   . counsel-git)
-   ("C-c h"   . counsel-command-history)
-   ("C-c i"   . counsel-register)
-   ("C-c m"   . counsel-bookmark)
-   ("C-h b"   . counsel-descbinds)
-   ("C-h f"   . counsel-describe-function)
-   ("C-h l"   . counsel-find-library)
-   ("C-h u"   . counsel-unicode-char)
-   ("C-h v"   . counsel-describe-variable)
-   ("C-x C-f" . counsel-find-file)
-   ("M-x"     . counsel-M-x)
-   ("M-y"     . counsel-yank-pop)
-   ("s-."     . counsel-semantic-or-imenu)
+  (
+   ;; Editing
+   ("M-y" . consult-yank-pop)
+   ;; Global navigation
+   ("C-x b"   . consult-buffer)
+   ("C-x 4 b" . consult-buffer-other-window)
+   ("C-x 5 b" . consult-buffer-other-frame)
+   ("C-x p b" . consult-project-buffer)
+   ("C-x r b" . consult-bookmark)
+   ("C-x r l" . consult-register-load)
+   ("C-x r s" . consult-register-store)
+   ("C-M-r"   . consult-register)
+   ("C-c h"   . consult-history)
+   ("C-c m"   . consult-man)
+   ("C-c i"   . consult-info)
+   ([remap Info-search] . consult-info)
+   ;; Buffer local navigation
+   ("M-g e"   . consult-compile-error)
+   ("M-g M-g" . consult-goto-line)
+   ("M-g o"   . consult-outline)
+   ("M-g m"   . consult-mark)
+   ("M-g k"   . consult-global-mark)
+   ("M-g i"   . consult-imenu)
+   ("M-g I"   . consult-imenu-multi)
+   ;; Searching
+   ("M-s d" . consult-find)
+   ("M-s c" . consult-locate)
+   ("M-s g" . consult-grep)
+   ("M-s G" . consult-git-grep)
+   ("C-c s" . consult-ripgrep)
+   ("C-S-s" . consult-line)
+   ("M-s L" . consult-line-multi)
    ;; Minibuffer key map for ordinary input (no completion). For
    ;; example, used in `M-:' (`eval-expression'). See:
    ;; `https://www.gnu.org/software/emacs/manual/html_node/emacs/Minibuffer-Maps.html'
    :map minibuffer-local-map
-   ("C-c h"   . counsel-minibuffer-history)))
+   ("M-s" . consult-history)
+   ("M-r" . consult-history)
+   ;; Misc
+   ("C-c M-x" . consult-mode-command)
+  )
 
-(use-package counsel-projectile
-  :ensure t
-
-  :bind
-  (("C-c s" . counsel-projectile-rg))
-
-  :after
-  (counsel projectile))
-
-(use-package counsel-tramp
-  :ensure t
-
-  :bind
-  (("s-f" . counsel-tramp))
+  :custom
+  (consult-locate-args locate-command)
+  (xref-show-xrefs-function #'consult-xref)
+  (xref-show-definitions-function #'consult-xref)
+  (consult-project-function (lambda (_) (projectile-project-root)))
 
   :after
-  (counsel))
+  (projectile)
+)
 
 ;;; Deadgrep interface for ripgrep
 
