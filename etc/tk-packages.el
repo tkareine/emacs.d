@@ -18,9 +18,10 @@
 ;; We call `package-initialize' ourselves
 (setq-default package-enable-at-startup nil)
 
-(setq-default package-archives '(("gnu"          . "https://elpa.gnu.org/packages/")
-                                 ("melpa"        . "https://melpa.org/packages/")
-                                 ("melpa-stable" . "https://stable.melpa.org/packages/")))
+;; Package archives, in order of preference
+(setq-default package-archives '(("melpa"        . "https://melpa.org/packages/")
+                                 ("melpa-stable" . "https://stable.melpa.org/packages/")
+                                 ("gnu"          . "https://elpa.gnu.org/packages/")))
 
 ;; Start package system, make installed packages available (activation)
 (package-initialize)
