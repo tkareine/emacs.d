@@ -102,6 +102,8 @@
            ("M-S-SPC" . cycle-spacing))
 
 ;; Color theme
+;;
+;; See https://github.com/tinted-theming/base16-emacs
 (use-package base16-theme
   :ensure t
 
