@@ -314,10 +314,19 @@ active region, kill the current line instead."
 
   :custom
   (save-place-file (tk-init/user-emacs-path "saveplace"))
+
+  :config
+  (save-place-mode 1))
+
+;;; Savehist: save minibuffer history
+
+(use-package savehist
+  :demand
+
+  :custom
   (savehist-file (tk-init/user-emacs-path "savehist"))
 
   :config
-  (save-place-mode 1)
   (savehist-mode 1))
 
 ;;; Recentf: shows list of recently opened files
