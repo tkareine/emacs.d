@@ -223,6 +223,8 @@ active region, kill the current line instead."
    ("M-]" . er/expand-region)))
 
 ;;; Smartparens
+;;;
+;;; See https://github.com/Fuco1/smartparens
 
 (use-package smartparens
   :ensure t
@@ -236,27 +238,34 @@ active region, kill the current line instead."
   (require 'smartparens-config)
   (smartparens-global-mode 1)
   (show-smartparens-global-mode 1)
-  (sp-use-paredit-bindings)
   (add-to-list 'tk-looks/minor-mode-alist
                '(smartparens-mode (" SP" (:eval (if smartparens-strict-mode "/s" "")))))
 
   :bind
   (:map smartparens-mode-map
-        ("C-<left>" .   nil)
-        ("C-<right>"  . nil)
-        ("C-M-<down>" . sp-down-sexp)
+        ;; Navigation
+        ("C-M-f"      . sp-forward-sexp)
+        ("C-M-b"      . sp-backward-sexp)
+        ("C-M-u"      . sp-backward-up-sexp)
+        ("C-M-n"      . sp-up-sexp)
         ("C-M-<up>"   . sp-up-sexp)
+        ("C-M-d"      . sp-down-sexp)
+        ("C-M-<down>" . sp-down-sexp)
+        ("C-M-p"      . sp-backward-down-sexp)
         ("C-M-a"      . sp-beginning-of-sexp)
         ("C-M-e"      . sp-end-of-sexp)
         ("C-M-k"      . sp-kill-sexp)
         ("C-M-n"      . sp-next-sexp)
         ("C-M-p"      . sp-backward-sexp)
         ("C-M-t"      . sp-transpose-sexp)
-        ("C-S-<down>" . sp-backward-down-sexp)
-        ("C-S-<up>"   . sp-backward-up-sexp)
-        ("C-c )"      . smartparens-strict-mode)
-        ("M-<left>"   . sp-forward-barf-sexp)
-        ("M-<right>"  . sp-forward-slurp-sexp)))
+        ;; Editing
+        ("C-M-j"       . sp-join-sexp)
+        ("C-M-s"       . sp-splice-sexp)
+        ("C-M-S-s"     . sp-split-sexp)
+        ("C-M-<left>"  . sp-forward-barf-sexp)
+        ("C-M-<right>" . sp-forward-slurp-sexp)
+        ;; Misc
+        ("C-c )" . smartparens-strict-mode)))
 
 ;;; Other key bindings
 
