@@ -512,14 +512,14 @@ probably not done."
    ("C-c s" . consult-ripgrep)
    ("C-S-s" . consult-line)
    ("M-s L" . consult-line-multi)
+   ;; Misc
+   ("C-c M-x" . consult-mode-command)
    ;; Minibuffer key map for ordinary input (no completion). For
    ;; example, used in `M-:' (`eval-expression'). See:
    ;; `https://www.gnu.org/software/emacs/manual/html_node/emacs/Minibuffer-Maps.html'
    :map minibuffer-local-map
    ("M-s" . consult-history)
    ("M-r" . consult-history)
-   ;; Misc
-   ("C-c M-x" . consult-mode-command)
   )
 
   :custom
