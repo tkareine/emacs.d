@@ -442,6 +442,21 @@ probably not done."
   ;; work with Tramp
   (completion-category-overrides '((file (styles basic partial-completion)))))
 
+;;; Marginalia: add annotations to minibuffer completions
+;;;
+;;; See https://github.com/minad/marginalia
+(use-package marginalia
+  :ensure t
+
+  :demand
+
+  :bind
+  (:map minibuffer-local-map
+        ("M-A" . marginalia-cycle))
+
+  :config
+  (marginalia-mode 1))
+
 ;;; Vertico: minibuffer completion
 ;;;
 ;;; See https://github.com/minad/vertico
