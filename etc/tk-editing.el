@@ -487,8 +487,8 @@ probably not done."
    ("M-g o"   . consult-outline)
    ("M-g m"   . consult-mark)
    ("M-g k"   . consult-global-mark)
-   ("M-g i"   . consult-imenu)
-   ("M-g I"   . consult-imenu-multi)
+   ("s-."     . consult-imenu)
+   ("C-s-."   . consult-imenu-multi)
    ;; Searching
    ("M-s d" . consult-find)
    ("M-s c" . consult-locate)
