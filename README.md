@@ -12,11 +12,12 @@ the file. Thank you all!
 ## Setup highlights
 
 A screenshot, featuring syntax coloring of a shell script file (the left
-buffer), [magit] (the right buffer), and [Ivy]'s `counsel-projectile-rg`
-(the bottom buffer), in the `base16-gruvbox-dark-pale` color theme of
-[base16-theme]:
+buffer), [magit] (the right buffer), and [Consult]'s `consult-ripgrep`
+(the bottom buffer, with [Vertico] used as the completion UI and
+[Orderless] for completion matching), in the `base16-gruvbox-dark-pale`
+color theme of [base16-theme]:
 
-<img src="https://github.com/tkareine/emacs.d/raw/master/images/setup-showcase-v2.png" title="Setup showcase" alt="Setup showcase" width="912">
+<img src="https://github.com/tkareine/emacs.d/raw/master/images/setup-showcase-v3.png" title="Setup showcase" alt="Setup showcase" width="912">
 
 The font in use is [Input][Input font]
 ([customization](https://input.djr.com/download/?customize&fontSelection=fourStyleFamily&regular=InputMonoNarrow-Regular&italic=InputMonoNarrow-Italic&bold=InputMonoNarrow-Bold&boldItalic=InputMonoNarrow-BoldItalic&a=ss&g=ss&i=serifs_round&l=serifs_round&zero=0&asterisk=height&braces=straight&preset=default&line-height=1.2)).
@@ -117,8 +118,8 @@ I use two frontends for [ripgrep], the fast search tool:
 
 1. [deadgrep] for situations when I want to persist the search results
    (`C-c a` for `deadgrep`), and
-2. [Ivy]'s `counsel-projectile-rg` (`C-c s`) when I want to discard
-   search results right away.
+2. [Consult]'s `consult-ripgrep` (`C-c s`) when I want to discard search
+   results right away.
 
 Installation with Homebrew:
 
@@ -173,17 +174,19 @@ Installation with npm:
 npm install -g typescript typescript-language-server
 ```
 
+[Consult]: https://github.com/minad/consult
 [Emacs Mac port]: https://bitbucket.org/mituharu/emacs-mac/src/master/
 [Flycheck]: https://www.flycheck.org/
 [GNU Global]: https://www.gnu.org/software/global/
 [Homebrew]: https://brew.sh/
 [Input font]: https://input.djr.com/
-[Ivy]: https://github.com/abo-abo/swiper
 [Marked]: https://github.com/markedjs/marked
 [Node.js]: https://nodejs.org/
+[Orderless]: https://github.com/oantolin/orderless
 [Prettier]: https://prettier.io/
 [Smartparens]: https://github.com/Fuco1/smartparens
 [TypeScript]: https://github.com/Microsoft/TypeScript
+[Vertico]: https://github.com/minad/vertico
 [base16-theme]: https://github.com/tinted-theming/base16-emacs
 [chnode]: https://github.com/tkareine/chnode
 [company-mode]: https://company-mode.github.io/
