@@ -104,6 +104,8 @@ the latter adds candidates the former misses.")
 ;;; Tree-sitter
 
 (use-package treesit
+  :if (>= emacs-major-version 29)
+
   :preface
   (defvar tk-dev/treesit-language-source-alist
     '((bash       "https://github.com/tree-sitter/tree-sitter-bash")
