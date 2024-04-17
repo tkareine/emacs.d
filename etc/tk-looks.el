@@ -283,9 +283,11 @@ mode-line-process, and narrowing) and selected minor modes.")
               '((fullscreen . maximized)))
 
 ;;; Font
-(let* ((selected-font "Input-14"))
-  (set-face-attribute 'default nil :font selected-font)
-  (set-face-attribute 'fixed-pitch nil :font selected-font))
+(let* ((font-name "Input"))
+  (when (find-font (font-spec :name font-name))
+    (let* ((font-name-and-size (concat font-name "-14")))
+      (set-face-attribute 'default nil :font font-name-and-size)
+      (set-face-attribute 'fixed-pitch nil :font font-name-and-size))))
 
 (setq-default line-spacing 1)
 
