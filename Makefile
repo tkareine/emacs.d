@@ -43,6 +43,7 @@ reinstall-treesit-language-grammars:
 	$(EMACS_BATCH) \
 	  --load=etc/tk-network.el \
 	  --load=etc/tk-packages.el \
+          --eval="(defvar tk-looks/minor-mode-alist '())" \
 	  --load=etc/tk-dev.el \
 	  --eval='(tk-dev/treesit-install-language-grammars t)'
 
