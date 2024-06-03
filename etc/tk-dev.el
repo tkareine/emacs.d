@@ -335,6 +335,7 @@ configuration for GNU Global."
   (add-hook 'js-base-mode-hook #'tk-dev/js-lsp-mode-hook)
 
   (unbind-key "M-." js-mode-map)
+  (unbind-key "M-." js-ts-mode-map)
 
   :hook
   ((js-base-mode . prettier-mode))
