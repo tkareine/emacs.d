@@ -544,7 +544,8 @@ configuration for GNU Global."
    (ruby-ts-mode . ggtags-mode))
 
   :mode
-  ("/Gemfile-[[:alnum:]]+\\'"))
+  ("/.Brewfile\\'"
+   "/Gemfile-[[:alnum:]]+\\'"))
 
 ;;; Rust
 
