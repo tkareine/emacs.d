@@ -592,7 +592,7 @@ configuration for GNU Global."
 
 (use-package dockerfile-ts-mode
   :mode
-  ("/Dockerfile\\(?:\\.[^/]+\\)?\\'" . dockerfile-ts-mode))
+  ("/Dockerfile\\(?:\\.[^/]+\\)?\\'"))
 
 ;;; Configuration files
 
