@@ -371,19 +371,18 @@ probably not done."
   :bind
   (("s-SPC" . hippie-expand)))
 
-;;; UndoTree
+;;; Vundo
+;;;
+;;; See https://github.com/casouri/vundo
 
-(use-package undo-tree
+(use-package vundo
   :ensure t
 
   :custom
-  (undo-tree-auto-save-history nil)
-
-  :config
-  (global-undo-tree-mode 1)
+  (vundo-glyph-alist vundo-unicode-symbols)
 
   :bind
-  (("C-x u" . undo-tree-visualize)))
+  (("C-x u" . vundo)))
 
 ;;; Projectile
 
