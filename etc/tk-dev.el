@@ -237,6 +237,10 @@ configuration for GNU Global."
 (use-package lsp-mode
   :ensure t
 
+  :init
+  ;; See `(setenv "LSP_USE_PLISTS" "true")' in `early-init.el'
+  (setq lsp-use-plists t)
+
   :custom
   (lsp-eldoc-render-all t)
   (lsp-progress-prefix " … " "Less obtrusive progress status")
