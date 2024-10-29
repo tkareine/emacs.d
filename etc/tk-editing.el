@@ -343,7 +343,7 @@ active region, kill the current line instead."
 (use-package recentf
   :demand
 
-  :preface
+  :init
   (defun tk-editing/recentf-save-list-silent ()
     "Save the list of recent files periodically. Normally, recentf saves
 the list when Emacs exits cleanly. If Emacs crashes, that save is
@@ -536,7 +536,7 @@ probably not done."
 (use-package deadgrep
   :ensure t
 
-  :preface
+  :init
   (defun tk-editing/deadgrep-show-result-other-window ()
     "Show the result in another window at point, keeping the
 current search result window."

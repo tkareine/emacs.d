@@ -106,7 +106,7 @@ the latter adds candidates the former misses.")
 (use-package treesit
   :if (>= emacs-major-version 29)
 
-  :preface
+  :init
   (defvar tk-dev/treesit-language-source-alist
     '((bash       "https://github.com/tree-sitter/tree-sitter-bash")
       (css        "https://github.com/tree-sitter/tree-sitter-css")
@@ -177,7 +177,7 @@ installed. Use FORCE-INSTALL-ALL to update grammars."
 (use-package ggtags
   :ensure t
 
-  :preface
+  :init
   (defun tk-dev/make-gtags (rootdir)
     "Make gtags files to the current project.
 
@@ -291,7 +291,7 @@ configuration for GNU Global."
 (use-package prettier
   :ensure t
 
-  :preface
+  :init
   (defun tk-dev/prettier-mode-advice-not-on-file-remote-p (&rest _r)
     (not (ignore-errors (file-remote-p (buffer-file-name (current-buffer))
                                        'method))))
@@ -323,7 +323,7 @@ configuration for GNU Global."
 ;;; js-mode for `.js' and `.jsx' sources
 
 (use-package js
-  :preface
+  :init
   (defun tk-dev/js-lsp-mode-hook ()
     ;; Don't enable LSP in `json-mode' or `jsonc-mode' (which derive
     ;; from `js-mode' via the `javascript-mode' alias)
@@ -470,7 +470,7 @@ configuration for GNU Global."
                             " && ")
                  t)
 
-  :preface
+  :init
   (defun tk-dev/cider-mode-hook ()
     (local-set-key (kbd "C-c B")   #'cider-connection-browser)
     (local-set-key (kbd "C-c M-l") #'cider-inspect-last-result)
@@ -502,7 +502,7 @@ configuration for GNU Global."
 ;;; Haskell
 
 (use-package haskell-mode
-  :preface
+  :init
   (defun tk-dev/haskell-mode-hook ()
     (haskell-indentation-mode)
     (haskell-decl-scan-mode)

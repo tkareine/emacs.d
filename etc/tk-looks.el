@@ -63,7 +63,7 @@
 (blink-cursor-mode -1)
 
 (use-package whitespace
-  :preface
+  :init
   (defun tk-looks/toggle-show-trailing-whitespace ()
     (interactive)
     (setq-default show-trailing-whitespace (eq show-trailing-whitespace nil)))
