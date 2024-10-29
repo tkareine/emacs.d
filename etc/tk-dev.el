@@ -274,6 +274,7 @@ configuration for GNU Global."
   (lsp-ui-doc-position 'top)
   (lsp-ui-doc-max-width 180)
   (lsp-ui-doc-max-height 40)
+  (lsp-ui-doc-include-signature t)
 
   :commands
   (lsp-ui-mode)
