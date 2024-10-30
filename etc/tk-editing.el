@@ -277,7 +277,9 @@ active region, kill the current line instead."
 
 (setq-default max-mini-window-height 0.2)
 
-(setq-default enable-recursive-minibuffers t)
+;; Disable recursive minibuffers, because resuming them is often
+;; confusing
+(setq-default enable-recursive-minibuffers nil)
 
 ;; Remove duplicate elements from history lists
 (setq-default history-delete-duplicates t)
