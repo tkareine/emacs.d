@@ -108,15 +108,15 @@ the latter adds candidates the former misses.")
 
   :init
   (defvar tk-dev/treesit-language-source-alist
-    '((bash       "https://github.com/tree-sitter/tree-sitter-bash")
-      (css        "https://github.com/tree-sitter/tree-sitter-css")
-      (dockerfile "https://github.com/camdencheek/tree-sitter-dockerfile")
-      (javascript "https://github.com/tree-sitter/tree-sitter-javascript")
-      (json       "https://github.com/tree-sitter/tree-sitter-json")
-      (ruby       "https://github.com/tree-sitter/tree-sitter-ruby")
-      (tsx        . ("https://github.com/tree-sitter/tree-sitter-typescript" "master" "tsx/src"))
-      (typescript . ("https://github.com/tree-sitter/tree-sitter-typescript" "master" "typescript/src"))
-      (yaml       "https://github.com/ikatyang/tree-sitter-yaml"))
+    '((bash       "https://github.com/tree-sitter/tree-sitter-bash" "v0.23.1")
+      (css        "https://github.com/tree-sitter/tree-sitter-css" "v0.23.0")
+      (dockerfile "https://github.com/camdencheek/tree-sitter-dockerfile" "v0.2.0")
+      (javascript "https://github.com/tree-sitter/tree-sitter-javascript" "v0.20.1")
+      (json       "https://github.com/tree-sitter/tree-sitter-json" "v0.24.1")
+      (ruby       "https://github.com/tree-sitter/tree-sitter-ruby" "v0.23.0")
+      (tsx        . ("https://github.com/tree-sitter/tree-sitter-typescript" "v0.20.3" "tsx/src"))
+      (typescript . ("https://github.com/tree-sitter/tree-sitter-typescript" "v0.20.3" "typescript/src"))
+      (yaml       "https://github.com/ikatyang/tree-sitter-yaml" "v0.5.0"))
     "Tree-sitter language grammar configuration")
 
   (defun tk-dev/treesit-install-language-grammars (force-install-all)
@@ -126,13 +126,12 @@ all configured languages regardless whether they are already
 installed. Use FORCE-INSTALL-ALL to update grammars."
     (interactive
      (list (y-or-n-p "Force install all configured Tree-sitter language grammars?")))
-    (dolist (lang tk-dev/treesit-language-source-alist)
-      (let* ((grammar (car lang)))
-        ;; Install `grammar' if forced or if we don't have it installed already
-        (when (or force-install-all
-                  (not (treesit-language-available-p grammar)))
-          (message "Installing Tree-sitter language grammar %s…" grammar)
-          (treesit-install-language-grammar grammar)))))
+    (pcase-dolist (`(,grammar . ,_rest) tk-dev/treesit-language-source-alist)
+      ;; Install `grammar' if forced or if we don't have it installed already
+      (when (or force-install-all
+                (not (treesit-language-available-p grammar)))
+        (message "Installing Tree-sitter language grammar %s…" grammar)
+        (treesit-install-language-grammar grammar))))
 
   :custom
   (treesit-max-buffer-size (let ((mb (* 1024 1024))) (* 100 mb)))
