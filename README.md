@@ -1,7 +1,7 @@
 # My Emacs setup
 
-My public Emacs configuration, in order to synchronize them to computers
-I work with. The configuration for selected command line tools is in [my
+Here is my public Emacs configuration, which I checkout to computers I
+work with. The configuration for selected command line tools is in [my
 dotfiles] repository.
 
 I have copied or adapted some contents from others. For small chunks of
@@ -63,12 +63,12 @@ There are a bunch of small improvements to editing in
 
 ## Installation
 
-Installing Mitsuharu Yamamoto's [Emacs Mac port], using [Homebrew] on
+Installing Boris Buliga's (d12frosted) [Emacs+], using [Homebrew] on
 macOS:
 
 ``` bash
-brew tap railwaycat/emacsmacport
-brew install railwaycat/emacsmacport/emacs-mac --with-modern-icon
+brew tap d12frosted/emacs-plus
+brew install d12frosted/emacs-plus/emacs-plus --with-modern-icon --with-native-comp
 ```
 
 You'll need [Node.js] and [npm] for some of the 3rd party tools (see
@@ -78,16 +78,16 @@ together with the latest LTS version of Node.js:
 ``` bash
 brew tap tkareine/chnode
 brew install tkareine/chnode/chnode
-brew install node@20
+brew install node@22
 mkdir -p ~/.nodes
-ln -s /usr/local/opt/node@20 ~/.nodes/node-20
+ln -s /usr/local/opt/node@22 ~/.nodes/node-22
 ```
 
 Then, put the following into your shell's (Bash or Zsh) init script:
 
 ``` bash
 source chnode.sh
-chnode node-20
+chnode node-22
 ```
 
 ## 3rd party tools in use
@@ -175,7 +175,7 @@ npm install -g typescript typescript-language-server
 ```
 
 [Consult]: https://github.com/minad/consult
-[Emacs Mac port]: https://bitbucket.org/mituharu/emacs-mac/src/master/
+[Emacs+]: https://github.com/d12frosted/homebrew-emacs-plus
 [Flycheck]: https://www.flycheck.org/
 [GNU Global]: https://www.gnu.org/software/global/
 [Homebrew]: https://brew.sh/
