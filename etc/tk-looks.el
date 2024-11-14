@@ -278,9 +278,10 @@ mode-line-process, and narrowing) and selected minor modes.")
                 " %*"
                 (multiple-frames (:eval (concat " [" (number-to-string (length (frame-list))) "]")))))
 
-;; Maximize initial frame
+;; Remove title bar, use rounded corners, maximize frame
 (setq-default default-frame-alist
-              '((fullscreen . maximized)))
+              '((undecorated-round . t)
+                (fullscreen . maximized)))
 
 ;;; Font
 (let* ((font-name "Input"))
