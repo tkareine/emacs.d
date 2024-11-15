@@ -63,7 +63,7 @@ clean:
 
 .PHONY: clobber
 clobber: clean
-	rm -rf elpa tree-sitter
+	rm -rf .cache eln-cache elpa tree-sitter
 
 define newline
 
