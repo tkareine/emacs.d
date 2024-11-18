@@ -373,6 +373,46 @@ probably not done."
   :bind
   (("s-SPC" . hippie-expand)))
 
+;;; Dabbrev
+
+(use-package dabbrev
+  :config
+  (add-to-list 'dabbrev-ignored-buffer-modes 'doc-view-mode)
+  (add-to-list 'dabbrev-ignored-buffer-modes 'pdf-view-mode)
+  (add-to-list 'dabbrev-ignored-buffer-modes 'tags-table-mode)
+
+  :bind
+  (("C-S-<tab>" . dabbrev-completion)))
+
+(bind-key "C-<tab>" #'completion-at-point)
+
+;;; Corfu
+;;;
+;;; https://github.com/minad/corfu
+(use-package corfu
+  :ensure t
+
+  :demand
+
+  :custom
+  (corfu-cycle t "Enable cycling for `corfu-next/previous'")
+  (corfu-auto t "Enable auto popup")
+  (corfu-auto-delay 0.5)
+  (corfu-preselect 'prompt "Always preselect the prompt")
+  (corfu-quit-no-match 'separator "Automatically quit there are no matching candidates, except when inserting `corfu-separator'")
+  (corfu-on-exact-match 'insert "Insert sole candidate on exact match")
+
+  :config
+  (global-corfu-mode 1)
+
+  :bind
+  (:map corfu-map
+        ("TAB" . corfu-next)
+        ([tab] . corfu-next)
+        ("S-TAB" . corfu-previous)
+        ([backtab] . corfu-previous)
+        ("C-SPC" . corfu-insert-separator)))
+
 ;;; Vundo
 ;;;
 ;;; See https://github.com/casouri/vundo

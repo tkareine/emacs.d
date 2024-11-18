@@ -32,9 +32,9 @@ shown. See [etc/tk-looks.el], grep for `mode-line-format`.
 
 I have customized `js-mode` (for `.js` and `.jsx` sources) and
 [typescript-mode] (`.ts`, `.tsx`) major modes to work together with
-[lsp-mode], [Prettier] (via [prettier.el]), [company-mode], and
-[Flycheck]. For instance, when I save a `.ts` buffer, Flycheck validates
-the file and Prettier reformats it. See [etc/tk-dev.el].
+[lsp-mode], [Prettier] (via [prettier.el]), and [Flycheck]. For
+instance, when I save a `.ts` buffer, Flycheck validates the file and
+Prettier reformats it. See [etc/tk-dev.el].
 
 ### Small editing improvements
 
@@ -189,7 +189,6 @@ npm install -g typescript typescript-language-server
 [Vertico]: https://github.com/minad/vertico
 [base16-theme]: https://github.com/tinted-theming/base16-emacs
 [chnode]: https://github.com/tkareine/chnode
-[company-mode]: https://company-mode.github.io/
 [conf-ctags]: https://github.com/tkareine/dotfiles/blob/master/.ctags
 [conf-globalrc]: https://github.com/tkareine/dotfiles/blob/master/.globalrc
 [deadgrep]: https://github.com/Wilfred/deadgrep

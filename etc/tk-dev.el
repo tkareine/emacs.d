@@ -46,36 +46,6 @@ with bitmaps)")
 
   (eldoc-documentation-strategy 'eldoc-documentation-compose-eagerly))
 
-;;; Company
-
-(use-package company
-  :ensure t
-
-  :demand
-
-  :custom
-  (company-idle-delay 0.5)
-  (company-minimum-prefix-length 2 "The minimum prefix length before showing idle completion")
-  (company-tooltip-align-annotations t "Align annotations to the right tooltip border")
-  (company-dabbrev-downcase nil "Don't lowercase completion candidates (dabbrev backend)")
-  (company-dabbrev-ignore-case t "Ignore case when collecting completion candidates and copy candidate verbatim")
-  (company-dabbrev-code-ignore-case t "Ignore case when collecting completion candidates and copy candidate verbatim")
-  (company-backends '(company-semantic
-                      company-clang
-                      (company-capf company-dabbrev-code company-gtags)
-                      company-files
-                      company-keywords
-                      company-dabbrev)
-                    "Use relevant completion engines only. Especially, put \
-`company-capf' and `company-dabbrev-code' into same group so that \
-the latter adds candidates the former misses.")
-
-  :config
-  (global-company-mode 1)
-
-  :bind
-  (("C-<tab>" . company-complete)))
-
 ;;; Snippets
 
 (use-package yasnippet
@@ -241,6 +211,10 @@ configuration for GNU Global."
   (setq lsp-use-plists t)
 
   :custom
+  (lsp-completion-provider :none)  ; Would like to use `:capf', but
+                                   ; `:none' removes a warning message
+                                   ; about not being able to
+                                   ; autoconfigure company-mode
   (lsp-eldoc-render-all t)
   (lsp-progress-prefix " … " "Less obtrusive progress status")
 
