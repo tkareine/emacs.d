@@ -36,7 +36,7 @@
 (setq-default window-min-width 80)
 (setq-default window-min-height 10)
 
-;; Disable visible bell, is broken on OS X El Capitan
+;; Disable visible bell as we replace with it `ring-bell-function'
 (setq-default visible-bell nil)
 
 (defun tk-looks/visible-bell ()
