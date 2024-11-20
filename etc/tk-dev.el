@@ -69,7 +69,12 @@ with bitmaps)")
   (flycheck-temp-prefix ".~flycheck")
 
   :config
-  (global-flycheck-mode 1))
+  (global-flycheck-mode 1)
+
+  :bind
+  (:map flycheck-mode-map
+        ("M-n" . flycheck-next-error)
+        ("M-p" . flycheck-previous-error)))
 
 ;;; Tree-sitter
 
