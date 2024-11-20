@@ -157,7 +157,7 @@ installed. Use FORCE-INSTALL-ALL to update grammars."
 
 If called with a prefix, specify the directory to make gtags files for."
     (interactive (cl-flet ((read-dir ()
-                                     (read-directory-name "Make GTAGS to: " nil nil t)))
+                             (read-directory-name "Make GTAGS to: " nil nil t)))
                    (let ((dir (if current-prefix-arg
                                   (read-dir)
                                 (if-let ((proj-dir (projectile-project-root)))
@@ -216,10 +216,10 @@ configuration for GNU Global."
   (setq lsp-use-plists t)
 
   :custom
-  (lsp-completion-provider :none)  ; Would like to use `:capf', but
-                                   ; `:none' removes a warning message
-                                   ; about not being able to
-                                   ; autoconfigure company-mode
+  ;; Would like to use `:capf', but `:none' removes a warning message
+  ;; about not being able to autoconfigure company-mode
+  (lsp-completion-provider :none)
+
   (lsp-eldoc-render-all t)
   (lsp-progress-prefix " … " "Less obtrusive progress status")
 
@@ -259,8 +259,8 @@ configuration for GNU Global."
 
   :bind
   (:map lsp-ui-mode-map
-   ("C-c h" . lsp-ui-doc-toggle)
-   ("s->"   . lsp-ui-imenu))
+        ("C-c h" . lsp-ui-doc-toggle)
+        ("s->"   . lsp-ui-imenu))
 
   :after
   (lsp-mode))
@@ -393,19 +393,19 @@ configuration for GNU Global."
 (use-package clojure-mode
   :config
   (define-clojure-indent
-    (ANY       2)
-    (DELETE    2)
-    (GET       2)
-    (HEAD      2)
-    (OPTIONS   2)
-    (PATCH     2)
-    (POST      2)
-    (PUT       2)
-    (api       'defun)
-    (context   1)
-    (defroutes 'defun)
-    (describe  1)
-    (it        1))
+   (ANY       2)
+   (DELETE    2)
+   (GET       2)
+   (HEAD      2)
+   (OPTIONS   2)
+   (PATCH     2)
+   (POST      2)
+   (PUT       2)
+   (api       'defun)
+   (context   1)
+   (defroutes 'defun)
+   (describe  1)
+   (it        1))
 
   (add-hook 'clojure-mode-hook #'smartparens-strict-mode)
 

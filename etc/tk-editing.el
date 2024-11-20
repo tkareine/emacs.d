@@ -561,7 +561,7 @@ probably not done."
    :map minibuffer-local-map
    ("M-s" . consult-history)
    ("M-r" . consult-history)
-  )
+   )
 
   :custom
   (consult-locate-args locate-command)
@@ -571,7 +571,7 @@ probably not done."
 
   :after
   (projectile)
-)
+  )
 
 ;;; Deadgrep interface for ripgrep
 
