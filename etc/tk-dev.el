@@ -359,7 +359,7 @@ configuration for GNU Global."
   ((mhtml-mode . prettier-mode))
 
   :mode
-  ("/\\.x?html\\'"))
+  ("\\.x?html\\'"))
 
 ;;; JSON
 
@@ -385,8 +385,8 @@ configuration for GNU Global."
    (yaml-mode . ggtags-mode))
 
   :mode
-  ("/\\.ya?ml\\'"
-   "/\\.gemrc\\'"))
+  ("\\.ya?ml\\'"
+   "\\.gemrc\\'"))
 
 (use-package yaml-ts-mode
   :hook
@@ -431,8 +431,8 @@ configuration for GNU Global."
   (add-hook 'clojure-mode-hook #'smartparens-strict-mode)
 
   :mode
-  ("/\\.clj\\'"
-   "/\\.edn\\'")
+  ("\\.clj\\'"
+   "\\.edn\\'")
 
   :after
   (smartparens))
@@ -504,7 +504,7 @@ configuration for GNU Global."
         ("C-c o" . haskell-hoogle))
 
   :mode
-  ("/\\.hs\\'"))
+  ("\\.hs\\'"))
 
 ;; Shell scripts
 
@@ -547,7 +547,7 @@ configuration for GNU Global."
   ((rust-mode . lsp-deferred))
 
   :mode
-  ("/\\.rs\\'"))
+  ("\\.rs\\'"))
 
 ;;; Markdown
 
