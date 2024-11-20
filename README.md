@@ -17,7 +17,7 @@ buffer), [magit] (the right buffer), and [Consult]'s `consult-ripgrep`
 [Orderless] for completion matching), in the `base16-gruvbox-dark-pale`
 color theme of [base16-theme]:
 
-<img src="https://github.com/tkareine/emacs.d/raw/master/images/setup-showcase-v3.png" title="Setup showcase" alt="Setup showcase" width="912">
+<img src="https://github.com/tkareine/emacs.d/raw/master/images/setup-showcase-v4.png" title="Setup showcase" alt="Setup showcase" width="916">
 
 The font in use is [Input][Input font]
 ([customization](https://input.djr.com/download/?customize&fontSelection=fourStyleFamily&regular=InputMonoNarrow-Regular&italic=InputMonoNarrow-Italic&bold=InputMonoNarrow-Bold&boldItalic=InputMonoNarrow-BoldItalic&a=ss&g=ss&i=serifs_round&l=serifs_round&zero=0&asterisk=height&braces=straight&preset=default&line-height=1.2)).
