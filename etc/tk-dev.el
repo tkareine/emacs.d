@@ -18,11 +18,11 @@
   (reb-re-syntax 'string)
 
   :bind
-  ("C-c R" . re-builder)
-  (:map reb-mode-map
-        ("C-c C-k" . reb-quit)
-        ("M-n"     . reb-next-match)
-        ("M-p"     . reb-prev-match)))
+  (("C-c R" . re-builder)
+   :map reb-mode-map
+   ("C-c C-k" . reb-quit)
+   ("M-n"     . reb-next-match)
+   ("M-p"     . reb-prev-match)))
 
 ;;; Compilation
 
