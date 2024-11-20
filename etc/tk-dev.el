@@ -265,22 +265,17 @@ configuration for GNU Global."
   :after
   (lsp-mode))
 
-;;; Prettier: format buffer with `prettier' upon save automatically
+;;; Apheleia: code formatter runner
+;;;
+;;; https://github.com/radian-software/apheleia
 
-(use-package prettier
+(use-package apheleia
   :ensure t
 
-  :init
-  (defun tk-dev/prettier-mode-advice-not-on-file-remote-p (&rest _r)
-    (not (ignore-errors (file-remote-p (buffer-file-name (current-buffer))
-                                       'method))))
-
   :config
-  (advice-add #'prettier-mode :before-while #'tk-dev/prettier-mode-advice-not-on-file-remote-p)
-  (add-to-list 'tk-looks/minor-mode-alist '(prettier-mode (" Prettier")) t)
+  (add-to-list 'tk-looks/minor-mode-alist '(apheleia-mode " Aph"))
 
-  :commands
-  (prettier-mode))
+  (apheleia-global-mode 1))
 
 ;;; CSS and SCSS
 
@@ -320,9 +315,6 @@ configuration for GNU Global."
   (unbind-key "M-." js-mode-map)
   (unbind-key "M-." js-ts-mode-map)
 
-  :hook
-  ((js-base-mode . prettier-mode))
-
   :mode
   (("\\.[cm]?jsx?\\'"  . js-mode)
    ("\\.javascript\\'" . js-mode))
@@ -339,8 +331,7 @@ configuration for GNU Global."
   (typescript-indent-level 2)
 
   :hook
-  ((typescript-mode . lsp-deferred)
-   (typescript-mode . prettier-mode))
+  ((typescript-mode . lsp-deferred))
 
   :mode
   ("\\.tsx?\\'"))
@@ -349,15 +340,11 @@ configuration for GNU Global."
   :hook
   ;; `typescript-ts-base-mode' is the parent mode for both
   ;; `typescript-ts-mode' and `typescript-ts-base-mode'
-  ((typescript-ts-base-mode . lsp-deferred)
-   (typescript-ts-base-mode . prettier-mode)))
+  ((typescript-ts-base-mode . lsp-deferred)))
 
 ;; HTML
 
 (use-package mhtml-mode
-  :hook
-  ((mhtml-mode . prettier-mode))
-
   :mode
   ("\\.x?html\\'"))
 
@@ -366,14 +353,8 @@ configuration for GNU Global."
 (use-package json-mode
   :ensure t
 
-  ;; Don't add prettier-mode hook, because json-mode derives from js-mode
-
   :mode
   ("\\.json\\'"))
-
-(use-package json-ts-mode
-  :hook
-  ((json-ts-mode . prettier-mode)))
 
 ;;; YAML
 
@@ -381,8 +362,7 @@ configuration for GNU Global."
   :ensure t
 
   :hook
-  ((yaml-mode . prettier-mode)
-   (yaml-mode . ggtags-mode))
+  ((yaml-mode . ggtags-mode))
 
   :mode
   ("\\.ya?ml\\'"
@@ -390,8 +370,7 @@ configuration for GNU Global."
 
 (use-package yaml-ts-mode
   :hook
-  ((yaml-ts-mode . prettier-mode)
-   (yaml-ts-mode . ggtags-mode)))
+  ((yaml-ts-mode . ggtags-mode)))
 
 ;;; ELisp
 
@@ -533,8 +512,10 @@ configuration for GNU Global."
 ;;; Rust
 
 (use-package rust-mode
+  :ensure t
+
   :custom
-  (rust-format-on-save t)
+  (rust-format-on-save nil "Use Apheleia instead")
   (rust-rustfmt-switches '())
   (lsp-rust-analyzer-cargo-watch-command "clippy")
 

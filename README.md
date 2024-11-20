@@ -28,14 +28,6 @@ I've tuned the mode-line to show only information that I think is
 relevant. For instance, only a selection of enabled minor modes is
 shown. See [etc/tk-looks.el], grep for `mode-line-format`.
 
-### JavaScript, TypeScript, and JSX source file editing
-
-I have customized `js-mode` (for `.js` and `.jsx` sources) and
-[typescript-mode] (`.ts`, `.tsx`) major modes to work together with
-[lsp-mode], [Prettier] (via [prettier.el]), and [Flycheck]. For
-instance, when I save a `.ts` buffer, Flycheck validates the file and
-Prettier reformats it. See [etc/tk-dev.el].
-
 ### Small editing improvements
 
 There are a bunch of small improvements to editing in
@@ -129,8 +121,7 @@ brew install ripgrep
 
 ### jq
 
-[jq] is used by [Flycheck] in [json-mode] to check JSON syntax. It's
-configured in [etc/tk-dev.el].
+[jq] is used by [Flycheck] in [json-mode] to check JSON syntax.
 
 Installation with Homebrew:
 
@@ -151,10 +142,8 @@ npm install -g marked
 
 ### Prettier
 
-[Prettier] is a popular code formatter, used by [prettier.el] to
-reformat the buffer upon save. It's configured in [etc/tk-dev.el] and
-enabled for `js-mode`, [typescript-mode], `html-mode`, [json-mode], and
-[yaml-mode] automatically.
+[Prettier] is a popular code formatter, used by [Apheleia] in selected
+major modes to reformat buffers upon save.
 
 Installation with npm:
 
@@ -174,6 +163,7 @@ Installation with npm:
 npm install -g typescript typescript-language-server
 ```
 
+[Apheleia]: https://github.com/radian-software/apheleia
 [Consult]: https://github.com/minad/consult
 [Emacs+]: https://github.com/d12frosted/homebrew-emacs-plus
 [Flycheck]: https://www.flycheck.org/
@@ -205,9 +195,7 @@ npm install -g typescript typescript-language-server
 [my dotfiles]: https://github.com/tkareine/dotfiles/
 [node-build]: https://github.com/nodenv/node-build
 [npm]: https://www.npmjs.com/
-[prettier.el]: https://github.com/jscheid/prettier.el
 [ripgrep]: https://github.com/BurntSushi/ripgrep
 [tsserver]: https://github.com/Microsoft/TypeScript/wiki/Standalone-Server-%28tsserver%29
 [typescript-language-server]: https://github.com/theia-ide/typescript-language-server
-[typescript-mode]: https://github.com/emacs-typescript/typescript.el
 [yaml-mode]: https://github.com/yoshiki/yaml-mode
