@@ -69,7 +69,7 @@ with bitmaps)")
   (flycheck-temp-prefix ".~flycheck")
 
   :config
-  (global-flycheck-mode 1)
+  (add-hook 'prog-mode-hook #'flycheck-mode)
 
   :bind
   (:map flycheck-mode-map
