@@ -207,6 +207,8 @@ configuration for GNU Global."
    ("C-M-/" . ggtags-find-reference)))
 
 ;;; LSP
+;;;
+;;; https://emacs-lsp.github.io/lsp-mode/
 
 (use-package lsp-mode
   :ensure t
@@ -221,6 +223,7 @@ configuration for GNU Global."
   (lsp-completion-provider :none)
 
   (lsp-eldoc-render-all t)
+  (lsp-enable-text-document-color nil "Rely on Treesitter for font faces")
   (lsp-progress-prefix " … " "Less obtrusive progress status")
 
   :config
