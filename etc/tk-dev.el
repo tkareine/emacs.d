@@ -68,8 +68,8 @@ with bitmaps)")
   (flycheck-disabled-checkers '(emacs-lisp-checkdoc json-python-json))
   (flycheck-temp-prefix ".~flycheck")
 
-  :config
-  (add-hook 'prog-mode-hook #'flycheck-mode)
+  :hook
+  (prog-mode)
 
   :bind
   (:map flycheck-mode-map
@@ -378,8 +378,8 @@ configuration for GNU Global."
 ;;; ELisp
 
 (use-package elisp-mode
-  :config
-  (add-hook 'emacs-lisp-mode-hook #'smartparens-strict-mode)
+  :hook
+  (emacs-lisp-mode . smartparens-strict-mode)
 
   :after
   (smartparens))
@@ -410,7 +410,8 @@ configuration for GNU Global."
    (describe  1)
    (it        1))
 
-  (add-hook 'clojure-mode-hook #'smartparens-strict-mode)
+  :hook
+  (clojure-mode . smartparens-strict-mode)
 
   :mode
   ("\\.clj\\'"
