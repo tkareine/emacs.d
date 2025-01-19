@@ -439,6 +439,7 @@ probably not done."
 ;;; Corfu
 ;;;
 ;;; https://github.com/minad/corfu
+
 (use-package corfu
   :ensure t
 
@@ -485,6 +486,8 @@ probably not done."
 
   :custom
   (projectile-completion-system 'default)
+  (projectile-switch-project-action #'projectile-dired)
+  (projectile-current-project-on-switch 'keep)
 
   :config
   (dolist (l '(("js" "scss" "less" "css" "html")
@@ -508,7 +511,6 @@ probably not done."
   :bind
   (("C-c D" . projectile-dired)
    ("C-c O" . projectile-find-other-file)
-   ("C-c d" . projectile-find-dir)
    ("C-c f" . projectile-find-file-dwim)
    ("C-c o" . projectile-toggle-between-implementation-and-test)))
 
@@ -536,6 +538,7 @@ probably not done."
 ;;; Marginalia: add annotations to minibuffer completions
 ;;;
 ;;; See https://github.com/minad/marginalia
+
 (use-package marginalia
   :ensure t
 
