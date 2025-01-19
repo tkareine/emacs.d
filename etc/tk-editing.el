@@ -304,11 +304,61 @@ active region, kill the current line instead."
 
 (use-package dired
   :custom
-  (dired-listing-switches "-alh")
+  (dired-listing-switches "-l --almost-all --group-directories-first --human-readable")
 
   :config
   ;; Allow opening file, replacing current buffer
-  (put 'dired-find-alternate-file 'disabled nil))
+  (put 'dired-find-alternate-file 'disabled nil)
+
+  ;; Prerequisite on macOS: `brew install coreutils'
+  (when (eq system-type 'darwin)
+    (setq insert-directory-program "gls")))
+
+;;; Dirvish
+;;;
+;;; https://github.com/alexluigit/dirvish
+
+(use-package dirvish
+  :ensure t
+
+  :demand
+
+  :custom
+  (dirvish-attributes '(vc-state
+                        subtree-state
+                        all-the-icons
+                        collapse
+                        git-msg
+                        file-time
+                        file-size))
+
+  (dirvish-quick-access-entries
+   '(("d" "~/Downloads/"               "Downloads")
+     ("h" "~/Dropbox/Documents/howtos" "howtos")
+     ("p" "~/Projects/"                "Projects")
+     ("s" "~/Dropbox/Scratches/"       "Scratches")))
+
+  :config
+  (dirvish-override-dired-mode)
+
+  :bind
+  (("C-x C-d" . dirvish-dwim)
+   ("C-c d"   . dirvish-fd)
+   :map dirvish-mode-map
+   ("TAB" . dirvish-subtree-toggle)
+   ("^"   . dirvish-history-last)
+   ("a"   . dirvish-quick-access)
+   ("f"   . dirvish-file-info-menu)
+   ("h"   . dirvish-history-jump)
+   ("s"   . dirvish-quicksort)
+   ("y"   . dirvish-yank-menu)
+   ("M-b" . dirvish-history-go-backward)
+   ("M-f" . dirvish-history-go-forward)
+   ("M-j" . dirvish-fd-jump)
+   ("M-l" . dirvish-ls-switches-menu)
+   ("M-m" . dirvish-mark-menu)
+   ("M-t" . dirvish-layout-toggle))
+  )
 
 ;;; Uniquify: append dir name to buffers with similar filenames
 
