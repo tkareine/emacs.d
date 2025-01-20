@@ -1,6 +1,6 @@
 EMACS := emacs
 
-EMACS_BATCH := $(EMACS) --batch
+EMACS_BATCH := $(EMACS) --batch --load=early-init.el
 
 EL_FILES := $(shell find site-lisp -type f -name '*.el')
 
