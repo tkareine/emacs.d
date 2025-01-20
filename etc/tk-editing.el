@@ -294,6 +294,12 @@ active region, kill the current line instead."
   ;; file for a root-owned remote file
   (tramp-allow-unsafe-temporary-files t))
 
+;;; find-func: find the definition of the Emacs Lisp function near point
+
+(use-package find-func
+  :bind
+  (("C-h l" . find-library)))
+
 ;;; ffap: find file (or url) at point
 
 (use-package ffap
