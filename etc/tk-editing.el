@@ -224,7 +224,7 @@ active region, kill the current line instead."
 
 ;;; Smartparens
 ;;;
-;;; See https://github.com/Fuco1/smartparens
+;;; `https://github.com/Fuco1/smartparens'
 
 (use-package smartparens
   :ensure t
@@ -291,7 +291,7 @@ active region, kill the current line instead."
   (tramp-default-method "ssh")
 
   ;; Don't prompt confirmation on writing backup, auto-save, or lock
-  ;; file for a `root'-owned remote file
+  ;; file for a root-owned remote file
   (tramp-allow-unsafe-temporary-files t))
 
 ;;; ffap: find file (or url) at point
@@ -314,9 +314,9 @@ active region, kill the current line instead."
   (when (eq system-type 'darwin)
     (setq insert-directory-program "gls")))
 
-;;; Dirvish
+;;; Dirvish: replace Dired
 ;;;
-;;; https://github.com/alexluigit/dirvish
+;;; `https://github.com/alexluigit/dirvish'
 
 (use-package dirvish
   :ensure t
@@ -368,7 +368,8 @@ active region, kill the current line instead."
   :custom
   (uniquify-buffer-name-style 'forward))
 
-;;; Saveplace: save point location in the buffer when revisiting the buffer
+;;; Saveplace: save point location in the buffer when revisiting the
+;;; buffer
 
 (use-package saveplace
   :demand
@@ -438,7 +439,7 @@ probably not done."
 
 ;;; Corfu
 ;;;
-;;; https://github.com/minad/corfu
+;;; `https://github.com/minad/corfu'
 
 (use-package corfu
   :ensure t
@@ -466,7 +467,7 @@ probably not done."
 
 ;;; Vundo
 ;;;
-;;; See https://github.com/casouri/vundo
+;;; `https://github.com/casouri/vundo'
 
 (use-package vundo
   :ensure t
@@ -517,7 +518,7 @@ probably not done."
 ;;; Orderless: completion style that enables space-separated input
 ;;; components
 ;;;
-;;; See https://github.com/oantolin/orderless
+;;; `https://github.com/oantolin/orderless'
 
 (use-package orderless
   :ensure t
@@ -537,7 +538,7 @@ probably not done."
 
 ;;; Marginalia: add annotations to minibuffer completions
 ;;;
-;;; See https://github.com/minad/marginalia
+;;; `https://github.com/minad/marginalia'
 
 (use-package marginalia
   :ensure t
@@ -553,7 +554,7 @@ probably not done."
 
 ;;; Vertico: minibuffer completion
 ;;;
-;;; See https://github.com/minad/vertico
+;;; `https://github.com/minad/vertico'
 
 (use-package vertico
   :ensure t
@@ -568,7 +569,7 @@ probably not done."
 
 ;;; Consult: search and navigation commands
 ;;;
-;;; See https://github.com/minad/consult
+;;; `https://github.com/minad/consult'
 
 (use-package consult
   :ensure t
@@ -626,7 +627,9 @@ probably not done."
   (projectile)
   )
 
-;;; Deadgrep interface for ripgrep
+;;; Deadgrep: interface for ripgrep
+;;;
+;;; `https://github.com/Wilfred/deadgrep'
 
 (use-package deadgrep
   :ensure t
@@ -653,6 +656,8 @@ current search result window."
    ))
 
 ;;; Symbol-overlay
+;;;
+;;; `https://github.com/wolray/symbol-overlay'
 
 (use-package symbol-overlay
   :ensure t
@@ -687,6 +692,11 @@ current search result window."
   :bind
   (("s-O" . symbol-overlay-remove-all)
    ("s-o" . symbol-overlay-put)))
+
+;;; Olivetti: minor-mode for writing text with comfortable horizontal
+;;; margins
+;;;
+;;; `https://github.com/rnkn/olivetti'
 
 (use-package olivetti
   :ensure t

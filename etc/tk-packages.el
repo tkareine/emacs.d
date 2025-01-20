@@ -26,7 +26,7 @@
 ;; Start package system, make installed packages available (activation)
 (package-initialize)
 
-;; Docs: https://jwiegley.github.io/use-package/
+;; Docs: `https://jwiegley.github.io/use-package/'
 (eval-when-compile
   (unless (package-installed-p 'use-package)
     (package-refresh-contents)

@@ -103,7 +103,7 @@
 
 ;; Color theme
 ;;
-;; See https://github.com/tinted-theming/base16-emacs
+;; `https://github.com/tinted-theming/base16-emacs'
 (use-package base16-theme
   :ensure t
 
@@ -336,12 +336,12 @@ mode-line-process, and narrowing) and selected minor modes.")
   :config
   (which-key-mode 1))
 
-;;; https://github.com/domtronn/all-the-icons.el
+;;; `https://github.com/domtronn/all-the-icons.el'
 ;;;
 ;;; Download and install the latests fonts based on the current OS:
-;;; (all-the-icons-install-fonts)
+;;; M-x all-the-icons-install-fonts
 ;;;
-;;; Prints all the icons for `alltheicon' font set:
+;;; Prints all the icons for the `alltheicon' font set:
 ;;; (all-the-icons-insert-icons-for 'alltheicon)
 
 (use-package all-the-icons

@@ -208,7 +208,7 @@ configuration for GNU Global."
 
 ;;; LSP
 ;;;
-;;; https://emacs-lsp.github.io/lsp-mode/
+;;; `https://emacs-lsp.github.io/lsp-mode/'
 
 (use-package lsp-mode
   :ensure t
@@ -270,7 +270,7 @@ configuration for GNU Global."
 
 ;;; Apheleia: code formatter runner
 ;;;
-;;; https://github.com/radian-software/apheleia
+;;; `https://github.com/radian-software/apheleia'
 
 (use-package apheleia
   :ensure t
