@@ -338,6 +338,9 @@ active region, kill the current line instead."
                         file-time
                         file-size))
 
+  (dirvish-mode-line-format
+   '(:left (sort symlink) :right (omit index)))
+
   (dirvish-quick-access-entries
    '(("d" "~/Downloads/"               "Downloads")
      ("h" "~/Dropbox/Documents/howtos" "howtos")
