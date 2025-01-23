@@ -135,6 +135,9 @@ installed. Use FORCE-INSTALL-ALL to update grammars."
   (magit-define-global-key-bindings nil "Disable default global key bindings because we defined them ourselves")
   (magit-auto-revert-mode nil "Disable `magit-auto-revert-mode' because we're using global-auto-revert-mode")
 
+  :config
+  (add-to-list 'tk-looks/minor-mode-alist '(magit-blame-mode magit-blame-mode-lighter))
+
   :bind
   (("C-x g"   . magit-status)
    ("C-x M-g" . magit-dispatch)
