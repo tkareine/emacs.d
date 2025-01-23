@@ -132,10 +132,13 @@ installed. Use FORCE-INSTALL-ALL to update grammars."
   :ensure t
 
   :custom
-  (magit-auto-revert-mode nil "Disable `magit-auto-revert-mode', because we're using global-auto-revert-mode")
+  (magit-define-global-key-bindings nil "Disable default global key bindings because we defined them ourselves")
+  (magit-auto-revert-mode nil "Disable `magit-auto-revert-mode' because we're using global-auto-revert-mode")
 
   :bind
-  (("C-x g" . magit-status)))
+  (("C-x g"   . magit-status)
+   ("C-x M-g" . magit-dispatch)
+   ("C-c M-g" .	magit-file-dispatch)))
 
 ;; Disable Emacs' Version Control interface
 ;; (setq-default vc-handled-backends '(RCS CVS SVN SCCS SRC Bzr Git Hg Mtn))
