@@ -149,8 +149,10 @@ installed. Use FORCE-INSTALL-ALL to update grammars."
 
 ;;; Xref
 
-;; Add additional keybinding, as macOS interprets M-? to show menu bar
-(bind-key "C-M-/" #'xref-find-references)
+(use-package xref
+  :bind
+  ;; Add additional keybinding, as macOS interprets M-? to show menu bar
+  (("C-M-/" . xref-find-references)))
 
 ;;; ggtags frontend for GNU global
 
