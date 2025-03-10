@@ -520,8 +520,9 @@ probably not done."
 
   :bind
   (("C-c D" . projectile-dired)
+   ("C-c F" . projectile-find-file-dwim)
    ("C-c O" . projectile-find-other-file)
-   ("C-c f" . projectile-find-file-dwim)
+   ("C-c f" . projectile-find-file)
    ("C-c o" . projectile-toggle-between-implementation-and-test)))
 
 ;;; Orderless: completion style that enables space-separated input
