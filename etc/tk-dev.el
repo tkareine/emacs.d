@@ -143,9 +143,9 @@ installed. Use FORCE-INSTALL-ALL to update grammars."
    ("C-x M-g" . magit-dispatch)
    ("C-c M-g" .	magit-file-dispatch)))
 
-;; Disable Emacs' Version Control interface
-;; (setq-default vc-handled-backends '(RCS CVS SVN SCCS SRC Bzr Git Hg Mtn))
-(setq-default vc-handled-backends nil)
+;; Select VCS backends for VC, the builtin Emacs version control
+;; interface
+(setq-default vc-handled-backends '(Git))
 
 ;;; Xref
 

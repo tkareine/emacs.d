@@ -6,7 +6,7 @@
 (setq-default make-backup-files t)
 
 ;; Make backups of files, even when they're in version control
-(setq-default vc-make-backup-files t)
+(setq-default vc-make-backup-files nil)
 
 ;; Safer backups by copying files; preserves hard file links
 (setq-default backup-by-copying t)
