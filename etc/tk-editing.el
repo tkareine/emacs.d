@@ -336,6 +336,7 @@ active region, kill the current line instead."
                         collapse
                         git-msg
                         file-time
+                        file-modes
                         file-size))
 
   (dirvish-mode-line-format
