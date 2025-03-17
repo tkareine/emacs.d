@@ -355,6 +355,7 @@ active region, kill the current line instead."
   (("C-x C-d" . dirvish-dwim)
    ("C-c d"   . dirvish-fd)
    :map dirvish-mode-map
+   ("?"   . dirvish-dispatch)
    ("TAB" . dirvish-subtree-toggle)
    ("^"   . dirvish-history-last)
    ("a"   . dirvish-quick-access)
