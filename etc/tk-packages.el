@@ -32,6 +32,8 @@
     (package-refresh-contents)
     (package-install 'use-package))
 
+  (setq-default use-package-enable-imenu-support t)
+
   (require 'use-package))
 
 (use-package bind-key)
