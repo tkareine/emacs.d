@@ -339,6 +339,8 @@ active region, kill the current line instead."
                         file-modes
                         file-size))
 
+  (dirvish-default-layout '(0 0.4 0.6))
+
   (dirvish-mode-line-format
    '(:left (sort symlink) :right (omit index)))
 
@@ -355,6 +357,7 @@ active region, kill the current line instead."
   (("C-x C-d" . dirvish-dwim)
    ("C-c d"   . dirvish-fd)
    :map dirvish-mode-map
+   (";"   . dired-up-directory)
    ("?"   . dirvish-dispatch)
    ("TAB" . dirvish-subtree-toggle)
    ("^"   . dirvish-history-last)
