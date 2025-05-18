@@ -592,7 +592,8 @@ probably not done."
   :bind
   (
    ;; Editing
-   ("M-y" . consult-yank-pop)
+   ("M-y"   . consult-yank-pop)
+   ("S-M-y" . consult-yank-from-kill-ring)
    ;; Global navigation
    ("C-x b"   . consult-buffer)
    ("C-x 4 b" . consult-buffer-other-window)
