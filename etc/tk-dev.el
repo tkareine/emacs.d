@@ -214,7 +214,7 @@ configuration for GNU Global."
    :map ggtags-mode-map
    ("C-M-/" . ggtags-find-reference)))
 
-;;; LSP
+;;; Language Server Protocol
 ;;;
 ;;; `https://emacs-lsp.github.io/lsp-mode/'
 
