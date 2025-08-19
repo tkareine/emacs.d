@@ -284,7 +284,14 @@ configuration for GNU Global."
   :ensure t
 
   :config
+  ;; (setq apheleia-log-debug-info t) ; Enable to debug formatters' run commands
   (add-to-list 'tk-looks/minor-mode-alist '(apheleia-mode " Aph"))
+
+  ;; Don't use parser or printer options for `shfmt'. Otherwise `shfmt'
+  ;; won't respect formatting options from EditorConfig files
+  (add-to-list 'apheleia-formatters '(shfmt . ("shfmt"
+                                               "--filename" filepath
+                                               "-")))
 
   (apheleia-global-mode 1))
 
