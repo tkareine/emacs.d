@@ -1,0 +1,43 @@
+#!/usr/bin/env bash
+
+# Execute `shfmt` with input from STDIN either with all the given
+# arguments or only with the first argument (FILEPATH).
+#
+# If there is an `.editorconfig' file in the current working directory
+# or somewhere up in the directory tree, use only the FILEPATH argument
+# with `shfmt'. This makes `shfmt' to respect formatting options from
+# the `.editorconfig' file. If the `.editorconfig' file is not found,
+# use all the given arguments to execute `shfmt'.
+
+set -euo pipefail
+
+if (("$#" < 1)); then
+    echo "usage: tk-apheleia-shfmt FILEPATH [SHFMT_OPTS...]" >&2
+    exit 1
+fi
+
+# Find the file given as the first argument in the current directory, in
+# the parent directory, or in the directory up to the root. Return 0 if
+# finding the file, otherwise return a nonzero value.
+#
+# See https://unix.stackexchange.com/a/22215
+find_upwards() {
+    local fname="$1"
+    local path="${PWD}"
+
+    while [[ -n "${path}" && ! -e "${path}/${fname}" ]]; do
+        path="${path%/*}"
+    done
+
+    [[ -n "${path}" ]]
+}
+
+filepath="$1"
+shift
+shfmt_opts=()
+
+if ! find_upwards ".editorconfig"; then
+    shfmt_opts+=("$@")
+fi
+
+exec shfmt --filename "$filepath" "${shfmt_opts[@]}" -

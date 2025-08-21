@@ -285,13 +285,28 @@ configuration for GNU Global."
 
   :config
   ;; (setq apheleia-log-debug-info t) ; Enable to debug formatters' run commands
+
   (add-to-list 'tk-looks/minor-mode-alist '(apheleia-mode " Aph"))
 
-  ;; Don't use parser or printer options for `shfmt'. Otherwise `shfmt'
-  ;; won't respect formatting options from EditorConfig files
-  (add-to-list 'apheleia-formatters '(shfmt . ("shfmt"
-                                               "--filename" filepath
-                                               "-")))
+  ;; `tk-apheleia-shfmt' wraps `shfmt': if there is an `.editorconfig'
+  ;; file in the current working directory or somewhere up in the
+  ;; directory tree, use only the `filepath' argument with `shfmt'. This
+  ;; makes `shfmt' to respect formatting options from the
+  ;; `.editorconfig' file. If the `.editorconfig' file is not found, use
+  ;; all the given command line options to execute `shfmt'.
+  (add-to-list 'apheleia-formatters '(shfmt . ((tk-init/user-emacs-path "bin/tk-apheleia-shfmt")
+                                               filepath
+                                               "--language-dialect" (cl-case (bound-and-true-p sh-shell)
+                                                                      (sh "posix")
+                                                                      (t "bash"))
+                                               "--indent" (number-to-string
+                                                           (cond
+                                                            (indent-tabs-mode 0)
+                                                            ((boundp 'sh-basic-offset)
+                                                             sh-basic-offset)
+                                                            (t 4)))
+                                               "--binary-next-line"
+                                               "--case-indent")))
 
   (apheleia-global-mode 1))
 
