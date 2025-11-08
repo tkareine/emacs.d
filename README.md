@@ -63,23 +63,22 @@ brew tap d12frosted/emacs-plus
 brew install d12frosted/emacs-plus/emacs-plus --with-modern-icon --with-native-comp
 ```
 
-You'll need [Node.js] and [npm] for some of the 3rd party tools (see
-below). For managing Node.js versions, I recommend using [chnode]
-together with the latest LTS version of Node.js:
+You'll need [Node.js] and [pnpm] or [npm] for some of the 3rd party
+tools (see below). For managing Node.js versions, I recommend using
+[chnode] together with the latest LTS version of Node.js:
 
 ``` bash
 brew tap tkareine/chnode
-brew install tkareine/chnode/chnode
-brew install node@22
+brew install tkareine/chnode/chnode node@24 pnpm
 mkdir -p ~/.nodes
-ln -s /usr/local/opt/node@22 ~/.nodes/node-22
+ln -s /opt/homebrew/opt/node@24 ~/.nodes/node-24
 ```
 
 Then, put the following into your shell's (Bash or Zsh) init script:
 
 ``` bash
 source chnode.sh
-chnode node-22
+chnode node-24
 ```
 
 ## 3rd party tools in use
@@ -134,10 +133,10 @@ brew install jq
 [Marked] generates the HTML output from Markdown sources, used by
 [markdown-mode]. It's configured in [etc/tk-dev.el].
 
-Installation with npm:
+Installation with [pnpm]:
 
 ``` bash
-npm install -g marked
+pnpm install -g marked
 ```
 
 ### Prettier
@@ -145,10 +144,10 @@ npm install -g marked
 [Prettier] is a popular code formatter, used by [Apheleia] in selected
 major modes to reformat buffers upon save.
 
-Installation with npm:
+Installation with [pnpm]:
 
 ``` bash
-npm install -g prettier
+pnpm install -g prettier
 ```
 
 ### TypeScript
@@ -157,10 +156,10 @@ I use the [`tsserver`][tsserver] CLI tool of of [TypeScript] and
 [typescript-language-server] as the server for [lsp-mode], configured in
 [etc/tk-dev.el].
 
-Installation with npm:
+Installation with [pnpm]:
 
 ``` bash
-npm install -g typescript typescript-language-server
+pnpm install -g typescript typescript-language-server
 ```
 
 [Apheleia]: https://github.com/radian-software/apheleia
@@ -195,6 +194,7 @@ npm install -g typescript typescript-language-server
 [my dotfiles]: https://github.com/tkareine/dotfiles/
 [node-build]: https://github.com/nodenv/node-build
 [npm]: https://www.npmjs.com/
+[pnpm]: https://pnpm.io/
 [ripgrep]: https://github.com/BurntSushi/ripgrep
 [tsserver]: https://github.com/Microsoft/TypeScript/wiki/Standalone-Server-%28tsserver%29
 [typescript-language-server]: https://github.com/theia-ide/typescript-language-server
