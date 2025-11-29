@@ -136,7 +136,7 @@ brew install jq
 Installation with [pnpm]:
 
 ``` bash
-pnpm install -g marked
+pnpm add -g marked
 ```
 
 ### Prettier
@@ -147,7 +147,7 @@ major modes to reformat buffers upon save.
 Installation with [pnpm]:
 
 ``` bash
-pnpm install -g prettier
+pnpm add -g prettier
 ```
 
 ### TypeScript
@@ -159,7 +159,7 @@ I use the [`tsserver`][tsserver] CLI tool of of [TypeScript] and
 Installation with [pnpm]:
 
 ``` bash
-pnpm install -g typescript typescript-language-server
+pnpm add -g typescript typescript-language-server
 ```
 
 [Apheleia]: https://github.com/radian-software/apheleia
