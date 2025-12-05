@@ -284,6 +284,16 @@ active region, kill the current line instead."
 ;; Remove duplicate elements from history lists
 (setq-default history-delete-duplicates t)
 
+;;; Auth-source
+;;;
+;;; See:
+;;;
+;;; * `https://www.gnu.org/software/emacs/manual/html_node/auth/Help-for-users.html'
+;;; * `https://www.gnu.org/software/emacs/manual/html_node/emacs/Authentication.html'
+(use-package auth-source
+  :custom
+  (auth-source-save-behavior nil "Never save entered password"))
+
 ;;; Tramp
 
 (use-package tramp
