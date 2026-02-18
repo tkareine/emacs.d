@@ -23,6 +23,8 @@
                                  ("melpa-stable" . "https://stable.melpa.org/packages/")
                                  ("gnu"          . "https://elpa.gnu.org/packages/")))
 
+(setq-default package-install-upgrade-built-in t)
+
 ;; Start package system, make installed packages available (activation)
 (package-initialize)
 
