@@ -310,6 +310,51 @@ configuration for GNU Global."
 
   (apheleia-global-mode 1))
 
+;;; gptel for a client to Large Language Models
+;;;
+;;; `https://github.com/karthink/gptel'
+(use-package gptel
+  :ensure t
+
+  :custom
+  (gptel-model 'claude-opus-4.6)
+
+  :config
+  ;; Instead of `:custom', set `gptel-backend' with `setq' to avoid
+  ;; recursive calls of `(require 'gptel)', triggered by `custom.el'
+  (setq gptel-backend (gptel-make-gh-copilot "Copilot"))
+  (require 'gptel-integrations)
+
+  :bind
+  (("C-c C-g" . gptel-send)
+   ("C-c G"   . gptel)))
+
+;;; mcp.el for Model Context Protocol
+;;;
+;;; `https://github.com/lizqwerscott/mcp.el'
+(use-package mcp
+  :ensure t
+
+  :init
+  (defun tk-dev/json-read-file (path)
+    (with-temp-buffer
+      (insert-file-contents path)
+      (json-parse-buffer)))
+
+  :config
+  (setq mcp-hub-servers
+        `(("context7" . (:command "context7-mcp"
+                                  :env (:CONTEXT7_API_KEY
+                                        ,(let ((path (expand-file-name ".secret/context7-mcp.json"
+                                                                       user-emacs-directory)))
+                                           (when (file-exists-p path)
+                                             (gethash "api-key" (tk-dev/json-read-file path)))))))))
+
+  (require 'mcp-hub)
+
+  :after
+  (gptel))
+
 ;;; CSS and SCSS
 
 (use-package css-mode
