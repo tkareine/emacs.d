@@ -14,20 +14,26 @@
 ;; Do not show splash screen
 (setq-default inhibit-startup-screen t)
 
-;; A hack to prevent showing the startup message. See
-;; `display-startup-echo-area-message' and
-;; `https://lists.gnu.org/archive/html/bug-gnu-emacs/2012-12/msg00954.html'.
+;; A hack to prevent showing the startup message. Implemented with an
+;; advice that overrides the whole function.
 ;;
-;; Temporarily disable the hack, because the `put' call causes error
-;; with `custom.el'. Steps to reproduce:
+;; The hack mentioned at
+;; `https://lists.gnu.org/archive/html/bug-gnu-emacs/2012-12/msg00954.html'
+;; does not work. Steps to reproduce:
 ;;
-;; 1. Enable the hack below
+;; 1. Enter the hack:
+;;
+;;    (put 'inhibit-startup-echo-area-message 'saved-value t)
+;;    (setq inhibit-startup-echo-area-message (user-login-name)))
+;;
 ;; 2. Start Emacs
-;; 3. Call the `list-packages' command
-;; 4. Error in `custom-save-all': Wrong type argument: listp, t
 ;;
-;; (put 'inhibit-startup-echo-area-message 'saved-value t)
-;; (setq inhibit-startup-echo-area-message (user-login-name))
+;; 3. Call the `package-list-packages' command
+;;
+;; 4. Get error in `custom-save-variables': (wrong-type-argument listp t)
+(advice-add #'display-startup-echo-area-message
+            :override
+            (lambda () t))
 
 ;; Set no content in the `*scratch*' buffer
 (setq-default initial-scratch-message "")
