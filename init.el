@@ -5,8 +5,9 @@
 
 (load (expand-file-name "site-lisp/tk-init" user-emacs-directory))
 
-;; Avoid the following error when calling certain commands, such as
-;; `package-install':
+;; Instead of using `null-device' for the save file of `custom.el', use
+;; `~/.emacs.d/custom.el'. This avoids the following error when calling
+;; certain commands, such as `package-install':
 ;;
 ;;   find-file-noselect-1: Maximum buffer size exceeded
 ;;
