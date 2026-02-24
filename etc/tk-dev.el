@@ -318,15 +318,23 @@ configuration for GNU Global."
 
   :custom
   (gptel-model 'claude-opus-4.6)
+  (gptel-highlight-methods '(fringe))
+  (gptel-directives '((default . "You are a helpful assistant inside Emacs. Respond concisely and include references. Check your response against references.")))
 
   :config
   ;; Instead of `:custom', set `gptel-backend' with `setq' to avoid
   ;; recursive calls of `(require 'gptel)', triggered by `custom.el'
   (setq gptel-backend (gptel-make-gh-copilot "Copilot"))
+
   (require 'gptel-integrations)
 
+  :hook
+  ;; Highlight LLM responses
+  ((gptel-mode . gptel-highlight-mode))
+
   :bind
-  (("C-c C-g" . gptel-send)
+  (("C-c C-p" . gptel-send)
+   ("C-c C-o" . gptel-rewrite)
    ("C-c G"   . gptel)))
 
 ;;; mcp.el for Model Context Protocol
@@ -620,6 +628,9 @@ configuration for GNU Global."
   (advice-add #'markdown-output-standalone-p
               :override
               (lambda () t))
+
+  (unbind-key "C-c C-o" markdown-mode-map)
+  (unbind-key "C-c C-p" markdown-mode-map)
 
   :custom
   (markdown-command "marked --gfm")
