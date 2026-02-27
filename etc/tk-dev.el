@@ -632,6 +632,9 @@ configuration for GNU Global."
   (unbind-key "C-c C-o" markdown-mode-map)
   (unbind-key "C-c C-p" markdown-mode-map)
 
+  ;; Format with Prettier
+  (add-to-list 'apheleia-mode-alist '(markdown-mode . prettier-markdown))
+
   :custom
   (markdown-command "marked --gfm")
   (markdown-hide-urls nil)
