@@ -588,6 +588,13 @@ configuration for GNU Global."
 ;;; Ruby
 
 (use-package ruby-mode
+  :config
+  ;; Don't use `prettier-ruby' of `apheleia-formatters' for Ruby code
+  (setq apheleia-mode-alist
+        (seq-remove (lambda (entry)
+                      (memq (car entry) '(ruby-mode ruby-ts-mode)))
+                    apheleia-mode-alist))
+
   :hook
   ((ruby-mode    . ggtags-mode)
    (ruby-ts-mode . ggtags-mode))
