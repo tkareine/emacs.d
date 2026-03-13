@@ -647,6 +647,7 @@ configuration for GNU Global."
   (markdown-hide-urls nil)
   (markdown-asymmetric-header t)
   (markdown-live-preview-delete-export 'delete-on-export)
+  (markdown-spaces-after-code-fence 0 "Consistent with the Markdown parser of Prettier")
 
   :mode
   (("\\.markdown\\'" . gfm-mode)
