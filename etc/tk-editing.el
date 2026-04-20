@@ -320,6 +320,8 @@ active region, kill the current line instead."
 
 (use-package dired
   :custom
+  (dired-create-destination-dirs 'ask)
+  (dired-create-destination-dirs-on-trailing-dirsep t "Consider a file name ending in a slash as a directory to create")
   (dired-listing-switches "-l --almost-all --group-directories-first --human-readable")
 
   :config
