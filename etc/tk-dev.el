@@ -660,8 +660,12 @@ configuration for GNU Global."
   ("/Dockerfile\\(?:\\.[^/]+\\)?\\'"))
 
 ;;; Configuration files
-
-(add-to-list 'auto-mode-alist '("/\\.aws/config\\'" . conf-unix-mode))
-(add-to-list 'auto-mode-alist '("/\\.aws/credentials\\'" . conf-unix-mode))
-(add-to-list 'auto-mode-alist '("/\\.s3cfg\\'" . conf-unix-mode))
-(add-to-list 'auto-mode-alist '("/Cargo\\.lock\\'" . conf-toml-mode))
+(use-package conf-mode
+  :mode
+  (
+   ("/Cargo\\.lock\\'"       . conf-toml-mode)
+   ("/\\.aws/config\\'"      . conf-unix-mode)
+   ("/\\.aws/credentials\\'" . conf-unix-mode)
+   ("/\\.gitmodules\\'"      . conf-unix-mode)
+   ("/\\.s3cfg\\'"           . conf-unix-mode)
+   ))
