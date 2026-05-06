@@ -351,6 +351,7 @@ configuration for GNU Global."
 
   :config
   (setq mcp-hub-servers
+        ;; `pnpm -g install @upstash/context7-mcp'
         `(("context7" . (:command "context7-mcp"
                                   :env (:CONTEXT7_API_KEY
                                         ,(let ((path (expand-file-name ".secret/context7-mcp.json"
