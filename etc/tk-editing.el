@@ -462,7 +462,7 @@ probably not done."
 
 (bind-key "C-<tab>" #'completion-at-point)
 
-;;; Corfu
+;;; Corfu: completion popup
 ;;;
 ;;; `https://github.com/minad/corfu'
 
@@ -475,12 +475,14 @@ probably not done."
   (corfu-cycle t "Enable cycling for `corfu-next/previous'")
   (corfu-auto t "Enable auto popup")
   (corfu-auto-delay 0.5)
+  (corfu-popupinfo-delay '(1.0 . 0.2) "Initial and subsequent delay for showing info for the current popup candidate")
   (corfu-preselect 'prompt "Always preselect the prompt")
   (corfu-quit-no-match 'separator "Automatically quit there are no matching candidates, except when inserting `corfu-separator'")
   (corfu-on-exact-match 'insert "Insert sole candidate on exact match")
 
   :config
   (global-corfu-mode 1)
+  (corfu-popupinfo-mode 1)
 
   :bind
   (:map corfu-map
