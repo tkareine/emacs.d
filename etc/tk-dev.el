@@ -257,7 +257,8 @@ configuration for GNU Global."
 
 (use-package lsp-modeline
   :custom
-  (lsp-modeline-code-action-fallback-icon "?" "Less obtrusive code action icon"))
+  (lsp-modeline-code-action-fallback-icon "?" "Less obtrusive code action icon")
+  (lsp-modeline-diagnostics-enable nil "Flycheck's modeline provides this"))
 
 (use-package lsp-ui
   :ensure t
