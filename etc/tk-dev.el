@@ -234,6 +234,10 @@ configuration for GNU Global."
   (lsp-enable-text-document-color nil "Rely on Treesitter for font faces")
   (lsp-progress-prefix " … " "Less obtrusive progress status")
 
+  (lsp-clients-typescript-prefer-use-project-ts-server nil "Prefer using tsserver.js from current project, if available")
+
+  (lsp-disabled-clients '(tailwindcss))
+
   :config
   (add-to-list 'tk-looks/minor-mode-alist
                (assq 'lsp-mode minor-mode-alist))
