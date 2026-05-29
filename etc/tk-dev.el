@@ -663,7 +663,7 @@ configuration for GNU Global."
 
 (use-package dockerfile-ts-mode
   :mode
-  ("/Dockerfile\\(?:\\.[^/]+\\)?\\'"))
+  ("/\\(?:Docker\\|Container\\)file\\(?:\\.[^/]+\\)?\\'"))
 
 ;;; Configuration files
 (use-package conf-mode
