@@ -289,6 +289,11 @@ mode-line-process, and narrowing) and selected minor modes.")
               '((undecorated-round . t)
                 (fullscreen . maximized)))
 
+(use-package ns-win
+  :bind
+  (("s-S-n" . make-frame)
+   ("M-ESC" . ns-prev-frame)))
+
 ;;; Font
 (let* ((font-name "Input"))
   (when (find-font (font-spec :name font-name))
