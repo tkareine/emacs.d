@@ -91,6 +91,7 @@ with bitmaps)")
       (json       . ("https://github.com/tree-sitter/tree-sitter-json" "v0.24.8"))
       (ruby       . ("https://github.com/tree-sitter/tree-sitter-ruby" "v0.23.1"))
       (rust       . ("https://github.com/tree-sitter/tree-sitter-rust" "v0.24.2"))
+      (toml .       ("https://github.com/tree-sitter-grammars/tree-sitter-toml" "v0.7.0"))
       (tsx        . ("https://github.com/tree-sitter/tree-sitter-typescript" "v0.23.2" "tsx/src"))
       (typescript . ("https://github.com/tree-sitter/tree-sitter-typescript" "v0.23.2" "typescript/src"))
       (yaml       . ("https://github.com/tree-sitter-grammars/tree-sitter-yaml" "v0.7.2"))
@@ -450,6 +451,14 @@ configuration for GNU Global."
 
   :mode
   ("\\.json\\'"))
+
+;;; Toml
+
+(use-package toml-ts-mode
+  :ensure t
+
+  :mode
+  ("\\.toml\\'"))
 
 ;;; YAML
 
