@@ -88,7 +88,7 @@ chnode node-26
 [GNU Global] is used by the [ggtags] minor mode to generate and find
 source code symbols. It's configured in [etc/tk-dev.el]. Ggtags mode
 gets enabled in selected major modes, such as `sh-mode`, `scss-mode`,
-and [yaml-mode], automatically. It's especially useful for navigating
+and `yaml-ts-mode`, automatically. It's especially useful for navigating
 vars in Ansible playbooks.
 
 Configure Global to use Exuberant Ctags for finding symbol definitions
@@ -196,5 +196,4 @@ npm install -g typescript typescript-language-server
 [npm]: https://www.npmjs.com/
 [ripgrep]: https://github.com/BurntSushi/ripgrep
 [tsserver]: https://github.com/Microsoft/TypeScript/wiki/Standalone-Server-%28tsserver%29
-[typescript-language-server]: https://github.com/theia-ide/typescript-language-server
-[yaml-mode]: https://github.com/yoshiki/yaml-mode
+[typescript-language-server]: https://github.com/typescript-language-server/typescript-language-server

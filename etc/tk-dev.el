@@ -124,10 +124,9 @@ installed. Use FORCE-INSTALL-ALL to update grammars."
   (dolist (mapping '((sh-mode         . bash-ts-mode)
                      (css-mode        . css-ts-mode)
                      (js-mode         . js-ts-mode)
-                     (json-mode       . json-ts-mode)
                      (ruby-mode       . ruby-ts-mode)
                      (typescript-mode . tsx-ts-mode)
-                     (yaml-mode       . yaml-ts-mode)))
+                     ))
     (add-to-list 'major-mode-remap-alist mapping)))
 
 ;;; Magit
@@ -392,11 +391,9 @@ configuration for GNU Global."
 
 ;;; JSON
 
-(use-package json-mode
-  :ensure t
-
+(use-package json-ts-mode
   :mode
-  ("\\.json\\'"))
+  ("\\.jsonc?\\'"))
 
 ;;; Toml
 
@@ -408,19 +405,13 @@ configuration for GNU Global."
 
 ;;; YAML
 
-(use-package yaml-mode
-  :ensure t
-
+(use-package yaml-ts-mode
   :hook
-  ((yaml-mode . ggtags-mode))
+  ((yaml-ts-mode . ggtags-mode))
 
   :mode
   ("\\.ya?ml\\'"
    "\\.gemrc\\'"))
-
-(use-package yaml-ts-mode
-  :hook
-  ((yaml-ts-mode . ggtags-mode)))
 
 ;;; ELisp
 
