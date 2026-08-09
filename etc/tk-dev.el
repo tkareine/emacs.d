@@ -79,19 +79,21 @@ with bitmaps)")
 ;;; Tree-sitter
 
 (use-package treesit
-  :if (>= emacs-major-version 29)
+  :if (>= emacs-major-version 30)
 
   :init
   (defvar tk-dev/treesit-language-source-alist
-    '((bash       "https://github.com/tree-sitter/tree-sitter-bash" "v0.23.1")
-      (css        "https://github.com/tree-sitter/tree-sitter-css" "v0.23.0")
-      (dockerfile "https://github.com/camdencheek/tree-sitter-dockerfile" "v0.2.0")
-      (javascript "https://github.com/tree-sitter/tree-sitter-javascript" "v0.20.1")
-      (json       "https://github.com/tree-sitter/tree-sitter-json" "v0.24.1")
-      (ruby       "https://github.com/tree-sitter/tree-sitter-ruby" "v0.23.0")
-      (tsx        . ("https://github.com/tree-sitter/tree-sitter-typescript" "v0.20.3" "tsx/src"))
-      (typescript . ("https://github.com/tree-sitter/tree-sitter-typescript" "v0.20.3" "typescript/src"))
-      (yaml       "https://github.com/ikatyang/tree-sitter-yaml" "v0.5.0"))
+    '(
+      (bash       . ("https://github.com/tree-sitter/tree-sitter-bash" "v0.25.1"))
+      (css        . ("https://github.com/tree-sitter/tree-sitter-css" "v0.25.0"))
+      (dockerfile . ("https://github.com/camdencheek/tree-sitter-dockerfile" "v0.2.0"))
+      (javascript . ("https://github.com/tree-sitter/tree-sitter-javascript" "v0.25.0"))
+      (json       . ("https://github.com/tree-sitter/tree-sitter-json" "v0.24.8"))
+      (ruby       . ("https://github.com/tree-sitter/tree-sitter-ruby" "v0.23.1"))
+      (tsx        . ("https://github.com/tree-sitter/tree-sitter-typescript" "v0.23.2" "tsx/src"))
+      (typescript . ("https://github.com/tree-sitter/tree-sitter-typescript" "v0.23.2" "typescript/src"))
+      (yaml       . ("https://github.com/tree-sitter-grammars/tree-sitter-yaml" "v0.7.2"))
+      )
     "Tree-sitter language grammar configuration")
 
   (defun tk-dev/treesit-install-language-grammars (force-install-all)
