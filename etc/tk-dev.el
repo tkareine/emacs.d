@@ -125,7 +125,6 @@ installed. Use FORCE-INSTALL-ALL to update grammars."
                      (css-mode        . css-ts-mode)
                      (js-mode         . js-ts-mode)
                      (ruby-mode       . ruby-ts-mode)
-                     (typescript-mode . tsx-ts-mode)
                      ))
     (add-to-list 'major-mode-remap-alist mapping)))
 
@@ -365,23 +364,14 @@ configuration for GNU Global."
 
 ;;; TypeScript for `.ts' and `.tsx' sources
 
-(use-package typescript-mode
-  :ensure t
-
-  :custom
-  (typescript-indent-level 2)
-
-  :hook
-  ((typescript-mode . lsp-deferred))
-
-  :mode
-  ("\\.tsx?\\'"))
-
 (use-package typescript-ts-mode
   :hook
   ;; `typescript-ts-base-mode' is the parent mode for both
   ;; `typescript-ts-mode' and `typescript-ts-base-mode'
-  ((typescript-ts-base-mode . lsp-deferred)))
+  ((typescript-ts-base-mode . lsp-deferred))
+
+  :mode
+  ("\\.tsx?\\'"))
 
 ;; HTML
 
