@@ -236,8 +236,6 @@ configuration for GNU Global."
   (lsp-enable-text-document-color nil "Rely on Tree-sitter for font faces")
   (lsp-progress-prefix " … " "Less obtrusive progress status")
 
-  (lsp-clients-typescript-prefer-use-project-ts-server nil "Prefer using tsserver.js from current project, if available")
-
   (lsp-disabled-clients '(tailwindcss))
 
   :config
@@ -365,6 +363,9 @@ configuration for GNU Global."
 ;;; TypeScript for `.ts' and `.tsx' sources
 
 (use-package typescript-ts-mode
+  :custom
+  (lsp-clients-typescript-prefer-use-project-ts-server t "Prefer using tsserver.js from current project, if available")
+
   :hook
   ;; `typescript-ts-base-mode' is the parent mode for both
   ;; `typescript-ts-mode' and `typescript-ts-base-mode'
