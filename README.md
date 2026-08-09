@@ -33,24 +33,24 @@ shown. See [etc/tk-looks.el], grep for `mode-line-format`.
 There are a bunch of small improvements to editing in
 [etc/tk-editing.el], such as:
 
-* Key binding `C-a`
+- Key binding `C-a`
   (`tk-editing/back-to-indentation-or-move-beginning-of-line`) switches
   the point between the start of line content or the beginning of the
   line.
-* Key binding `M-/` (`tk-editing/comment-or-uncomment-region-or-line`)
+- Key binding `M-/` (`tk-editing/comment-or-uncomment-region-or-line`)
   comments or uncomments either the current line the point is on (if no
   region is active) or active region. And if the point was on the
   beginning of the line, automatically move point to the next line.
-* By default, highlight trailing whitespace with high-key color and show
+- By default, highlight trailing whitespace with high-key color and show
   tabs with low-key color (easy to see, but not to disturb you). Toggle
   showing trailing whitespace with `C-x W`
   (`tk-editing/toggle-show-trailing-whitespace`).
-* Copy the path of the current buffer to the OS clipboard with `C-c P`
+- Copy the path of the current buffer to the OS clipboard with `C-c P`
   (`tk-editing/file-path-to-clipboard`), helping you to pass the path to
   other programs quickly.
-* Use [Smartparens] globally, so that it's easy to copy strings within
+- Use [Smartparens] globally, so that it's easy to copy strings within
   quotes, for example.
-* Save the history of recent files periodically, in order to avoid
+- Save the history of recent files periodically, in order to avoid
   losing the information if Emacs crashes.
 
 ## Installation
@@ -58,7 +58,7 @@ There are a bunch of small improvements to editing in
 Installing Boris Buliga's (d12frosted) [Emacs+], using [Homebrew] on
 macOS:
 
-``` bash
+```bash
 brew tap d12frosted/emacs-plus
 brew install d12frosted/emacs-plus/emacs-plus --with-modern-icon --with-native-comp
 ```
@@ -67,7 +67,7 @@ You'll need [Node.js] and [pnpm] or [npm] for some of the 3rd party
 tools (see below). For managing Node.js versions, I recommend using
 [chnode] together with the latest LTS version of Node.js:
 
-``` bash
+```bash
 brew tap tkareine/chnode
 brew install tkareine/chnode/chnode node@24 pnpm
 mkdir -p ~/.nodes
@@ -76,7 +76,7 @@ ln -s /opt/homebrew/opt/node@24 ~/.nodes/node-24
 
 Then, put the following into your shell's (Bash or Zsh) init script:
 
-``` bash
+```bash
 source chnode.sh
 chnode node-24
 ```
@@ -96,7 +96,7 @@ and Pygments for symbol references.
 
 Installation, with Homebrew on macOS:
 
-``` bash
+```bash
 brew install global
 ```
 
@@ -114,7 +114,7 @@ I use two frontends for [ripgrep], the fast search tool:
 
 Installation with Homebrew:
 
-``` bash
+```bash
 brew install ripgrep
 ```
 
@@ -124,7 +124,7 @@ brew install ripgrep
 
 Installation with Homebrew:
 
-``` bash
+```bash
 brew install jq
 ```
 
@@ -135,7 +135,7 @@ brew install jq
 
 Installation with [pnpm]:
 
-``` bash
+```bash
 pnpm add -g marked
 ```
 
@@ -146,7 +146,7 @@ major modes to reformat buffers upon save.
 
 Installation with [pnpm]:
 
-``` bash
+```bash
 pnpm add -g prettier
 ```
 
@@ -158,7 +158,7 @@ I use the [`tsserver`][tsserver] CLI tool of of [TypeScript] and
 
 Installation with [pnpm]:
 
-``` bash
+```bash
 pnpm add -g typescript typescript-language-server
 ```
 
