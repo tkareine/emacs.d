@@ -90,6 +90,7 @@ with bitmaps)")
       (javascript . ("https://github.com/tree-sitter/tree-sitter-javascript" "v0.25.0"))
       (json       . ("https://github.com/tree-sitter/tree-sitter-json" "v0.24.8"))
       (ruby       . ("https://github.com/tree-sitter/tree-sitter-ruby" "v0.23.1"))
+      (rust       . ("https://github.com/tree-sitter/tree-sitter-rust" "v0.24.2"))
       (tsx        . ("https://github.com/tree-sitter/tree-sitter-typescript" "v0.23.2" "tsx/src"))
       (typescript . ("https://github.com/tree-sitter/tree-sitter-typescript" "v0.23.2" "typescript/src"))
       (yaml       . ("https://github.com/tree-sitter-grammars/tree-sitter-yaml" "v0.7.2"))
@@ -615,6 +616,9 @@ configuration for GNU Global."
 
 (use-package rust-mode
   :ensure t
+
+  :init
+  (setq rust-mode-treesitter-derive t)
 
   :custom
   (rust-format-on-save nil "Use Apheleia instead")
