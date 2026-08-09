@@ -96,7 +96,20 @@ with bitmaps)")
       (typescript . ("https://github.com/tree-sitter/tree-sitter-typescript" "v0.23.2" "typescript/src"))
       (yaml       . ("https://github.com/tree-sitter-grammars/tree-sitter-yaml" "v0.7.2"))
       )
-    "Tree-sitter language grammar configuration")
+    "Tree-sitter language grammar configuration.
+
+A grammar uses a parser generated with Tree-sitter. A parser's ABI
+must be compatible with the Tree-sitter library.
+
+For a compatibility list between the library and generated parsers, see:
+`https://tree-sitter.github.io/tree-sitter/using-parsers/7-abi-versions.html'
+
+To get the maximum (latest) ABI version of the library,
+eval `(treesit-library-abi-version)'.
+
+To get the minimum (oldest) ABI version of the library,
+eval `(treesit-library-abi-version t)'
+")
 
   (defun tk-dev/treesit-install-language-grammars (force-install-all)
     "Install Tree-sitter grammars for configured languages if grammars
