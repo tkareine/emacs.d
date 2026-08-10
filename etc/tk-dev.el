@@ -462,47 +462,6 @@ configuration for GNU Global."
   :after
   (smartparens))
 
-;;; CIDER
-
-(use-package cider
-  :pin melpa-stable
-
-  :init
-  (shell-command (mapconcat #'identity
-                            `("touch ~/.cider_history"
-                              "chmod 600 ~/.cider_history")
-                            " && ")
-                 t)
-
-  :init
-  (defun tk-dev/cider-mode-hook ()
-    (local-set-key (kbd "C-c B")   #'cider-connection-browser)
-    (local-set-key (kbd "C-c M-l") #'cider-inspect-last-result)
-    (local-set-key (kbd "C-c M-R") #'cider-restart))
-
-  :custom
-  (cider-eval-result-prefix ";; => ")
-  (cider-repl-result-prefix ";; => ")
-  (cider-repl-history-file "~/.cider_history")
-  (cider-prompt-for-symbol nil "Attempt to use the symbol at point as input for `cider-find-var', and only prompt if that throws an error")
-  (cider-inject-dependencies-at-jack-in nil "I want to inject dependencies manually via `~/.lein/profiles.clj'. Otherwise Leiningen's `:pedantic? :abort' setting causes `lein repl' to abort due to overriding version of `org.clojure/tools.nrepl'.")
-  (cider-mode-line '(" " (:eval (cider--modeline-info))) "Shorten mode line info")
-
-  :config
-  (add-to-list 'tk-looks/minor-mode-alist '(cider-popup-buffer-mode (" cider-tmp")))
-  (add-to-list 'tk-looks/minor-mode-alist '(cider-auto-test-mode (cider-mode " Test")))
-  (add-to-list 'tk-looks/minor-mode-alist '(cider--debug-mode " DEBUG"))
-  (add-to-list 'tk-looks/minor-mode-alist '(cider-mode cider-mode-line))
-
-  (add-hook 'cider-mode-hook #'tk-dev/cider-mode-hook)
-  (add-hook 'cider-repl-mode-hook #'tk-dev/cider-mode-hook)
-
-  :custom-face
-  (cider-result-overlay-face ((t (:background "grey30"))))
-
-  :after
-  (clojure-mode))
-
 ;;; Haskell
 
 (use-package haskell-mode
