@@ -251,6 +251,9 @@ configuration for GNU Global."
 
   (lsp-disabled-clients '(tailwindcss))
 
+  (lsp-modeline-code-action-fallback-icon "?" "Less obtrusive code action icon")
+  (lsp-modeline-diagnostics-enable nil "Flycheck's modeline provides this")
+
   :config
   (add-to-list 'tk-looks/minor-mode-alist
                (assq 'lsp-mode minor-mode-alist))
@@ -267,11 +270,6 @@ configuration for GNU Global."
    ("C-c H" . lsp-describe-thing-at-point)
    ("C-M-/" . lsp-find-references)
    ("C-M->" . lsp-find-type-definition)))
-
-(use-package lsp-modeline
-  :custom
-  (lsp-modeline-code-action-fallback-icon "?" "Less obtrusive code action icon")
-  (lsp-modeline-diagnostics-enable nil "Flycheck's modeline provides this"))
 
 (use-package lsp-ui
   :ensure t
