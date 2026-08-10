@@ -402,10 +402,9 @@ configuration for GNU Global."
 ;;; Toml
 
 (use-package toml-ts-mode
-  :ensure t
-
   :mode
-  ("\\.toml\\'"))
+  ("\\.toml\\'"
+   "/Cargo\\.lock\\'"))
 
 ;;; YAML
 
@@ -584,7 +583,6 @@ configuration for GNU Global."
 (use-package conf-mode
   :mode
   (
-   ("/Cargo\\.lock\\'"       . conf-toml-mode)
    ("/\\.aws/config\\'"      . conf-unix-mode)
    ("/\\.aws/credentials\\'" . conf-unix-mode)
    ("/\\.gitmodules\\'"      . conf-unix-mode)
