@@ -120,7 +120,7 @@ brew install ripgrep
 
 ### jq
 
-[jq] is used by [Flycheck] in [json-mode] to check JSON syntax.
+[jq] is used by [Flycheck] in `json-ts-mode` to check JSON syntax.
 
 Installation with Homebrew:
 
@@ -187,7 +187,6 @@ npm install -g typescript typescript-language-server
 [etc/tk-packages.el]: etc/tk-packages.el
 [ggtags]: https://github.com/leoliu/ggtags
 [jq]: https://stedolan.github.io/jq/
-[json-mode]: https://github.com/joshwnj/json-mode
 [lsp-mode]: https://emacs-lsp.github.io/lsp-mode/
 [magit]: https://magit.vc/
 [markdown-mode]: https://jblevins.org/projects/markdown-mode/
