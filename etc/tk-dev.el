@@ -141,6 +141,11 @@ installed. Use FORCE-INSTALL-ALL to update grammars."
                      ))
     (add-to-list 'major-mode-remap-alist mapping)))
 
+;;; Transient
+
+(use-package transient
+  :ensure t)
+
 ;;; Magit
 
 (use-package magit
@@ -156,7 +161,11 @@ installed. Use FORCE-INSTALL-ALL to update grammars."
   :bind
   (("C-x g"   . magit-status)
    ("C-x M-g" . magit-dispatch)
-   ("C-c M-g" .	magit-file-dispatch)))
+   ("C-c M-g" .	magit-file-dispatch))
+
+  :after
+  ;; Requires newer Transient than bundled with Emacs
+  (transient))
 
 ;; Select VCS backends for VC, the builtin Emacs version control
 ;; interface
