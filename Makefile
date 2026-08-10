@@ -24,12 +24,9 @@ help:
 .PHONY: compile
 compile: $(ELC_FILES)
 
-.PHONY: upgrade-packages
-upgrade-packages:
-	$(EMACS_BATCH) \
-	  --load=etc/tk-network.el \
-	  --load=etc/tk-packages.el \
-	  --funcall=tk-packages/upgrade-packages
+.PHONY: update-packages
+update-packages:
+	{ echo "Not implemented yet" >&2; exit 1; }
 
 .PHONY: recompile-packages
 recompile-packages:
@@ -63,7 +60,7 @@ clean:
 
 .PHONY: clobber
 clobber: clean
-	rm -rf .cache eln-cache elpa tree-sitter
+	rm -rf .cache eln-cache elpa elpaca tree-sitter
 
 define newline
 
@@ -75,7 +72,7 @@ Targets:
 
   help                                 Show this guide
   compile                              Compile site-lisp/**/*.el to .elc
-  upgrade-packages                     Upgrade installed packages
+  update-packages                      Update installed packages
   recompile-packages                   Recompile installed packages
   reinstall-treesit-language-grammars  Reinstall Tree-sitter language grammars
   test                                 Run tests

@@ -1,42 +1,75 @@
 ;; -*- lexical-binding: t; -*-
 
-(defun tk-packages/upgrade-packages ()
-  (interactive)
-  (let ((package-menu-async nil))
-    (message ";;; Updating package list…\n")
-    (package-list-packages)
+;;; Elpaca
+;;;
+;;; Docs: `https://github.com/progfolio/elpaca/blob/master/doc/manual.md'
 
-    (message "\n;;; Upgrading packages (if any)…\n")
-    (let ((res-msg (package-menu-mark-upgrades)))
-      (if (string-prefix-p "Packages marked for upgrading: " res-msg)
-          (ignore-errors (package-menu-execute t))))))
+(defvar elpaca-lock-file (expand-file-name "elpaca-lockfile.eld" user-emacs-directory))
+
+;; Elpaca installation snippet
+(progn
+  (defvar elpaca-installer-version 0.12)
+  (defvar elpaca-directory (expand-file-name "elpaca/" user-emacs-directory))
+  (defvar elpaca-builds-directory (expand-file-name "builds/" elpaca-directory))
+  (defvar elpaca-sources-directory (expand-file-name "sources/" elpaca-directory))
+  (defvar elpaca-order '(elpaca :repo "https://github.com/progfolio/elpaca.git"
+                                :ref nil :depth 1 :inherit ignore
+                                :files (:defaults "elpaca-test.el" (:exclude "extensions"))
+                                :build (:not elpaca-activate)))
+  (let* ((repo  (expand-file-name "elpaca/" elpaca-sources-directory))
+         (build (expand-file-name "elpaca/" elpaca-builds-directory))
+         (order (cdr elpaca-order))
+         (default-directory repo))
+    (add-to-list 'load-path (if (file-exists-p build) build repo))
+    (unless (file-exists-p repo)
+      (make-directory repo t)
+      (when (<= emacs-major-version 28) (require 'subr-x))
+      (condition-case-unless-debug err
+          (if-let* ((buffer (pop-to-buffer-same-window "*elpaca-bootstrap*"))
+                    ((zerop (apply #'call-process `("git" nil ,buffer t "clone"
+                                                    ,@(when-let* ((depth (plist-get order :depth)))
+                                                        (list (format "--depth=%d" depth) "--no-single-branch"))
+                                                    ,(plist-get order :repo) ,repo))))
+                    ((zerop (call-process "git" nil buffer t "checkout"
+                                          (or (plist-get order :ref) "--"))))
+                    (emacs (concat invocation-directory invocation-name))
+                    ((zerop (call-process emacs nil buffer nil "-Q" "-L" "." "--batch"
+                                          "--eval" "(byte-recompile-directory \".\" 0 'force)")))
+                    ((require 'elpaca))
+                    ((elpaca-generate-autoloads "elpaca" repo)))
+              (progn (message "%s" (buffer-string)) (kill-buffer buffer))
+            (error "%s" (with-current-buffer buffer (buffer-string))))
+        ((error) (warn "%s" err) (delete-directory repo 'recursive))))
+    (unless (require 'elpaca-autoloads nil t)
+      (require 'elpaca)
+      (elpaca-generate-autoloads "elpaca" repo)
+      (let ((load-source-file-function nil)) (load "./elpaca-autoloads"))))
+  (add-hook 'after-init-hook #'elpaca-process-queues)
+  (elpaca `(,@elpaca-order)))
+
+;; use-package support for elpaca
+;;
+;; Docs: `https://jwiegley.github.io/use-package/'
+(elpaca elpaca-use-package
+  (setq-default use-package-enable-imenu-support t)
+  ;; Enable use-package `:ensure' support for Elpaca
+  (elpaca-use-package-mode))
+
+(defun tk-packages/elpaca-write-lock-file ()
+  "Write the Elpaca lock file to the path given by `elpaca-lock-file'."
+  (interactive)
+  (elpaca-write-lock-file elpaca-lock-file))
+
+(defun tk-packages/update-packages ()
+  (interactive)
+  (message "Updating all packages…\n")
+  (elpaca-update-all t)
+  (elpaca-wait)
+  (tk-packages/elpaca-write-lock-file))
 
 (defun tk-packages/recompile-packages ()
   (interactive)
-  (byte-recompile-directory package-user-dir 0 'force))
-
-;; We call `package-initialize' ourselves
-(setq-default package-enable-at-startup nil)
-
-;; Package archives, in order of preference
-(setq-default package-archives '(("melpa"        . "https://melpa.org/packages/")
-                                 ("melpa-stable" . "https://stable.melpa.org/packages/")
-                                 ("gnu"          . "https://elpa.gnu.org/packages/")))
-
-(setq-default package-install-upgrade-built-in t)
-
-;; Start package system, make installed packages available (activation)
-(package-initialize)
-
-;; Docs: `https://jwiegley.github.io/use-package/'
-(eval-when-compile
-  (unless (package-installed-p 'use-package)
-    (package-refresh-contents)
-    (package-install 'use-package))
-
-  (setq-default use-package-enable-imenu-support t)
-
-  (require 'use-package))
+  (byte-recompile-directory elpaca-builds-directory 0 'force))
 
 (use-package bind-key)
 
