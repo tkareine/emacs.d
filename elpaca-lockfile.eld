@@ -53,13 +53,13 @@
                                "README*" "*-pkg.el"))
                     :source "elpaca-menu-lock-file" :id consult :type
                     git :protocol https :inherit t :depth treeless :ref
-                    "3ddec5493bce5445f099537be50b7a4f79c68321"))
+                    "e98ac9a3b7b78397e6f14eadfc70aacc069edd7d"))
  (corfu :source "elpaca-menu-lock-file" :recipe
         (:package "corfu" :repo "minad/corfu" :files
                   (:defaults "extensions/corfu-*.el") :fetcher github
                   :source "elpaca-menu-lock-file" :id corfu :type git
                   :protocol https :inherit t :depth treeless :ref
-                  "4b440fb30ff2fff4291af676b59da7ab22130a45"))
+                  "1c88f38cf9cb0b2e130cf989ef361cd70cf2b46f"))
  (dash :source "elpaca-menu-lock-file" :recipe
        (:package "dash" :fetcher github :repo "magnars/dash.el" :files
                  ("dash.el" "dash.texi") :source "elpaca-menu-lock-file"
@@ -145,7 +145,7 @@
                                 "README*" "*-pkg.el"))
                      :source "elpaca-menu-lock-file" :id flycheck :type
                      git :protocol https :inherit t :depth treeless :ref
-                     "e6fe520a21df70854055468a77c2dfe8adf02297"))
+                     "d7860ed0c116f1660b43fb0c4d8f37009d3f08fc"))
  (ggtags :source "elpaca-menu-lock-file" :recipe
          (:package "ggtags" :fetcher github :repo "leoliu/ggtags" :files
                    ("*.el" "*.el.in" "dir" "*.info" "*.texi" "*.texinfo"
@@ -253,7 +253,7 @@
                        :source "elpaca-menu-lock-file" :id marginalia
                        :type git :protocol https :inherit t :depth
                        treeless :ref
-                       "10b170ad8006bad535599e5b3e007e643e34345a"))
+                       "13220ab7a67f450434e6b2da452b9700ffcb39bf"))
  (markdown-mode :source "elpaca-menu-lock-file" :recipe
                 (:package "markdown-mode" :fetcher github :repo
                           "jrblevin/markdown-mode" :files
@@ -295,7 +295,7 @@
                       :source "elpaca-menu-lock-file" :id orderless
                       :type git :protocol https :inherit t :depth
                       treeless :ref
-                      "0ffd9d6903714c1f6d8fcbb6a20941fb33dd7ae5"))
+                      "f4a8114ed729d34d35cec6c7eb34b5d0b23aaa6f"))
  (projectile :source "elpaca-menu-lock-file" :recipe
              (:package "projectile" :fetcher github :repo
                        "bbatsov/projectile" :files
@@ -309,7 +309,7 @@
                        :source "elpaca-menu-lock-file" :id projectile
                        :type git :protocol https :inherit t :depth
                        treeless :ref
-                       "f954c2f0f347500e1b5b482d9492075447de5256"))
+                       "fcd8f2b7d9e67623bfcdcb3ab874d31016badeae"))
  (rainbow-delimiters :source "elpaca-menu-lock-file" :recipe
                      (:package "rainbow-delimiters" :fetcher github
                                :repo "Fanael/rainbow-delimiters" :files
@@ -410,7 +410,7 @@
                     (:defaults "extensions/vertico-*.el") :fetcher
                     github :source "elpaca-menu-lock-file" :id vertico
                     :type git :protocol https :inherit t :depth treeless
-                    :ref "be96000c2b0b3501723291b3721ceba12f784dcd"))
+                    :ref "9adb8188c4aa926c15b8d68097c13f66c0d72071"))
  (vundo :source "elpaca-menu-lock-file" :recipe
         (:package "vundo" :repo
                   ("https://github.com/casouri/vundo" . "vundo") :tar
