@@ -4,9 +4,12 @@
 ;;;
 ;;; Docs: `https://github.com/progfolio/elpaca/blob/master/doc/manual.md'
 
-(defvar elpaca-lock-file (expand-file-name "elpaca-lockfile.eld" user-emacs-directory))
+;; Elpaca has limited support for lockfiles currently. See
+;; `https://github.com/progfolio/elpaca/issues/447'.
+(defvar elpaca-lock-file (expand-file-name "elpaca-lock.eld" user-emacs-directory))
 
-;; Elpaca installation snippet
+;; Elpaca installation snippet. See
+;; `https://github.com/progfolio/elpaca/blob/master/doc/manual.md#installer'.
 (progn
   (defvar elpaca-installer-version 0.12)
   (defvar elpaca-directory (expand-file-name "elpaca/" user-emacs-directory))
@@ -47,7 +50,7 @@
   (add-hook 'after-init-hook #'elpaca-process-queues)
   (elpaca `(,@elpaca-order)))
 
-;; use-package support for elpaca
+;; use-package support for Elpaca
 ;;
 ;; Docs: `https://jwiegley.github.io/use-package/'
 (elpaca elpaca-use-package
