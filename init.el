@@ -23,7 +23,8 @@
   (load (tk-init/user-emacs-path "etc" l)))
 
 ;; Server mode
-(server-start)
+(unless noninteractive
+  (server-start))
 
 (message "Started in %.2fs, %d gcs"
          (float-time (time-subtract after-init-time before-init-time))
