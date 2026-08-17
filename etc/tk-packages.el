@@ -76,6 +76,9 @@
 
 (use-package bind-key)
 
+(use-package transient
+  :ensure t)
+
 (use-package tk-support
   :commands
   (tk-support/active-region-or-line

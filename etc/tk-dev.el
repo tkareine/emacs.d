@@ -141,11 +141,6 @@ installed. Use FORCE-INSTALL-ALL to update grammars."
                      ))
     (add-to-list 'major-mode-remap-alist mapping)))
 
-;;; Transient
-
-(use-package transient
-  :ensure t)
-
 ;;; Magit
 
 (use-package magit
