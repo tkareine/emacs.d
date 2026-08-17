@@ -24,16 +24,24 @@ help:
 .PHONY: compile
 compile: $(ELC_FILES)
 
-.PHONY: update-packages
-update-packages:
-	{ echo "Not implemented yet" >&2; exit 1; }
-
 .PHONY: recompile-packages
 recompile-packages:
 	$(EMACS_BATCH) \
 	  --load=etc/tk-network.el \
 	  --load=etc/tk-packages.el \
 	  --funcall=tk-packages/recompile-packages
+
+.PHONY: reinstall-packages
+reinstall-packages: .cache/make/reinstall-packages.sentinel
+
+.cache/make/reinstall-packages.sentinel: elpaca-lock.eld
+	rm -fr elpaca/builds
+	$(EMACS_BATCH) \
+	  --load=etc/tk-network.el \
+	  --load=etc/tk-packages.el \
+	  --funcall=tk-packages/reinstall-packages
+	mkdir -p "$(@D)"
+	touch "$@"
 
 .PHONY: reinstall-treesit-language-grammars
 reinstall-treesit-language-grammars:
@@ -72,8 +80,8 @@ Targets:
 
   help                                 Show this guide
   compile                              Compile site-lisp/**/*.el to .elc
-  update-packages                      Update installed packages
   recompile-packages                   Recompile installed packages
+  reinstall-packages                   Reinstall packages by lockfile
   reinstall-treesit-language-grammars  Reinstall Tree-sitter language grammars
   test                                 Run tests
   clean                                Delete custom.el and compiled files

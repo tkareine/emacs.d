@@ -63,16 +63,15 @@
   (interactive)
   (elpaca-write-lock-file elpaca-lock-file))
 
-(defun tk-packages/update-packages ()
-  (interactive)
-  (message "Updating all packages…\n")
-  (elpaca-update-all t)
-  (elpaca-wait)
-  (tk-packages/elpaca-write-lock-file))
-
 (defun tk-packages/recompile-packages ()
   (interactive)
   (byte-recompile-directory elpaca-builds-directory 0 'force))
+
+(defun tk-packages/reinstall-packages ()
+  (interactive)
+  (message "Reinstall packages…\n")
+  (elpaca-merge-all t)
+  (elpaca-wait))
 
 (use-package bind-key)
 
