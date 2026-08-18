@@ -60,7 +60,7 @@ macOS:
 
 ```bash
 brew tap d12frosted/emacs-plus
-brew install d12frosted/emacs-plus/emacs-plus --with-modern-icon --with-native-comp
+brew install d12frosted/emacs-plus/emacs-plus
 ```
 
 You'll need [Node.js] and [npm] for some of the 3rd party tools (see
