@@ -1,82 +1,32 @@
 ;; -*- lexical-binding: t; -*-
 
-;;; Elpaca
+;;; Straight.el
 ;;;
-;;; Docs: `https://github.com/progfolio/elpaca/blob/master/doc/manual.md'
+;;; Docs: `https://github.com/radian-software/straight.el/blob/main/README.md'
 
-;; Elpaca has limited support for lockfiles currently. See
-;; `https://github.com/progfolio/elpaca/issues/447'.
-(defvar elpaca-lock-file (expand-file-name "elpaca-lock.eld" user-emacs-directory))
+(defvar bootstrap-version)
+(let ((bootstrap-file
+       (expand-file-name
+        "straight/repos/straight.el/bootstrap.el"
+        (or (bound-and-true-p straight-base-dir)
+            user-emacs-directory)))
+      (bootstrap-version 7))
+  (unless (file-exists-p bootstrap-file)
+    (with-current-buffer
+        (url-retrieve-synchronously
+         "https://raw.githubusercontent.com/radian-software/straight.el/develop/install.el"
+         'silent 'inhibit-cookies)
+      (goto-char (point-max))
+      (eval-print-last-sexp)))
+  (load bootstrap-file nil 'nomessage))
 
-;; Elpaca installation snippet. See
-;; `https://github.com/progfolio/elpaca/blob/master/doc/manual.md#installer'.
-(progn
-  (defvar elpaca-installer-version 0.12)
-  (defvar elpaca-directory (expand-file-name "elpaca/" user-emacs-directory))
-  (defvar elpaca-builds-directory (expand-file-name "builds/" elpaca-directory))
-  (defvar elpaca-sources-directory (expand-file-name "sources/" elpaca-directory))
-  (defvar elpaca-order '(elpaca :repo "https://github.com/progfolio/elpaca.git"
-                                :ref nil :depth 1 :inherit ignore
-                                :files (:defaults "elpaca-test.el" (:exclude "extensions"))
-                                :build (:not elpaca-activate)))
-  (let* ((repo  (expand-file-name "elpaca/" elpaca-sources-directory))
-         (build (expand-file-name "elpaca/" elpaca-builds-directory))
-         (order (cdr elpaca-order))
-         (default-directory repo))
-    (add-to-list 'load-path (if (file-exists-p build) build repo))
-    (unless (file-exists-p repo)
-      (make-directory repo t)
-      (when (<= emacs-major-version 28) (require 'subr-x))
-      (condition-case-unless-debug err
-          (if-let* ((buffer (pop-to-buffer-same-window "*elpaca-bootstrap*"))
-                    ((zerop (apply #'call-process `("git" nil ,buffer t "clone"
-                                                    ,@(when-let* ((depth (plist-get order :depth)))
-                                                        (list (format "--depth=%d" depth) "--no-single-branch"))
-                                                    ,(plist-get order :repo) ,repo))))
-                    ((zerop (call-process "git" nil buffer t "checkout"
-                                          (or (plist-get order :ref) "--"))))
-                    (emacs (concat invocation-directory invocation-name))
-                    ((zerop (call-process emacs nil buffer nil "-Q" "-L" "." "--batch"
-                                          "--eval" "(byte-recompile-directory \".\" 0 'force)")))
-                    ((require 'elpaca))
-                    ((elpaca-generate-autoloads "elpaca" repo)))
-              (progn (message "%s" (buffer-string)) (kill-buffer buffer))
-            (error "%s" (with-current-buffer buffer (buffer-string))))
-        ((error) (warn "%s" err) (delete-directory repo 'recursive))))
-    (unless (require 'elpaca-autoloads nil t)
-      (require 'elpaca)
-      (elpaca-generate-autoloads "elpaca" repo)
-      (let ((load-source-file-function nil)) (load "./elpaca-autoloads"))))
-  (add-hook 'after-init-hook #'elpaca-process-queues)
-  (elpaca `(,@elpaca-order)))
-
-;; use-package support for Elpaca
+;; use-package
 ;;
 ;; Docs: `https://jwiegley.github.io/use-package/'
-(elpaca elpaca-use-package
-  (setq-default use-package-enable-imenu-support t)
-  ;; Enable use-package `:ensure' support for Elpaca
-  (elpaca-use-package-mode))
-
-(defun tk-packages/elpaca-write-lock-file ()
-  "Write the Elpaca lock file to the path given by `elpaca-lock-file'."
-  (interactive)
-  (elpaca-write-lock-file elpaca-lock-file))
-
-(defun tk-packages/recompile-packages ()
-  (interactive)
-  (byte-recompile-directory elpaca-builds-directory 0 'force))
-
-(defun tk-packages/reinstall-packages ()
-  (interactive)
-  (message "Reinstall packages…\n")
-  (elpaca-merge-all t)
-  (elpaca-wait))
-
-(use-package bind-key)
+(setq-default use-package-enable-imenu-support t)
 
 (use-package transient
-  :ensure t)
+  :straight t)
 
 (use-package tk-support
   :commands

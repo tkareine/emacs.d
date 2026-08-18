@@ -22,26 +22,16 @@ help:
 	  $<
 
 .PHONY: compile
-compile: $(ELC_FILES)
+compile: compile-site-lisp compile-packages
 
-.PHONY: recompile-packages
-recompile-packages:
+.PHONY: compile-packages
+compile-packages:
 	$(EMACS_BATCH) \
-	  --load=etc/tk-network.el \
-	  --load=etc/tk-packages.el \
-	  --funcall=tk-packages/recompile-packages
+	  --load=init.el \
+	  --funcall=straight-check-all
 
-.PHONY: reinstall-packages
-reinstall-packages: .cache/make/reinstall-packages.sentinel
-
-.cache/make/reinstall-packages.sentinel: elpaca-lock.eld
-	rm -fr elpaca/builds
-	$(EMACS_BATCH) \
-	  --load=etc/tk-network.el \
-	  --load=etc/tk-packages.el \
-	  --funcall=tk-packages/reinstall-packages
-	mkdir -p "$(@D)"
-	touch "$@"
+.PHONY: compile-site-lisp
+compile-site-lisp: $(ELC_FILES)
 
 .PHONY: reinstall-treesit-language-grammars
 reinstall-treesit-language-grammars:
@@ -68,7 +58,14 @@ clean:
 
 .PHONY: clobber
 clobber: clean
-	rm -rf .cache eln-cache elpa elpaca tree-sitter
+	rm -rf \
+	  .cache \
+	  eln-cache \
+	  elpa \
+	  straight/build \
+	  straight/build-cache.el \
+	  straight/modified \
+	  tree-sitter
 
 define newline
 
@@ -79,9 +76,9 @@ define help_text
 Targets:
 
   help                                 Show this guide
-  compile                              Compile site-lisp/**/*.el to .elc
-  recompile-packages                   Recompile installed packages
-  reinstall-packages                   Reinstall packages by lockfile
+  compile                              Compile all
+  compile-packages                     Compile installed packages
+  compile-site-lisp                    Compile site-lisp/**/*.el to .elc
   reinstall-treesit-language-grammars  Reinstall Tree-sitter language grammars
   test                                 Run tests
   clean                                Delete custom.el and compiled files

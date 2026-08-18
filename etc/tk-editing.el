@@ -216,7 +216,7 @@ active region, kill the current line instead."
 ;;; Expand-reqion
 
 (use-package expand-region
-  :ensure t
+  :straight t
 
   :bind
   (("M-[" . er/contract-region)
@@ -227,7 +227,7 @@ active region, kill the current line instead."
 ;;; `https://github.com/Fuco1/smartparens'
 
 (use-package smartparens
-  :ensure t
+  :straight t
 
   :demand
 
@@ -337,7 +337,7 @@ active region, kill the current line instead."
 ;;; `https://github.com/alexluigit/dirvish'
 
 (use-package dirvish
-  :ensure t
+  :straight t
 
   :demand
 
@@ -469,7 +469,7 @@ probably not done."
 ;;; `https://github.com/minad/corfu'
 
 (use-package corfu
-  :ensure t
+  :straight t
 
   :demand
 
@@ -499,7 +499,7 @@ probably not done."
 ;;; `https://github.com/casouri/vundo'
 
 (use-package vundo
-  :ensure t
+  :straight t
 
   :custom
   (vundo-glyph-alist vundo-unicode-symbols)
@@ -510,7 +510,7 @@ probably not done."
 ;;; Projectile
 
 (use-package projectile
-  :ensure t
+  :straight t
 
   :demand
 
@@ -551,7 +551,7 @@ probably not done."
 ;;; `https://github.com/oantolin/orderless'
 
 (use-package orderless
-  :ensure t
+  :straight t
 
   :demand
 
@@ -571,7 +571,7 @@ probably not done."
 ;;; `https://github.com/minad/marginalia'
 
 (use-package marginalia
-  :ensure t
+  :straight t
 
   :demand
 
@@ -587,7 +587,7 @@ probably not done."
 ;;; `https://github.com/minad/vertico'
 
 (use-package vertico
-  :ensure t
+  :straight t
 
   :demand
 
@@ -602,7 +602,7 @@ probably not done."
 ;;; `https://github.com/minad/consult'
 
 (use-package consult
-  :ensure t
+  :straight t
 
   :bind
   (
@@ -663,7 +663,7 @@ probably not done."
 ;;; `https://github.com/Wilfred/deadgrep'
 
 (use-package deadgrep
-  :ensure t
+  :straight t
 
   :init
   (defun tk-editing/deadgrep-show-result-other-window ()
@@ -691,7 +691,7 @@ current search result window."
 ;;; `https://github.com/wolray/symbol-overlay'
 
 (use-package symbol-overlay
-  :ensure t
+  :straight t
 
   :config
   (let ((symbol-overlay-faces
@@ -730,7 +730,7 @@ current search result window."
 ;;; `https://github.com/rnkn/olivetti'
 
 (use-package olivetti
-  :ensure t
+  :straight t
 
   :custom
   (olivetti-style nil "Use margins to balance text")

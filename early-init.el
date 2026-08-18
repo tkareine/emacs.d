@@ -18,5 +18,5 @@
 (setq-default read-process-output-max
               (let ((mb (* 1024 1024))) (* 1 mb)))
 
-;; Disable `package.el'. We use Elpaca instead.
+;; Disable `package.el'. We use straight.el instead.
 (setq package-enable-at-startup nil)

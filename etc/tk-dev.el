@@ -49,7 +49,7 @@ with bitmaps)")
 ;;; Snippets
 
 (use-package yasnippet
-  :ensure t
+  :straight t
 
   :hook
   (lsp-mode . yas-minor-mode-on)
@@ -60,7 +60,7 @@ with bitmaps)")
 ;;; Flycheck
 
 (use-package flycheck
-  :ensure t
+  :straight t
 
   :demand
 
@@ -79,8 +79,6 @@ with bitmaps)")
 ;;; Tree-sitter
 
 (use-package treesit
-  :if (>= emacs-major-version 30)
-
   :init
   (defvar tk-dev/treesit-language-source-alist
     '(
@@ -144,7 +142,7 @@ installed. Use FORCE-INSTALL-ALL to update grammars."
 ;;; Magit
 
 (use-package magit
-  :ensure t
+  :straight t
 
   :custom
   (magit-define-global-key-bindings nil "Disable default global key bindings because we defined them ourselves")
@@ -176,7 +174,7 @@ installed. Use FORCE-INSTALL-ALL to update grammars."
 ;;; ggtags frontend for GNU global
 
 (use-package ggtags
-  :ensure t
+  :straight t
 
   :init
   (defun tk-dev/make-gtags (rootdir)
@@ -238,7 +236,7 @@ configuration for GNU Global."
 ;;; `https://emacs-lsp.github.io/lsp-mode/'
 
 (use-package lsp-mode
-  :ensure t
+  :straight t
 
   :init
   ;; See `(setenv "LSP_USE_PLISTS" "true")' in `early-init.el'
@@ -276,7 +274,7 @@ configuration for GNU Global."
    ("C-M->" . lsp-find-type-definition)))
 
 (use-package lsp-ui
-  :ensure t
+  :straight t
 
   :custom
   (lsp-ui-doc-delay 0.5 "Number of seconds before showing documentation popup")
@@ -301,7 +299,7 @@ configuration for GNU Global."
 ;;; `https://github.com/radian-software/apheleia'
 
 (use-package apheleia
-  :ensure t
+  :straight t
 
   :config
   ;; (setq apheleia-log-debug-info t) ; Enable to debug formatters' run commands
@@ -428,7 +426,7 @@ configuration for GNU Global."
   (smartparens))
 
 (use-package macrostep
-  :ensure t
+  :straight t
 
   :bind
   (:map emacs-lisp-mode-map
@@ -525,7 +523,7 @@ configuration for GNU Global."
 ;;; Rust
 
 (use-package rust-mode
-  :ensure t
+  :straight t
 
   :init
   (setq rust-mode-treesitter-derive t)
@@ -549,7 +547,7 @@ configuration for GNU Global."
 ;;; Markdown
 
 (use-package markdown-mode
-  :ensure t
+  :straight t
 
   :config
   ;; Don't include XHTML DTD for generated HTML, as it affects CSS

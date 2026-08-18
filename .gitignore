@@ -10,7 +10,6 @@
 /dirvish/
 /eln-cache/
 /elpa/
-/elpaca/
 /eshell/
 /games/
 /ido.last
@@ -20,6 +19,10 @@
 /recentf
 /savehist
 /saveplace
+/straight/build/
+/straight/build-cache.el
+/straight/modified/
+/straight/repos/
 /swank/
 /tramp
 /transient/

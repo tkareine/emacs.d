@@ -111,7 +111,7 @@
 ;;
 ;; `https://github.com/tinted-theming/base16-emacs'
 (use-package base16-theme
-  :ensure t
+  :straight t
 
   :demand
 
@@ -319,7 +319,7 @@ mode-line-process, and narrowing) and selected minor modes.")
 ;;; GitGutter
 
 (use-package git-gutter
-  :ensure t
+  :straight t
 
   :demand
 
@@ -332,7 +332,7 @@ mode-line-process, and narrowing) and selected minor modes.")
 ;;; rainbow-delimiters
 
 (use-package rainbow-delimiters
-  :ensure t
+  :straight t
 
   :hook
   (prog-mode))
@@ -340,7 +340,7 @@ mode-line-process, and narrowing) and selected minor modes.")
 ;;; Which-key: show available key bindings
 
 (use-package which-key
-  :ensure t
+  :straight t
 
   :demand
 
@@ -360,6 +360,6 @@ mode-line-process, and narrowing) and selected minor modes.")
 (use-package all-the-icons
   :if (display-graphic-p)
 
-  :ensure t
+  :straight t
 
   :demand)
