@@ -354,6 +354,8 @@ mode-line-process, and narrowing) and selected minor modes.")
 ;;;
 ;;; Prints all the icons for the `alltheicon' font set:
 ;;; (all-the-icons-insert-icons-for 'alltheicon)
+;;;
+;;; Used by Dirvish.
 
 (use-package all-the-icons
   :if (display-graphic-p)

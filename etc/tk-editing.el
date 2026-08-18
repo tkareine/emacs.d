@@ -383,7 +383,9 @@ active region, kill the current line instead."
    ("M-l" . dirvish-ls-switches-menu)
    ("M-m" . dirvish-mark-menu)
    ("M-t" . dirvish-layout-toggle))
-  )
+
+  :after
+  (all-the-icons))
 
 ;;; Uniquify: append dir name to buffers with similar filenames
 
