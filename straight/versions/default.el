@@ -8,6 +8,7 @@
  ("dash.el" . "d746dd9edcb67a108818beb0cdc78dc1cb466832")
  ("deadgrep" . "85257234fa696f412c5701b94f3aa5266a760252")
  ("dirvish" . "bf164ee21e128837ede59be03836a9900c4a41be")
+ ("editorconfig-emacs" . "b18fcf7fdea1ce84b7fdc60360ad8016b5c00d79")
  ("el-get" . "447b7efc9fca29a087f4ec29c5d8ccb580cd1c78")
  ("eldoc" . "cfd17854b6b9b6830111851ad21c2d560db07dfb")
  ("emacs-which-key" . "38d4308d1143b61e4004b6e7a940686784e51500")

@@ -294,6 +294,15 @@ configuration for GNU Global."
   :after
   (lsp-mode))
 
+;;; EditorConfig
+;;;
+;;; `https://github.com/editorconfig/editorconfig-emacs/'
+(use-package editorconfig
+  :straight t
+
+  :config
+  (editorconfig-mode 1))
+
 ;;; Apheleia: code formatter runner
 ;;;
 ;;; `https://github.com/radian-software/apheleia'
