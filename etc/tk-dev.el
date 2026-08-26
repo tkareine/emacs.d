@@ -66,6 +66,7 @@ with bitmaps)")
 
   :custom
   (flycheck-disabled-checkers '(emacs-lisp-checkdoc json-python-json))
+  (flycheck-emacs-lisp-initialize-packages nil "Don't call `package-initialize' for files under `user-emacs-directory'. We use straight.el instead of package.el.")
   (flycheck-temp-prefix ".~flycheck")
 
   :hook
