@@ -69,6 +69,18 @@ with bitmaps)")
   (flycheck-emacs-lisp-initialize-packages nil "Don't call `package-initialize' for files under `user-emacs-directory'. We use straight.el instead of package.el.")
   (flycheck-temp-prefix ".~flycheck")
 
+  :config
+  ;; Set selected paths under `user-emacs-directory' as trusted content
+  ;; for enabling `emacs-lisp' checker.
+  ;;
+  ;; See: `https://www.cve.org/CVERecord?id=CVE-2024-53920'
+  (dolist (sub-dir '("etc/"
+                     "site-lisp/"
+                     "test/"
+                     "early-init.el"
+                     "init.el"))
+    (add-to-list 'trusted-content (file-name-concat user-emacs-directory sub-dir))) ; Must use `~/' for directories under `$HOME'
+
   :hook
   (prog-mode)
 
