@@ -25,6 +25,10 @@
 ;; Docs: `https://jwiegley.github.io/use-package/'
 (setq-default use-package-enable-imenu-support t)
 
+(defun tk-packages/compile-all-packages ()
+  (straight-thaw-versions)
+  (straight-check-all))
+
 (use-package transient
   :straight t)
 

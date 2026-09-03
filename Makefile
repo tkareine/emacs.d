@@ -28,7 +28,7 @@ compile: compile-site-lisp compile-packages
 compile-packages:
 	$(EMACS_BATCH) \
 	  --load=init.el \
-	  --funcall=straight-check-all
+	  --funcall=tk-packages/compile-all-packages
 
 .PHONY: compile-site-lisp
 compile-site-lisp: $(ELC_FILES)
