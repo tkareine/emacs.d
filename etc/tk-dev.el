@@ -542,6 +542,19 @@ configuration for GNU Global."
   ("/.Brewfile\\'"
    "/Gemfile-[[:alnum:]]+\\'"))
 
+;;; Go
+
+(use-package go-mode
+  :straight t
+
+  :init
+  (defun tk-dev/go-mode-hook ()
+    (setq-local tab-width 4))
+
+  :hook
+  ((go-mode . lsp-deferred)
+   (go-mode . tk-dev/go-mode-hook)))
+
 ;;; Rust
 
 (use-package rust-mode

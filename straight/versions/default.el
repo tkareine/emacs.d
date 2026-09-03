@@ -19,6 +19,7 @@
  ("ggtags" . "4e3630c30fb836872b5d8f2ae3e5d5ae003365d8")
  ("git-gutter" . "101b1e29ec4f4609b29a17877990f95993452188")
  ("gnu-elpa-mirror" . "f39608f7ff7a67cfd093635c6dcba36a6285de87")
+ ("go-mode.el" . "3a71d28ab47df685e54ca6046a7a3dd3e28b682c")
  ("ht.el" . "1c49aad1c820c86f7ee35bf9fff8429502f60fef")
  ("hydra" . "59a2a45a35027948476d1d7751b0f0215b1e61aa")
  ("llama" . "4d4024048053b898a01521046e0f063ee47615b0")
