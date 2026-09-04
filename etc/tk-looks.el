@@ -152,7 +152,8 @@
 ;; bitmaps in the left fringe
 (setq-default indicate-buffer-boundaries 'left)
 
-;; Visually indicate empty lines in buffer in the left fringe
+;; Visually indicate empty lines after the buffer's actual content in
+;; the left fringe
 (setq-default indicate-empty-lines t)
 
 ;; Don't show line number if buffer is too big; value in bytes
