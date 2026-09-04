@@ -1,5 +1,9 @@
 ;; -*- lexical-binding: t; -*-
 
+;; For `cl-loop'
+(eval-when-compile
+  (require 'cl-macs))
+
 (defun tk-network/test-tls-security ()
   "Adapted from URL
 `https://glyph.twistedmatrix.com/2015/11/editor-malware.html'."
