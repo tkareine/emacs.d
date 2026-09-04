@@ -1,5 +1,7 @@
 ;; -*- lexical-binding: t; -*-
 
+(require 'tk-support)
+
 ;; Prefer UTF-8 encoding for input and output
 (set-language-environment "UTF-8")
 (prefer-coding-system 'utf-8)
@@ -128,6 +130,8 @@ Adapted from
 
 (bind-keys ("S-<return>"    . tk-editing/eol-newline-and-indent)
            ("s-<backspace>" . delete-char))
+
+(bind-keys ("C-c q" . tk-support/unfill-paragraph))
 
 ;;; Commenting
 

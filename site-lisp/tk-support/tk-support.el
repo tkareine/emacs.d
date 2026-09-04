@@ -35,6 +35,12 @@ nil if not found."
         (setq should-continue nil)))
     idx))
 
+(defun tk-support/unfill-paragraph (&optional region)
+  "Fill the current paragraph onto a single line."
+  (interactive (progn (barf-if-buffer-read-only) '(t)))
+  (let ((fill-column most-positive-fixnum))
+    (fill-paragraph nil region)))
+
 ;; For `cl-flet' in `tk-support/xml-pretty-print'
 (eval-when-compile
   (require 'cl-macs))
