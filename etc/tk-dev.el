@@ -552,8 +552,10 @@ configuration for GNU Global."
     (setq-local tab-width 4))
 
   :hook
-  ((go-mode . lsp-deferred)
-   (go-mode . tk-dev/go-mode-hook)))
+  ((go-dot-mod-mode  . tk-dev/go-mode-hook)
+   (go-dot-work-mode . tk-dev/go-mode-hook)
+   (go-mode          . lsp-deferred)
+   (go-mode          . tk-dev/go-mode-hook)))
 
 ;;; Rust
 
