@@ -296,11 +296,13 @@ mode-line-process, and narrowing) and selected minor modes.")
    ("M-ESC" . ns-prev-frame)))
 
 ;;; Font
-(let* ((font-name "Input"))
-  (when (find-font (font-spec :name font-name))
-    (let* ((font-name-and-size (concat font-name "-14")))
-      (set-face-attribute 'default nil :font font-name-and-size)
-      (set-face-attribute 'fixed-pitch nil :font font-name-and-size))))
+(let ((font-family "JetBrains Mono"))
+  (when (find-font (font-spec :family font-family))
+    (dolist (face '(default fixed-pitch))
+      (set-face-attribute face nil
+                          :family font-family
+                          :height 140 ; in 1/10 pt
+                          :weight 'regular))))
 
 (setq-default line-spacing 1)
 
