@@ -33,7 +33,7 @@
  ("nongnu-elpa" . "29142e0d10c03940490685f5741bad18c6bdf38b")
  ("olivetti" . "d2ccae56b442d9c5b06dd2481057abbd7eb82551")
  ("orderless" . "3d2c2e6468ddf51e69c78e8212e5fd9006d2ce8a")
- ("projectile" . "f902073c1d10bb125875470c9dcbdcd7c9a1eefb")
+ ("projectile" . "4d2be8680fe445c4ca88177f0ed838051cadfe58")
  ("rainbow-delimiters" . "f40ece58df8b2f0fb6c8576b527755a552a5e763")
  ("rust-mode" . "0058837c048cc031ca1a13f598a6a6604777458b")
  ("s.el" . "d7c04b84d03481a1ed62ee13dbe595224ccbe57c")
