@@ -16,6 +16,18 @@
 ;; Default indentation
 (setq-default standard-indent 2)
 
+;; Trigger scroll when point gets within this many lines of the top or
+;; bottom of the screen
+(setopt scroll-margin 3)
+
+;; Scroll just enough to bring point into view. Set value to greater
+;; than 100 to enforce never recenter point.
+(setopt scroll-conservatively 101)
+
+;; Keep point at current screen position when scrolling by full screens
+;; (`C-v', `M-v')
+(setopt scroll-preserve-screen-position t)
+
 ;; Disable double space indicating the end of a sentence. Affects
 ;; commands such as `fill-paragraph' and `forward-sentence'.
 (setq-default sentence-end-double-space nil)
