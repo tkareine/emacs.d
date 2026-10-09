@@ -28,7 +28,7 @@
  ("macrostep" . "d0928626b4711dcf9f8f90439d23701118724199")
  ("magit" . "49504a982b7d8948da297e1ab515bece4008273d")
  ("marginalia" . "42eafcfddbe88d92ed96521a00a5a90a49bac4dd")
- ("markdown-mode" . "aa79129f3de38d40daeb7cd6333c785e585b5d25")
+ ("markdown-mode" . "1d22840d588be29aa57eca36f28a32bede331550")
  ("melpa" . "9e4a6027d860e0d820062c847e6f765118a8bae6")
  ("nongnu-elpa" . "1b9129021fd94519ca126aeda6cbfc091c6310a2")
  ("olivetti" . "d2ccae56b442d9c5b06dd2481057abbd7eb82551")
