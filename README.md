@@ -60,8 +60,11 @@ macOS:
 
 ```bash
 brew tap d12frosted/emacs-plus
-brew install d12frosted/emacs-plus/emacs-plus
+brew trust d12frosted/emacs-plus
+brew install d12frosted/emacs-plus/emacs-plus@VERSION
 ```
+
+Where `VERSION` is your preferred version of Emacs.
 
 You'll need [Node.js] and [npm] for some of the 3rd party tools (see
 below). For managing Node.js versions, I recommend using [chnode]
@@ -69,6 +72,7 @@ together with the latest LTS version of Node.js:
 
 ```bash
 brew tap tkareine/chnode
+brew trust tkareine/chnode/chnode
 brew install tkareine/chnode/chnode node@26
 mkdir -p ~/.nodes
 ln -s /opt/homebrew/opt/node@26 ~/.nodes/node-26
