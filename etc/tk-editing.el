@@ -153,7 +153,7 @@ active) or region, moving position if point is at the beginning
 of region."
   (interactive)
   (require 'subr-x)
-  (when-let ((region (tk-support/active-region-or-line)))
+  (when-let* ((region (tk-support/active-region-or-line)))
     (let* ((region-begin-pos (car region))
            (region-end-pos (cadr region))
            (current-pos (point))

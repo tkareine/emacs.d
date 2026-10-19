@@ -198,7 +198,7 @@ If called with a prefix, specify the directory to make gtags files for."
                              (read-directory-name "Make GTAGS to: " nil nil t)))
                    (let ((dir (if current-prefix-arg
                                   (read-dir)
-                                (if-let ((proj-dir (projectile-project-root)))
+                                (if-let* ((proj-dir (projectile-project-root)))
                                     proj-dir
                                   (read-dir)))))
                      (list dir))))
