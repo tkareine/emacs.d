@@ -52,7 +52,7 @@ with bitmaps)")
   :straight t
 
   :hook
-  (lsp-mode . yas-minor-mode-on)
+  (eglot-mode . yas-minor-mode-on)
 
   :commands
   (yas-expand-snippet))
@@ -80,6 +80,9 @@ with bitmaps)")
                      "early-init.el"
                      "init.el"))
     (add-to-list 'trusted-content (file-name-concat user-emacs-directory sub-dir))) ; Must use `~/' for directories under `$HOME'
+
+  ;; Report Eglot's LSP diagnostics through Flycheck
+  (global-flycheck-eglot-mode 1)
 
   :hook
   (prog-mode)
@@ -246,66 +249,23 @@ configuration for GNU Global."
 
 ;;; Language Server Protocol
 ;;;
-;;; `https://emacs-lsp.github.io/lsp-mode/'
-
-(use-package lsp-mode
-  :straight t
-
-  :init
-  ;; See `(setenv "LSP_USE_PLISTS" "true")' in `early-init.el'
-  (setq lsp-use-plists t)
-
-  :custom
-  ;; Would like to use `:capf', but `:none' removes a warning message
-  ;; about not being able to autoconfigure company-mode
-  (lsp-completion-provider :none)
-
-  (lsp-eldoc-render-all t)
-  (lsp-enable-text-document-color nil "Rely on Tree-sitter for font faces")
-  (lsp-progress-prefix " … " "Less obtrusive progress status")
-
-  (lsp-disabled-clients '(tailwindcss))
-
-  (lsp-modeline-code-action-fallback-icon "?" "Less obtrusive code action icon")
-  (lsp-modeline-diagnostics-enable nil "Flycheck's modeline provides this")
-
+;;; `https://www.gnu.org/software/emacs/manual/html_mono/eglot.html'
+(use-package eglot
   :config
   (add-to-list 'tk-looks/minor-mode-alist
-               (assq 'lsp-mode minor-mode-alist))
+               (assq 'eglot-mode minor-mode-alist))
 
-  :hook
-  ((lsp-mode . lsp-enable-which-key-integration))
-
-  :commands
-  (lsp lsp-deferred)
-
-  :bind
-  (("C-c l" . lsp)
-   :map lsp-mode-map
-   ("C-c H" . lsp-describe-thing-at-point)
-   ("C-M-/" . lsp-find-references)
-   ("C-M->" . lsp-find-type-definition)))
-
-(use-package lsp-ui
-  :straight t
+  (add-to-list 'eglot-server-programs
+               '((js-ts-mode tsx-ts-mode typescript-ts-mode)
+                 . ("tsc" "--lsp" "--stdio")))
 
   :custom
-  (lsp-ui-doc-delay 0.5 "Number of seconds before showing documentation popup")
-  (lsp-ui-doc-position 'top)
-  (lsp-ui-doc-max-width 180)
-  (lsp-ui-doc-max-height 40)
-  (lsp-ui-doc-include-signature t)
-
-  :commands
-  (lsp-ui-mode)
+  (eglot-connect-timeout 10 "Seconds before timing out LSP connection attempts")
 
   :bind
-  (:map lsp-ui-mode-map
-        ("C-c h" . lsp-ui-doc-toggle)
-        ("s->"   . lsp-ui-imenu))
-
-  :after
-  (lsp-mode))
+  (:map eglot-mode-map
+        ("C-c o" . eglot-code-action-organize-imports)
+        ("C-c r" . eglot-rename)))
 
 ;;; EditorConfig
 ;;;
@@ -371,11 +331,11 @@ configuration for GNU Global."
 
 (use-package js
   :init
-  (defun tk-dev/js-lsp-mode-hook ()
+  (defun tk-dev/js-eglot-mode-hook ()
     ;; Don't enable LSP in `json-mode' or `jsonc-mode' (which derive
     ;; from `js-mode' via the `javascript-mode' alias)
     (when (not (member major-mode '(json-mode jsonc-mode)))
-      (lsp-deferred)))
+      (eglot-ensure)))
 
   :custom
   (js-indent-level 2)
@@ -383,7 +343,7 @@ configuration for GNU Global."
   :config
   ;; `js-base-mode' is the parent mode of both `js-mode' and
   ;; `js-ts-mode'
-  (add-hook 'js-base-mode-hook #'tk-dev/js-lsp-mode-hook)
+  (add-hook 'js-base-mode-hook #'tk-dev/js-eglot-mode-hook)
 
   (unbind-key "M-." js-mode-map)
   (unbind-key "M-." js-ts-mode-map)
@@ -398,13 +358,10 @@ configuration for GNU Global."
 ;;; TypeScript for `.ts' and `.tsx' sources
 
 (use-package typescript-ts-mode
-  :custom
-  (lsp-clients-typescript-prefer-use-project-ts-server t "Prefer using tsserver.js from current project, if available")
-
   :hook
   ;; `typescript-ts-base-mode' is the parent mode for both
   ;; `typescript-ts-mode' and `typescript-ts-base-mode'
-  ((typescript-ts-base-mode . lsp-deferred))
+  ((typescript-ts-base-mode . eglot-ensure))
 
   :mode
   ("\\.tsx?\\'"))
@@ -554,7 +511,7 @@ configuration for GNU Global."
   :hook
   ((go-dot-mod-mode  . tk-dev/go-mode-hook)
    (go-dot-work-mode . tk-dev/go-mode-hook)
-   (go-mode          . lsp-deferred)
+   (go-mode          . eglot-ensure)
    (go-mode          . tk-dev/go-mode-hook)))
 
 ;;; Rust
@@ -568,15 +525,9 @@ configuration for GNU Global."
   :custom
   (rust-format-on-save nil "Use Apheleia instead")
   (rust-rustfmt-switches '())
-  (lsp-rust-analyzer-cargo-watch-command "clippy")
-
-  :bind
-  (:map rust-mode-map
-        ("C-c e"   . lsp-rust-analyzer-expand-macro)
-        ("C-x C-e" . lsp-rust-analyzer-run))
 
   :hook
-  ((rust-mode . lsp-deferred))
+  ((rust-mode . eglot-ensure))
 
   :mode
   ("\\.rs\\'"))

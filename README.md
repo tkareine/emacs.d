@@ -152,18 +152,18 @@ npm install -g prettier
 
 ### TypeScript
 
-I use the [`tsserver`][tsserver] CLI tool of of [TypeScript] and
-[typescript-language-server] as the server for [lsp-mode], configured in
+I use [TypeScript]'s built-in LSP server for [Eglot], configured in
 [etc/tk-dev.el].
 
 Installation with [npm]:
 
 ```bash
-npm install -g typescript typescript-language-server
+npm install -g typescript
 ```
 
 [Apheleia]: https://github.com/radian-software/apheleia
 [Consult]: https://github.com/minad/consult
+[Eglot]: https://www.gnu.org/software/emacs/manual/html_mono/eglot.html
 [Emacs+]: https://github.com/d12frosted/homebrew-emacs-plus
 [Flycheck]: https://www.flycheck.org/
 [GNU Global]: https://www.gnu.org/software/global/
@@ -187,12 +187,9 @@ npm install -g typescript typescript-language-server
 [etc/tk-packages.el]: etc/tk-packages.el
 [ggtags]: https://github.com/leoliu/ggtags
 [jq]: https://stedolan.github.io/jq/
-[lsp-mode]: https://emacs-lsp.github.io/lsp-mode/
 [magit]: https://magit.vc/
 [markdown-mode]: https://jblevins.org/projects/markdown-mode/
 [my dotfiles]: https://github.com/tkareine/dotfiles/
 [node-build]: https://github.com/nodenv/node-build
 [npm]: https://www.npmjs.com/
 [ripgrep]: https://github.com/BurntSushi/ripgrep
-[tsserver]: https://github.com/Microsoft/TypeScript/wiki/Standalone-Server-%28tsserver%29
-[typescript-language-server]: https://github.com/typescript-language-server/typescript-language-server

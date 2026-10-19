@@ -1,10 +1,5 @@
 ;; -*- lexical-binding: t; -*-
 
-;; The plist mode of compilation for lsp-mode should perform better than
-;; the default hash-table mode. From
-;; `https://emacs-lsp.github.io/lsp-mode/page/performance/#use-plists-for-deserialization'.
-(setenv "LSP_USE_PLISTS" "true")
-
 ;; Number of bytes of consing between garbage collections. Increased
 ;; from the original value to avoid frequent GC pauses with lsp-mode.
 ;; From
