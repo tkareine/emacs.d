@@ -364,7 +364,8 @@ configuration for GNU Global."
   ((typescript-ts-base-mode . eglot-ensure))
 
   :mode
-  ("\\.tsx?\\'"))
+  ("\\.tsx?\\'"
+   "\\.mts\\'"))
 
 ;; HTML
 
