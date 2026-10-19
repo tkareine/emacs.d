@@ -238,6 +238,16 @@ active region, kill the current line instead."
   (("M-[" . er/contract-region)
    ("M-]" . er/expand-region)))
 
+;;; Multiple-cursors
+
+(use-package multiple-cursors
+  :straight t
+
+  :bind
+  (("C->"     . mc/mark-next-like-this)
+   ("C-<"     . mc/mark-previous-like-this)
+   ("C-c C->" . mc/mark-all-like-this)))
+
 ;;; Smartparens
 ;;;
 ;;; `https://github.com/Fuco1/smartparens'
