@@ -22,7 +22,7 @@
 
 ;; use-package
 ;;
-;; Docs: `https://jwiegley.github.io/use-package/'
+;; Docs: `https://www.gnu.org/software/emacs/manual/html_mono/use-package.html'
 (setq-default use-package-enable-imenu-support t)
 
 (defun tk-packages/compile-all-packages ()
