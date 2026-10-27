@@ -266,6 +266,7 @@ configuration for GNU Global."
   :bind
   (:map eglot-mode-map
         ("C-c o" . eglot-code-action-organize-imports)
+        ("C-c q" . eglot-code-action-quickfix)
         ("C-c r" . eglot-rename)))
 
 ;;; EditorConfig

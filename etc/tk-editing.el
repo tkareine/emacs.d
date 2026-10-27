@@ -143,7 +143,7 @@ Adapted from
 (bind-keys ("S-<return>"    . tk-editing/eol-newline-and-indent)
            ("s-<backspace>" . delete-char))
 
-(bind-keys ("C-c q" . tk-support/unfill-paragraph))
+(bind-keys ("C-c Q" . tk-support/unfill-paragraph))
 
 ;;; Commenting
 
