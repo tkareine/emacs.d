@@ -101,6 +101,7 @@ with bitmaps)")
       (bash       . ("https://github.com/tree-sitter/tree-sitter-bash" "v0.25.1"))
       (css        . ("https://github.com/tree-sitter/tree-sitter-css" "v0.25.0"))
       (dockerfile . ("https://github.com/camdencheek/tree-sitter-dockerfile" "v0.2.0"))
+      (go .         ("https://github.com/tree-sitter/tree-sitter-go" "v0.25.0"))
       (javascript . ("https://github.com/tree-sitter/tree-sitter-javascript" "v0.25.0"))
       (jsdoc      . ("https://github.com/tree-sitter/tree-sitter-jsdoc" "v0.25.0"))
       (json       . ("https://github.com/tree-sitter/tree-sitter-json" "v0.24.8"))
@@ -504,18 +505,16 @@ configuration for GNU Global."
 
 ;;; Go
 
-(use-package go-mode
-  :straight t
-
+(use-package go-ts-mode
   :init
   (defun tk-dev/go-mode-hook ()
     (setq-local tab-width 4))
 
   :hook
-  ((go-dot-mod-mode  . tk-dev/go-mode-hook)
-   (go-dot-work-mode . tk-dev/go-mode-hook)
-   (go-mode          . eglot-ensure)
-   (go-mode          . tk-dev/go-mode-hook)))
+  ((go-mod-ts-mode  . tk-dev/go-mode-hook)
+   (go-work-ts-mode . tk-dev/go-mode-hook)
+   (go-ts-mode      . eglot-ensure)
+   (go-ts-mode      . tk-dev/go-mode-hook)))
 
 ;;; Rust
 
