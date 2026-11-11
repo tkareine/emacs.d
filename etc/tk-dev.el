@@ -477,7 +477,10 @@ configuration for GNU Global."
 (use-package sh-script
   :hook
   ((sh-mode      . ggtags-mode)
-   (bash-ts-mode . ggtags-mode)))
+   (bash-ts-mode . ggtags-mode))
+
+  :mode
+  (("/.bash_history\\'" . text-mode)))
 
 ;;; Python
 
