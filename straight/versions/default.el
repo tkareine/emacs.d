@@ -38,7 +38,6 @@
  ("transient" . "f0c63b8f480ee5fee595185abbe936c165fe6a03")
  ("vertico" . "c60d80215d19b4b36c0ba49599b6815ed35f2ac1")
  ("vundo" . "61c1447e7d38d75c253eca4771bbf178b5a5fa3d")
- ("which-key" . "ba9d887f1fdbb95b0cfb62e9ef42d6a62395567a")
  ("with-editor" . "254c54189e26ed9223a55cba8bbd08b51c4b83c0")
  ("yasnippet" . "c1e6ff23e9af16b856c88dfaab9d3ad7b746ad37"))
 :epsilon

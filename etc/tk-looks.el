@@ -343,9 +343,10 @@ mode-line-process, and narrowing) and selected minor modes.")
 ;;; Which-key: show available key bindings
 
 (use-package which-key
-  :straight t
-
   :demand
+
+  :custom
+  (which-key-compute-remaps t "Show remapped commands given the currently active keymaps")
 
   :config
   (which-key-mode 1))
